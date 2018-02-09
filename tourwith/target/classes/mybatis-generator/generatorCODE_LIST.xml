@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+	
+  <context id="mysql">
+    <jdbcConnection connectionURL="jdbc:mysql://192.168.0.20:3306/tourwith" 
+    driverClass="com.mysql.jdbc.Driver" password="wwgo!234" userId="tourwith" />
+    <javaModelGenerator targetPackage="tk.tourwith.project.util.code.model" targetProject="tourwith/src/main/java">
+    	<property name="trimStrings" value="true"/>
+    </javaModelGenerator>
+    <sqlMapGenerator targetPackage="tk.tourwith.project.mapper" targetProject="tourwith/src/main/java" />
+    <javaClientGenerator targetPackage="tk.tourwith.project.util.code.dao" targetProject="tourwith/src/main/java" type="XMLMAPPER" />
+    <table schema="tourwith" tableName="CODE_LIST">
+      <columnOverride column="CODE_NO" property="code_no" />
+      <columnOverride column="CODE_RGSDE" property="code_rgsde" />
+      <columnOverride column="CODE_SE" property="code_se" />
+      <columnOverride column="CODE_NM" property="code_nm" />
+      <columnOverride column="GROUP_CODE" property="group_code" />
+      <columnOverride column="WRITER" property="writer" />
+    </table>
+  </context>
+</generatorConfiguration>
