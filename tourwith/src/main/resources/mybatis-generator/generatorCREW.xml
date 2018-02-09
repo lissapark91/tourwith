@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+	
+  <context id="mysql">
+    <jdbcConnection connectionURL="jdbc:mysql://192.168.0.20:3306/tourwith" 
+    driverClass="com.mysql.jdbc.Driver" password="wwgo!234" userId="tourwith" />
+    <javaModelGenerator targetPackage="tk.tourwith.project.crew.model" targetProject="tourwith/src/main/java">
+    	<property name="trimStrings" value="true"/>
+    </javaModelGenerator>
+    <sqlMapGenerator targetPackage="tk.tourwith.project.mapper" targetProject="tourwith/src/main/java" />
+    <javaClientGenerator targetPackage="tk.tourwith.project.crew.dao" targetProject="tourwith/src/main/java" type="XMLMAPPER" />
+    <table schema="tourwith" tableName="CR_LIST">
+      <columnOverride column="CR_NO" property="cr_no" />
+      <columnOverride column="CR_SJ" property="cr_sj" />
+      <columnOverride column="THEMA" property="thema" />
+      <columnOverride column="MAIN_COURS" property="main_cours" />
+      <columnOverride column="DETAIL_TRPLC" property="detail_trplc" />
+      <columnOverride column="DEPRDE" property="deprde" />
+      <columnOverride column="ARVLDE" property="arvlde" />
+      <columnOverride column="MALE_NMPR" property="male_nmpr" />
+      <columnOverride column="FEMALE_NMPR" property="female_nmpr" />
+      <columnOverride column="NOW_MALE_NMPR" property="now_male_nmpr" />
+      <columnOverride column="NOW_FEMALE_NMPR" property="now_female_nmpr" />
+      <columnOverride column="PRTXT" property="prtxt" />
+      <columnOverride column="REG_DE" property="reg_de" />
+      <columnOverride column="UPD_DE" property="upd_de" />
+      <columnOverride column="DEL_YN" property="del_yn" />
+      <columnOverride column="CR_LEADER_MB_NO" property="cr_leader_mb_no" />
+      <columnOverride column="TRPLC_NO" property="trplc_no" />
+      <columnOverride column="RCRIT_STTUS" property="rcrit_sttus" />
+      
+      
+      
+      
+    </table>
+  </context>
+</generatorConfiguration>
