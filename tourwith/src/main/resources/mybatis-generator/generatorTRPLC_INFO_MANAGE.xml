@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+	
+  <context id="mysql">
+    <jdbcConnection connectionURL="jdbc:mysql://192.168.0.20:3306/tourwith" 
+    driverClass="com.mysql.jdbc.Driver" password="wwgo!234" userId="tourwith" />
+    <javaModelGenerator targetPackage="tk.tourwith.project.util.trplc.model" targetProject="tourwith/src/main/java">
+    	<property name="trimStrings" value="true"/>
+    </javaModelGenerator>
+    <sqlMapGenerator targetPackage="tk.tourwith.project.mapper" targetProject="tourwith/src/main/java" />
+    <javaClientGenerator targetPackage="tk.tourwith.project.util.dao" targetProject="tourwith/src/main/java" type="XMLMAPPER" />
+    <table schema="tourwith" tableName="TRPLC_INFO_MANAGE">
+      <columnOverride column="TRPLC_NO" property="trplc_no" />
+      <columnOverride column="TRPLC_CTGRY" property="trplc_ctgry" />
+      <columnOverride column="TRPLC_DETAIL_CTGRY" property="trplc_detail_ctgry" />
+      <columnOverride column="LATI" property="lati" />
+      <columnOverride column="LONGI" property="longi" />
+      <columnOverride column="REG_DE" property="reg_de" />
+      <columnOverride column="UPD_DE" property="upd_de" />
+    </table>
+  </context>
+</generatorConfiguration>
