@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+<settings>
+	<setting name="jdbcTypeForNull" value="NULL"/>
+	<setting name="callSettersOnNulls" value="true"/>
+
+</settings>
+
+<typeAliases>
+
+<!-- <typeAlias type="tk.tourwith.project.member.model.Member" alias="Member"/> -->
+<!-- <typeAlias type="tk.tourwith.project.board.model.Board" alias="Board"/> -->
+<!-- <typeAlias type="tk.tourwith.project.reply.model.Reply" alias="Reply"/> -->
+
+</typeAliases>
+
+
+</configuration>
