@@ -3,14 +3,15 @@
 <generatorConfiguration>
 	
   <context id="mysql">
-    <jdbcConnection connectionURL="jdbc:mysql://192.168.0.20:3306/tourwith" 
+    <jdbcConnection connectionURL="jdbc:mysql://192.168.0.20:3306/tourwith?serverTimezone=UTC" 
     driverClass="com.mysql.jdbc.Driver" password="wwgo!234" userId="tourwith" />
-    <javaModelGenerator targetPackage="tk.tourwith.project.bbs.FAQ.model" targetProject="tourwith/src/main/java">
+    <javaModelGenerator targetPackage="tk.tourwith.project.bbs.faq.model" targetProject="tourwith/src/main/java">
     	<property name="trimStrings" value="true"/>
+    	<property name="verifyServerCertificate" value="false"/>
     </javaModelGenerator>
     <sqlMapGenerator targetPackage="tk.tourwith.project.mapper" targetProject="tourwith/src/main/java" />
-    <javaClientGenerator targetPackage="tk.tourwith.project.bbs.FAQ.dao" targetProject="tourwith/src/main/java" type="XMLMAPPER" />
-    <table schema="tourwith" tableName="MB_LIST">
+    <javaClientGenerator targetPackage="tk.tourwith.project.bbs.faq.dao" targetProject="tourwith/src/main/java" type="XMLMAPPER" />
+    <table schema="tourwith" tableName="FAQ_LIST">
       <columnOverride column="FAQ_NO" property="faq_no" />
       <columnOverride column="SJ" property="sj" />
       <columnOverride column="REG_DE" property="req_de" />
