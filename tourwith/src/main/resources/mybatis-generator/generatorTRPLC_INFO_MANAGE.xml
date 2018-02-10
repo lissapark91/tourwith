@@ -7,6 +7,7 @@
     driverClass="com.mysql.jdbc.Driver" password="wwgo!234" userId="tourwith" />
     <javaModelGenerator targetPackage="tk.tourwith.project.util.trplc.model" targetProject="tourwith/src/main/java">
     	<property name="trimStrings" value="true"/>
+    	<property name="verifyServerCertificate" value="false"/>
     </javaModelGenerator>
     <sqlMapGenerator targetPackage="tk.tourwith.project.mapper" targetProject="tourwith/src/main/java" />
     <javaClientGenerator targetPackage="tk.tourwith.project.util.dao" targetProject="tourwith/src/main/java" type="XMLMAPPER" />
