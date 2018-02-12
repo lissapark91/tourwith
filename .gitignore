@@ -38,3 +38,5 @@ local.properties
 .buildpath
 .target
 /target
+target/
+home/

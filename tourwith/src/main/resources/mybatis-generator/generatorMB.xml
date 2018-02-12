@@ -3,20 +3,25 @@
 <generatorConfiguration>
 	
   <context id="mysql">
-    <jdbcConnection connectionURL="jdbc:mysql://192.168.0.20:3306/tourwith" 
+    <jdbcConnection connectionURL="jdbc:mysql://192.168.0.20:3306/tourwith?serverTimezone=UTC" 
     driverClass="com.mysql.jdbc.Driver" password="wwgo!234" userId="tourwith" />
-    <javaModelGenerator targetPackage="tk.tourwith.project.util.code.model" targetProject="tourwith/src/main/java">
+    <javaModelGenerator targetPackage="tk.tourwith.project.member.model" targetProject="tourwith/src/main/java">
     	<property name="trimStrings" value="true"/>
     </javaModelGenerator>
     <sqlMapGenerator targetPackage="tk.tourwith.project.mapper" targetProject="tourwith/src/main/java" />
-    <javaClientGenerator targetPackage="tk.tourwith.project.util.code.dao" targetProject="tourwith/src/main/java" type="XMLMAPPER" />
+    <javaClientGenerator targetPackage="tk.tourwith.project.member.dao" targetProject="tourwith/src/main/java" type="XMLMAPPER" />
     <table schema="tourwith" tableName="MB_LIST">
       <columnOverride column="MB_NO" property="mb_no" />
-      <columnOverride column="CODE_RGSDE" property="code_rgsde" />
-      <columnOverride column="CODE_SE" property="code_se" />
-      <columnOverride column="CODE_NM" property="code_nm" />
-      <columnOverride column="GROUP_CODE" property="group_code" />
-      <columnOverride column="WRITER" property="writer" />
+      <columnOverride column="NICK" property="nick" />
+      <columnOverride column="MB_GRAD" property="mb_grad" />
+      <columnOverride column="FB_ID" property="fb_id" />
+      <columnOverride column="FB_TKN" property="fb_tkn" />
+      <columnOverride column="REG_DE" property="reg_de" />
+      <columnOverride column="UPD_DE" property="upd_de" />
+      <columnOverride column="DEL_YN" property="del_yn" />
+      <columnOverride column="GENDER" property="gender" />
+      <columnOverride column="AGE" property="age" />
+      <columnOverride column="TOUR_CNT" property="tour_cnt" />
     </table>
   </context>
 </generatorConfiguration>
