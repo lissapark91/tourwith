@@ -12,9 +12,10 @@
 
 <typeAliases>
 
-<!-- <typeAlias type="tk.tourwith.project.member.model.Member" alias="Member"/> -->
-<!-- <typeAlias type="tk.tourwith.project.board.model.Board" alias="Board"/> -->
-<!-- <typeAlias type="tk.tourwith.project.reply.model.Reply" alias="Reply"/> -->
+<typeAlias type="tk.tourwith.project.member.model.Member" alias="Member"/>
+<typeAlias type="tk.tourwith.project.crew.model.Crew" alias="Crew"/>
+<!-- <typeAlias type="tk.tourwith.project.reply.crew.model.CrewReply" alias="CrewReply"/> -->
+<!-- <typeAlias type="tk.tourwith.project.reply.review.model.ReviewReply" alias="ReviewReply"/> -->
 
 </typeAliases>
 

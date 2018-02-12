@@ -21,25 +21,25 @@
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 	</context:component-scan>
 	
-<!-- 	<context:property-placeholder location="classpath:/db.properties"/> -->
+	<context:property-placeholder location="classpath:/db.properties"/>
 	
 	<!-- DB 관련 설정 -->
-<!-- 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource"> -->
-<!-- 	  <property name="driverClassName" value="${db.driver}"/> -->
-<!-- 	  <property name="url" value="${db.url}"/> -->
-<!-- 	  <property name="username" value="${db.username}"/> -->
-<!-- 	  <property name="password" value="${db.password}"/> -->
+	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
+	  <property name="driverClassName" value="${db.driver}"/>
+	  <property name="url" value="${db.url}"/>
+	  <property name="username" value="${db.username}"/>
+	  <property name="password" value="${db.password}"/>
 	  
-<!-- 	  <property name="validationQuery" value="select 1 from dual"></property> -->
-<!-- 	  <property name="maxTotal" value="10"></property> -->
-<!-- 	  <property name="maxIdle" value="5"></property> -->
-<!-- 	  <property name="minIdle" value="4"></property> -->
-<!-- 	  <property name="defaultAutoCommit" value="false"></property>	   -->
-<!-- 	 </bean> -->
+	  <property name="validationQuery" value="select 1 from dual"></property>
+	  <property name="maxTotal" value="10"></property>
+	  <property name="maxIdle" value="5"></property>
+	  <property name="minIdle" value="4"></property>
+	  <property name="defaultAutoCommit" value="false"></property>	  
+	 </bean>
 	 
-<!-- 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"> -->
-<!-- 	  <property name="dataSource" ref="dataSource"/> -->
-<!-- 	 </bean> -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+	  <property name="dataSource" ref="dataSource"/>
+	 </bean>
 
 
 	
@@ -58,17 +58,17 @@
 	
 	
 	<!-- mybatis 설정 -->
-<!-- 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"> -->
-<!-- 		<property name="configLocation" value="classpath:/mybatis-config.xml"></property> -->
-<!-- 		<property name="dataSource" ref="dataSource"></property> -->
-<!-- 		<property name="mapperLocations" value="classpath:/mapper/*Mapper.xml"></property> -->
-<!-- 	</bean> -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation" value="classpath:/mybatis-config.xml"></property>
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="mapperLocations" value="classpath:/mapper/*Mapper.xml"></property>
+	</bean>
 	
-<!-- 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate"> -->
-<!-- 		<constructor-arg ref="sqlSessionFactory"></constructor-arg> -->
-<!-- 	</bean> -->
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="sqlSessionFactory"></constructor-arg>
+	</bean>
 	
-<!-- 	<mybatis-spring:scan base-package="tk.tourwith.project" annotation="org.apache.ibatis.annotations.Mapper"/> -->
+	<mybatis-spring:scan base-package="tk.tourwith.project" annotation="org.apache.ibatis.annotations.Mapper"/>
 		
 	
 </beans>
