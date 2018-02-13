@@ -10,19 +10,21 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import tk.tourwith.project.faq.model.Faq;
-import tk.tourwith.project.faq.service.FaqService;
+import tk.tourwith.project.faq.service.impl.FaqServiceImpl;
+
+
 
 @Controller
 public class FaqController {
 	
 	@Autowired
-	private FaqService faqService;	
+	private FaqServiceImpl faqServiceImpl;	
 	
 	@RequestMapping("/faq")
 	public String getFaqList(Model model) throws Exception {
 		
 		Map<String, Object> paramMap = new HashMap<>();
-		List<Faq> faqList = faqService.selectFaqList(paramMap);
+		List<Faq> faqList = faqServiceImpl.selectFaqList(paramMap);
 		
 		model.addAttribute(faqList);
 		
