@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+  <mapper namespace="tk.tourwith.project.member.mapper.MemberMapper">
+  	
+  	
+  	<select id="selectMemberList" resultType="Member" parameterType="map">
+  	select	
+  		MB_NO	
+		, NICK	
+		, MB_GRAD	
+		, FB_ID	
+		, FB_TKN
+		, REG_DE	
+		, UPD_DE	
+		, DEL_YN	
+		, GENDER
+		, AGE	
+		, TOUR_CNT	
+	from  MEMBER
+	where DEL_YN = 'n'			
+  	</select>
+  	
+  	<insert id="insertMember" parameterType="Member">
+  	
+  	<selectKey keyProperty="mb_no" resultType="string" order="BEFORE">
+  		SELECT NEXT_NO FROM NO_CREAT where TABLENM = 'MEMBER'
+  	</selectKey>
+  		
+  		INSERT INTO MEMBER
+			(MB_NO,
+			 NICK,
+			 MB_GRAD,
+			 FB_ID,
+			 FB_TKN,
+			 REG_DE,
+			 UPD_DE,
+			 DEL_YN,
+			 GENDER,
+			 AGE,
+			 TOUR_CNT)
+			VALUES
+			(   CONCAT('MB_',#{mb_no}),
+				#{nick},
+				#{mb_grad},
+				#{fb_id},
+				#{fb_tkn},
+				#{reg_de},
+				#{upd_de},
+				#{del_yn},
+				#{gender},
+				#{age},
+				#{tour_cnt} )
+	  		
+  	</insert>
+  	
+  	<select id="selectMemberByPK" resultType="Member" parameterType="string">
+  	
+  	select	
+  		MB_NO	
+		, NICK	
+		, MB_GRAD	
+		, FB_ID	
+		, FB_TKN
+		, REG_DE	
+		, UPD_DE	
+		, DEL_YN	
+		, GENDER
+		, AGE	
+		, TOUR_CNT	
+	from  MEMBER
+	where DEL_YN = 'n'
+	and MB_NO = #{mb_no}
+		
+  	</select>
+  	
+  	<select id="selectMemberById" resultType="Member" parameterType="string">
+  	
+  	select	
+  		MB_NO	
+		, NICK	
+		, MB_GRAD	
+		, FB_ID	
+		, FB_TKN
+		, REG_DE	
+		, UPD_DE	
+		, DEL_YN	
+		, GENDER
+		, AGE	
+		, TOUR_CNT	
+	from  MEMBER
+	where DEL_YN = 'n'
+	and MB_NO = #{fb_id}
+		
+  	</select>
+  	
+  	<update id="deleteMember" parameterType="string">
+  	update MEMBER 
+  	set
+  		DEL_YN = 'y'
+  	where MB_NO = #{mb_no}
+  	
+  	</update>
+  	
+  	
+ </mapper>

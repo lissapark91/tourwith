@@ -8,78 +8,78 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>Tourwith.tk &mdash;</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="Free HTML5 Website Template by GetTemplates.co" />
-	<meta name="keywords" content="free website templates, free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
-	<meta name="author" content="GetTemplates.co" />
+	<meta name="description" content="tourwith my crew" />
+	<meta name="keywords" content="tour, with, my, crew, let's, go" />
+	<meta name="author" content="WWGo" />
 
   	<!-- Facebook and Twitter integration -->
-	<meta property="og:title" content=""/>
+	<meta property="og:title" content="toruwith"/>
 	<meta property="og:image" content=""/>
-	<meta property="og:url" content=""/>
-	<meta property="og:site_name" content=""/>
-	<meta property="og:description" content=""/>
-	<meta name="twitter:title" content="" />
+	<meta property="og:url" content="http://tourwith.tk"/>
+	<meta property="og:site_name" content="투어위드"/>
+	<meta property="og:description" content="함께 여행갈사람 여기여기로"/>
+	<meta name="twitter:title" content="tourwith" />
 	<meta name="twitter:image" content="" />
-	<meta name="twitter:url" content="" />
-	<meta name="twitter:card" content="" />
+	<meta name="twitter:url" content="http://tourwith.tk" />
+	<meta name="twitter:card" content="함께 여행갈사람 여기여기로" />
 
 	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
 	
 	<!-- Animate.css -->
-	<link rel="stylesheet" href="css/animate.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/animate.css">
 	<!-- Icomoon Icon Fonts-->
-	<link rel="stylesheet" href="css/icomoon.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/icomoon.css">
 	<!-- Themify Icons-->
-	<link rel="stylesheet" href="css/themify-icons.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/themify-icons.css">
 	<!-- Bootstrap  -->
-	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.css">
 	<!-- main slider -->
-	<link rel="stylesheet" href="css/carousel.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/carousel.css">
 	<!-- Magnific Popup -->
-	<link rel="stylesheet" href="css/magnific-popup.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/magnific-popup.css">
 
 	<!-- Magnific Popup -->
-	<link rel="stylesheet" href="css/bootstrap-datepicker.min.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap-datepicker.min.css">
 
 	<!-- Owl Carousel  -->
-	<link rel="stylesheet" href="css/owl.carousel.min.css">
-	<link rel="stylesheet" href="css/owl.theme.default.min.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/owl.carousel.min.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/owl.theme.default.min.css">
 
 	<!-- Theme style  -->
-	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
 
 	<!-- Modernizr JS -->
-	<script src="js/modernizr-2.6.2.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/modernizr-2.6.2.min.js"></script>
 	<!-- FOR IE9 below -->
 	<!--[if lt IE 9]>
 	<script src="js/respond.min.js"></script>
 	<![endif]-->
 	
 	<!-- jQuery -->
-	<script src="js/jquery.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 	<!-- jQuery Easing -->
-	<script src="js/jquery.easing.1.3.js"></script>
+	<script src="${pageContext.request.contextPath}/js/jquery.easing.1.3.js"></script>
 	<!-- Bootstrap -->
-	<script src="js/bootstrap.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 	<!-- Waypoints -->
-	<script src="js/jquery.waypoints.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/jquery.waypoints.min.js"></script>
 	<!-- Carousel -->
-	<script src="js/owl.carousel.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/owl.carousel.min.js"></script>
 	<!-- countTo -->
-	<script src="js/jquery.countTo.js"></script>
+	<script src="${pageContext.request.contextPath}/js/jquery.countTo.js"></script>
 
 	<!-- Stellar Parallax -->
-	<script src="js/jquery.stellar.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/jquery.stellar.min.js"></script>
 
 	<!-- Magnific Popup -->
-	<script src="js/jquery.magnific-popup.min.js"></script>
-	<script src="js/magnific-popup-options.js"></script>
+	<script src="${pageContext.request.contextPath}/js/jquery.magnific-popup.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/magnific-popup-options.js"></script>
 	
 	<!-- Datepicker -->
-	<script src="js/bootstrap-datepicker.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/bootstrap-datepicker.min.js"></script>
 
 	<!-- Main -->
-	<script src="js/main.js"></script>
+	<script src="${pageContext.request.contextPath}/js/main.js"></script>
 
 </head>
 <body>
@@ -94,12 +94,14 @@
 		
 	
 			if (response.status === 'connected') {
-				FB.api('https://graph.facebook.com/me?fields=id,name,picture,gender,birthday,email', {locale : 'ko_KR'}, function(response) {
-					  console.log(response);
+				FB.api('https://graph.facebook.com/me?fields=id', {locale : 'ko_KR'}, function(response) {
 				    console.log(JSON.stringify(response));
+					location.href="${pageContext.request.contextPath}/login/" + response.id
 				});
 				
-			} 
+			}else {
+				console.log('logout');
+			}
 		}, true); // 중복실행방지
 	}
 // 	  https://graph.facebook.com/me?fields=id,name,picture
@@ -109,7 +111,7 @@
 	      appId      : '330372100804574',
 	      cookie     : true,
 	      xfbml      : true,
-	      version    : 'v2.11'
+	      version    : 'v2.12'
 	    });
 	      
 	    FB.AppEvents.logPageView();   
@@ -131,15 +133,16 @@
 
 <div class="gtco-loader"></div>
 <div id="fb-root"></div>
+<div id="page">
+	<tiles:insertAttribute name="nav"/>
 
-	<tiles:insertAttribute name="header"/>
-
+<%-- 	<tiles:insertAttribute name="header"/> --%>
 
 	<tiles:insertAttribute name="body"/>
 
 	<tiles:insertAttribute name="footer"/>
 
-
+</div>
 <div class="gototop js-top">
 		<a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
 </div>
