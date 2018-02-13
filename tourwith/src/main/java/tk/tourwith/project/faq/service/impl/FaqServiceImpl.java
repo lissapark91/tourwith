@@ -1,5 +1,6 @@
 package tk.tourwith.project.faq.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,17 +10,57 @@ import org.springframework.stereotype.Service;
 import tk.tourwith.project.faq.mapper.FaqMapper;
 import tk.tourwith.project.faq.model.Faq;
 import tk.tourwith.project.faq.service.FaqService;
-
-@Service(value="faqService")
-public class FaqServiceImpl implements FaqService{
+import tk.tourwith.project.util.mapper.NumberCreateMapper;
+		
+	@Service(value="faqService")
+	public class FaqServiceImpl implements FaqService{
 
 	@Autowired
 	FaqMapper faqMapper;
 	
+	@Autowired
+	NumberCreateMapper numberCreateMapper;
+	
+	// FAQ 게시글 조회
 	@Override
 	public List<Faq> selectFaqList(Map<String, Object> paramMap) throws Exception {
 		
 		return faqMapper.selectFaqList(paramMap);
+	}
+
+	// FAQ 게시글 보기
+	@Override
+	public Faq viewFaq(String faq_no) throws Exception {
+		
+		faqMapper.updateHitCnt(faq_no);
+		
+		Faq faq = faqMapper.selectFaq(faq_no);
+		
+		return faq;			
+	}
+
+	@Override
+	public int insertFaq(Faq faq) throws Exception {
+		
+		numberCreateMapper.updateNumber("FAQ");
+		
+		int updCnt = faqMapper.insertFaq(faq);
+		
+		return updCnt;
+	}
+
+	@Override
+	public int updateFaq(Faq faq) throws Exception {
+
+		int updCnt = faqMapper.updateFaq(faq);
+		
+		return updCnt;
+	}
+
+	@Override
+	public int deleteFaq(Map<String, Object> paramMap) throws Exception {
+
+		return faqMapper.deleteFaq(paramMap);
 	}
 
 }

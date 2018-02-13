@@ -22,4 +22,54 @@
 		where DEL_YN = 'n'
 		
   	</select>
+  	
+  	
+  	<insert id="insertFaq" parameterType="Faq">
+  	
+  	<selectKey keyProperty="faq_no" resultType="string" order="BEFORE">
+  		SELECT NEXT_NO FROM NO_CREAT where TABLENM = 'FAQ'
+  	</selectKey>
+  	
+  		INSERT INTO FAQ(
+  		FAQ_NO
+			,SJ
+			,REG_DE
+			,CON
+			,HITCNT
+			,UPD_DE
+			,DEL_YN
+			,REG_MB_NO)
+		VALUES(
+			CONCAT('FAQ_',#{faq_no}),
+			,#{faq_no}
+			,#{sj}
+			,#{reg_de}
+			,#{con}
+			,#{hitcnt}
+			,#{upd_de}
+			,#{del_yn}
+			,#{reg_mb_no}
+  	</insert>
+  	
+  		
+  		
+  	<update id="updateHitCnt" parameterType="string">
+  		UPDATE NO_CREAT
+			SET
+			 	NEXT_NO = NEXT_NO + 1,
+				WHERE TABLENM = #{FAQ}
+  	</update>
+  
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
  </mapper>
