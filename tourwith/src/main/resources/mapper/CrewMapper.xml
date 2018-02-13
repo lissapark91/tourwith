@@ -26,7 +26,7 @@
 			, CR_LEADR_MB_NO	
 			, TRPLC_NO
 			, RCRIT_STTUS
-		from CREW	/* crew table 이름 수정 후 수정 */
+		from CREW	/*/crew table 이름 수정 후 수정 */
 		where DEL_YN = 'n'
 		
 		<if test="category != null and category != ''">
@@ -35,5 +35,6 @@
 		
 
   	</select>
-  	
  </mapper>
+
+

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+  <mapper namespace="tk.tourwith.project.rev.mapper.RevMapper">
+  	
+  	<select id="selectRevList" resultType="Rev" parameterType="map">
+  		select
+  			REV_NO
+				,SJ
+				,REV_WRITNG_MB_NO
+				,DEL_YN
+				,HITCNT
+				,CR_NO
+				,CON
+				,REG_DE
+				,UPD_DE
+			from REV
+			where DEL_YN = 'n'
+		
+  	</select>
+  </mapper>
