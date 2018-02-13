@@ -4,7 +4,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-  <mapper namespace="tk.tourwith.project.tourwith.dao.CrewMapper">
+  <mapper namespace="tk.tourwith.project.mapper.CrewMapper">
   	
   	<select id="selectCrewList" resultType="Crew" parameterType="map">
   		select
@@ -32,5 +32,111 @@
 		<if test="category != null and category != ''">
 		and TRLC_NO like '#{category}%'
 		</if>
-		
   	</select>
+  	
+  	<select id="getCrew" resultType="Crew" parameterType="String" >
+  		select
+  			  CR_NO				<!-- 크루 번호 -->
+			, CR_SJ				<!--크루 명 -->
+			, THEMA				<!--크루 테마 -->
+			, MAIN_COURS		<!-- 주요 코스 -->
+			, DETAIL_TRPLC		<!-- 세부 코스 -->
+			, DEPRDE	 		<!-- 출발 날짜 -->
+			, ARVLDE			<!-- 도착 날짜 -->
+			, NOW_MALE_NMPR		<!-- 현재 남자 인원 -->
+			, MALE_NMPR			<!-- 남자인원 -->
+			, FEMALE_NMPR		<!--여자 인원 -->
+			, NOW_FEMALE_NMPR	<!-- 현재 여자 인원 -->
+			, PRTXT				<!-- 홍보 글 -->
+			, REG_DE			<!-- 등록 날짜 -->
+			, UPD_DE			<!-- 수정 날짜 -->
+			, DEL_YN			<!-- 삭제 여부 -->
+			, CR_LEADR_MB_NO	<!-- 크루리더 번호 -->	
+			, TRPLC_NO			<!-- 여행지 번호  -->
+			, RCRIT_STTUS		<!-- 모집 상태 -->
+		from CREW 
+		where CR_NO = #{cr_no}
+  	</select>
+  	
+  	<insert id="insertCrew" parameterType="String">
+  	
+  		<selectKey keyProperty="mb_no" resultType="string" order="BEFORE">
+  		SELECT NEXT_NO FROM NO_CREAT where TABLENM = 'MEMBER'
+ 		</selectKey>
+ 		
+  			INSERT INTO CREW
+			   (CR_NO, 
+				CR_SJ
+				THEMA,
+				MAIN_COURS
+				DETAIL_TRPLC,
+				DEPR_DE,
+				ARVL_DE,
+				NOW_MALE_NMPR,
+				MALE_NMPR,
+				FEMALE_NMPR,
+				NOW_FEMALE_NMPR,
+				PRTXT,
+				REG_DE,
+				UPD_DE,
+				DEL_YN,
+				CR_LEADR_MB_NO,
+				TRPLC_NO,
+				RCRIT_STTUS)
+				VALUES
+			   (#{CR_NO},
+				#{CR_SJ},
+				#{THEMA},
+				#{MAIN_COURS},
+				#{DETAIL_TRPLC},
+				#{DEPR_DE},
+				#{ARVL_DE},
+				#{NOW_MALE_NMPR},
+				#{MALE_NMPR},
+				#{FEMALE_NMPR},
+				#{NOW_FEMALE_NMPR},
+				#{PRTXT},
+				date(),
+				date(),
+				'N',
+				#{CR_LEADR_MB_NO},
+				#{TRPLC_NO},
+				#{RCRIT_STTUS}
+				)
+  		
+  	</insert>
+  	
+  	<update id="updateCrew" parameterType="String">
+  			UPDATE CREW
+			SET
+			CR_NO = #{CR_NO},
+			CR_SJ = #{CR_SJ},
+			THEMA = #{THEMA},
+			MAIN_COURS = #{MAIN_COURS},
+			DETAIL_TRPLC = #{DETAIL_TRPLC},
+			DEPR_DE = #{DEPR_DE},
+			ARVL_DE = #{ARVL_DE},
+			NOW_MALE_NMPR = #{NOW_MALE_NMPR},
+			MALE_NMPR = #{MALE_NMPR},
+			FEMALE_NMPR = #{FEMALE_NMPR},
+			NOW_FEMALE_NMPR = #{NOW_FEMALE_NMPR},
+			PRTXT = #{PRTXT},
+			REG_DE = #{REG_DE},
+			UPD_DE = #{UPD_DE},
+			DEL_YN = #{DEL_YN},
+			CR_LEADR_MB_NO = #{CR_LEADR_MB_NO},
+			TRPLC_NO = #{TRPLC_NO},
+			RCRIT_STTUS = #{RCRIT_STTUS}
+			WHERE CR_NO = #{cr_no}
+  	</update>
+  	
+  	<update id="deleteCrew" parameterType="String">
+  			UPDATE CREW
+  			SET
+  			DEL_YN = 'Y'
+  			WHERE CR_NO=#{cr_no}
+  	</update>
+  	
+  	
+  	</mapper>
+ 

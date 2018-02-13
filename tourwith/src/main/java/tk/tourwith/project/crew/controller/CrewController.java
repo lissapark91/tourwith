@@ -32,6 +32,17 @@ public class CrewController {
 		return "crew/crewList";
 	}
 	
+	@RequestMapping("crew")
+	public String crewView(String cr_no
+						  ,Model model) throws Exception {
+		Crew crew = null;
+		
+		crew = crewService.getCrew(cr_no);
+		
+		model.addAttribute(crew);
+		
+		return "crew/crewview";
+	}
 	
 
 }
