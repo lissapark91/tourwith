@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
 <!--SG 슬라이더 메인 작업-->
    <header id="gtco-header" class="gtco-cover gtco-cover-md" role="banner">
 	<div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -58,13 +60,15 @@
 														<div class="col-md-12">
 															<label for="activities">나라별선택</label>
 															<select name="#" id="activities" class="form-control">
-																<option value="">Country</option>
-																<option value="">동남아</option>
-																<option value="">국내</option>
-																<option value="">유럽</option>
-																<option value="">일/중/홍</option>
-																<option value="">남태평양</option>
-																<option value="">아메리카</option>
+																<c:forEach var="result" items="${resultList}" varStatus="status" >
+																	<tr> 
+																		<td align="center" class="listtd"><c:out value="${status.count"/></td>
+																		<td align="center" ></td>
+																	
+																	</tr>
+																</c:forEach>
+															
+													
 															</select>
 														</div>
 													</div>

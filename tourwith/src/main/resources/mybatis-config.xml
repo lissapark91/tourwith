@@ -7,17 +7,16 @@
 <settings>
 	<setting name="jdbcTypeForNull" value="NULL"/>
 	<setting name="callSettersOnNulls" value="true"/>
-
 </settings>
 
 <typeAliases>
 
 <!-- <typeAlias type="tk.tourwith.project.member.model.Member" alias="Member"/> -->
 <typeAlias type="tk.tourwith.project.crew.model.Crew" alias="Crew"/>
+<typeAlias type="tk.tourwith.project.code.model.Code" alias="Code"/>
 <typeAlias type="tk.tourwith.project.faq.model.Faq" alias="Faq"/>
 <!-- <typeAlias type="tk.tourwith.project.reply.crew.model.CrewReply" alias="CrewReply"/> -->
 <!-- <typeAlias type="tk.tourwith.project.reply.review.model.ReviewReply" alias="ReviewReply"/> -->
-
 </typeAliases>
 
 

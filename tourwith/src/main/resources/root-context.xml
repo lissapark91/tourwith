@@ -44,16 +44,16 @@
 
 	
 	<!-- 트랜젝션 AOP 적용 -->
-<!-- 	<tx:advice id="txAdvice" transaction-manager="transactionManager"> -->
-<!-- 		<tx:attributes> -->
-<!-- 			<tx:method name="*" rollback-for="Exception"/> -->
-<!-- 		</tx:attributes>	 -->
-<!-- 	</tx:advice>	 -->
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="*" rollback-for="Exception"/>
+		</tx:attributes>	
+	</tx:advice>	
 	
-<!-- 	<aop:config> -->
-<!-- 		<aop:pointcut expression="execution(public * tk.tourwith.project..*Service.*(..))" id="servicePointCut"/> -->
-<!-- 		<aop:advisor advice-ref="txAdvice" pointcut-ref="servicePointCut"/> -->
-<!-- 	</aop:config> -->
+	<aop:config>
+		<aop:pointcut expression="execution(public * tk.tourwith.project..*Service.*(..))" id="servicePointCut"/>
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="servicePointCut"/>
+	</aop:config>
 	
 	
 	
