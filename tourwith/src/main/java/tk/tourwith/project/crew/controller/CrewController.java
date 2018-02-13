@@ -24,7 +24,7 @@ public class CrewController {
 	public String getCrewList(@PathVariable String category, Model model) throws Exception {
 		
 		Map<String, Object> paramMap = new HashMap<>();
-		paramMap.put("category", category);
+		paramMap.put("category", "BIG_CATE_"+category);
 		List<Crew> crewList = crewService.selectCrewList(paramMap);
 		
 		model.addAttribute(crewList);
@@ -32,16 +32,16 @@ public class CrewController {
 		return "crew/crewList";
 	}
 	
-	@RequestMapping("crew")
-	public String crewView(String cr_no
-						  ,Model model) throws Exception {
+	@RequestMapping("/crew/page/{cr_no}")
+	public String crewView(Model model
+						  ,@PathVariable(value="cr_no", required=true) String cr_no) throws Exception {
 		Crew crew = null;
 		
 		crew = crewService.getCrew(cr_no);
 		
-		model.addAttribute(crew);
+		model.addAttribute("crew",crew);
 		
-		return "crew/crewview";
+		return "crew/crewView";
 	}
 	
 

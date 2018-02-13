@@ -4,8 +4,8 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-  <mapper namespace="tk.tourwith.project.mapper.CrewMapper">
-  	
+  <mapper namespace="tk.tourwith.project.crew.mapper.CrewMapper">
+  					 
   	<select id="selectCrewList" resultType="Crew" parameterType="map">
   		select
   			  CR_NO
@@ -13,8 +13,8 @@
 			, THEMA
 			, MAIN_COURS
 			, DETAIL_TRPLC
-			, DEPRDE	
-			, ARVLDE	
+			, DEPR_DE	
+			, ARVL_DE	
 			, NOW_MALE_NMPR
 			, MALE_NMPR	
 			, FEMALE_NMPR	
@@ -26,11 +26,12 @@
 			, CR_LEADR_MB_NO	
 			, TRPLC_NO
 			, RCRIT_STTUS
-		from CREW	/* crew table 이름 수정 후 수정 */
+		from CREW	
 		where DEL_YN = 'n'
 		
 		<if test="category != null and category != ''">
-		and TRLC_NO like '#{category}%'
+<!-- 		and TRLC_NO like '#{category}%' -->
+		and TRPLC_NO like concat(#{category} , '%')
 		</if>
   	</select>
   	
@@ -41,8 +42,8 @@
 			, THEMA				<!--크루 테마 -->
 			, MAIN_COURS		<!-- 주요 코스 -->
 			, DETAIL_TRPLC		<!-- 세부 코스 -->
-			, DEPRDE	 		<!-- 출발 날짜 -->
-			, ARVLDE			<!-- 도착 날짜 -->
+			, DEPR_DE	 		<!-- 출발 날짜 -->
+			, ARVL_DE			<!-- 도착 날짜 -->
 			, NOW_MALE_NMPR		<!-- 현재 남자 인원 -->
 			, MALE_NMPR			<!-- 남자인원 -->
 			, FEMALE_NMPR		<!--여자 인원 -->

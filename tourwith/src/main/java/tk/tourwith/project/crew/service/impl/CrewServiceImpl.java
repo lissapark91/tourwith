@@ -3,6 +3,7 @@ package tk.tourwith.project.crew.service.impl;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import tk.tourwith.project.crew.mapper.CrewMapper;
@@ -11,7 +12,8 @@ import tk.tourwith.project.crew.service.CrewService;
 
 @Service(value="crewService")
 public class CrewServiceImpl implements CrewService{
-
+	
+	@Autowired
 	CrewMapper crewMapper;
 	
 	@Override
@@ -22,8 +24,8 @@ public class CrewServiceImpl implements CrewService{
 
 	@Override
 	public Crew getCrew(String cr_no) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return crewMapper.getCrew(cr_no);
 	}
 
 	@Override
