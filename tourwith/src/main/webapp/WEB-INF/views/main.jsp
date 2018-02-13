@@ -59,16 +59,10 @@
 													<div class="row form-group">
 														<div class="col-md-12">
 															<label for="activities">나라별선택</label>
-															<select name="#" id="activities" class="form-control">
-																<c:forEach var="result" items="${resultList}" varStatus="status" >
-																	<tr> 
-																		<td align="center" class="listtd"><c:out value="${status.count"/></td>
-																		<td align="center" ></td>
-																	
-																	</tr>
+															<select name="BIG_CATE" id="activities" class="form-control">
+																<c:forEach var="code" items="${codeList}" varStatus="status" >
+																	<option value="${code.code_no}">${code.code_nm}</option>
 																</c:forEach>
-															
-													
 															</select>
 														</div>
 													</div>

@@ -136,7 +136,6 @@
 <div id="page">
 	<tiles:insertAttribute name="nav"/>
 
-<%-- 	<tiles:insertAttribute name="header"/> --%>
 
 	<tiles:insertAttribute name="body"/>
 
