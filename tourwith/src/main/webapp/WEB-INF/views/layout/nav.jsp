@@ -27,10 +27,15 @@
 									<li><a href="${pageContext.request.contextPath}/crew/06">유럽</a></li>
 								</ul>
 							</li>
-							<li>
-								<a href="#">어디갈래?</a>
+							<li class="has-dropdown"><a href="#">어디갈래?</a>
+								<ul class="dropdown">
+									<li><a href="#">여행도우미</a></li>
+									<li><a href="#">여행 리뷰</a></li>
+								</ul>
 							</li>
-							<li><a href="contact.html">FAQ</a></li>
+							<li>
+								<a href="#">FAQ</a>
+							</li>
 			<!-- 				<li><a href="${pageContext.request.contextPath}/login" 
 							onclick="loginPopup(this.href, '로그인 또는 회원가입', 500, 400);return false;">로그인</a></li> -->
 							<!-- <li><a href="contact.html" >로그인</a></li> -->
@@ -64,7 +69,7 @@
 
 							<c:if test="${not empty sessionScope.LOGIN_USER}">
 	
-							<li class="has-dropdown"><a href="#">마이페이지</a>
+							<li class="has-dropdown"><a href="#"><img src="http://graph.facebook.com/${LOGIN_USER.fb_id}/picture?width=32&height=32" style="border-radius:16px; border: 1px solid grey;"/></a>
 								<ul class="dropdown">
 									<li><a href="#">마이페이지</a></li>
 									<li><a href="${pageContext.request.contextPath}/signout">로그아웃</a></li>

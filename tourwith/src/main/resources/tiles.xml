@@ -4,8 +4,8 @@
 <!-- tiles 설정 파일 -->
 <tiles-definitions>
 <!-- login page -->
-	<definition name="login/loginForm" template="/WEB-INF/views/layout/emptyTemplate.jsp">
-		<put-attribute name="body" value="/WEB-INF/views/login/loginForm.jsp" />
+	<definition name="admin" template="/WEB-INF/views/layout/admin_template.jsp">
+		<put-attribute name="nav" value="/WEB-INF/views/layout/admin_nav.jsp" />
 	</definition>
 
 	<definition name="default" template="/WEB-INF/views/layout/template.jsp">
