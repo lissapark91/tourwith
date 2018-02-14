@@ -5,15 +5,33 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
  <mapper namespace="tk.tourwith.project.code.mapper.CodeMapper">
- 
-<select id="selectByGroupCode" parameterType="String" resultType="Code">
+ 					
+<select id="selectListByGroupCode" parameterType="String" resultType="Code">
 
    select CODE_NO, CODE_NM 
    from CMMN_CODE
-	where GROUP_CODE = #{group_code}  
+   where GROUP_CODE = #{group_code}  
 	  
 </select>
- 
+
+<!-- <select id="selectByGroupCodeList" parameterType="String" resultType="Code"> -->
+
+<!-- select * -->
+<!--    from CMMN_CODE -->
+<!--    where GROUP_CODE = #{group_code_01} -->
+
+<!-- </select> -->
+
+<!-- parameterType에서 #{변수 명} 변수값을 받아오겠다 -->
+
+<!-- 	select 가져오겠다 -->
+<!-- 	 CODE_NO, CODE_NM 컬럼들의 내용을  -->
+<!--    from CMMN_CODE 어디에서?  CMMN 코드 테이블에서 -->
+<!--    where  어떤 조건으로? -->
+<!--    GROUP_CODE = #{group_code} 그룹코드가 입력된 값과 동일한 애로 -->
+
+
+
  
  </mapper> 
 
