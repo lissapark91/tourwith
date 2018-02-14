@@ -16,11 +16,15 @@ public class CodeServiceImpl implements CodeService {
 	CodeMapper codeMapper;
 
 	@Override
-	public List<Code> selectByGroupCode(String group_code) throws Exception {
+	public List<Code> selectListByGroupCode(String group_code) {
 
-		return codeMapper.selectByGroupCode(group_code);
+		return codeMapper.selectListByGroupCode(group_code);
 	
 	}
+
+	
+
+
 	
 }
 
