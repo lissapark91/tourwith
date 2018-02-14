@@ -58,14 +58,13 @@
 			,REG_MB_NO)
 		VALUES(
 			CONCAT('FAQ_',#{faq_no})
-			,#{faq_no}
 			,#{sj}
-			,#{reg_de}
+			,now()
 			,#{con}
-			,#{hitcnt}
-			,#{upd_de}
-			,#{del_yn}
-			,#{reg_mb_no}
+			,0
+			,now()
+			,'n'
+			,#{reg_mb_no})
   	</insert>
   	
   		

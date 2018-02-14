@@ -70,10 +70,10 @@ function fn_save(type){
 	
 	var frm = document.faqForm;
 	
-	frm.action = "faqInsert";	
+	frm.action = "${pageContext.request.contextPath}/faqInsert";	
 	
 	if(type == 'U'){
-		frm.action = "faqUpdate";		
+		frm.action = "${pageContext.request.contextPath}/faqUpdate";		
 	}
 	
 	frm.submit();
@@ -92,11 +92,11 @@ function validate(){
 		frm.sj.focus();
 		return false;
 	}
-	if(frm.reg_mb_no.value == ""){
-		alert("작성자는 필수입력 항목입니다.");
-		frm.reg_mb_no.focus();
-		return false;
-	}
+// 	if(frm.reg_mb_no.value == ""){
+// 		alert("작성자는 필수입력 항목입니다.");
+// 		frm.reg_mb_no.focus();
+// 		return false;
+// 	}
 	if(frm.con.value == ""){
 		alert("내용을 입력하세요.");
 		frm.con.focus();
@@ -129,15 +129,9 @@ function validate(){
 					</div>
 				</td>
 			</tr>
-			<tr>
-				<td>작성자</td>
-				<td>
-					<div class="col-xs-3">
-						<input type="hidden" name="reg_mb_no" value="${faq.reg_mb_no}">
-						<input type="text" name="reg_mb_no" value="${faq.reg_mb_no}" class="form-control" readonly="readonly">
-					</div>
-				</td>
-			</tr>
+			
+						<input type="hidden" name="reg_mb_no" value="${LOGIN_USER.nick}">
+		
 			
 			<tr>
 				<td colspan="2">

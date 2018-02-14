@@ -111,7 +111,7 @@ public class FaqController {
 	
 	@RequestMapping(value="/faqInsert", method=RequestMethod.POST)
 	public String faqInsert(
-			
+			HttpSession session,
 			Faq faq,
 			HttpServletRequest request,
 			Model model
@@ -119,9 +119,15 @@ public class FaqController {
 				
 		String viewPage = "common/message";
 		
+		
+		Member member = (Member) session.getAttribute("LOGIN_USER");
+		faq.setReg_mb_no(member.getMb_no());
+		
+		faqService.insertFaq(faq);
+		
 		boolean isError = false;
 		String message = "정상 등록되었습니다.";
-		String locationURL = "/board/boardList.do";
+		String locationURL = "/faq";
 		
 		model.addAttribute("isError", isError);
 		model.addAttribute("message", message);

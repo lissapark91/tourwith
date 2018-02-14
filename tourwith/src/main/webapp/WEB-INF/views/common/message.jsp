@@ -24,7 +24,7 @@
 	<script type="text/javascript">
 		alert("${message}");
 		
-		if(${fn:startsWith(locationURL, 'http')}){
+		if("true" == "${fn:startsWith(locationURL, 'http')}"){
 			location.href="${locationURL}";
 		}else{
 			location.href="${pageContext.request.contextPath}${locationURL}";	
