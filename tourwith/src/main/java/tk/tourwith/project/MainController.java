@@ -54,5 +54,16 @@ public class MainController {
 	}
 
 	
+//	@RequestMapping(value = "/admin", method = RequestMethod.GET)
+//
+//	public String adminhome()  {
+//		
+//		
+//		
+//		return "admin";
+//	}
+	
+	
+	
 	
 }

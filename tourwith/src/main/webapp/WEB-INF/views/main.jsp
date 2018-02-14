@@ -5,7 +5,7 @@
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
 <!--SG 슬라이더 메인 작업-->
 
-<script src="${pageContext.request.contextPath}/js/jquery-3.2.1.js"></script>
+<%-- <script src="${pageContext.request.contextPath}/js/jquery-3.2.1.js"></script> --%>
 
 <script type="text/javascript">
 

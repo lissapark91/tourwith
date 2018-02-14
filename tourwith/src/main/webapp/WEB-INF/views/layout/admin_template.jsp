@@ -1,66 +1,84 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-	<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Tourwith.tk &mdash; admin</title>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Tourwith.tk &mdash; admin</title>
 
+<!-- Bootstrap  -->
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.css">
+	    <!-- Bootstrap core CSS -->
+    <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="${pageContext.request.contextPath}/css/simple-sidebar.css" rel="stylesheet">
+	
 
 </head>
 <body>
-<div id="fb-root"></div>
-<script>
 
-	function fbLogin() {
-		// 로그인 여부 체크
-		FB.getLoginStatus(function(response) {
+	  <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="#">
+                        TOURWITH.TK
+                    </a>
+                </li>
+                <li>
+                    <a href="#">회원 관리</a>
+                </li>
+                <li>
+                    <a href="#">FAQ 관리</a>
+                </li>
+                <li>
+                    <a href="#">여행도우미 관리</a>
+                </li>
+                <li>
+                    <a href="#">공통코드 관리</a>
+                </li>
+                <li>
+                    <a href="#">여행지 관리</a>
+                </li>
+                <li>
+                    <a href="#">통계</a>
+                </li>
+            </ul>
+        </div>
+
+
+
+	<tiles:insertAttribute name="nav" />
+
+
+
+
+
+	<div id="page-content-wrapper">
+		<div class="container-fluid">
+			
+<!-- 			<h1>관리자 페이지입니다.</h1> -->
+<!-- 			<p>안녕하세요 이 곳은 우리어디가의 관리자 페이지 입니다.<p> -->
+			 
+			 
+	
+			
+			
+			<tiles:insertAttribute name="body" />
 		
+		</div>
+	</div>
 	
-			if (response.status === 'connected') {
-				FB.api('https://graph.facebook.com/me?fields=id,name,picture,gender,birthday,email', {locale : 'ko_KR'}, function(response) {
-					  console.log(response);
-				    console.log(JSON.stringify(response));
-				});
-				
-			} 
-		}, true); // 중복실행방지
-	}
-// 	  https://graph.facebook.com/me?fields=id,name,picture
+ <!-- Bootstrap core JavaScript -->
+    <script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/bootstrap.bundle.min.js"></script>
 
-	window.fbAsyncInit = function() {
-	    FB.init({
-	      appId      : '330372100804574',
-	      cookie     : true,
-	      xfbml      : true,
-	      version    : 'v2.11'
-	    });
-	      
-	    FB.AppEvents.logPageView();   
-
-
-	  };
-	
-  (function(d, s, id) {
-	  var js, fjs = d.getElementsByTagName(s)[0];
-	  if (d.getElementById(id)) return;
-	  js = d.createElement(s); js.id = id;
-	  js.src = 'https://connect.facebook.net/ko_KR/sdk.js#xfbml=1&version=v2.12&appId=330372100804574&autoLogAppEvents=1';
-	  fjs.parentNode.insertBefore(js, fjs);
-	}(document, 'script', 'facebook-jssdk'));
-  
-  
-</script>
-
-<div id="fb-root"></div>
-
-	<tiles:insertAttribute name="header"/>
-	
-	<tiles:insertAttribute name="nav"/>
-
-	<tiles:insertAttribute name="footer"/>
 
 </body>
 </html>
+
+
+
