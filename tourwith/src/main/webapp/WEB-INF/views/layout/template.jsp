@@ -86,60 +86,184 @@
 
 </head>
 <body>
+
+
+<div class="gtco-loader"></div>
 <div id="fb-root"></div>
 <script>
 
-  
-
-	function fbLogin() {
-		// 로그인 여부 체크
-		FB.getLoginStatus(function(response) {
-		
-	
-			if (response.status === 'connected') {
-				FB.api('https://graph.facebook.com/me?fields=id', {locale : 'ko_KR'}, function(response) {
-				    console.log(JSON.stringify(response));
-					location.href="${pageContext.request.contextPath}/login/" + response.id
-				});
+ 	function fbLogin() {
+ 		// 로그인 여부 체크
+ 		FB.getLoginStatus(function(response) {
+ 			if (response.status === 'connected') {
+//  					console.log(response.authResponse.accessToken);
+					document.getElementById("fb_tkn").value = response.authResponse.accessToken;
+ 				FB.api('https://graph.facebook.com/me?fields=id,birthday,gender,name,picture', {locale : 'ko_KR'}, function(response) {
 				
-			}else {
-				console.log('logout');
-			}
+ 					document.getElementById("gender").value = response.gender;
+					document.getElementById("age").value = response.birthday ? response.birthday : '';
+					
+					document.getElementById("member").action = "${pageContext.request.contextPath}/member/form/" + response.id;
+ 					
+ 					
+ 					$(function(){
+ 					      $.ajax({
+ 					         type: "GET",
+ 					         url: "${pageContext.request.contextPath}/check/" + response.id,
+ 					         success: function(result) {
+ 					        	 console.log(result);
+//  					        	 var result = JSON.parse(result)
+ 					        	 var isMember = result.isMember;
+ 					        	 console.log(isMember);
+ 					        	 $('#modal-contents').hide();
+ 					        	 if(!isMember){
+ 					        		 var htmlStr = '<div align="center">';
+ 					        		 htmlStr += "<h4>"+ response.name +"님으로 tourwith에 가입합니다.</h4>";
+ 					        		 htmlStr += '<div><img src="' + response.picture.data.url + '"></div>'
+ 					        		 htmlStr += '<br/><button type="button" class="btn btn-default" onclick="document.getElementById('+"'member'"+').submit();">회원가입</button>'
+ 					        		 $('.modal-body').html(htmlStr)
+ 					        		 console.log(htmlStr)
+ 					        	 }else{
+ 					        		 var htmlStr = '<div align="center">';
+					        		 htmlStr += "<h4>"+ response.name +"님으로 tourwith에 로그인합니다.</h4>";
+					        		 htmlStr += '<div><img src="' + response.picture.data.url + '"></div>'
+					        		 htmlStr += '<br/><button type="button" class="btn btn-default" onclick="signin(' + "'" + response.id + "'" + ')">로그인</button>';
+					        		 $('.modal-body').html(htmlStr);
+ 					        		 
+ 					        	 }
+ 					         }
+ 					       });
+ 					})
+				
+ 				});
+ 			}else {
+				$(function(){
+					$('#modal-contents').show();
+ 				})
+ 			}
 		}, true); // 중복실행방지
-	}
-// 	  https://graph.facebook.com/me?fields=id,name,picture
-
-	window.fbAsyncInit = function() {
-	    FB.init({
-	      appId      : '330372100804574',
+ 	}
+ 	 // https://graph.facebook.com/me?fields=id,name,picture
+// 	function formSubmit(){
+ 		 
+//  	}
+ 	function fbLoginButton() {
+ 		// 로그인 여부 체크
+ 		FB.getLoginStatus(function(response) {
+ 			if (response.status === 'connected') {
+					document.getElementById("fb_tkn").value = response.authResponse.accessToken;
+ 				FB.api('https://graph.facebook.com/me?fields=id,birthday,gender,name,picture', {locale : 'ko_KR'}, 
+			function(response) {
+ 					document.getElementById("gender").value = response.gender ? response.gender : '비공개';
+					document.getElementById("age").value = response.birthday ? response.birthday : '비공개';
+					
+					$(function(){
+					      $.ajax({
+					         type: "GET",
+					         url: "${pageContext.request.contextPath}/check/" + response.id,
+					         success: function(result) {
+					        	 console.log(result);
+//					        	 var result = JSON.parse(result)
+					        	 var isMember = result.isMember;
+					        	 console.log(isMember);
+					        	 $('#modal-contents').hide();
+					        	 if(!isMember){
+					        		 //회원가입으로
+					        		 document.getElementById("member").action = "${pageContext.request.contextPath}/member/form/" + response.id;
+					        	 	 document.getElementById("member").submit();
+					        	 }else{
+					        		 //로그인으로
+					        		 document.getElementById("member").action = "${pageContext.request.contextPath}/signin/" + response.id + "?url=" + location.href;
+					        	 	 document.getElementById("member").submit();	        		 
+					        		 
+					        	 	 //로그인 후 돌아올 url 제출
+					        	 	 
+					        	 	 
+					        	 }
+					         }
+					       });
+					})
+				
+ 				})
+ 			} else {
+ 				
+ 			}
+ 		}, true)
+ 	}
+ 	
+ 	function signin(id){
+      		 document.getElementById("member").action = "${pageContext.request.contextPath}/signin/" + id + "?url=" + location.href;
+      	 	 document.getElementById("member").submit();	        		 
+		}
+ 
+ 			 
+ 	window.fbAsyncInit = function() {
+ 	    FB.init({
+ 	      appId      : '330372100804574',
 	      cookie     : true,
 	      xfbml      : true,
-	      version    : 'v2.12'
+ 	      version    : 'v2.12'
 	    });
 	      
 	    FB.AppEvents.logPageView();   
 
 
-	  };
+ 	  };
 	
-  (function(d, s, id) {
-	  var js, fjs = d.getElementsByTagName(s)[0];
-	  if (d.getElementById(id)) return;
+   (function(d, s, id) {
+ 	  var js, fjs = d.getElementsByTagName(s)[0];
+ 	  if (d.getElementById(id)) return;
 	  js = d.createElement(s); js.id = id;
 	  js.src = 'https://connect.facebook.net/ko_KR/sdk.js#xfbml=1&version=v2.12&appId=330372100804574&autoLogAppEvents=1';
-	  fjs.parentNode.insertBefore(js, fjs);
-	}(document, 'script', 'facebook-jssdk'));
+ 	  fjs.parentNode.insertBefore(js, fjs);
+ 	}(document, 'script', 'facebook-jssdk'));
   
   
   
 </script>
-
-<div class="gtco-loader"></div>
-<div id="fb-root"></div>
 <div id="page">
+<form method="post" name="member" id="member">
+	<input type="hidden" name="gender" id="gender"/>
+	<input type="hidden" name="age" id="age"/>
+	<input type="hidden" name="fb_tkn" id="fb_tkn"/>
+</form>
+	  
 	<tiles:insertAttribute name="nav"/>
 
+	
+	<!-- Modal -->
 
+	  <div class="modal fade" id="myModal" role="dialog">
+	    <div class="modal-dialog">
+	    
+	      <!-- Modal content-->
+	      <div class="modal-content">
+	        <div class="modal-header">
+	          <button type="button" class="close" data-dismiss="modal">&times;</button>
+	          <h4 class="modal-title">로그인 또는 회원가입</h4>
+	        </div>
+	        <div class="modal-body" id="modal-body">
+	        <div id="modal-contents" align="center">
+	        <h4>tourwith는 페이스북 아이디만으로 이용 가능합니다.</h4>
+	        <br/>
+	        <br/>
+	         <div id="fb-login-button" class="fb-login-button" data-max-rows="1" data-size="large" 
+				data-button-type="login_with" data-show-faces="false" data-auto-logout-link="true" 
+				data-use-continue-as="true" 
+				scope="public_profile"
+				onlogin="fbLoginButton()"></div>
+	        </div>
+	        </div>
+	        <div class="modal-footer">
+	          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	        </div>
+	      </div>
+	      
+	    </div>
+	  </div>
+<!-- modal end -->
+
+	  
 	<tiles:insertAttribute name="body"/>
 
 	<tiles:insertAttribute name="footer"/>

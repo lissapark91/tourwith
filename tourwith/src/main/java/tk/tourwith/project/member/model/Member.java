@@ -12,7 +12,7 @@ public class Member {
 	private String upd_de	;
 	private String del_yn	;
 	private String gender	;
-	private String age	;
+	private String birthday	;
 	private String tour_cnt ;
 	
 	
@@ -70,11 +70,11 @@ public class Member {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-	public String getAge() {
-		return age;
+	public String getBirthday() {
+		return birthday;
 	}
-	public void setAge(String age) {
-		this.age = age;
+	public void setBirthday(String age) {
+		this.birthday = birthday;
 	}
 	public String getTour_cnt() {
 		return tour_cnt;
