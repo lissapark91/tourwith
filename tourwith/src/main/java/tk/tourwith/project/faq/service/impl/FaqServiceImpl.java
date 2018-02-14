@@ -38,13 +38,17 @@ import tk.tourwith.project.util.mapper.NumberCreateMapper;
 		
 		return faq;			
 	}
-
+	
+	// FAQ 게시글 작성
 	@Override
 	public int insertFaq(Faq faq) throws Exception {
 		
 		numberCreateMapper.updateNumber("FAQ");
-		
 		int updCnt = faqMapper.insertFaq(faq);
+		
+		if(updCnt > 0) {
+			numberCreateMapper.updateNumber("FAQ");
+		}
 		
 		return updCnt;
 	}

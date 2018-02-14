@@ -40,7 +40,7 @@
 			,DEL_YN
 			,REG_MB_NO)
 		VALUES(
-			CONCAT('FAQ_',#{faq_no}),
+			CONCAT('FAQ_',#{faq_no})
 			,#{faq_no}
 			,#{sj}
 			,#{reg_de}

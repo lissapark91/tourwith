@@ -1,8 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>	
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -50,21 +54,6 @@
 
 <!-- Modernizr JS -->
 <script src="js/modernizr-2.6.2.min.js"></script>
-<!-- FOR IE9 below -->
-<!--[if lt IE 9]>
-	<script src="js/respond.min.js"></script>
-	<![endif]-->
-
-
-<style>
-#user {
-	margin-top: 30px;
-}
-
-.noresize {
-	resize: none;
-}
-</style>
 
 
 <script type="text/javascript">
@@ -89,7 +78,7 @@ function fn_search(currentPage){
 </script>
 
 
-<title>Insert title here</title>
+<title>FAQ LIST</title>
 </head>
 <body>
 
@@ -168,20 +157,19 @@ function fn_search(currentPage){
 
 								</thead>
 
-
-
 								<tbody>
-
+								
 									<c:if test="${not empty faqList}">
+										
 										<c:forEach var="faq" items="${faqList}">
 											<tr>
-												<td>${faq.reg_mb_no }</td>
+												<td>${faq.reg_mb_no}</td>
 
 												<td><a href="faqView/${faq.reg_mb_no}">${faq.sj }</a></td>
 
 												<td>${faq.reg_mb_no }</td>
-												<td>${faq.reg_date }</td>
-												<td>${faq.bo_hitcnt }</td>
+												<td>${faq.reg_de }</td>
+												<td>${faq.hitcnt }</td>
 											</tr>
 										</c:forEach>
 									</c:if>
