@@ -1,0 +1,126 @@
+@font-face {
+    font-family: 'icomoon';
+    src: url("../fonts/icomoon/icomoon.eot?srf3rx");
+    src: url("../fonts/icomoon/icomoon.eot?srf3rx#iefix") format("embedded-opentype"), url("../fonts/icomoon/icomoon.ttf?srf3rx") format("truetype"), url("../fonts/icomoon/icomoon.woff?srf3rx") format("woff"), url("../fonts/icomoon/icomoon.svg?srf3rx#icomoon") format("svg");
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  /* =======================================================
+*
+* 	Template Style 
+*
+* ======================================================= */
+
+/* 수정수정 수정ㅁㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴ */
+.img-fluid{
+    max-width: 100%; 
+    height: auto; 
+  }
+  
+  
+    
+  .tour_status_k{
+     background-color:ivory;
+    border-radius: 4px;
+    margin: 1px;
+  }
+  
+  .date_status_k{
+    background-color:ivory;
+    border-radius: 4px;
+    margin: 1px;
+  }
+  .cru_status_k{
+    background-color:ivory;
+    border-radius: 4px;
+    margin-left: 10px;
+    margin-bottom: 1px;
+    margin-top: 1px;
+   /* color: whitesmoke;*/
+  
+  }
+  .title_status_k{
+    background-color:ivory;
+    border-radius: 4px;
+    margin-bottom: 1px;
+    margin-top: 1px;
+  }
+  
+  .paging .hide {
+    display: block;
+    height: 0;
+    width: 0;
+    font-size: 0;
+    line-height: 0;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+  
+  .paging {
+    padding: 19px;
+    text-align: center;
+  }
+  
+  .paging a {
+    display: inline-block;
+    width: 23px;
+    height: 23px;
+    padding-top: 2px;
+    vertical-align: middle;
+  }
+  
+  .paging a:hover {
+    text-decoration: underline;
+  }
+  
+  .paging .btn_arr {
+    text-decoration: none;
+  }
+  
+  .paging .btn_arr,
+  .paging .on {
+    margin: 0 3px;
+    padding-top: 0;
+    border: 1px solid #ddd;
+    border-radius: 30px;
+    /* background:url(/front/img/com/btn_paging.png) no-repeat; */
+  }
+  
+  .paging .on {
+    padding-top: 1px;
+    height: 22px;
+    color: #fff;
+    font-weight: bold;
+    background: #000;
+  }
+  
+  .paging .on:hover {
+    text-decoration: none;
+  }
+  
+  #cru1{
+    border: 1px solid  black;
+    width: 525px;
+    background-color: goldenrod;
+    color: black;
+  }
+  
+  .a{
+    text-align: center;
+  }
+  
+  .centerk{
+  	display:block;
+  	margin-right:auto;
+  	margin:15px;
+  	}
+  	
+  .form-sizek,input-sizek{
+  	width:100%;
+  	margin-bottom:15px;
+  	height:20%;
+  }
+  
+  /* 수정 수정 수정ㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴ */

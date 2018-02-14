@@ -47,7 +47,10 @@
 
 	<!-- Theme style  -->
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
-
+	
+	<!-- gyubot style -->
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/sky.css">
+	
 	<!-- Modernizr JS -->
 	<script src="${pageContext.request.contextPath}/js/modernizr-2.6.2.min.js"></script>
 	<!-- FOR IE9 below -->
