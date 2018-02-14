@@ -9,12 +9,15 @@ import org.springframework.stereotype.Service;
 import tk.tourwith.project.member.mapper.MemberMapper;
 import tk.tourwith.project.member.model.Member;
 import tk.tourwith.project.member.service.MemberService;
+import tk.tourwith.project.util.mapper.NumberCreateMapper;
 
 @Service(value="memberService")
 public class MemberServiceImpl implements MemberService{
 	
 	@Autowired
 	MemberMapper memberMapper;
+	@Autowired
+	NumberCreateMapper numberCreateMapper;
 
 	@Override
 	public List<Member> selectMemberList(Map<String, Object> paramMap) throws Exception {
@@ -23,7 +26,12 @@ public class MemberServiceImpl implements MemberService{
 
 	@Override
 	public int insertMember(Member member) throws Exception {
-		return 0;
+		int updCnt = memberMapper.insertMember(member);
+		if(updCnt > 0) {
+			numberCreateMapper.updateNumber("MEMBER");			
+		}
+		
+		return updCnt;
 	}
 
 	@Override
@@ -40,6 +48,17 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public int deleteMember(String mb_no) throws Exception {
 		return 0;
+	}
+
+	@Override
+	public Member selectMemberByNick(String nick) throws Exception {
+		
+		return memberMapper.selectMemberByNick(nick);
+	}
+
+	@Override
+	public int updateMember(Member member) throws Exception {
+		return memberMapper.updateMember(member);
 	}
 
 }

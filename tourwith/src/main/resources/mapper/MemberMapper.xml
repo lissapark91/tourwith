@@ -18,7 +18,7 @@
 		, UPD_DE	
 		, DEL_YN	
 		, GENDER
-		, AGE	
+		, BIRTHDAY	
 		, TOUR_CNT	
 	from  MEMBER
 	where DEL_YN = 'n'			
@@ -40,20 +40,20 @@
 			 UPD_DE,
 			 DEL_YN,
 			 GENDER,
-			 AGE,
+			 BIRTHDAY,
 			 TOUR_CNT)
 			VALUES
-			(   CONCAT('MB_',#{mb_no}),
+			(CONCAT('MB_',#{mb_no}),
 				#{nick},
-				#{mb_grad},
+				'E',
 				#{fb_id},
 				#{fb_tkn},
-				#{reg_de},
-				#{upd_de},
-				#{del_yn},
+				now(),
+				now(),
+				'n',
 				#{gender},
-				#{age},
-				#{tour_cnt} )
+				#{birthday},
+				0)
 	  		
   	</insert>
   	
@@ -69,7 +69,7 @@
 		, UPD_DE	
 		, DEL_YN	
 		, GENDER
-		, AGE	
+		, BIRTHDAY	
 		, TOUR_CNT	
 	from  MEMBER
 	where DEL_YN = 'n'
@@ -89,11 +89,22 @@
 		, UPD_DE	
 		, DEL_YN	
 		, GENDER
-		, AGE	
+		, BIRTHDAY	
 		, TOUR_CNT	
 	from  MEMBER
 	where DEL_YN = 'n'
-	and MB_NO = #{fb_id}
+	and FB_ID = #{fb_id}
+		
+  	</select>
+  	
+  	<select id="selectMemberByNick" resultType="Member" parameterType="string">
+  	
+  	select	
+  		MB_NO	
+		, NICK	
+	from  MEMBER
+	where DEL_YN = 'n'
+	and NICK = #{nick}
 		
   	</select>
   	
@@ -103,6 +114,18 @@
   		DEL_YN = 'y'
   	where MB_NO = #{mb_no}
   	
+  	</update>
+  	
+  	<update id="updateMember" parameterType="Member">
+  	
+  		update MEMBER
+  		set
+  			  GENDER = #{gender}
+  			, BIRTHDAY = #{birthday}
+  			, FB_TKN = #{fb_tkn}
+  			, UPD_DE = now()
+  		where FB_ID = #{fb_id}
+  		
   	</update>
   	
   	

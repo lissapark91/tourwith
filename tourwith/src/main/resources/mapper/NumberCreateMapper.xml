@@ -9,7 +9,7 @@
   	<update id="updateNumber" parameterType="string">
   		UPDATE NO_CREAT
 		SET
-		 NEXT_NO = NEXT_NO + 1,
+		 NEXT_NO = NEXT_NO + 1
 		WHERE TABLENM = #{tablenm}
   	</update>
   
