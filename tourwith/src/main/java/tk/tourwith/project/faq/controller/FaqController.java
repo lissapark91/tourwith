@@ -72,10 +72,9 @@ public class FaqController {
 			) throws Exception {		
 		
 		Faq faq = null;
-		
-		if(faq_no == null) {						
+								
 			faq = faqService.viewFaq(faq_no);
-		}
+
 		
 		model.addAttribute("faq", faq);
 		
@@ -83,17 +82,19 @@ public class FaqController {
 	}
 	
 	// FAQ 글 작성
-	@RequestMapping("/faqForm")
+	@RequestMapping("/faq/faqForm")
 	public String faqForm(
 			HttpSession session,
-			@RequestParam(value="faq") Faq faq,
+			Faq faq,
 			Model model
 			) throws Exception {
-		
+
+		// 관리자 로그인 멤버 아직 구현 X		
+		/*		
 		// 로그인 여부 확인		
 		Member member = (Member)session.getAttribute("LOGIN_USER");
 		
-		int updCnt =0;
+		int updCnt = 0;
 		
 		if(faq != null) {
 		
@@ -104,8 +105,8 @@ public class FaqController {
 		}
 		
 		model.addAttribute("faq", faq);
-		
-		return "board/boardForm";
+*/		
+		return "faq/faqForm";
 	}
 	
 	@RequestMapping(value="/faqInsert", method=RequestMethod.POST)

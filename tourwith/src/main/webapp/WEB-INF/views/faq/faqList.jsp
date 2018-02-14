@@ -163,9 +163,9 @@ function fn_search(currentPage){
 										
 										<c:forEach var="faq" items="${faqList}">
 											<tr>
-												<td>${faq.reg_mb_no}</td>
+												<td>${faq.faq_no}</td>
 
-												<td><a href="faqView/${faq.reg_mb_no}">${faq.sj }</a></td>
+												<td><a href="faqView/${faq.faq_no}">${faq.sj }</a></td>
 
 												<td>${faq.reg_mb_no }</td>
 												<td>${faq.reg_de }</td>

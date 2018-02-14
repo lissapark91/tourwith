@@ -95,8 +95,8 @@ function fn_writeForm(seqNo){
 				<td colspan="2" style="white-space: pre-wrap;" height="300px">${faq.con}</td>
 			</tr>
 
-		</table>
 
+		</table>
 		<p align="center">
 			<br>
 			<br>
