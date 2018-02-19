@@ -31,19 +31,19 @@ public class FaqController {
 	private FaqServiceImpl faqService;	
 	
 	// FAQ 조회
-	@RequestMapping("/faq")
-	public String getFaqList(Model model) throws Exception {
-		
-		Map<String, Object> paramMap = new HashMap<>();
-		List<Faq> faqList = faqService.selectFaqList(paramMap);
-		
-		model.addAttribute(faqList);
-		
-		return "faq/faqList";
-	}
-	
+//	@RequestMapping("/faq")
+//	public String getFaqList(Model model) throws Exception {
+//		
+//		Map<String, Object> paramMap = new HashMap<>();
+//		List<Faq> faqList = faqService.selectFaqList(paramMap);
+//		
+//		model.addAttribute(faqList);
+//		
+//		return "faq/faqList";
+//	}
+//	
 	// FAQ 검색
-	@RequestMapping("/faqList")
+	@RequestMapping("/faq")
 	public String faqList(
 			@RequestParam(value="searchType", required=false, defaultValue="") String searchType,
 			@RequestParam(value="searchWord", required=false, defaultValue="") String searchWord,
@@ -65,17 +65,16 @@ public class FaqController {
 	}
 	
 	// FAQ 글 보기
-	@RequestMapping("/faqView/{faq_no}")
+	@RequestMapping("/faq/{faq_no}")
 	public String faqView(
 			@PathVariable(value="faq_no", required=true) String faq_no,
 			Model model
 			) throws Exception {		
 		
 		Faq faq = null;
-		
-		if(faq_no == null) {						
+								
 			faq = faqService.viewFaq(faq_no);
-		}
+
 		
 		model.addAttribute("faq", faq);
 		
@@ -83,17 +82,19 @@ public class FaqController {
 	}
 	
 	// FAQ 글 작성
-	@RequestMapping("/faqForm")
+	@RequestMapping("/faq/form")
 	public String faqForm(
 			HttpSession session,
-			@RequestParam(value="faq") Faq faq,
+			Faq faq,
 			Model model
 			) throws Exception {
-		
+
+		// 관리자 로그인 멤버 아직 구현 X		
+		/*		
 		// 로그인 여부 확인		
 		Member member = (Member)session.getAttribute("LOGIN_USER");
 		
-		int updCnt =0;
+		int updCnt = 0;
 		
 		if(faq != null) {
 		
@@ -104,13 +105,13 @@ public class FaqController {
 		}
 		
 		model.addAttribute("faq", faq);
-		
-		return "board/boardForm";
+*/		
+		return "faq/faqForm";
 	}
 	
 	@RequestMapping(value="/faqInsert", method=RequestMethod.POST)
 	public String faqInsert(
-			
+			HttpSession session,
 			Faq faq,
 			HttpServletRequest request,
 			Model model
@@ -118,9 +119,15 @@ public class FaqController {
 				
 		String viewPage = "common/message";
 		
+		
+		Member member = (Member) session.getAttribute("LOGIN_USER");
+		faq.setReg_mb_no(member.getMb_no());
+		
+		faqService.insertFaq(faq);
+		
 		boolean isError = false;
 		String message = "정상 등록되었습니다.";
-		String locationURL = "/board/boardList.do";
+		String locationURL = "/faq";
 		
 		model.addAttribute("isError", isError);
 		model.addAttribute("message", message);

@@ -3,19 +3,15 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.css">
-
-<script src="${pageContext.request.contextPath}/js/jquery-3.2.1.js"></script>
+<link href="${pageContext.request.contextPath}/summernote/summernote.css" rel="stylesheet">
+<script src="${pageContext.request.contextPath}/summernote/summernote.js"></script>
+ <!-- include libraries(jQuery, bootstrap) --> 
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet"> 
 
 <script type="text/javascript">
 
 function fn_list(){
-	location.href="faqList";
+	location.href= "${pageContext.request.contextPath}/faq";
 }
 
 function fn_save(type){
@@ -26,14 +22,19 @@ function fn_save(type){
 	
 	var frm = document.faqForm;
 	
-	frm.action = "faqInsert";	
+	frm.action = "${pageContext.request.contextPath}/faqInsert";	
 	
 	if(type == 'U'){
-		frm.action = "faqUpdate";		
+		frm.action = "${pageContext.request.contextPath}/faqUpdate";		
 	}
 	
 	frm.submit();
 }
+
+function fn_cancle(){
+	location.href = "${pageContext.request.contextPath}/faq";
+}
+
 
 function validate(){
 	var frm = document.faqForm;
@@ -43,11 +44,7 @@ function validate(){
 		frm.sj.focus();
 		return false;
 	}
-	if(frm.reg_mb_no.value == ""){
-		alert("작성자는 필수입력 항목입니다.");
-		frm.reg_mb_no.focus();
-		return false;
-	}
+
 	if(frm.con.value == ""){
 		alert("내용을 입력하세요.");
 		frm.con.focus();
@@ -56,16 +53,29 @@ function validate(){
 	return true;
 }
 
+$(function(){
+	
+	$('[name=bo_title]').focus()
+	
+	
+	var $frm = $('#boardForm');
+	
+	$('#summernote').summernote({
+		  height: 300,                 // set editor height
+		  minHeight: null,             // set minimum height of editor
+		  maxHeight: null,             // set maximum height of editor
+		  lang: 'ko-KR'
+		});
 
+})
 </script>
 
-<title>FAQ INSERT</title>
-</head>
-<body>
+<header id="gtco-header" class="gtco-cover gtco-cover-sm" role="banner" style="height: 80px;">
+</header>
 
 <div class="container">
-	
-	<h3>${faq.reg_mb_no == 0 ? '글쓰기' : '글수정'}</h3>
+	<br><br><br><br><br>
+	<h3>${faq.faq_no == null ? '글쓰기' : '글수정'}</h3>
 	
 	<form name="faqForm" id="faqForm" method="post" enctype="multipart/form-data">
 	
@@ -80,19 +90,13 @@ function validate(){
 					</div>
 				</td>
 			</tr>
-			<tr>
-				<td>작성자</td>
-				<td>
-					<div class="col-xs-3">
-						<input type="hidden" name="reg_mb_no" value="${faq.reg_mb_no}">
-						<input type="text" name="reg_mb_no" value="${faq.reg_mb_no}" class="form-control" readonly="readonly">
-					</div>
-				</td>
-			</tr>
+			
+						<input type="hidden" name="reg_mb_no" value="${LOGIN_USER.nick}">
+		
 			
 			<tr>
 				<td colspan="2">
-					<textarea rows="15" class="form-control" name="con">${faq.con}</textarea>
+					<textarea id="summernote" rows="15" class="form-control" name="con">${faq.con}</textarea>
 				</td>
 			</tr>
 		
@@ -100,15 +104,15 @@ function validate(){
 		
 		<p align="center">
 			
-			<c:if test="${faq.faq_no == 0}">
+			<c:if test="${faq.faq_no == null}">
 				<input type="button" value="저장" class="btn btn-primary" onclick="fn_save('I');">
 			</c:if>
 			
-			<c:if test="${faq.faq_no != 0}">
+			<c:if test="${faq.faq_no != null}">
 				<input type="button" value="수정" class="btn btn-primary" onclick="fn_save('U');">
 			</c:if>
 						
-			<input type="reset" value="취소" class="btn btn-primary">
+			<input type="reset" value="취소" class="btn btn-primary" onclick="fn_cancle();">
 			<input type="button" value="목록" class="btn btn-primary" onclick="fn_list();">
 		</p>
 		

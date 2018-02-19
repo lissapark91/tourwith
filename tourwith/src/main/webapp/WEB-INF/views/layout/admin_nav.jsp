@@ -4,9 +4,47 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>관리자 페이지</title>
+
+
 </head>
 <body>
+
+  <div id="wrapper" class="toggled">
+
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="#">
+                        TOURWITH.TK
+                    </a>
+                </li>
+                <li>
+                    <a href="#">회원 관리</a>
+                </li>
+                <li>
+                    <a href="#">FAQ 관리</a>
+                </li>
+                <li>
+                    <a href="#">여행도우미 관리</a>
+                </li>
+                <li>
+                    <a href="#">공통코드 관리</a>
+                </li>
+                <li>
+                    <a href="#">여행지 관리</a>
+                </li>
+                <li>
+                    <a href="#">통계</a>
+                </li>
+            </ul>
+        </div>
+</div>
+
+
+
+
 
 </body>
 </html>

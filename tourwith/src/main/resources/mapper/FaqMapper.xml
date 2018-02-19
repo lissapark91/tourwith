@@ -17,9 +17,39 @@
 		,HITCNT
 		,UPD_DE
 		,DEL_YN
-		REG_MB_NO
+		,REG_MB_NO
 		from FAQ
 		where DEL_YN = 'n'
+		<if test="searchWord != null and searchWord != '' ">
+			<if test="searchType == '01'">
+				and SJ LIKE CONCAT('%', #{searchWord}, '%')	/* subject */
+			</if>
+			<if test="searchType == '02'">
+				and CON LIKE CONCAT('%', #{searchWord}, '%')	/* content */
+			</if>
+			<if test="searchType == '01'">
+				and ( SJ like CONCAT('%', #{searchWord}, '%')	/* subject + content */
+				or CON LIKE CONCAT('%', #{searchWord}, '%'))
+			</if>
+		</if>
+		order by REG_DE
+		
+  	</select>
+  	
+  	<!-- FAQ 게시판 뷰 -->
+  	<select id="selectFaq" resultType="Faq" parameterType="string">
+		select
+			FAQ_NO 
+			,SJ
+			,REG_DE
+			,CON
+			,HITCNT
+			,UPD_DE
+			,DEL_YN
+			,REG_MB_NO
+		from FAQ
+		where DEL_YN = 'n'
+		and FAQ_NO = #{faq_no}
 		
   	</select>
   	
@@ -41,23 +71,23 @@
 			,REG_MB_NO)
 		VALUES(
 			CONCAT('FAQ_',#{faq_no})
-			,#{faq_no}
 			,#{sj}
-			,#{reg_de}
+			,now()
 			,#{con}
-			,#{hitcnt}
-			,#{upd_de}
-			,#{del_yn}
-			,#{reg_mb_no}
+			,0
+			,now()
+			,'n'
+			,#{reg_mb_no})
   	</insert>
   	
   		
   		
   	<update id="updateHitCnt" parameterType="string">
-  		UPDATE NO_CREAT
+  		UPDATE FAQ
 			SET
-			 	NEXT_NO = NEXT_NO + 1,
-				WHERE TABLENM = #{FAQ}
+			 	hitcnt = hitcnt + 1
+				WHERE faq_no = #{faq_no}
+				
   	</update>
   
   	
