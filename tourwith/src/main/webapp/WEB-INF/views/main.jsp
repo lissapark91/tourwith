@@ -4,6 +4,46 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
 <!--SG 슬라이더 메인 작업-->
+
+<%-- <script src="${pageContext.request.contextPath}/js/jquery-3.2.1.js"></script> --%>
+
+<script type="text/javascript">
+
+$(function() {
+	
+	$("#activities1").on("change",function(){
+		var codecate = $("#activities1").val();
+// 		alert(codecate);
+		$.ajax({      
+	        type:"GET",  
+	        url:"${pageContext.request.contextPath}/cate/"+ codecate,      
+// 	        data:params,
+			dataType:"json",
+	        success:function(data){   
+// 	            console.log(data); //{codeList: []}   
+// 	            console.log(data.codeList); // []
+	            var codeList = data.codeList;
+	            var optionHtml = '<option>==지역을 선택해주세요==</option>';
+	            for (var i = 0; i < codeList.length; i++) {
+					var code = codeList[i];  //{code_no: "BIG_CATE_02_01", code_nm: "동티모르", group_code: null, …}
+// 					console.log(code.code_no,code.code_nm);
+					console.log('<option value="'+code.code_no+'">'+code.code_nm+'</option>');
+// 					optionHtml=optionHtml+'<option value="'+code.code_no+'">'+code.code_nm+'</option>';
+					optionHtml+='<option value="'+code.code_no+'">'+code.code_nm+'</option>';
+				}
+	            console.log(optionHtml);
+	            $("#activities2").html(optionHtml);
+	        },   
+	        error:function(e){  
+	        	console.log("요청 실패",e.responseText);  
+	        }  
+	    });  
+		
+	});
+});
+
+</script>
+
    <header id="gtco-header" class="gtco-cover gtco-cover-md" role="banner">
 	<div id="myCarousel" class="carousel slide" data-ride="carousel">
 
@@ -59,7 +99,8 @@
 													<div class="row form-group">
 														<div class="col-md-12">
 															<label for="activities">나라별선택</label>
-															<select name="BIG_CATE" id="activities" class="form-control">
+															<select name="BIG_CATE" id="activities1" class="form-control">
+																<option>==국가를 선택해주세요==</option>
 																<c:forEach var="code" items="${codeList}" varStatus="status" >
 																	<option value="${code.code_no}">${code.code_nm}</option>
 																</c:forEach>
@@ -69,9 +110,9 @@
 													<div class="row form-group">
 														<div class="col-md-12">
 															<label for="destination">지역별선택</label>
-															<input placeholder="도시, 지역별로 검색" type="text" id="destination" class="form-control">
-															<!-- <button class="destination2" type="submit"></button>
-															<i class="icon-search"></i> -->
+<!-- 															<input placeholder="도시, 지역별로 검색" type="text" id="destination" class="form-control"> -->
+															<select name="BIG_CATE_2" id="activities2" class="form-control">
+																<option>==지역을 선택해주세요==</option>
 															</select>
 														</div>
 													</div>

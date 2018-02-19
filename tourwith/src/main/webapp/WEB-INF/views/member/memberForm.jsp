@@ -7,20 +7,68 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%-- 	<header id="gtco-header" class="gtco-cover gtco-cover-sm" role="banner" style="background-image: url(${pageContext.request.contextPath}/images/img_bg_3.jpg)"> --%>
-	<header id="gtco-header" class="gtco-cover gtco-cover-sm" role="banner" >
-<!-- 		<div class="overlay"></div> -->
-<!-- 		<div class="gtco-container"> -->
-<!-- 			<div class="row"> -->
-<!-- 				<div class="col-md-12 col-md-offset-0 text-left"> -->
-<!-- 					<div class="row row-mt-7em"> -->
-						
-<!-- 					</div> -->
-					
-<!-- 				</div> -->
-<!-- 			</div> -->
-<!-- 		</div> -->
+	<header id="gtco-header" class="gtco-cover gtco-cover-sm" role="banner" style="height: 80px;">
 	</header>
-	memberForm
+	<script>
+		$( document ).ready(function() {
+		  $( "#nick" ).focus();
+		});
+		
+		$(function(){
+			
+			
+			$('#nick').on('keyup',function(){
+				$.ajax({
+			         type: "POST",
+			         data: 'nick='+$('#nick').val(),
+			         dataType: 'text',
+			         url: "${pageContext.request.contextPath}/member/nick",
+			         success: function(result) {
+			        	 var result = JSON.parse(result)
+			        	 var message = result.message;
+			        	 var able = result.able;
+		        		 $('#nick_check').html(message);
+			        	 if(!able){ //닉네임이 존재
+			        		 $('#nick_check').css('color','red');
+			        	 }else {
+			        		 $('#nick_check').css('color','green');			        		 
+			        	 }
+			         }
+			      });
+			})
+			
+			$('#signup_btn').click(function(){
+				$('#signup_form').submit()
+			})
+			
+		})
+	</script>
+	<div class="container container-fluid" align="center">
+		<form class="form-group" name="member" id="signup_form" 
+			action="${pageContext.request.contextPath}/member/signup" method="post">
+			<input type="hidden" name="birthday" value="${member.birthday}"/>
+			<input type="hidden" name="fb_id" value="${member.fb_id}"/>
+			<input type="hidden" name="gender" value="${member.gender}"/>
+			<input type="hidden" name="fb_tkn" value="${member.fb_tkn}"/>
+			<br/>
+			<h2>닉네임만 추가로 입력하면 가입이 완료됩니다!</h2>
+			<br/>
+			<br/>
+			<div class="col-xs-6 col-xs-offset-3">
+				<label for="nick"><h3>닉네임</h3></label><input id="nick" type="text" class="form-control" name="nick"/>
+				<span id="nick_check"><span>						
+			</div>
+		</form>
+		
+		
+		<div class="col-xs-12" style="margin-top:20px;">
+			<button id="signup_btn" type="button" class="btn btn-default">가입하기</button>
+		</div>
+	</div>
+	
+	
+	
+	
+	
 </body>
 </html>
