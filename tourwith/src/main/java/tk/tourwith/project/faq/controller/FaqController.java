@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -118,6 +119,8 @@ public class FaqController {
 			) throws Exception {
 				
 		String viewPage = "common/message";
+		
+		HttpHeaders headers = new HttpHeaders();
 		
 		
 		Member member = (Member) session.getAttribute("LOGIN_USER");
