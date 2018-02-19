@@ -31,7 +31,7 @@ public class MemberController {
 		
 		//이미 가입되어 있는 아이디이면
 		if(memberService.selectMemberById(fb_id) != null) {
-			throw new ResourceNotFoundException("잘못된 접근 입니다.");
+			throw new ResourceNotFoundException("잘못된 접근 입니다."); //400에러
 		}
 		
 		//form으로 넘겨 닉네임을 입력 받게 한다.

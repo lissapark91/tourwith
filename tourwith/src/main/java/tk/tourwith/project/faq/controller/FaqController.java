@@ -86,27 +86,21 @@ public class FaqController {
 	@RequestMapping("/faq/form")
 	public String faqForm(
 			HttpSession session,
-			Faq faq,
+			@RequestParam(value="faq_no", required=false) String faq_no,
 			Model model
 			) throws Exception {
-
-		// 관리자 로그인 멤버 아직 구현 X		
-		/*		
-		// 로그인 여부 확인		
-		Member member = (Member)session.getAttribute("LOGIN_USER");
 		
-		int updCnt = 0;
+//		Faq faq = null;
 		
-		if(faq != null) {
-		
-			// 로그인 사용자 정보
-			faq.setReg_mb_no(member.getMb_no());
+		if(StringUtils.isNotBlank(faq_no) && StringUtils.isNotEmpty(faq_no)) {
 			
-			updCnt = faqService.insertFaq(faq);
+//			faq = faqService.viewFaq(faq_no);
+
+			Faq faq = faqService.viewFaq(faq_no);
+			model.addAttribute("faq", faq);
+
 		}
 		
-		model.addAttribute("faq", faq);
-*/		
 		return "faq/faqForm";
 	}
 	

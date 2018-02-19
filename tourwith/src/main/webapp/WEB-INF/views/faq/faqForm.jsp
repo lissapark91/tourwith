@@ -80,7 +80,6 @@ $(function(){
 	<form name="faqForm" id="faqForm" method="post" enctype="multipart/form-data">
 	
 		<input type="hidden" name="reg_mb_no" value="${faq.reg_mb_no}">
-		<input type="hidden" name="faq_type" value="BBS">
 		<table class="table">
 			<tr>
 				<td width="15%">제목</td>
@@ -89,10 +88,7 @@ $(function(){
 						<input type="text" name="sj" value="${faq.sj}" class="form-control" placeholder="제목을 입력하세요.">
 					</div>
 				</td>
-			</tr>
-			
-						<input type="hidden" name="reg_mb_no" value="${LOGIN_USER.nick}">
-		
+			</tr>		
 			
 			<tr>
 				<td colspan="2">

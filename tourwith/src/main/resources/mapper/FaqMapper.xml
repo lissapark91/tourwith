@@ -27,12 +27,12 @@
 			<if test="searchType == '02'">
 				and CON LIKE CONCAT('%', #{searchWord}, '%')	/* content */
 			</if>
-			<if test="searchType == '01'">
-				and ( SJ like CONCAT('%', #{searchWord}, '%')	/* subject + content */
+			<if test="searchType == '03'">
+				and ( SJ LIKE CONCAT('%', #{searchWord}, '%')	/* subject + content */
 				or CON LIKE CONCAT('%', #{searchWord}, '%'))
 			</if>
 		</if>
-		order by REG_DE
+		order by REG_DE DESC
 		
   	</select>
   	
@@ -90,16 +90,5 @@
 				
   	</update>
   
-  	
-  	
-  	
-  	
-  	
-  	
-  	
-  	
-  	
-  	
-  	
   	
  </mapper>

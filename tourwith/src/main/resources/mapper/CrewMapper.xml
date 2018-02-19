@@ -132,7 +132,7 @@
   	<update id="deleteCrew" parameterType="map">
   			UPDATE CREW
   			SET
-  			DEL_YN = 'Y'
+  			DEL_YN = 'y'
   			WHERE CR_NO=#{cr_no}
   	</update>
   	

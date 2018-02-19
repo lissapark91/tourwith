@@ -31,12 +31,7 @@
 													${rev.rev_writng_mb_no}
 												</td>
 											</tr>
-											<tr>
-												<td>공개여부</td>
-												<td>
-													공개할까요
-												</td>
-											</tr>
+											
 											
 											<tr>
 												<td colspan="2" style="white-space: pre-wrap;">${rev.con}

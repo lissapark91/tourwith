@@ -3,7 +3,7 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.css">
+
 
 <script type="text/javascript">
 
@@ -22,10 +22,11 @@ function fn_search(currentPage){
 </script>
 
 
-<div align="right"><input type="button" value="리뷰작성" class="btn btn btn-default" onclick="fn_writeForm();" /></div>
-
+<header id="gtco-header" class="gtco-cover gtco-cover-sm" role="banner" style="height: 80px;">
+	</header>
 
 <div class="container">
+<div align="right"><input type="button" value="리뷰작성" class="btn btn btn-default" onclick="fn_writeForm();" /></div>
 <div class="row">
 
 <c:forEach var="rev" items="${revList}">
