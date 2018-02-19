@@ -2,14 +2,25 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
+
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.css">
+<script src="${pageContext.request.contextPath}/js/jquery-3.2.1.js"></script>
+<script src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
+
+<link href="${pageContext.request.contextPath}/summernote/summernote.css" rel="stylesheet">
+<script src="${pageContext.request.contextPath}/summernote/summernote.js"></script>
+<script src="${pageContext.request.contextPath}/summernote/lang/summernote-ko-KR.js"></script>
+
 </head>
 <body>
 
-<div id="page" style="background-color: ivory;">
+<div id="page">
 		<!-- 상세 보기 코드 -->
 <div class="container">
         <div class="row">
@@ -21,12 +32,12 @@
                             <div class="cdtl_prd_infotop">
                                     <div class="cdtl_prd_mall">
                                         <span class="cmall_ic">
-                                                <p class="text-center"><input type="button" value="${crew.rcrit_sttus}" class="btn-mint" ></p>
+                                                <p class="text-center"><input type="button" value="${crew.rcrit_sttus}" class="btn-mint" ><a class="cdtl_ico_txt"></a></p>
                                             
                                         </span>
                                     </div>
                                     <div class="padding-bottom">
-                                    <h2 class="text-center">${crew.cr_sj}</h2>
+                                     <input type="text" name="cr_sj" value="${crew.cr_sj}" class="form-control" placeholder="제목을 입력하세요.">
                                     </div>
                                     </div>
                             <div class="row">
@@ -53,13 +64,13 @@
                                                     <div class="cdtl_item">
                                                         <dl class="cdtl_dl cdtl_review_info">
                                                            <dt>출발일자</dt>
-                                                           <a>${crew.depr_de}</a>
+                                                           <a>${crew.reg_de}</a>
                                                         </dl>
                                                     </div>
                                                     <div class="cdtl_item">
                                                         <dl class="cdtl_dl cdtl_review_info">
                                                            <dt>도착일자</dt>
-                                                           <a>${crew.arvl_de}</a>
+                                                           <a>${crew.upd_de}</a>
                                                         </dl>
                                                     </div>
                                                 </dl>  
@@ -109,10 +120,7 @@
                                         
 
                                         <div class="col-md-10">
-                                               <div class="boxline" style="border:1px solid black;">
-                                                 먹는 거 좋아하시는 분~ 인스타에 사진 업뎃하는거 좋아하시는  분!<br>
-                                                 같이 예쁜 카페 도장깨면서 먹으러 다닐 분들 구합니다.<br>
-                                                 우리 제주도 카페 도장을 다 깨버려여<br>
+                                               <div class="boxline">
                                                  ${crew.prtxt}
                                                  <br>
                                                  <br>
@@ -125,20 +133,9 @@
                                                <div class="container">
                                                     <div class="row">
                                                         <div class="padding-top">
-                                                            <div class="row form-group " >
-                                                            		<div class="col-md-10">
-
-																	<div class="col-md-12 com-md-offset-4 text-center">
-                                                        			<input type="button" value="참여하기" class="btn btn-info">
-                                                        			</div>
-                                                            		
-                                                            		<div class="col-md-12 text-right">
-                                                                    <input type="button" value="수정하기" class="btn btn-mint" >
-                                                                    <input type="button" value="삭제하기" class="btn btn-mint" >
-                                                                    <input type="button" value="목록" class="btn btn-mint">
-                                                        			</div>
-                                                        			
-                                                        			</div>
+                                                            <div class="row form-group" >
+                                                                    <input type="button" value="수정하기" class="btn btn-mint" ><input type="button" value="삭제하기" class="btn btn-mint" >
+                                                        
                                                                 </div>        
                                                             </div>
                                                </div>

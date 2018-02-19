@@ -43,7 +43,6 @@ import tk.tourwith.project.util.mapper.NumberCreateMapper;
 	@Override
 	public int insertFaq(Faq faq) throws Exception {
 		
-		numberCreateMapper.updateNumber("FAQ");
 		int updCnt = faqMapper.insertFaq(faq);
 		
 		if(updCnt > 0) {

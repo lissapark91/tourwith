@@ -143,7 +143,7 @@
 			 <c:forEach var="crew" items="${crewList}">
 			<div class="col-lg-6 col-md-6 col-sm-9" >			
 				<a href="#" class="fh5co-card-item "> 
-					  </figure>    -->
+					  </figure>   
 					  <div class="row">
 						  <div class="col-md-4">	
 						<img src="${pageContext.request.contextPath}/images/vietnam.png"  class="img-fluid img-rounded"> 	
@@ -164,7 +164,7 @@
 												ㅁ${crew.rcrit_sttus}
 										</div>
 									<div class="row col-md-10  tour_status_k" >
-										기간 ${crew.reg_de}~${crew.upd_de}
+										기간 ${crew.depr_de} - ${crew.arvl_de}
 									</div>
 							  </div>
 							  

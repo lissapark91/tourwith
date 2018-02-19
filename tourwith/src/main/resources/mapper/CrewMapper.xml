@@ -34,7 +34,7 @@
 		and TRPLC_NO like concat(#{category} , '%')
 		</if>
   	</select>
-  	
+
   	<select id="getCrew" resultType="Crew" parameterType="String" >
   		select
   			  CR_NO				<!-- 크루 번호 -->
@@ -59,10 +59,10 @@
 		where CR_NO = #{cr_no}
   	</select>
   	
-  	<insert id="insertCrew" parameterType="String">
+  	<insert id="insertCrew" parameterType="crew">
   	
-  		<selectKey keyProperty="mb_no" resultType="string" order="BEFORE">
-  		SELECT NEXT_NO FROM NO_CREAT where TABLENM = 'MEMBER'
+  		<selectKey keyProperty="cr_no" resultType="string" order="BEFORE">
+  		SELECT NEXT_NO FROM NO_CREAT where TABLENM = 'CREW'
  		</selectKey>
  		
   			INSERT INTO CREW
@@ -85,56 +85,54 @@
 				TRPLC_NO,
 				RCRIT_STTUS)
 				VALUES
-			   (#{CR_NO},
-				#{CR_SJ},
-				#{THEMA},
-				#{MAIN_COURS},
-				#{DETAIL_TRPLC},
-				#{DEPR_DE},
-				#{ARVL_DE},
-				#{NOW_MALE_NMPR},
-				#{MALE_NMPR},
-				#{FEMALE_NMPR},
-				#{NOW_FEMALE_NMPR},
-				#{PRTXT},
+			   (concat('CR_',#{cr_no}),
+				#{cr_sj},
+				#{thema},
+				#{main_cours},
+				#{detail_trplc},
+				#{depr_de},
+				#{arvl_de},
+				#{now_male_nmpr}, /* gender of login user must be considered */
+				#{male_nmpr},
+				#{female_nmpr},
+				#{now_female_nmpr},
+				#{prtxt},
 				date(),
 				date(),
-				'N',
-				#{CR_LEADR_MB_NO},
-				#{TRPLC_NO},
-				#{RCRIT_STTUS}
+				'n',
+				#{cr_leadr_mb_no},
+				#{trplc_no},
+				#{rcrit_sttus}
 				)
   		
   	</insert>
   	
-  	<update id="updateCrew" parameterType="String">
+  	<update id="updateCrew" parameterType="crew">
   			UPDATE CREW
 			SET
-			CR_NO = #{CR_NO},
-			CR_SJ = #{CR_SJ},
-			THEMA = #{THEMA},
-			MAIN_COURS = #{MAIN_COURS},
-			DETAIL_TRPLC = #{DETAIL_TRPLC},
-			DEPR_DE = #{DEPR_DE},
-			ARVL_DE = #{ARVL_DE},
-			NOW_MALE_NMPR = #{NOW_MALE_NMPR},
-			MALE_NMPR = #{MALE_NMPR},
-			FEMALE_NMPR = #{FEMALE_NMPR},
-			NOW_FEMALE_NMPR = #{NOW_FEMALE_NMPR},
-			PRTXT = #{PRTXT},
-			REG_DE = #{REG_DE},
-			UPD_DE = #{UPD_DE},
-			DEL_YN = #{DEL_YN},
-			CR_LEADR_MB_NO = #{CR_LEADR_MB_NO},
-			TRPLC_NO = #{TRPLC_NO},
-			RCRIT_STTUS = #{RCRIT_STTUS}
+			CR_NO = #{cr_no},
+			CR_SJ = #{cr_sj},
+			THEMA = #{thema},
+			MAIN_COURS = #{main_cours},
+			DETAIL_TRPLC = #{detail_trplc},
+			DEPR_DE = #{depr_de},
+			ARVL_DE = #{arvl_de},
+			NOW_MALE_NMPR = #{now_male_nmpr},
+			MALE_NMPR = #{male_nmpr},
+			FEMALE_NMPR = #{female_nmpr},
+			NOW_FEMALE_NMPR = #{now_female_nmpr},
+			PRTXT = #{prtxt},
+			UPD_DE = now(),
+			CR_LEADR_MB_NO = #{cr_leadr_mb_no},
+			TRPLC_NO = #{trplc_no},
+			RCRIT_STTUS = #{rcrit_sttus}
 			WHERE CR_NO = #{cr_no}
   	</update>
   	
-  	<update id="deleteCrew" parameterType="String">
+  	<update id="deleteCrew" parameterType="map">
   			UPDATE CREW
   			SET
-  			DEL_YN = 'Y'
+  			DEL_YN = 'y'
   			WHERE CR_NO=#{cr_no}
   	</update>
   	

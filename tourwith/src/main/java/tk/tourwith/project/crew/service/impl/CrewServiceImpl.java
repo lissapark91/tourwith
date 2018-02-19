@@ -29,21 +29,24 @@ public class CrewServiceImpl implements CrewService{
 	}
 
 	@Override
-	public String insertCrew(Crew crew) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public int insertCrew(Crew crew) throws Exception {
+		
+		int updcnt = crewMapper.insertCrew(crew);
+		
+		return updcnt;
+		
 	}
 
 	@Override
-	public String updateCrew(Crew crew) throws Exception {
+	public int updateCrew(Crew crew) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return 0;
 	}
 
 	@Override
-	public String deleteCrew(String cr_no) throws Exception {
+	public int deleteCrew(String cr_no) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return 0;
 	}
 
 }

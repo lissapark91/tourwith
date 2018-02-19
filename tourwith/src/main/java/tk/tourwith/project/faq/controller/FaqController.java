@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,19 +32,19 @@ public class FaqController {
 	private FaqServiceImpl faqService;	
 	
 	// FAQ 조회
-	@RequestMapping("/faq")
-	public String getFaqList(Model model) throws Exception {
-		
-		Map<String, Object> paramMap = new HashMap<>();
-		List<Faq> faqList = faqService.selectFaqList(paramMap);
-		
-		model.addAttribute(faqList);
-		
-		return "faq/faqList";
-	}
-	
+//	@RequestMapping("/faq")
+//	public String getFaqList(Model model) throws Exception {
+//		
+//		Map<String, Object> paramMap = new HashMap<>();
+//		List<Faq> faqList = faqService.selectFaqList(paramMap);
+//		
+//		model.addAttribute(faqList);
+//		
+//		return "faq/faqList";
+//	}
+//	
 	// FAQ 검색
-	@RequestMapping("/faqList")
+	@RequestMapping("/faq")
 	public String faqList(
 			@RequestParam(value="searchType", required=false, defaultValue="") String searchType,
 			@RequestParam(value="searchWord", required=false, defaultValue="") String searchWord,
@@ -65,7 +66,7 @@ public class FaqController {
 	}
 	
 	// FAQ 글 보기
-	@RequestMapping("/faqView/{faq_no}")
+	@RequestMapping("/faq/{faq_no}")
 	public String faqView(
 			@PathVariable(value="faq_no", required=true) String faq_no,
 			Model model
@@ -82,30 +83,24 @@ public class FaqController {
 	}
 	
 	// FAQ 글 작성
-	@RequestMapping("/faq/faqForm")
+	@RequestMapping("/faq/form")
 	public String faqForm(
 			HttpSession session,
-			Faq faq,
+			@RequestParam(value="faq_no", required=false) String faq_no,
 			Model model
 			) throws Exception {
-
-		// 관리자 로그인 멤버 아직 구현 X		
-		/*		
-		// 로그인 여부 확인		
-		Member member = (Member)session.getAttribute("LOGIN_USER");
 		
-		int updCnt = 0;
+//		Faq faq = null;
 		
-		if(faq != null) {
-		
-			// 로그인 사용자 정보
-			faq.setReg_mb_no(member.getMb_no());
+		if(StringUtils.isNotBlank(faq_no) && StringUtils.isNotEmpty(faq_no)) {
 			
-			updCnt = faqService.insertFaq(faq);
+//			faq = faqService.viewFaq(faq_no);
+
+			Faq faq = faqService.viewFaq(faq_no);
+			model.addAttribute("faq", faq);
+
 		}
 		
-		model.addAttribute("faq", faq);
-*/		
 		return "faq/faqForm";
 	}
 	
@@ -118,6 +113,8 @@ public class FaqController {
 			) throws Exception {
 				
 		String viewPage = "common/message";
+		
+		HttpHeaders headers = new HttpHeaders();
 		
 		
 		Member member = (Member) session.getAttribute("LOGIN_USER");

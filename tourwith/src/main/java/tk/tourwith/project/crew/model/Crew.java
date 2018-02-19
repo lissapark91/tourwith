@@ -11,8 +11,8 @@ public class Crew {
 	private String thema;	
 	private String main_cours;	
 	private String detail_trplc;	
-	private String deprde;	
-	private String arvlde;	
+	private String depr_de;	
+	private String arvl_de;	
 	private int now_male_nmpr;	
 	private int male_nmpr;	
 	private int female_nmpr;	
@@ -59,18 +59,7 @@ public class Crew {
 	public void setDetail_trplc(String detail_trplc) {
 		this.detail_trplc = detail_trplc;
 	}
-	public String getDeprde() {
-		return deprde;
-	}
-	public void setDeprde(String deprde) {
-		this.deprde = deprde;
-	}
-	public String getArvlde() {
-		return arvlde;
-	}
-	public void setArvlde(String arvlde) {
-		this.arvlde = arvlde;
-	}
+	
 	public int getNow_male_nmpr() {
 		return now_male_nmpr;
 	}
@@ -136,6 +125,18 @@ public class Crew {
 	}
 	public void setRcrit_sttus(String rcrit_sttus) {
 		this.rcrit_sttus = rcrit_sttus;
+	}
+	public String getDepr_de() {
+		return depr_de;
+	}
+	public void setDepr_de(String depr_de) {
+		this.depr_de = depr_de;
+	}
+	public String getArvl_de() {
+		return arvl_de;
+	}
+	public void setArvl_de(String arvl_de) {
+		this.arvl_de = arvl_de;
 	}	
 
 	
