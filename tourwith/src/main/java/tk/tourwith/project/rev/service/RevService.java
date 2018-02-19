@@ -8,5 +8,7 @@ import tk.tourwith.project.rev.model.Rev;
 public interface RevService {
 	
 	public List<Rev> selectRevList(Map<String, Object> paramMap) throws Exception;
+	
+	public Rev selectRev(String rev_no) throws Exception;
 
 }

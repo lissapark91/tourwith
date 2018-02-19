@@ -2,10 +2,6 @@
     pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.css">
 
@@ -25,37 +21,58 @@ function fn_search(currentPage){
 
 </script>
 
-<title>ReviewList</title>
-</head>
-<body>
 
-<div align="right"><input type="button" value="리뷰작성" class="btn btn btn-default" onclick="fn_writeForm();"></div>
+<div align="right"><input type="button" value="리뷰작성" class="btn btn btn-default" onclick="fn_writeForm();" /></div>
 
-<div class="gtco-container">
-			
-			<div class="row">
-				<div class="col-sm-4 col-xs-12">
-					<div id="gtco-logo"><a href="index.html">Traveler <em>.</em></a></div>
-				</div>
-				<div class="col-xs-8 text-right menu-1">
-					<ul>
-						<li><a href="destination.html">Destination</a></li>
-						<li class="has-dropdown">
-							<a href="#">Travel</a>
-							<ul class="dropdown">
-								<li><a href="#">Europe</a></li>
-								<li><a href="#">Asia</a></li>
-								<li><a href="#">America</a></li>
-								<li><a href="#">Canada</a></li>
-							</ul>
-						</li>
-						<li><a href="pricing.html">Pricing</a></li>
-						<li><a href="contact.html">Contact</a></li>
-					</ul>	
-				</div>
-			</div>
-			
+
+<div class="container">
+<div class="row">
+
+<c:forEach var="rev" items="${revList}">
+	<div class="col-md-6">
+		<div class="col-md-3">
+			<a href="" class="fh5co-card-item image-popup">
+			<img alt="" src="${pageContext.request.contextPath}/images/img_6.jpg" style="width: 100%; height: 100%;">
+			</a>
 		</div>
+		<div class="col-md-9">
+			<span>제목</span>
+			<span>${rev.sj}</span>
+		</div>
+		<div class="col-md-9">
+			<span>인원수</span>
+			<span>4</span>
+			<span>기간</span>		
+			<span>2018/01/24~2018/01/30</span>
+		</div>
+		<div class="col-md-4">
+			<span>댓글,조회수</span>
+			<span>[1]/${rev.hitcnt}</span>
+			</div>
+	</div>
+</c:forEach>
 
-</body>
-</html>
+<!-- <div class="col-md-6"> -->
+<!-- 		<div class="col-md-3"> -->
+<!-- 			<a href="" class="fh5co-card-item image-popup"> -->
+<%-- 			<img alt="" src="${pageContext.request.contextPath}/images/img_6.jpg" style="width: 100%; height: 100%;"> --%>
+<!-- 			</a> -->
+<!-- 		</div> -->
+<!-- 		<div class="col-md-9"> -->
+<!-- 			<span>제목</span> -->
+<%-- 			<span>${rev.sj}</span> --%>
+<!-- 		</div> -->
+<!-- 		<div class="col-md-9"> -->
+<!-- 			<span>인원수</span> -->
+<!-- 			<span>4</span> -->
+<!-- 			<span>기간</span>		 -->
+<!-- 			<span>2018/01/24~2018/01/30</span> -->
+<!-- 		</div> -->
+<!-- 		<div class="col-md-4"> -->
+<!-- 			<span>댓글,조회수</span> -->
+<%-- 			<span>[1]/${rev.hitcnt}</span> --%>
+<!-- 			</div> -->
+<!-- 	</div> -->
+
+</div>
+</div>

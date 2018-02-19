@@ -6,6 +6,7 @@
   <mapper namespace="tk.tourwith.project.rev.mapper.RevMapper">
   	
   	<select id="selectRevList" resultType="Rev" parameterType="map">
+  	
   		select
   			REV_NO
 				,SJ
@@ -20,4 +21,20 @@
 			where DEL_YN = 'n'
 		
   	</select>
+  	
+  		<select id="selectRev" resultType="Rev" parameterType="string">
+  				select
+	  			REV_NO
+					,SJ
+					,REV_WRITNG_MB_NO
+					,DEL_YN
+					,HITCNT
+					,CR_NO
+					,CON
+					,REG_DE
+					,UPD_DE
+				from REV
+				where DEL_YN = 'n'
+				and REV_NO = #{rev_no}
+  		</select>
   </mapper>

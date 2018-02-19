@@ -15,20 +15,39 @@ import tk.tourwith.project.rev.service.impl.RevServiceImpl;
 
 @Controller
 public class RevController {
-	
+
 	@Autowired
 	RevServiceImpl revService;
-	
-	@RequestMapping("/rev/{review}")
-	public String getRevList(@PathVariable String review, Model model) throws Exception{
-		
+
+	@RequestMapping("/reviews")
+	public String getRevList(Model model) throws Exception {
+
 		Map<String, Object> paramMap = new HashMap<>();
-		paramMap.put("review", review);
+		
 		List<Rev> revList = revService.selectRevList(paramMap);
-		
-		model.addAllAttributes(revList);
-		
+
+		model.addAttribute("revList", revList);
+
 		return "review/reviewList";
+	}
+
+	@RequestMapping("/review/{rev_no}")
+	public String getRevView(@PathVariable(value = "rev_no", required = true) String rev_no, Model model)
+			throws Exception {
+
+		Rev rev = null;
+
+		if (rev_no != null) {
+			rev = revService.selectRev(rev_no);
+		}
+		System.out.println("========================");
+		System.out.println(rev);
+		System.out.println(rev.getSj());
+
+		model.addAttribute("rev", rev);
+
+		return "review/reviewView";
+
 	}
 
 }
