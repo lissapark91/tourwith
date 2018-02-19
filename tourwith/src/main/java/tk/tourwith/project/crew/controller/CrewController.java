@@ -17,13 +17,12 @@ import tk.tourwith.project.crew.model.Crew;
 import tk.tourwith.project.crew.service.impl.CrewServiceImpl;
 
 @Controller
-@RequestMapping("/crew")
 public class CrewController {
 	
 	@Autowired
 	CrewServiceImpl crewService;	
 	
-	@RequestMapping("/{category}")
+	@RequestMapping("/crew/{category}")
 	public String getCrewList(@PathVariable String category, Model model) throws Exception {
 		
 		Map<String, Object> paramMap = new HashMap<>();
@@ -35,7 +34,7 @@ public class CrewController {
 		return "crew/crewList";
 	}
 	
-	@RequestMapping("/page/{cr_no}")
+	@RequestMapping("crew/page/{cr_no}")
 	public String crewView(Model model
 						  ,@PathVariable(value="cr_no", required=true) String cr_no) throws Exception {
 		Crew crew = null;
@@ -47,7 +46,7 @@ public class CrewController {
 		return "crew/crewView";
 	}
 	
-	@RequestMapping("/CrewForm")
+	@RequestMapping("crew/form")
 	public String crewForm(@RequestParam(value="cr_no", required=false, defaultValue="0") String cr_no,
 			Model model) throws Exception{
 		
@@ -58,11 +57,11 @@ public class CrewController {
 		return "crew/crewForm";
 	}
 	
-	@RequestMapping(value="/crewInsert", method=RequestMethod.POST)
+	@RequestMapping(value="crew/crewInsert", method=RequestMethod.POST)
 	public String insertCrew(Crew crew,
 							 Model model) throws Exception{
 		
-		String updCnt = crewService.insertCrew(crew);
+		int updCnt = crewService.insertCrew(crew);
 		
 		
 		
