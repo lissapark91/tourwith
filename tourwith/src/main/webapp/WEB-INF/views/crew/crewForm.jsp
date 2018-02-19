@@ -32,7 +32,7 @@
                             <div class="cdtl_prd_infotop">
                                     <div class="cdtl_prd_mall">
                                         <span class="cmall_ic">
-                                                <p class="text-center"><input type="button" value="${crew.rcrit_sttus}" class="btn-mint" ><a class="cdtl_ico_txt"><u>#식도락 여행</u></a></p>
+                                                <p class="text-center"><input type="button" value="${crew.rcrit_sttus}" class="btn-mint" ><a class="cdtl_ico_txt"></a></p>
                                             
                                         </span>
                                     </div>
@@ -121,9 +121,6 @@
 
                                         <div class="col-md-10">
                                                <div class="boxline">
-                                                 먹는 거 좋아하시는 분~ 인스타에 사진 업뎃하는거 좋아하시는  분!<br>
-                                                 같이 예쁜 카페 도장깨면서 먹으러 다닐 분들 구합니다.<br>
-                                                 우리 제주도 카페 도장을 다 깨버려여<br>
                                                  ${crew.prtxt}
                                                  <br>
                                                  <br>
