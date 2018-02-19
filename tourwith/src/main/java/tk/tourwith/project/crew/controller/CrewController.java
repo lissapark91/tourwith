@@ -24,6 +24,7 @@ public class CrewController {
 	public String getCrewList(@PathVariable String category, Model model) throws Exception {
 		
 		Map<String, Object> paramMap = new HashMap<>();
+		category = "BIG_CATE_" + category;  //BIG_CATE_{} by.bsp
 		paramMap.put("category", category);
 		List<Crew> crewList = crewService.selectCrewList(paramMap);
 		

@@ -3,57 +3,7 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
 
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description"
-	content="Free HTML5 Website Template by GetTemplates.co" />
-<meta name="keywords"
-	content="free website templates, free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
-<meta name="author" content="GetTemplates.co" />
-
-<!-- Facebook and Twitter integration -->
-<meta property="og:title" content="" />
-<meta property="og:image" content="" />
-<meta property="og:url" content="" />
-<meta property="og:site_name" content="" />
-<meta property="og:description" content="" />
-<meta name="twitter:title" content="" />
-<meta name="twitter:image" content="" />
-<meta name="twitter:url" content="" />
-<meta name="twitter:card" content="" />
-
-<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700"
-	rel="stylesheet">
-
-<!-- Animate.css -->
-<link rel="stylesheet" href="css/animate.css">
-<!-- Icomoon Icon Fonts-->
-<link rel="stylesheet" href="css/icomoon.css">
-<!-- Themify Icons-->
-<link rel="stylesheet" href="css/themify-icons.css">
-<!-- Bootstrap  -->
-<link rel="stylesheet" href="css/bootstrap.css">
-
-<!-- Magnific Popup -->
-<link rel="stylesheet" href="css/magnific-popup.css">
-
-<!-- Magnific Popup -->
-<link rel="stylesheet" href="css/bootstrap-datepicker.min.css">
-
-<!-- Owl Carousel  -->
-<link rel="stylesheet" href="css/owl.carousel.min.css">
-<link rel="stylesheet" href="css/owl.theme.default.min.css">
-
-<!-- Theme style  -->
-<link rel="stylesheet" href="css/style.css">
-
-<!-- Modernizr JS -->
-<script src="js/modernizr-2.6.2.min.js"></script>
 
 <script type="text/javascript">
 
@@ -71,9 +21,8 @@ function fn_writeForm(seqNo){
 
 </script>
 
-<title>FAQ VIEW</title>
-</head>
-<body>
+<header id="gtco-header" class="gtco-cover gtco-cover-sm" role="banner" style="height: 80px;">
+	</header>
 
 	<div class="container">
 		<br><br><br><br><br>
@@ -84,11 +33,6 @@ function fn_writeForm(seqNo){
 				<td width="15%">제목</td>
 				<td>${faq.sj}</td>
 			</tr>
-			<tr>
-				<td>작성자</td>
-				<td>${faq.reg_mb_no}</td>
-			</tr>
-
 
 
 			<tr>

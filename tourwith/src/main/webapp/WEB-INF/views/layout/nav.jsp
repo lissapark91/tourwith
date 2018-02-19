@@ -29,12 +29,12 @@
 							</li>
 							<li class="has-dropdown"><a href="#">어디갈래?</a>
 								<ul class="dropdown">
-									<li><a href="#">여행도우미</a></li>
-									<li><a href="#">여행 리뷰</a></li>
+									<li><a href="${pageContext.request.contextPath}/helper">여행도우미</a></li>
+									<li><a href="${pageContext.request.contextPath}/review">여행 리뷰</a></li>
 								</ul>
 							</li>
 							<li>
-								<a href="#">FAQ</a>
+								<a href="${pageContext.request.contextPath}/faq">FAQ</a>
 							</li>
 			<!-- 				<li><a href="${pageContext.request.contextPath}/login" 
 							onclick="loginPopup(this.href, '로그인 또는 회원가입', 500, 400);return false;">로그인</a></li> -->

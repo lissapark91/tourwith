@@ -3,63 +3,13 @@
 	
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>	
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
 
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description"
-	content="Free HTML5 Website Template by GetTemplates.co" />
-<meta name="keywords"
-	content="free website templates, free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
-<meta name="author" content="GetTemplates.co" />
-
-<!-- Facebook and Twitter integration -->
-<meta property="og:title" content="" />
-<meta property="og:image" content="" />
-<meta property="og:url" content="" />
-<meta property="og:site_name" content="" />
-<meta property="og:description" content="" />
-<meta name="twitter:title" content="" />
-<meta name="twitter:image" content="" />
-<meta name="twitter:url" content="" />
-<meta name="twitter:card" content="" />
-
-<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700"
-	rel="stylesheet">
-
-<!-- Animate.css -->
-<link rel="stylesheet" href="css/animate.css">
-<!-- Icomoon Icon Fonts-->
-<link rel="stylesheet" href="css/icomoon.css">
-<!-- Themify Icons-->
-<link rel="stylesheet" href="css/themify-icons.css">
-<!-- Bootstrap  -->
-<link rel="stylesheet" href="css/bootstrap.css">
-
-<!-- Magnific Popup -->
-<link rel="stylesheet" href="css/magnific-popup.css">
-
-<!-- Magnific Popup -->
-<link rel="stylesheet" href="css/bootstrap-datepicker.min.css">
-
-<!-- Owl Carousel  -->
-<link rel="stylesheet" href="css/owl.carousel.min.css">
-<link rel="stylesheet" href="css/owl.theme.default.min.css">
-
-<!-- Theme style  -->
-<link rel="stylesheet" href="css/style.css">
-
-<!-- Modernizr JS -->
-<script src="js/modernizr-2.6.2.min.js"></script>
 
 
 <script type="text/javascript">
 
 function fn_writeForm(){
-	location.href="${pageContext.request.contextPath}/faq/faqForm";
+	location.href="${pageContext.request.contextPath}/faq/form";
 }
 
 function fn_search(currentPage){
@@ -71,24 +21,15 @@ function fn_search(currentPage){
 		alert("검색어를 입력하세요.");
 		return false;
 	}	
-	frm.action = "${pageContext.request.contextPath}/faq/faqList ";	
+	frm.action = "${pageContext.request.contextPath}/faq";	
 	frm.submit();
 }
 
 </script>
 
 
-<title>FAQ LIST</title>
-</head>
-<body>
-
-	<div class="gtco-loader"></div>
-
-	<div id="page">
-
-
-
-
+<header id="gtco-header" class="gtco-cover gtco-cover-sm" role="banner" style="height: 80px;">
+	</header>
 		<!-- 상세 보기 코드 -->
 
 		<div class="gtco-section border-bottom">
@@ -125,7 +66,7 @@ function fn_search(currentPage){
 												value="03">제목 + 내용</option>
 										</select> 
 										
-										<input type="text" name="searchWord" size="40" value=""
+										<input type="text" name="searchWord" size="40" value="${param.searchWord}"
 											class="form-control"> <input type="button" value="검색"
 											onclick="fn_search(1);" class="btn btn-primary">
 
@@ -147,7 +88,6 @@ function fn_search(currentPage){
 
 										<th>제목</th>
 
-										<th>작성자</th>
 
 										<th>작성일자</th>
 
@@ -165,9 +105,8 @@ function fn_search(currentPage){
 											<tr>
 												<td>${faq.faq_no}</td>
 
-												<td><a href="faqView/${faq.faq_no}">${faq.sj }</a></td>
+												<td><a href="faq/${faq.faq_no}">${faq.sj }</a></td>
 
-												<td>${faq.reg_mb_no }</td>
 												<td>${faq.reg_de }</td>
 												<td>${faq.hitcnt }</td>
 											</tr>

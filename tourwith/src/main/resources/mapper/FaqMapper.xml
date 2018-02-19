@@ -20,6 +20,19 @@
 		,REG_MB_NO
 		from FAQ
 		where DEL_YN = 'n'
+		<if test="searchWord != null and searchWord != '' ">
+			<if test="searchType == '01'">
+				and SJ LIKE CONCAT('%', #{searchWord}, '%')	/* subject */
+			</if>
+			<if test="searchType == '02'">
+				and CON LIKE CONCAT('%', #{searchWord}, '%')	/* content */
+			</if>
+			<if test="searchType == '01'">
+				and ( SJ like CONCAT('%', #{searchWord}, '%')	/* subject + content */
+				or CON LIKE CONCAT('%', #{searchWord}, '%'))
+			</if>
+		</if>
+		order by REG_DE
 		
   	</select>
   	

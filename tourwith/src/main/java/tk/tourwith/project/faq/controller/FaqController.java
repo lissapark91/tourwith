@@ -31,19 +31,19 @@ public class FaqController {
 	private FaqServiceImpl faqService;	
 	
 	// FAQ 조회
-	@RequestMapping("/faq")
-	public String getFaqList(Model model) throws Exception {
-		
-		Map<String, Object> paramMap = new HashMap<>();
-		List<Faq> faqList = faqService.selectFaqList(paramMap);
-		
-		model.addAttribute(faqList);
-		
-		return "faq/faqList";
-	}
-	
+//	@RequestMapping("/faq")
+//	public String getFaqList(Model model) throws Exception {
+//		
+//		Map<String, Object> paramMap = new HashMap<>();
+//		List<Faq> faqList = faqService.selectFaqList(paramMap);
+//		
+//		model.addAttribute(faqList);
+//		
+//		return "faq/faqList";
+//	}
+//	
 	// FAQ 검색
-	@RequestMapping("/faqList")
+	@RequestMapping("/faq")
 	public String faqList(
 			@RequestParam(value="searchType", required=false, defaultValue="") String searchType,
 			@RequestParam(value="searchWord", required=false, defaultValue="") String searchWord,
@@ -65,7 +65,7 @@ public class FaqController {
 	}
 	
 	// FAQ 글 보기
-	@RequestMapping("/faqView/{faq_no}")
+	@RequestMapping("/faq/{faq_no}")
 	public String faqView(
 			@PathVariable(value="faq_no", required=true) String faq_no,
 			Model model
@@ -82,7 +82,7 @@ public class FaqController {
 	}
 	
 	// FAQ 글 작성
-	@RequestMapping("/faq/faqForm")
+	@RequestMapping("/faq/form")
 	public String faqForm(
 			HttpSession session,
 			Faq faq,
