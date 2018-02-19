@@ -61,8 +61,8 @@
   	
   	<insert id="insertCrew" parameterType="String">
   	
-  		<selectKey keyProperty="mb_no" resultType="string" order="BEFORE">
-  		SELECT NEXT_NO FROM NO_CREAT where TABLENM = 'MEMBER'
+  		<selectKey keyProperty="cr_no" resultType="string" order="BEFORE">
+  		SELECT NEXT_NO FROM NO_CREAT where TABLENM = 'CREW'
  		</selectKey>
  		
   			INSERT INTO CREW
@@ -85,24 +85,24 @@
 				TRPLC_NO,
 				RCRIT_STTUS)
 				VALUES
-			   (#{CR_NO},
-				#{CR_SJ},
-				#{THEMA},
-				#{MAIN_COURS},
-				#{DETAIL_TRPLC},
-				#{DEPR_DE},
-				#{ARVL_DE},
-				#{NOW_MALE_NMPR},
-				#{MALE_NMPR},
-				#{FEMALE_NMPR},
-				#{NOW_FEMALE_NMPR},
-				#{PRTXT},
+			   (concat('CR_',#{cr_no}),
+				#{cr_sj},
+				#{thema},
+				#{main_cours},
+				#{detail_trplc},
+				#{depr_de},
+				#{arvl_de},
+				#{now_male_nmpr}, /* gender of login user must be considered */
+				#{male_nmpr},
+				#{female_nmpr},
+				#{now_female_nmpr},
+				#{prtxt},
 				date(),
 				date(),
-				'N',
-				#{CR_LEADR_MB_NO},
-				#{TRPLC_NO},
-				#{RCRIT_STTUS}
+				'n',
+				#{cr_leadr_mb_no},
+				#{trplc_no},
+				#{rcrit_sttus}
 				)
   		
   	</insert>
