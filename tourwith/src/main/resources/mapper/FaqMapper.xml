@@ -55,32 +55,54 @@
   	
   	
   	<insert id="insertFaq" parameterType="Faq">
-  	
-  	<selectKey keyProperty="faq_no" resultType="string" order="BEFORE">
-  		SELECT NEXT_NO FROM NO_CREAT where TABLENM = 'FAQ'
-  	</selectKey>
-  	
-  		INSERT INTO FAQ(
-  		FAQ_NO
-			,SJ
-			,REG_DE
-			,CON
-			,HITCNT
-			,UPD_DE
-			,DEL_YN
-			,REG_MB_NO)
-		VALUES(
-			CONCAT('FAQ_',#{faq_no})
-			,#{sj}
-			,now()
-			,#{con}
-			,0
-			,now()
-			,'n'
-			,#{reg_mb_no})
-  	</insert>
-  	
+    
+    <selectKey keyProperty="faq_no" resultType="string" order="BEFORE">
+      SELECT NEXT_NO FROM NO_CREAT where TABLENM = 'FAQ'
+    </selectKey>
+    
+      INSERT INTO FAQ(
+      FAQ_NO
+      ,SJ
+      ,REG_DE
+      ,CON
+      ,HITCNT
+      ,UPD_DE
+      ,DEL_YN
+      ,REG_MB_NO)
+    VALUES(
+      #{faq_no}
+      ,#{sj}
+      ,now()
+      ,#{con}
+     		 ,0
+      ,now()
+      ,'n'
+      ,#{reg_mb_no})
+    </insert>
+
   		
+  	<update id="updateFaq" parameterType="Faq">
+			UPDATE FAQ
+				SET
+				faq_no = #{faq_no}
+				,sj = #{sj}
+				,reg_de = now()
+				,con = #{con}
+				,hitcnt = #{hitcnt}
+				,upd_de = now()
+				,del_yn = #{del_yn}
+				,reg_mb_no = #{reg_mb_no}
+			WHERE faq_no = #{faq_no}
+		</update>
+		
+		<delete id="deleteFaq" parameterType="map">
+			UPDATE FAQ
+				SET
+				del_yn = 'y'
+				,reg_mb_no = #{reg_mb_no}
+				,upd_de = now()
+			WHERE faq_no = #{faq_no}
+		</delete>  		
   		
   	<update id="updateHitCnt" parameterType="string">
   		UPDATE FAQ
