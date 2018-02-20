@@ -15,7 +15,7 @@
 		});
 		
 		$(function(){
-			
+			var able;
 			
 			$('#nick').on('keyup',function(){
 				$.ajax({
@@ -26,7 +26,7 @@
 			         success: function(result) {
 			        	 var result = JSON.parse(result)
 			        	 var message = result.message;
-			        	 var able = result.able;
+			        	 able = result.able;
 		        		 $('#nick_check').html(message);
 			        	 if(!able){ //닉네임이 존재
 			        		 $('#nick_check').css('color','red');
@@ -38,7 +38,11 @@
 			})
 			
 			$('#signup_btn').click(function(){
-				$('#signup_form').submit()
+				if(able){
+					$('#signup_form').submit()					
+				}else{
+					alert('가입 할 수 없습니다.\n닉네임을 확인해 주세요.')
+				}
 			})
 			
 		})

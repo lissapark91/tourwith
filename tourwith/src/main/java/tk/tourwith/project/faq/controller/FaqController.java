@@ -3,6 +3,8 @@ package tk.tourwith.project.faq.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -22,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import tk.tourwith.project.faq.model.Faq;
 import tk.tourwith.project.faq.service.impl.FaqServiceImpl;
 import tk.tourwith.project.member.model.Member;
+import tk.tourwith.project.util.file.service.impl.FileServcieImpl;
 
 
 
@@ -30,6 +33,9 @@ public class FaqController {
 	
 	@Autowired
 	private FaqServiceImpl faqService;	
+	
+	@Autowired
+	private FileServcieImpl fileService;
 	
 	// FAQ 조회
 //	@RequestMapping("/faq")
@@ -111,14 +117,26 @@ public class FaqController {
 			HttpServletRequest request,
 			Model model
 			) throws Exception {
-				
+		
+		//박보성 추가부분 : 이미지 태그 중 실제 반영된 부분만을 reg_yn = 'y'로 업데이트
+		
+		Pattern pattern = Pattern.compile("<img[^>]*src=[\"']?([^>\"']+)[\"']?[^>]*>"); 
+        Matcher matcher = pattern.matcher(faq.getCon());
+		
+        while(matcher.find()){
+        	//이미지 실제 등록된 것만 체크
+            String file_no = matcher.group(1).substring(matcher.group(1).lastIndexOf("/")+1);
+            fileService.updateRegynByPk(file_no);
+        }
+		
+		//////////////////////
+        
+        
 		String viewPage = "common/message";
 		
-		HttpHeaders headers = new HttpHeaders();
-		
-		
-		Member member = (Member) session.getAttribute("LOGIN_USER");
-		faq.setReg_mb_no(member.getMb_no());
+//		Member member = (Member) session.getAttribute("LOGIN_USER");
+//		faq.setReg_mb_no(member.getMb_no());
+		faq.setReg_mb_no("MB_0000000005");
 		
 		faqService.insertFaq(faq);
 		

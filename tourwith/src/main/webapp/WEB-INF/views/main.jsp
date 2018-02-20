@@ -161,24 +161,10 @@ $(function() {
 			</div>
 			<div class="row">
 				<!--SG 크루 이미지 및 문구-->
+				
 				<div class="col-lg-4 col-md-4 col-sm-6">
-					<a href="images/vietnam.png" class="fh5co-card-item image-popup">
+					<a href="${pageContext.request.contextPath}/crew/list/01" class="fh5co-card-item">
 						<figure>
-							<div class="overlay"><i class="ti-plus"></i></div>
-							<img src="images/vietnam.png" alt="Image" class="img-responsive">
-						</figure>
-						<div class="fh5co-text">
-							<h2>동남아시아</h2>
-							<p>아름다운 자연과 이색적인 문화<br>
-								 떠나자, 동남아시아로!</p>
-							<p><span class="btn btn-primary">Go</span></p>
-						</div>
-					</a>
-				</div>
-				<div class="col-lg-4 col-md-4 col-sm-6">
-					<a href="images/korea.png" class="fh5co-card-item image-popup">
-						<figure>
-							<div class="overlay"><i class="ti-plus"></i></div>
 							<img src="images/korea.png" alt="Image" class="img-responsive">
 						</figure>
 						<div class="fh5co-text">
@@ -190,24 +176,24 @@ $(function() {
 						</div>
 					</a>
 				</div>
+				
 				<div class="col-lg-4 col-md-4 col-sm-6">
-					<a href="images/europe.png" class="fh5co-card-item image-popup">
+					<a href="${pageContext.request.contextPath}/crew/list/02" class="fh5co-card-item">
 						<figure>
-							<div class="overlay"><i class="ti-plus"></i></div>
-							<img src="images/europe.png" alt="Image" class="img-responsive">
+							<img src="images/vietnam.png" alt="Image" class="img-responsive">
 						</figure>
 						<div class="fh5co-text">
-							<h2>유럽</h2>
-							<p>멋진 건축물과 서양미술의 근현대사<br>
-								유럽!</p>
+							<h2>동남아시아</h2>
+							<p>아름다운 자연과 이색적인 문화<br>
+								 떠나자, 동남아시아로!</p>
 							<p><span class="btn btn-primary">Go</span></p>
 						</div>
 					</a>
 				</div>
+				
 				<div class="col-lg-4 col-md-4 col-sm-6">
-					<a href="images/china.png" class="fh5co-card-item image-popup">
+					<a href="${pageContext.request.contextPath}/crew/list/03" class="fh5co-card-item">
 						<figure>
-							<div class="overlay"><i class="ti-plus"></i></div>
 							<img src="images/china.png" alt="Image" class="img-responsive">
 						</figure>
 						<div class="fh5co-text">
@@ -218,11 +204,10 @@ $(function() {
 						</div>
 					</a>
 				</div>
-
+				
 				<div class="col-lg-4 col-md-4 col-sm-6">
-					<a href="images/fiji.png" class="fh5co-card-item image-popup">
+					<a href="${pageContext.request.contextPath}/crew/list/04" class="fh5co-card-item">
 						<figure>
-							<div class="overlay"><i class="ti-plus"></i></div>
 							<img src="images/fiji.png" alt="Image" class="img-responsive">
 						</figure>
 						<div class="fh5co-text">
@@ -233,11 +218,10 @@ $(function() {
 						</div>
 					</a>
 				</div>
-
+				
 				<div class="col-lg-4 col-md-4 col-sm-6">
-					<a href="images/america.png" class="fh5co-card-item image-popup">
+					<a href="${pageContext.request.contextPath}/crew/list/05" class="fh5co-card-item">
 						<figure>
-							<div class="overlay"><i class="ti-plus"></i></div>
 							<img src="images/america.png" alt="Image" class="img-responsive">
 						</figure>
 						<div class="fh5co-text">
@@ -248,6 +232,25 @@ $(function() {
 						</div>
 					</a>
 				</div>
+				
+				<div class="col-lg-4 col-md-4 col-sm-6">
+					<a href="${pageContext.request.contextPath}/crew/list/06" class="fh5co-card-item">
+						<figure>
+							<img src="images/europe.png" alt="Image" class="img-responsive">
+						</figure>
+						<div class="fh5co-text">
+							<h2>유럽</h2>
+							<p>멋진 건축물과 서양미술의 근현대사<br>
+								유럽!</p>
+							<p><span class="btn btn-primary">Go</span></p>
+						</div>
+					</a>
+				</div>
+			
+
+				
+
+				
 
 			</div>
 		</div>

@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import tk.tourwith.project.code.model.Code;
+import tk.tourwith.project.code.service.impl.CodeServiceImpl;
 import tk.tourwith.project.crew.model.Crew;
 import tk.tourwith.project.crew.service.impl.CrewServiceImpl;
 
@@ -20,15 +22,21 @@ public class CrewController {
 
 	@Autowired
 	CrewServiceImpl crewService;
+	@Autowired
+	CodeServiceImpl codeService;
 
 	@RequestMapping("/crew/list/{category}")
 	public String getCrewList(@PathVariable String category, Model model) throws Exception {
-
+		
+		List<Code> codeList = codeService.selectListByGroupCode("BIG_CATE");
+		
+		
 		Map<String, Object> paramMap = new HashMap<>();
 		// BIG_CATE_{} by.bsp
 		paramMap.put("category", String.format("BIG_CATE_%s", category));
 		List<Crew> crewList = crewService.selectCrewList(paramMap);
 
+		model.addAttribute("codeList",codeList);
 		model.addAttribute(crewList);
 
 		return "crew/crewList";
