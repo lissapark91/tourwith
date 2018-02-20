@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import tk.tourwith.project.faq.model.Faq;
 import tk.tourwith.project.faq.service.impl.FaqServiceImpl;
 import tk.tourwith.project.member.model.Member;
+import tk.tourwith.project.util.PagingUtil;
 
 
 
@@ -30,37 +31,37 @@ public class FaqController {
 	
 	@Autowired
 	private FaqServiceImpl faqService;	
-	
-	// FAQ 조회
-//	@RequestMapping("/faq")
-//	public String getFaqList(Model model) throws Exception {
-//		
-//		Map<String, Object> paramMap = new HashMap<>();
-//		List<Faq> faqList = faqService.selectFaqList(paramMap);
-//		
-//		model.addAttribute(faqList);
-//		
-//		return "faq/faqList";
-//	}
-//	
+
 	// FAQ 검색
 	@RequestMapping("/faq")
 	public String faqList(
 			@RequestParam(value="searchType", required=false, defaultValue="") String searchType,
 			@RequestParam(value="searchWord", required=false, defaultValue="") String searchWord,
+			@RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage,
+			@RequestParam(value="pageSize", required=false, defaultValue="10") int pageSize,
 			Model model
 	) throws Exception {
-
+		
+		// 페이징 처리 데이터		
+		int pageCount = 5;  // 기본값
+		int totalCount = 0;
+		
 		Map<String, Object> paramMap = new HashMap<>();
 		
 		if(StringUtils.isNotBlank(searchType) && StringUtils.isNotBlank(searchWord)) {
 			paramMap.put("searchType", searchType);
 			paramMap.put("searchWord", searchWord);
 		}
-
+		
+		PagingUtil pagingUtil = new PagingUtil(currentPage, totalCount, pageSize, pageCount);
+		
+		paramMap.put("startRow", pagingUtil.getStartRow());
+		paramMap.put("endRow", pagingUtil.getEndRow());
+		
 		List<Faq> faqList = faqService.selectFaqList(paramMap);
 
 		model.addAttribute("faqList", faqList);
+		model.addAttribute("pagingUtil", pagingUtil);
 
 		return "faq/faqList";
 	}
