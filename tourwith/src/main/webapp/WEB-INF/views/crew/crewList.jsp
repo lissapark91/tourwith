@@ -55,13 +55,12 @@
 							<div class="text-center col-md-12">
 							<form class="form-inline fomr-control">
 							<div class="col-md-3 col-md-offset-1">
-								<select class="form-sizek" >
-									<option>도시, 지역</option>
-									<option>오사카</option>
-									<option>도쿄</option>
-									<option>중국</option>
-									<option>기타</option>
-		 						</select>
+								<select name="BIG_CATE" id="activities1" class="form-control">
+									<option>==국가를 선택해주세요==</option>
+									<c:forEach var="code" items="${codeList}" varStatus="status" >
+										<option value="${code.code_no}">${code.code_nm}</option>
+									</c:forEach>
+								</select>
 		 					</div>
 		 					<div class="col-md-3 col-md-offset-1">
 								<select class="form-sizek">

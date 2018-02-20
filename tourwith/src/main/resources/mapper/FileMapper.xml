@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="tk.tourwith.project.util.file.mapper.FileMapper">
+ 					
+ <insert id="insertFile" parameterType="File">
+ <selectKey keyProperty="file_no" resultType="string" order="BEFORE">
+  		SELECT NEXT_NO FROM NO_CREAT where TABLENM = 'FILE_MANAGE'
+  </selectKey>
+ 	INSERT INTO FILE_MANAGE
+	(   FILE_NO,
+		FILE_TY,
+		FILE_NM,
+		STRE_NM,
+		DETAIL_STRE_COURS,
+		FILE_SIZE,
+		FANCY_SIZE,
+		REGISTER,
+		REG_DE,
+		REG_YN )
+	VALUES
+	  ( CONCAT('FI_', #{file_no}),
+		#{file_ty},
+		#{file_nm},
+		#{stre_nm},
+		#{detail_stre_cours},
+		#{file_size},
+		#{fancy_size},
+		#{register},
+		now(),
+		'n' );
+ </insert>
+	
+ <select id="selectFileByPk" resultType="File" parameterType="string">
+ 	select 
+ 		FILE_NO,
+		FILE_TY,
+		FILE_NM,
+		STRE_NM,
+		DETAIL_STRE_COURS,
+		FILE_SIZE,
+		FANCY_SIZE,
+		REGISTER,
+		REG_DE,
+		REG_YN 
+	from FILE_MANAGE
+	where FILE_NO = #{file_no}
+ 	
+ </select>
+ 
+ <select id="selectFileByStre" resultType="File" parameterType="string">
+ 	select 
+ 		FILE_NO,
+		FILE_TY,
+		FILE_NM,
+		STRE_NM,
+		DETAIL_STRE_COURS,
+		FILE_SIZE,
+		FANCY_SIZE,
+		REGISTER,
+		REG_DE,
+		REG_YN 
+	from FILE_MANAGE
+	where STRE_NM = #{stre_nm}
+ 	
+ </select>
+ 
+ <update id="updateRegynByPk" parameterType="string">
+ 	update FILE_MANAGE
+ 	set 
+ 		REG_YN = 'y'
+ 	where FILE_NO = #{file_no}
+ 
+ </update>
+
+ </mapper> 
+
