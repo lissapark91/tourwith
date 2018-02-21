@@ -5,7 +5,28 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
   <mapper namespace="tk.tourwith.project.faq.mapper.FaqMapper">
+	
+	
+	<select id="getTotalCnt" resultType="int" parameterType="map" >
+		select count(SJ)
+		from FAQ
+		where DEL_YN = 'n'
+		<if test="searchWord != null and searchWord != '' ">
+			<if test="searchType == '01'">
+				and SJ LIKE CONCAT('%', #{searchWord}, '%')	/* subject */
+			</if>
+			<if test="searchType == '02'">
+				and CON LIKE CONCAT('%', #{searchWord}, '%')	/* content */
+			</if>
+			<if test="searchType == '03'">
+				and CONCAT(SJ, ' ', CON) LIKE CONCAT('%', #{searchWord}, '%')
+				/* subject + content */
+			</if>
+		</if>
 
+		
+		
+	</select>
 	
 	<!-- FAQ 게시판 리스트 매퍼 -->
 	<select id="selectFaqList" resultType="Faq" parameterType="map">
@@ -28,11 +49,14 @@
 				and CON LIKE CONCAT('%', #{searchWord}, '%')	/* content */
 			</if>
 			<if test="searchType == '03'">
-				and ( SJ LIKE CONCAT('%', #{searchWord}, '%')	/* subject + content */
-				or CON LIKE CONCAT('%', #{searchWord}, '%'))
+				and CONCAT(SJ, ' ', CON) LIKE CONCAT('%', #{searchWord}, '%')
+				/* subject + content */
 			</if>
 		</if>
-		order by REG_DE DESC
+		ORDER BY REG_DE DESC
+		<if test="startRow >= 0 and endRow > startRow">
+			LIMIT #{startRow}, 15
+		</if>
 		
   	</select>
   	
@@ -54,6 +78,7 @@
   	</select>
   	
   	
+  		<!-- FAQ 게시물 작성 -->
   	<insert id="insertFaq" parameterType="Faq">
     
     <selectKey keyProperty="faq_no" resultType="string" order="BEFORE">
@@ -81,26 +106,23 @@
     </insert>
 
   		
+  		<!-- FAQ 게시물 수정 -->
   	<update id="updateFaq" parameterType="Faq">
 			UPDATE FAQ
 				SET
 				faq_no = #{faq_no}
 				,sj = #{sj}
-				,reg_de = now()
 				,con = #{con}
-				,hitcnt = #{hitcnt}
 				,upd_de = now()
-				,del_yn = #{del_yn}
-				,reg_mb_no = #{reg_mb_no}
 			WHERE faq_no = #{faq_no}
 		</update>
 		
-		<delete id="deleteFaq" parameterType="map">
+		
+		<!-- FAQ 게시물 삭제 -->
+		<delete id="deleteFaq" parameterType="Faq">
 			UPDATE FAQ
-				SET
+				SET				
 				del_yn = 'y'
-				,reg_mb_no = #{reg_mb_no}
-				,upd_de = now()
 			WHERE faq_no = #{faq_no}
 		</delete>  		
   		

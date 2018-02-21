@@ -11,64 +11,74 @@ public class PagingUtil {
 	private int endRow; // 종료 게시물 번호
 	private int startPage; // 시작 페이지 번호
 	private int endPage; // 종료 페이지 번호
-	
-	 // 페이지 링크 데이터를 담는 버퍼
-    private StringBuffer pageHtml = new StringBuffer();
-    
-    public PagingUtil(int currentPage, int totalCount) {
-        this(currentPage, totalCount, 20, 5);
-    }
 
-    public PagingUtil(int currentPage, int totalCount, int pageSize, int pageCount) {
+	// 페이지 링크 데이터를 담는 버퍼
+	private StringBuffer pageHtml = new StringBuffer();
 
-        this.currentPage = currentPage;
-        this.totalCount = totalCount;
-        this.pageSize = pageSize;
-        this.pageCount = pageCount;
+	public PagingUtil(int currentPage, int totalCount) {
+		this(currentPage, totalCount, 15, 5);
+	}
 
-        
-        // 시작/종료 게시물 번호
-        startRow = (currentPage - 1) * pageSize + 1;
+	public PagingUtil(int currentPage, int totalCount, int pageSize, int pageCount) {
 
-        endRow = currentPage * pageSize;
+		this.currentPage = currentPage;
+		this.totalCount = totalCount;
+		this.pageSize = pageSize;
+		this.pageCount = pageCount;
 
-        if (endRow > totalCount) {
-            endRow = totalCount;
-        }
+		System.out.println(currentPage);
+		System.out.println(totalCount);
+		System.out.println(pageSize);
+		System.out.println(pageCount);
+		System.out.println("==========================");
+		
+		// 시작/종료 게시물 번호
+		startRow = (currentPage - 1) * pageSize + 1 - 1;
+		System.out.println("startRow : " + startRow);
+		
+		endRow = currentPage * pageSize;
+		System.out.println("endRow : " + endRow);
+		
+		totalPage = (totalCount - 1) / pageSize + 1;
+		System.out.println("totalPage : " + totalPage);
 
-        // 시작/종료 페이지 번호
-        startPage = ((currentPage - 1) / pageCount * pageCount) + 1;
-        endPage = startPage + pageCount - 1;
+		if (endRow > totalCount) {
+			endRow = totalCount;
+		}
 
-        if (endPage > totalPage) {
-            endPage = totalPage;
-        }
+		// 시작/종료 페이지 번호
+		startPage = ((currentPage - 1) / pageCount * pageCount) + 1;
+		System.out.println("startPage : " + startPage);
+		endPage = startPage + pageCount - 1;
 
- 
-        // 이전 생성
-        if (currentPage > pageCount) {
-            pageHtml.append("<li><a href='#' onclick='fn_search(" + (startPage - 1) + ")'>이전</a></li>");
-        }
+		if (endPage > totalPage) {
+			endPage = totalPage;
+		}
 
-        // 페이지 네비게이터 생성
-        for (int i = startPage; i <= endPage; i++) {
+		// 이전 생성
+		if (currentPage > pageCount) {
+			pageHtml.append("<li><a href='#' onclick='fn_search(" + (startPage - 1) + ")'>이전</a></li>");
+		}
 
-            if (currentPage == i) {
-                pageHtml.append("<li class='active'><a href='#'>" + i + "</a></li>");
-            } else {
-                pageHtml.append(
-                        "<li><a href='#' onclick='fn_search(" + i + ")'>" + i + "</a></li>");
-            }
-        }
+		// 페이지 네비게이터 생성
+		for (int i = startPage; i <= endPage; i++) {
 
-        // 다음 생성
-        if (totalPage - startPage >= pageCount) {
-            pageHtml.append("<li><a href='#' onclick='fn_search(" + (endPage + 1) + ")'>다음</a></li>");
-        }
+			if (currentPage == i) {
+				pageHtml.append("<li class='active'><a href='#'>" + i + "</a></li>");
+			} else {
+				pageHtml.append("<li><a href='#' onclick='fn_search(" + i + ")'>" + i + "</a></li>");
+			}
+			
+			
+		}
 
-       
-    }
-	
+		// 다음 생성
+		if (totalPage - startPage >= pageCount) {
+			pageHtml.append("<li><a href='#' onclick='fn_search(" + (endPage + 1) + ")'>다음</a></li>");
+		}
+
+	}
+
 	public int getCurrentPage() {
 		return currentPage;
 	}

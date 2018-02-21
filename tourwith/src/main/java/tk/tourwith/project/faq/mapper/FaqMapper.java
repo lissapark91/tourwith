@@ -19,5 +19,7 @@ public interface FaqMapper {
 	
 	public int updateFaq(Faq faq) throws Exception;
 	
-	public int deleteFaq(Map<String, Object> paramMap) throws Exception;
+	public int deleteFaq(Faq faq) throws Exception;
+	
+	public int getTotalCnt(Map<String, Object> paramMap) throws Exception;
 }
