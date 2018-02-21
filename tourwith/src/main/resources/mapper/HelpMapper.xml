@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="tk.tourwith.project.help.mapper.HelpMapper">
+
+	<select id="selectLoc" parameterType="string" resultType="Help">
+
+		select a.TRPLC_NO, a.TRPLC_CTGRY, a.REG_DE, a.UPD_DE, a.TRPLC_DETAIL_CTGRY, a.LATI, a.LONGI, a.MNGR 
+		from TRPLC_INFO as a
+		where a.TRPLC_NO = #{trplc_no}
+
+<!-- 		select a.TRPLC_NO, a.TRPLC_CTGRY, a.REG_DE, a.UPD_DE, a.TRPLC_DETAIL_CTGRY, -->
+<!-- 		a.LATI, a.LONGI, a.MNGR, b.CODE_NM as TRPLC_NM  -->
+<!-- 		from TRPLC_INFO as a,CMMN_CODE as b  -->
+<!-- 		where a.TRPLC_NO = #{trplc_no} and b.CODE_NO =#{trplc_nm} -->
+
+	</select>
+	<!-- select 가져오겠다 -->
+	<!-- CODE_NO, CODE_NM 컬럼들의 내용을 -->
+	<!-- from CMMN_CODE 어디에서? CMMN 코드 테이블에서 -->
+	<!-- where 어떤 조건으로? -->
+	<!-- GROUP_CODE = #{group_code} 그룹코드가 입력된 값과 동일한 애로 -->
+</mapper>
