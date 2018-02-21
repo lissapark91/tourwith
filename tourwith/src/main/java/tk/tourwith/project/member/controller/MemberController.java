@@ -30,8 +30,8 @@ public class MemberController {
 	public String memberForm(@PathVariable("fb_id") String fb_id , Model model, Member member) throws Exception {
 		
 		//이미 가입되어 있는 아이디이면
-		if(memberService.selectMemberById(fb_id) != null) {
-			throw new ResourceNotFoundException("잘못된 접근 입니다."); //400에러
+		if(memberService.selectMemberById(fb_id) != null || StringUtils.isEmpty(member.getFb_tkn()) || StringUtils.isBlank(member.getFb_tkn())) {
+			throw new ResourceNotFoundException("잘못된 접근 입니다."); //500에러
 		}
 		
 		//form으로 넘겨 닉네임을 입력 받게 한다.
@@ -61,7 +61,7 @@ public class MemberController {
 			
 			return result;
 		}
-		if(nick.length() > 50) {
+		if(nick.length() >= 50) {
 			message = "닉네임은 50글자 미만으로 설정해 주세요.";
 			
 			Map<String, Object> result = new HashMap<>();

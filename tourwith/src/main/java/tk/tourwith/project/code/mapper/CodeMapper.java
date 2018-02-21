@@ -12,6 +12,9 @@ public interface CodeMapper {
 // @Mapper interface 약속할게 mapper.xml에 연결할거야
 	
 	public List<Code> selectListByGroupCode(String group_code) ;
+
+	public Code selectCodeByPk(String code_no) ;
+	
 	
 	
 	

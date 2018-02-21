@@ -19,18 +19,18 @@
 								<a href="#">크루찾기</a>
 								<ul class="dropdown">
 								<!-- c tag 이용하여 출력 -->
-									<li><a href="${pageContext.request.contextPath}/crew/01">국내</a></li>
-									<li><a href="${pageContext.request.contextPath}/crew/02">동남아</a></li>
-									<li><a href="${pageContext.request.contextPath}/crew/03">중/일/홍</a></li>
-									<li><a href="${pageContext.request.contextPath}/crew/04">남태평양</a></li>
-									<li><a href="${pageContext.request.contextPath}/crew/05">미주</a></li>
-									<li><a href="${pageContext.request.contextPath}/crew/06">유럽</a></li>
+									<li><a href="${pageContext.request.contextPath}/crew/list/01">국내</a></li>
+									<li><a href="${pageContext.request.contextPath}/crew/list/02">동남아</a></li>
+									<li><a href="${pageContext.request.contextPath}/crew/list/03">중/일/홍</a></li>
+									<li><a href="${pageContext.request.contextPath}/crew/list/04">남태평양</a></li>
+									<li><a href="${pageContext.request.contextPath}/crew/list/05">미주</a></li>
+									<li><a href="${pageContext.request.contextPath}/crew/list/06">유럽</a></li>
 								</ul>
 							</li>
 							<li class="has-dropdown"><a href="#">어디갈래?</a>
 								<ul class="dropdown">
-									<li><a href="${pageContext.request.contextPath}/helper">여행도우미</a></li>
-									<li><a href="${pageContext.request.contextPath}/review">여행 리뷰</a></li>
+									<li><a href="${pageContext.request.contextPath}/helper/map">여행도우미</a></li>
+									<li><a href="${pageContext.request.contextPath}/reviews">여행 리뷰</a></li>
 								</ul>
 							</li>
 							<li>
