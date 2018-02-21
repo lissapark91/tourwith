@@ -15,10 +15,12 @@
 			, DETAIL_TRPLC
 			, DEPR_DE	
 			, ARVL_DE	
-			, NOW_MALE_NMPR
+<!-- 			, (select count(*) from MEMBER as a CR_AUTHOR as b where b.code_no='CR_ROLE_02' and b.cr_no=#{cr_no} and a.GENDER = '남' ) as NOW_MALE_NMPR -->
+			,NOW_MALE_NMPR
 			, MALE_NMPR	
 			, FEMALE_NMPR	
-			, NOW_FEMALE_NMPR	
+<!-- 			,(select count(*) from MEMBER as a CR_AHTHOR as b where b.code_no='CR_ROLE_02' and b.cr_no=${cr_no} and a.GENDER = '여' ) as NOW_FEMALE_NMPR	 -->
+			,NOW_FEMALE_NMPR
 			, PRTXT	
 			, REG_DE	
 			, UPD_DE	
@@ -26,13 +28,18 @@
 			, CR_LEADR_MB_NO	
 			, TRPLC_NO
 			, RCRIT_STTUS
-		from CREW	
+		from CREW 
 		where DEL_YN = 'n'
 		
-		<if test="category != null and category != ''">
-<!-- 		and TRLC_NO like '#{category}%' -->
-		and TRPLC_NO like concat(#{category} , '%')
+		<!--  검색 -->
+		<if test="city != null and city != ''">
+
+		and TRPLC_NO =#{city}
 		</if>
+		<if test="date != null and date != ''">
+		and DEPR_DE >=  STR_TO_DATE(#{date},'%m/%d/%Y')
+		</if>
+
   	</select>
 
   	<select id="getCrew" resultType="Crew" parameterType="String" >

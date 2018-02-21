@@ -40,6 +40,33 @@ $(function() {
 	    });  
 		
 	});
+	
+	
+ 	$("#form_select").submit(function(e){
+		// e.preventDefault(); // 이벤트 전파 막기
+		var codecate = $("#activities1").val();
+		// param = $(this).serialize();		
+		// console.log(param);
+		url = "${pageContext.request.contextPath}/crew/list/"+ codecate;
+		console.log(url);
+		$(this).attr("action", url);
+		$(this).submit();
+		return false;
+	/* 	
+	 	$.ajax({      
+	        type:"POST",  
+	        url:"${pageContext.request.contextPath}/crew/list/"+ codecate,     //컨트롤러 url
+			dataType:"json",
+	        success:function(data){   
+				console.log(data);
+	        },   
+	        error:function(e){  
+	        	console.log("요청 실패",e.responseText);  
+	        }  
+	    });     */
+		
+	}); 
+	
 });
 
 </script>
@@ -94,7 +121,7 @@ $(function() {
 										
 										<div class="tab-content">
 											<div class="tab-content-inner active" data-content="signup">
-												<form action="#">
+												<form id="form_select" action="#" method="post">
 													
 													<div class="row form-group">
 														<div class="col-md-12">
@@ -119,7 +146,7 @@ $(function() {
 													<div class="row form-group">
 														<div class="col-md-12">
 															<label for="date-start">출발일 선택</label>
-															<input type="text" id="date-start" class="form-control">
+															<input type="text" name="DATE_SELECT"  id="date-start" class="form-control">
 														</div>
 													</div>
 	

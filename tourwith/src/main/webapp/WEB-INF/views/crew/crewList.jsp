@@ -142,7 +142,7 @@
 			
 			 <c:forEach var="crew" items="${crewList}">
 			<div class="col-lg-6 col-md-6 col-sm-9" >			
-				<a href="#" class="fh5co-card-item "> 
+				<a href="crew/page/${cr_no}" class="fh5co-card-item "> 
 					  </figure>   
 					  <div class="row">
 						  <div class="col-md-4">	
@@ -161,7 +161,7 @@
 										남 : ${crew.now_male_nmpr}/${crew.male_nmpr}		여 ${crew.now_female_nmpr}/${crew.female_nmpr}
 										</div>
 										<div class=" col-md-4 col-md-offset-0.5  title_status_k " style="background-color: lightsalmon; " >
-												ㅁ${crew.rcrit_sttus}
+												${crew.rcrit_sttus}
 										</div>
 									<div class="row col-md-10  tour_status_k" >
 										기간 ${crew.depr_de} - ${crew.arvl_de}

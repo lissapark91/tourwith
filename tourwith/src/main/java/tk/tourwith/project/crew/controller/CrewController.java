@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,11 +23,20 @@ public class CrewController {
 	CrewServiceImpl crewService;
 
 	@RequestMapping("/crew/list/{category}")
-	public String getCrewList(@PathVariable String category, Model model) throws Exception {
+	public String getCrewList(@PathVariable String category,
+			                  @RequestParam(value="BIG_CATE_2",required=false) String city,
+			                   @RequestParam(value="DATE_SELECT", required=false) String date , 
+			                   Model model) throws Exception {
 
 		Map<String, Object> paramMap = new HashMap<>();
 		// BIG_CATE_{} by.bsp
-		paramMap.put("category", String.format("BIG_CATE_%s", category));
+		paramMap.put("category", category);
+		if(StringUtils.isNotBlank(city)) {
+			paramMap.put("city",  city );
+		}
+		if(StringUtils.isNotBlank(date)) {
+			paramMap.put("date", date);
+		}
 		List<Crew> crewList = crewService.selectCrewList(paramMap);
 
 		model.addAttribute(crewList);
@@ -35,7 +45,8 @@ public class CrewController {
 	}
 
 	@RequestMapping("crew/page/{cr_no}")
-	public String crewView(Model model, @PathVariable(value = "cr_no", required = true) String cr_no) throws Exception {
+	public String crewView(Model model, @RequestParam(value = "cr_no", required = false) String cr_no) throws Exception {
+		
 		Crew crew = null;
 
 		crew = crewService.getCrew(cr_no);
