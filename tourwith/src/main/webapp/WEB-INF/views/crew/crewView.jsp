@@ -2,165 +2,131 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-</head>
-<body>
 
-<div id="page">
+
+<head>
+	<style>
+		table td {
+			padding: 1%;
+		}
+		table {
+			width: 100%;
+		}
+		.RECR_STAT_01{
+			color: orange;
+		}
+		.RECR_STAT_02{
+			color: red;
+		}
+	</style>
+	<script>
+		$(function(){
+			var reg_de = '${crew.reg_de}';
+			$('#crew_reg_de').text(reg_de.split(' ')[0]);
+			
+			$('#modiBtn').click(function(){
+				
+				location.href = "${pageContext.request.contextPath}/crew/form?cr_no=" + ${crew.cr_no}
+
+			})			
+			
+			$('#delBtn').click(function(){
+			
+				location.href = "${pageContext.request.contextPath}/crew/del?cr_no=" + ${crew.cr_no}
+				
+				
+			})
+			
+			
+		})
+	</script>
+
+</head>
+
+
+<header id="gtco-header" class="gtco-cover gtco-cover-sm" role="banner"
+	style="height: 80px;"> </header>
+
 		<!-- 상세 보기 코드 -->
 <div class="container">
         <div class="row">
-                <div class="col-md-12">
+           
 		<div class="gtco-section border-bottom">
 			<div class="gtco-container">
-                    <div class="list-group-item fh5co-text-SG">
-                        
-                            <div class="cdtl_prd_infotop">
-                                    <div class="cdtl_prd_mall">
-                                        <span class="cmall_ic">
-                                                <p class="text-center"><input type="button" value="${crew.rcrit_sttus}" class="btn-mint" ><a class="cdtl_ico_txt"><u>#식도락 여행</u></a></p>
-                                            
-                                        </span>
-                                    </div>
-                                    <div class="padding-bottom">
-                                    <h2 class="text-center">${crew.cr_sj}</h2>
-                                    </div>
-                                    </div>
-                            <div class="row">
-                                <div class="col-md-6 right-boder-box">
-
-                                          
-                                                <dl class="cdtl_col_lft">
-                                                    <div class="cdtl_item">
-                                                        <dl class="cdtl_dl">
-                                                            <dt>주요 경로</dt>
-        
-                                                                    <a>
-                                                                      ${crew.main_cours}
-                                                                    </a>
-                                                        </dl>
-                                                    </div>
-        
-                                                    <div class="cdtl_item">
-                                                            <dl class="cdtl_dl cdtl_review_info">
-                                                               <dt>세부 여행지</dt>
-                                                               <a>${crew.detail_trplc}</a>
-                                                            </dl>
-                                                        </div>
-                                                    <div class="cdtl_item">
-                                                        <dl class="cdtl_dl cdtl_review_info">
-                                                           <dt>출발일자</dt>
-                                                           <a>${crew.reg_de}</a>
-                                                        </dl>
-                                                    </div>
-                                                    <div class="cdtl_item">
-                                                        <dl class="cdtl_dl cdtl_review_info">
-                                                           <dt>도착일자</dt>
-                                                           <a>${crew.upd_de}</a>
-                                                        </dl>
-                                                    </div>
-                                                </dl>  
-
-
-                                </div>
-                                <div class="col-md-6">
-
-
-                                        <div class="cdtl_col_rgt">
-                                                <div class="cdtl_info_wrap">
-                                                        <div class="cdtl_item">
-                                                                <dl class="cdtl_dl cdtl_review_info">
-                                                                   <dt>남자 인원</dt>
-                                                                   <a>${crew.male_nmpr}명</a>
-                                                                </dl>
-                                                         </div>
-                                                        <div class="cdtl_item">
-                                                                <dl class="cdtl_dl cdtl_review_info">
-                                                                   <dt>현재 남자 인원</dt>
-                                                                   <a>${crew.now_male_nmpr}명</a>
-                                                                </dl>
-                                                         </div>
-                                                        <div class="cdtl_item">
-                                                                <dl class="cdtl_dl cdtl_review_info">
-                                                                   <dt>여자 인원</dt>
-                                                                   <a>${crew.female_nmpr}명</a>
-                                                                </dl>
-                                                         </div>
-                                                        <div class="cdtl_item">
-                                                                <dl class="cdtl_dl cdtl_review_info">
-                                                                   <dt>현재 여자 인원</dt>
-                                                                   <a>${crew.now_female_nmpr}명</a>
-                                                                </dl>
-                                                         </div>
-                                                </div>
-                                            </div>
-                                        </div> 
-                                            
-
-                                </div>
-
-                                <div class="padding-top">
-                                <div class="container">
-                                    <div class="row">
-
-                                        
-
-                                        <div class="col-md-10">
-                                               <div class="boxline">
-                                                 먹는 거 좋아하시는 분~ 인스타에 사진 업뎃하는거 좋아하시는  분!<br>
-                                                 같이 예쁜 카페 도장깨면서 먹으러 다닐 분들 구합니다.<br>
-                                                 우리 제주도 카페 도장을 다 깨버려여<br>
-                                                 ${crew.prtxt}
-                                                 <br>
-                                                 <br>
-                                                 <br>
-                                                 <br>
-                                                 <br>
-                                                 <br>
-                                               </div>
-
-                                               <div class="container">
-                                                    <div class="row">
-                                                        <div class="padding-top">
-                                                            <div class="row form-group" >
-                                                                    <input type="button" value="수정하기" class="btn btn-mint" ><input type="button" value="삭제하기" class="btn btn-mint" >
-                                                        
-                                                                </div>        
-                                                            </div>
-                                               </div>
-                                        </div>
-
-                                    </div>
-                                    <!-- <div class="col-md-12">
-                                            <div class="row form-group">
-                                                <div class="col-md-2">
-                                                    <input type="button" value="강성민" class="btn btn-mint">
-                                                </div>
-                                                
-                                                <div class="col-md-8">
-                                                    <textarea cols="46" rows="1" class="form-control"> 댓글란 </textarea>
-                                                </div>
-                
-                                                <div class="col-md-2">
-                                                    <img src="https://kr.seaicons.com/wp-content/uploads/2015/11/Programming-Settings-3-icon.png" height="32" width="32">
-                                                </div>
-                
-                                            </div>
-                                        </div> -->
-                                </div>
-                            </div>
-                           </div>       
-                            
-                                </div>
+				<div>
+					<span>#${crew.trplc_no_nm }</span>
+					<span>#${crew.thema_nm }</span>
+					<span class="${crew.rcrit_sttus}"><strong>#${crew.rcrit_sttus_nm }</strong></span>
 				</div>
+				<div class="row" style="border-bottom: 2px solid #222;">
+				<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10" >
+					<h3>${crew.cr_sj}</h3>
+				</div>
+				<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+				<c:if test="${isLeader}">
+					<button type="button" id="modiBtn" class="btn btn-xs" style="padding: 0.5em;">수정</button>
+					<button type="button" id="delBtn" class="btn btn-sm" style="padding: 0.5em;">삭제</button>
+				</c:if>
+				</div>
+				</div>
+				<div class="row">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<table>
+						<tr>
+							<td>크루 리더</td>
+							<td><a href="http://www.facebook.com/${crew.cr_leadr_fb_id }" target="_blank" >
+							<img src="http://graph.facebook.com/${crew.cr_leadr_fb_id }/picture?width=32&height=32"/>${crew.cr_leadr_nick }</a></td>
+							<td>크루 등록 일자</td>
+							<td id="crew_reg_de"></td>
+							
+						</tr>
+						
+						<tr>
+							<td width="15%">주요 경로</td>
+							<td width="35%"><b>${crew.main_cours}</b></td>
+							<td width="15%">상세 경로</td>
+							<td width="35%"><b>${crew.detail_trplc}</b></td>
+						</tr>
+						
+						<tr>
+							<td>남자 인원</td>
+							<td><b>${crew.now_male_nmpr} / ${crew.male_nmpr }</b></td>
+							<td>여자 인원</td>
+							<td><b>${crew.now_female_nmpr} / ${crew.female_nmpr }</b></td>
+						</tr>
+						
+						<tr style="border-bottom: 2px solid #222;">
+							<td>출발 일자</td>
+							<td><b>${crew.depr_de }</b></td>
+							<td>도착 일자</td>
+							<td><b>${crew.arvl_de }</b></td>
+						</tr>
+						
+						<tr >
+							<td colspan="4"><div style="min-height:400px;">${crew.prtxt }</div></td>
+						</tr>
+
+					</table>
+				</div>	
+				</div>
+				
+				<div class="row">
+					<!-- 가운데 정렬용.. div.. -->
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+					</div>
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+						<button type="button" class="btn btn-warning btn-block"><b>참 여 하 기</b></button>
+					</div>
+					<!-- 가운데 정렬용.. div.. -->
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+					</div>
+				
+				</div>
+				
+			
 			</div>
 		</div>
+	
     </div>
 </div>
-</div>
 
-</body>
-</html>

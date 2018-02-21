@@ -64,10 +64,37 @@ $(function(){
 		  height: 300,                 // set editor height
 		  minHeight: null,             // set minimum height of editor
 		  maxHeight: null,             // set maximum height of editor
-		  lang: 'ko-KR'
-		});
+		  lang: 'ko-KR', 
+		  callbacks: {
+			  onImageUpload: function(files, editor, welEditable) {
+	          sendFile(files[0], this);
+
+	      }
+
+	  }
+	});
+	
+	function sendFile(file, el) {
+		console.log("sendFile")
+	      var form_data = new FormData();
+	      form_data.append('file', file);
+	      $.ajax({
+	        data: form_data,
+	        type: "POST",
+	        url: '${pageContext.request.contextPath}/image/upload', //일단 서버와 db에 파일 및 파일 정보 저장 
+	        cache: false,
+	        contentType: false,
+	        enctype: 'multipart/form-data',
+	        processData: false,
+	        success: function(file_no) {
+	          $(el).summernote('insertImage',"${pageContext.request.contextPath}/image/" + file_no); //base64 대신 넣어주는 url 
+//	           $('#imageBoard > ul').append('<li><img src="'+url+'" width="480" height="auto"/></li>');
+	        }
+	      });
+	    }
 
 })
+	
 </script>
 
 <header id="gtco-header" class="gtco-cover gtco-cover-sm" role="banner" style="height: 80px;">
@@ -78,9 +105,8 @@ $(function(){
 	<h3>${faq.faq_no == null ? '글쓰기' : '글수정'}</h3>
 	
 	<form name="faqForm" id="faqForm" method="post" enctype="multipart/form-data">
-	
+		<input type="hidden" name="faq_no" value="${faq.faq_no}">
 		<input type="hidden" name="reg_mb_no" value="${faq.reg_mb_no}">
-		<input type="hidden" name="faq_type" value="BBS">
 		<table class="table">
 			<tr>
 				<td width="15%">제목</td>
@@ -89,10 +115,7 @@ $(function(){
 						<input type="text" name="sj" value="${faq.sj}" class="form-control" placeholder="제목을 입력하세요.">
 					</div>
 				</td>
-			</tr>
-			
-						<input type="hidden" name="reg_mb_no" value="${LOGIN_USER.nick}">
-		
+			</tr>		
 			
 			<tr>
 				<td colspan="2">

@@ -12,11 +12,11 @@ function fn_list(){
 }
 
 function fn_delete(seqNo){
-	location.href="${pageContext.request.contextPath}/faq/faqDelete?faq_no=";
+	location.href="${pageContext.request.contextPath}/faq/faqDelete?faq_no=${faq.faq_no}";
 }
 
 function fn_writeForm(seqNo){
-	location.href="${pageContext.request.contextPath}/faq/faqForm?faq_no=";
+	location.href="${pageContext.request.contextPath}/faq/form?faq_no=${faq.faq_no}";
 }
 
 </script>

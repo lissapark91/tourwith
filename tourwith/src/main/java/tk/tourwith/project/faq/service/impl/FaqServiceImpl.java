@@ -43,7 +43,6 @@ import tk.tourwith.project.util.mapper.NumberCreateMapper;
 	@Override
 	public int insertFaq(Faq faq) throws Exception {
 		
-		numberCreateMapper.updateNumber("FAQ");
 		int updCnt = faqMapper.insertFaq(faq);
 		
 		if(updCnt > 0) {
@@ -62,9 +61,19 @@ import tk.tourwith.project.util.mapper.NumberCreateMapper;
 	}
 
 	@Override
-	public int deleteFaq(Map<String, Object> paramMap) throws Exception {
-
-		return faqMapper.deleteFaq(paramMap);
+	public int deleteFaq(Faq faq) throws Exception {
+		
+		int updCnt = faqMapper.deleteFaq(faq);
+		
+		return updCnt;
 	}
+
+	@Override
+	public int getTotalCnt(Map<String, Object> paramMap) throws Exception {
+
+		return faqMapper.getTotalCnt(paramMap);
+	}
+
+	
 
 }

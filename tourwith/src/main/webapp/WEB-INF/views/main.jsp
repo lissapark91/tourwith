@@ -171,126 +171,100 @@
 					솔플 못 하는 사람! 걱정하지 마<br> 우리는 "크루"를 만들 수 있고 "크루"에 가입해서 함께 할 수 있어~
 				</p>
 			</div>
-		</div>
-		<div class="row">
-			<!--SG 크루 이미지 및 문구-->
-			<div class="col-lg-4 col-md-4 col-sm-6">
-				<a href="images/vietnam.png" class="fh5co-card-item image-popup">
-					<figure>
-						<div class="overlay">
-							<i class="ti-plus"></i>
+			<div class="row">
+				<!--SG 크루 이미지 및 문구-->
+				
+				<div class="col-lg-4 col-md-4 col-sm-6">
+					<a href="${pageContext.request.contextPath}/crew/list/01" class="fh5co-card-item">
+						<figure>
+							<img src="${pageContext.request.contextPath}/images/korea.png" alt="Image" class="img-responsive">
+						</figure>
+						<div class="fh5co-text">
+							<h2>국내</h2>
+							<p>가깝고도 친숙한 우리나라!<br>
+								우리 구석구석 가볼까?
+							</p>
+							<p><span class="btn btn-primary">Go</span></p>
 						</div>
-						<img src="images/vietnam.png" alt="Image" class="img-responsive">
-					</figure>
-					<div class="fh5co-text">
-						<h2>동남아시아</h2>
-						<p>
-							아름다운 자연과 이색적인 문화<br> 떠나자, 동남아시아로!
-						</p>
-						<p>
-							<span class="btn btn-primary">Go</span>
-						</p>
-					</div>
-				</a>
-			</div>
-			<div class="col-lg-4 col-md-4 col-sm-6">
-				<a href="images/korea.png" class="fh5co-card-item image-popup">
-					<figure>
-						<div class="overlay">
-							<i class="ti-plus"></i>
+					</a>
+				</div>
+				
+				<div class="col-lg-4 col-md-4 col-sm-6">
+					<a href="${pageContext.request.contextPath}/crew/list/02" class="fh5co-card-item">
+						<figure>
+							<img src="${pageContext.request.contextPath}/images/vietnam.png" alt="Image" class="img-responsive">
+						</figure>
+						<div class="fh5co-text">
+							<h2>동남아시아</h2>
+							<p>아름다운 자연과 이색적인 문화<br>
+								 떠나자, 동남아시아로!</p>
+							<p><span class="btn btn-primary">Go</span></p>
 						</div>
-						<img src="images/korea.png" alt="Image" class="img-responsive">
-					</figure>
-					<div class="fh5co-text">
-						<h2>국내</h2>
-						<p>
-							가깝고도 친숙한 우리나라!<br> 우리 구석구석 가볼까?
-						</p>
-						<p>
-							<span class="btn btn-primary">Go</span>
-						</p>
-					</div>
-				</a>
-			</div>
-			<div class="col-lg-4 col-md-4 col-sm-6">
-				<a href="images/europe.png" class="fh5co-card-item image-popup">
-					<figure>
-						<div class="overlay">
-							<i class="ti-plus"></i>
+					</a>
+				</div>
+				
+				<div class="col-lg-4 col-md-4 col-sm-6">
+					<a href="${pageContext.request.contextPath}/crew/list/03" class="fh5co-card-item">
+						<figure>
+							<img src="${pageContext.request.contextPath}/images/china.png" alt="Image" class="img-responsive">
+						</figure>
+						<div class="fh5co-text">
+								<h2>중/일/홍</h2>
+								<p>가깝고도 친숙한 이웃 나라들<br>
+									중국 일본 홍콩!</p>
+							<p><span class="btn btn-primary">Go</span></p>
 						</div>
-						<img src="images/europe.png" alt="Image" class="img-responsive">
-					</figure>
-					<div class="fh5co-text">
-						<h2>유럽</h2>
-						<p>
-							멋진 건축물과 서양미술의 근현대사<br> 유럽!
-						</p>
-						<p>
-							<span class="btn btn-primary">Go</span>
-						</p>
-					</div>
-				</a>
-			</div>
-			<div class="col-lg-4 col-md-4 col-sm-6">
-				<a href="images/china.png" class="fh5co-card-item image-popup">
-					<figure>
-						<div class="overlay">
-							<i class="ti-plus"></i>
+					</a>
+				</div>
+				
+				<div class="col-lg-4 col-md-4 col-sm-6">
+					<a href="${pageContext.request.contextPath}/crew/list/04" class="fh5co-card-item">
+						<figure>
+							<img src="${pageContext.request.contextPath}/images/fiji.png" alt="Image" class="img-responsive">
+						</figure>
+						<div class="fh5co-text">
+								<h2>남태평양</h2>
+								<p>꿈같은 바다가 펼쳐지는 곳<br>
+									휴양지는 남태평양이지!</p>
+							<p><span class="btn btn-primary">Go</span></p>
 						</div>
-						<img src="images/china.png" alt="Image" class="img-responsive">
-					</figure>
-					<div class="fh5co-text">
-						<h2>중/일/홍</h2>
-						<p>
-							가깝고도 친숙한 이웃 나라들<br> 중국 일본 홍콩!
-						</p>
-						<p>
-							<span class="btn btn-primary">Go</span>
-						</p>
-					</div>
-				</a>
-			</div>
+					</a>
+				</div>
+				
+				<div class="col-lg-4 col-md-4 col-sm-6">
+					<a href="${pageContext.request.contextPath}/crew/list/05" class="fh5co-card-item">
+						<figure>
+							<img src="${pageContext.request.contextPath}/images/america.png" alt="Image" class="img-responsive">
+						</figure>
+						<div class="fh5co-text">
+							<h2>아메리카</h2>
+							<p>아메리카 드림이라고 들어봤니?<br>
+								넓은 땅덩어리로 가보자!</p>
+							<p><span class="btn btn-primary">Go</span></p>
+						</div>
+					</a>
+				</div>
+				
+				<div class="col-lg-4 col-md-4 col-sm-6">
+					<a href="${pageContext.request.contextPath}/crew/list/06" class="fh5co-card-item">
+						<figure>
+							<img src="${pageContext.request.contextPath}/images/europe.png" alt="Image" class="img-responsive">
+						</figure>
+						<div class="fh5co-text">
+							<h2>유럽</h2>
+							<p>멋진 건축물과 서양미술의 근현대사<br>
+								유럽!</p>
+							<p><span class="btn btn-primary">Go</span></p>
+						</div>
+					</a>
+				</div>
+			
 
-			<div class="col-lg-4 col-md-4 col-sm-6">
-				<a href="images/fiji.png" class="fh5co-card-item image-popup">
-					<figure>
-						<div class="overlay">
-							<i class="ti-plus"></i>
-						</div>
-						<img src="images/fiji.png" alt="Image" class="img-responsive">
-					</figure>
-					<div class="fh5co-text">
-						<h2>남태평양</h2>
-						<p>
-							꿈같은 바다가 펼쳐지는 곳<br> 휴양지는 남태평양이지!
-						</p>
-						<p>
-							<span class="btn btn-primary">Go</span>
-						</p>
-					</div>
-				</a>
-			</div>
+				
 
-			<div class="col-lg-4 col-md-4 col-sm-6">
-				<a href="images/america.png" class="fh5co-card-item image-popup">
-					<figure>
-						<div class="overlay">
-							<i class="ti-plus"></i>
-						</div>
-						<img src="images/america.png" alt="Image" class="img-responsive">
-					</figure>
-					<div class="fh5co-text">
-						<h2>아메리카</h2>
-						<p>
-							아메리카 드림이라고 들어봤니?<br> 넓은 땅덩어리로 가보자!
-						</p>
-						<p>
-							<span class="btn btn-primary">Go</span>
-						</p>
-					</div>
-				</a>
-			</div>
+				
 
+			</div>
 		</div>
 	</div>
 </div>

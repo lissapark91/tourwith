@@ -11,8 +11,8 @@ public class Crew {
 	private String thema;	
 	private String main_cours;	
 	private String detail_trplc;	
-	private String deprde;	
-	private String arvlde;	
+	private String depr_de;	
+	private String arvl_de;	
 	private int now_male_nmpr;	
 	private int male_nmpr;	
 	private int female_nmpr;	
@@ -25,9 +25,23 @@ public class Crew {
 	private String trplc_no	;
 	private String rcrit_sttus;
 	
+	//테이블에 없지만 추가
+	//trplc_no 이름
+	private String trplc_no_nm;
+	
+	//리더 닉네임
+	private String cr_leadr_nick;
+	//리더 페이스북 아이디
+	private String cr_leadr_fb_id;
+	
+	//thema 명
+	private String thema_nm;
+	
+	//모집상태 명
+	private String rcrit_sttus_nm;
+	
 // 크루가 포함해야 할 정보 리스트들 추가 해야 함.
 //	private List<Member> crMemberList;
-	
 	
 	public String getCr_no() {
 		return cr_no;
@@ -59,18 +73,7 @@ public class Crew {
 	public void setDetail_trplc(String detail_trplc) {
 		this.detail_trplc = detail_trplc;
 	}
-	public String getDeprde() {
-		return deprde;
-	}
-	public void setDeprde(String deprde) {
-		this.deprde = deprde;
-	}
-	public String getArvlde() {
-		return arvlde;
-	}
-	public void setArvlde(String arvlde) {
-		this.arvlde = arvlde;
-	}
+	
 	public int getNow_male_nmpr() {
 		return now_male_nmpr;
 	}
@@ -136,6 +139,48 @@ public class Crew {
 	}
 	public void setRcrit_sttus(String rcrit_sttus) {
 		this.rcrit_sttus = rcrit_sttus;
+	}
+	public String getDepr_de() {
+		return depr_de;
+	}
+	public void setDepr_de(String depr_de) {
+		this.depr_de = depr_de;
+	}
+	public String getArvl_de() {
+		return arvl_de;
+	}
+	public void setArvl_de(String arvl_de) {
+		this.arvl_de = arvl_de;
+	}
+	public String getTrplc_no_nm() {
+		return trplc_no_nm;
+	}
+	public void setTrplc_no_nm(String trplc_no_nm) {
+		this.trplc_no_nm = trplc_no_nm;
+	}
+	public String getCr_leadr_nick() {
+		return cr_leadr_nick;
+	}
+	public void setCr_leadr_nick(String cr_leadr_nick) {
+		this.cr_leadr_nick = cr_leadr_nick;
+	}
+	public String getThema_nm() {
+		return thema_nm;
+	}
+	public void setThema_nm(String thema_nm) {
+		this.thema_nm = thema_nm;
+	}
+	public String getRcrit_sttus_nm() {
+		return rcrit_sttus_nm;
+	}
+	public void setRcrit_sttus_nm(String rcrit_sttus_nm) {
+		this.rcrit_sttus_nm = rcrit_sttus_nm;
+	}
+	public String getCr_leadr_fb_id() {
+		return cr_leadr_fb_id;
+	}
+	public void setCr_leadr_fb_id(String cr_leadr_fb_id) {
+		this.cr_leadr_fb_id = cr_leadr_fb_id;
 	}	
 
 	
