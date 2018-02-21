@@ -8,30 +8,29 @@
   					 
   	<select id="selectCrewList" resultType="Crew" parameterType="map">
   		select
-  			  CR_NO
-			, CR_SJ
-			, THEMA
-			, MAIN_COURS
-			, DETAIL_TRPLC
-			, DEPR_DE	
-			, ARVL_DE	
-			, NOW_MALE_NMPR
-			, MALE_NMPR	
-			, FEMALE_NMPR	
-			, NOW_FEMALE_NMPR	
-			, PRTXT	
-			, REG_DE	
-			, UPD_DE	
-			, DEL_YN	
-			, CR_LEADR_MB_NO	
-			, TRPLC_NO
-			, RCRIT_STTUS
-		from CREW	
+  			  a.CR_NO
+			, a.CR_SJ
+			, a.THEMA
+			, a.MAIN_COURS
+			, a.DETAIL_TRPLC
+			, a.DEPR_DE	
+			, a.ARVL_DE	
+			, a.NOW_MALE_NMPR
+			, a.MALE_NMPR	
+			, a.FEMALE_NMPR	
+			, a.NOW_FEMALE_NMPR	
+			, a.PRTXT	
+			, a.REG_DE	
+			, a.UPD_DE	
+			, a.CR_LEADR_MB_NO
+			, a.TRPLC_NO
+			, a.RCRIT_STTUS
+		from CREW as a	
 		where DEL_YN = 'n'
 		
 		<if test="category != null and category != ''">
 <!-- 		and TRLC_NO like '#{category}%' -->
-		and TRPLC_NO like concat(#{category} , '%')
+		and a.TRPLC_NO like concat(#{category} , '%')
 		</if>
   	</select>
 

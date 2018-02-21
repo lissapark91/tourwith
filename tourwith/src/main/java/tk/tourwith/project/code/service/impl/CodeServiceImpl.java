@@ -21,7 +21,12 @@ public class CodeServiceImpl implements CodeService {
 		return codeMapper.selectListByGroupCode(group_code);
 	
 	}
-
+	
+	//bsp 추가
+	@Override
+	public Code selectCodeByPk(String code_no) {
+		return codeMapper.selectCodeByPk(code_no);
+	}
 	
 
 
