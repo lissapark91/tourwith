@@ -36,7 +36,7 @@ public class MemberServiceImpl implements MemberService{
 
 	@Override
 	public Member selectMemberByPK(String mb_no) throws Exception {
-		return null;
+		return memberMapper.selectMemberByPK(mb_no);
 	}
 
 	@Override

@@ -11,5 +11,5 @@ public interface CodeService {
 	public List<Code> selectListByGroupCode(String group_code) ;
 //	레코드가 많으면 list 한건이면 map, vo
 	
-	
+	public Code selectCodeByPk(String code_no) ;
 }
