@@ -3,9 +3,6 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-
-
-
 <script type="text/javascript">
 	function fn_writeForm() {
 		location.href = "${pageContext.request.contextPath}/faq/form";
@@ -13,16 +10,23 @@
 
 	function fn_search(currentPage) {
 		var frm = document.searchForm;
-
+		
 		frm.currentPage.value = currentPage;
 
-		if (frm.searchType.value != "" && frm.searchWord.value == "") {
+		/* if (frm.searchType.value != "" && frm.searchWord.value == "") {
 			alert("검색어를 입력하세요.");
 			return false;
-		}
+		} */
 		frm.action = "${pageContext.request.contextPath}/faq";
 		frm.submit();
 	}
+	
+	$(function() {
+		$('.reg_de').text($('.reg_de').attr('regde').split(' ')[0]);
+	})
+	
+	
+	
 </script>
 
 
@@ -102,7 +106,7 @@
 
 										<td><a href="faq/${faq.faq_no}">${faq.sj }</a></td>
 
-										<td>${faq.reg_de }</td>
+										<td class="reg_de" regde="${faq.reg_de }"></td>
 										<td>${faq.hitcnt }</td>
 									</tr>
 								</c:forEach>
@@ -114,18 +118,15 @@
 					<!-- 페이지 네이게이션 -->
 					<div style="text-align: center;">
 						<ul class="pagination">
-							${pagingUtil.pageHtml }
+							${pagingUtil}
 						</ul>
 					</div>
 
 				</div>
-
-
 			</div>
 		</div>
 	</div>
 </div>
-
 <div class="gototop js-top">
 	<a href="#" class="js-gotop"> <i class="icon-arrow-up"></i>
 	</a>

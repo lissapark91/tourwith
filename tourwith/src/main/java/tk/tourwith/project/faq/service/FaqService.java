@@ -20,5 +20,9 @@ public interface FaqService {
 	public int updateFaq(Faq faq) throws Exception;
 			
 	// 게시글 삭제
-	public int deleteFaq(Map<String, Object> paramMap) throws Exception;
+	public int deleteFaq(Faq faq) throws Exception;
+	
+	// 페이징 처리
+	public int getTotalCnt(Map<String, Object> paramMap) throws Exception;
+	
 }

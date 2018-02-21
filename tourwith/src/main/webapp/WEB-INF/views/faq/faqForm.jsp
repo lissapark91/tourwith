@@ -105,7 +105,7 @@ $(function(){
 	<h3>${faq.faq_no == null ? '글쓰기' : '글수정'}</h3>
 	
 	<form name="faqForm" id="faqForm" method="post" enctype="multipart/form-data">
-	
+		<input type="hidden" name="faq_no" value="${faq.faq_no}">
 		<input type="hidden" name="reg_mb_no" value="${faq.reg_mb_no}">
 		<table class="table">
 			<tr>
