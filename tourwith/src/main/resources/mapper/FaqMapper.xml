@@ -6,7 +6,7 @@
 
   <mapper namespace="tk.tourwith.project.faq.mapper.FaqMapper">
 	
-	
+	<!-- 페이징 조회를 위한 쿼리 -->
 	<select id="getTotalCnt" resultType="int" parameterType="map" >
 		select count(SJ)
 		from FAQ
@@ -126,6 +126,7 @@
 			WHERE faq_no = #{faq_no}
 		</delete>  		
   		
+  		<!-- 조회수 -->
   	<update id="updateHitCnt" parameterType="string">
   		UPDATE FAQ
 			SET
