@@ -19,6 +19,7 @@
 <typeAlias type="tk.tourwith.project.faq.model.Faq" alias="Faq"/>
 <typeAlias type="tk.tourwith.project.util.file.model.File" alias="File"/>
 <typeAlias type="tk.tourwith.project.help.model.Help" alias="Help"/>
+<typeAlias type="tk.tourwith.project.crew.model.CrewReply" alias="CrewReply"/>
 <!-- <typeAlias type="tk.tourwith.project.reply.crew.model.CrewReply" alias="CrewReply"/> -->
 <!-- <typeAlias type="tk.tourwith.project.reply.review.model.ReviewReply" alias="ReviewReply"/> -->
 </typeAliases>
