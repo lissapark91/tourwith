@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="tk.tourwith.project.member.mapper.CrAuthorMapper">
+ 					
+<select id="selectListByCrNo" parameterType="string" resultType="CrAuthor">
+
+   select CR_AUTHOR_NO, MB_NO, CR_NO, AUTHOR_CODE;
+   from CR_AUTHOR
+   where CR_NO = #{cr_no}  
+	  
+</select>
+
+<insert id="insertCrewLeaderIntoCrAuthor" parameterType="CrAuthor">
+
+	<selectKey keyProperty="cr_author_no" resultType="string" order="BEFORE">
+  		SELECT NEXT_NO FROM NO_CREAT where TABLENM = 'CR_AUTHOR'
+ 	</selectKey>
+	
+	INSERT INTO CR_AUTHOR
+	(CR_AUTHOR_NO, MB_NO, CR_NO, AUTHOR_CODE) VALUES (#{cr_author_no}, #{mb_no}, #{cr_no}, 'CR_ROLE_01')
+
+</insert>
+
+<insert id="insertCrewRequestIntoCrAuthor" parameterType="CrAuthor">
+
+	<selectKey keyProperty="cr_author_no" resultType="string" order="BEFORE">
+  		SELECT NEXT_NO FROM NO_CREAT where TABLENM = 'CR_AUTHOR'
+ 	</selectKey>
+	
+	INSERT INTO CR_AUTHOR
+	(CR_AUTHOR_NO, MB_NO, CR_NO, AUTHOR_CODE) VALUES (#{cr_author_no}, #{mb_no}, #{cr_no}, 'CR_ROLE_03')
+</insert>
+
+<update id="updateRequestApproved" parameterType="map">
+
+	UPDATE CR_AUTHOR
+	SET 
+		AUTHOR_CODE = 'CR_ROLE_02'
+	WHERE
+		MB_NO = #{mb_no}
+	AND
+		CR_NO = #{cr_no}
+		
+</update>
+
+<update id="updateRequestRefuse" parameterType="map">
+
+	UPDATE CR_AUTHOR
+	SET 
+		AUTHOR_CODE = 'CR_ROLE_04'
+	WHERE
+		MB_NO = #{mb_no}
+	AND
+		CR_NO = #{cr_no}
+		
+</update>
+
+<update id="updateEventAuth" parameterType="map">
+
+	UPDATE CR_AUTHOR
+	SET 
+		AUTHOR_CODE = 'CR_ROLE_05'
+	WHERE
+		MB_NO = #{mb_no}
+	AND
+		CR_NO = #{cr_no}
+		
+</update>
+
+<update id="updateKickOut1" parameterType="map">
+
+	UPDATE CR_AUTHOR
+	SET 
+		AUTHOR_CODE = 'CR_ROLE_06'
+	WHERE
+		MB_NO = #{mb_no}
+	AND
+		CR_NO = #{cr_no}
+		
+</update>
+
+<update id="updateKickOut2" parameterType="map">
+
+	UPDATE CR_AUTHOR
+	SET 
+		AUTHOR_CODE = 'CR_ROLE_07'
+	WHERE
+		MB_NO = #{mb_no}
+	AND
+		CR_NO = #{cr_no}
+		
+</update>
+
+ 
+ </mapper> 
+
