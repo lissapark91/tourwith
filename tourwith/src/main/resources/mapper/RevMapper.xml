@@ -1,12 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
   <mapper namespace="tk.tourwith.project.rev.mapper.RevMapper">
-  	
+  		
+  		<!-- 페이징 조회를 위한 쿼리 -->
+  	<select id="getTotalCnt" resultType="int" parameterType="map" >
+  		select count(SJ)
+  		from REV
+  			where DEL_YN = 'n'
+  		<if test="searchWord != null and searchWord != '' ">
+				<if test="searchType == '01'">
+					and SJ LIKE CONCAT('%', #{searchWord}, '%')	/* subject */
+				</if>
+				<if test="searchType == '02'">
+					and CON LIKE CONCAT('%', #{searchWord}, '%')	/* content */
+				</if>
+				<if test="searchType == '03'">
+					and CONCAT(SJ, ' ', CON) LIKE CONCAT('%', #{searchWord}, '%')
+					/* subject + content */
+				</if>
+			</if>
+  	</select>
+  		
+  	<!-- REV 게시판 리스트 매퍼 -->
   	<select id="selectRevList" resultType="Rev" parameterType="map">
-  	
   		select
   			REV_NO
 				,SJ
@@ -19,9 +39,24 @@
 				,UPD_DE
 			from REV
 			where DEL_YN = 'n'
-		
+			<if test="searchWord != null and searchWord != '' ">
+				<if test="searchType == '01'">
+					and SJ LIKE CONCAT('%', #{searchWord}, '%')
+				</if>
+				<if test="searchType == '02'">
+					and CON LIKE CONCAT('%', #{searchWord}, '%')
+				</if>
+				<if test="searchType == '03'">
+					and CONCAT(SJ, ' ', CON) LIKE CONCAT('%', #{searchWord}, '%')
+			</if>
+		</if>
+		ORDER BY REG_DE DESC
+		<if test="startRow >= 0 and endRow > startRow">
+			LIMIT #{startRow}, 15
+		</if>
   	</select>
-  	
+ 		
+ 		<!-- REV 게시판 뷰 -->
   		<select id="selectRev" resultType="Rev" parameterType="string">
   				select
 	  			REV_NO
@@ -37,4 +72,66 @@
 				where DEL_YN = 'n'
 				and REV_NO = #{rev_no}
   		</select>
+  		
+  		
+  		<!-- REV 게시물 작성 -->
+  		<insert id="insertRev" parameterType="Rev">
+  		<selectKey keyProperty="rev_no" resultType="string" order="BEFORE">
+  			SELECT NEXT_NO FROM NO_CREAT where TABLENM = 'REV'
+  		</selectKey>
+		
+			INSERT INTO REV(
+				REV_NO
+				,SJ
+				,REV_WRITNG_MB_NO
+				,DEL_YN
+				,HITCNT
+				,CR_NO
+				,CON
+				,REG_DE
+				,UPD_DE
+				)
+			VALUES(
+				#{rev_no}
+				,#{sj}
+				,#{rev_writng_mb_no}
+				,'n'
+				,0
+				,1
+				,#{con}
+				,now()
+				,now()
+				)
+  		</insert>
+  		
+  		<!-- REV 게시물 수정 -->
+  		<update id="updateRev" parameterType="Rev">
+  		UPDATE REV
+				SET
+				rev_no = #{rev_no}
+				,sj = #{sj}
+				,cr_no = 1
+				,con = #{con}
+				,upd_de = now()
+			WHERE rev_no = #{rev_no}
+  		
+  		</update>
+  		
+  		<!-- REV 게시물 삭제 -->
+  		<delete id="deleteRev" parameterType="Rev">
+  		UPDATE REV
+  			SET
+  			del_yn = 'y'
+  		WHERE rev_no = #{rev_no}
+  		</delete>
+  		
+  			<!-- 조회수 -->
+  		<update id="updateHitCnt" parameterType="string">
+  			UPDATE REV
+  			SET
+  				hitcnt = hitcnt + 1
+  			WHERE rev_no = #{rev_no}
+  		</update>
+
+  		
   </mapper>
