@@ -11,7 +11,7 @@ public interface FaqService {
 	public List<Faq> selectFaqList(Map<String, Object> paramMap) throws Exception;
 	
 	// 게시글 보기
-	public Faq viewFaq(String faq_no) throws Exception;
+	public Faq selectFaq(String faq_no) throws Exception;
 	
 	// 게시글 등록
 	public int insertFaq(Faq faq) throws Exception;

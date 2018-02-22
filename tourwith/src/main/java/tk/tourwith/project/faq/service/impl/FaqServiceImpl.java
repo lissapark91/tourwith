@@ -30,7 +30,7 @@ import tk.tourwith.project.util.mapper.NumberCreateMapper;
 
 	// FAQ 게시글 보기
 	@Override
-	public Faq viewFaq(String faq_no) throws Exception {
+	public Faq selectFaq(String faq_no) throws Exception {
 		
 		faqMapper.updateHitCnt(faq_no);
 		
@@ -51,7 +51,8 @@ import tk.tourwith.project.util.mapper.NumberCreateMapper;
 		
 		return updCnt;
 	}
-
+	
+	// FAQ 게시물 수정
 	@Override
 	public int updateFaq(Faq faq) throws Exception {
 
@@ -59,7 +60,8 @@ import tk.tourwith.project.util.mapper.NumberCreateMapper;
 		
 		return updCnt;
 	}
-
+	
+	// FAQ 게시물 삭제
 	@Override
 	public int deleteFaq(Faq faq) throws Exception {
 		
@@ -67,7 +69,8 @@ import tk.tourwith.project.util.mapper.NumberCreateMapper;
 		
 		return updCnt;
 	}
-
+	
+	// 페이징 조회를 위한 
 	@Override
 	public int getTotalCnt(Map<String, Object> paramMap) throws Exception {
 

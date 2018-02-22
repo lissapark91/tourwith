@@ -1,5 +1,7 @@
 package tk.tourwith.project.crew.controller;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,21 +35,46 @@ public class CrewController {
 	MemberServiceImpl memberService;
 
 	@RequestMapping("/crew/list/{category}")
-	public String getCrewList(@PathVariable String category, Model model) throws Exception {
+	public String getCrewList(@PathVariable String category, 
+			String big_cate_2, String nmpl, String depr_de, String cr_sj,
+			String cr_leadr_mb_nick,
+			Model model) throws Exception {
+		
 		
 		List<Code> codeList = codeService.selectListByGroupCode("BIG_CATE");
 		
 		Map<String, Object> paramMap = new HashMap<>();
 		// BIG_CATE_{} by.bsp
-		paramMap.put("category", String.format("BIG_CATE_%s", category));
-		List<Crew> crewList = crewService.selectCrewList(paramMap);
+		category = "BIG_CATE_" + category;
+		paramMap.put("category", category);
 		
+		//search
+		paramMap.put("big_cate_2", big_cate_2);
+		paramMap.put("nmpl", nmpl);
+		paramMap.put("depr_de", depr_de);
+		paramMap.put("cr_sj", cr_sj);
+
+		model.addAttribute("big_cate_2", big_cate_2);
+		model.addAttribute("nmpl", nmpl);
+		model.addAttribute("depr_de", depr_de);
+		model.addAttribute("cr_sj", cr_sj);
+		
+		System.out.println(cr_leadr_mb_nick);
+		
+		
+		//리더 닉네임
+		paramMap.put("cr_leadr_nm_nick", cr_leadr_mb_nick);
+		
+		List<Crew> crewList = crewService.selectCrewList(paramMap);
+		List<Crew> crewListSearchhNick = new ArrayList<>();
+		model.addAttribute("category", category);
 		//trplc, 크루 리더, 테마, 모집상태 이름을 넣어준다.
 		for(Crew crew : crewList) {
 			
 			Member member = memberService.selectMemberByPK(crew.getCr_leadr_mb_no());
 			crew.setCr_leadr_nick(member.getNick());
-
+			
+			
 			Code code = codeService.selectCodeByPk(crew.getTrplc_no());
 			crew.setTrplc_no_nm(code.getCode_nm());
 			
@@ -57,10 +84,25 @@ public class CrewController {
 			code = codeService.selectCodeByPk(crew.getRcrit_sttus());
 			crew.setRcrit_sttus_nm(code.getCode_nm());
 			
+			//리더 닉네임 검색을 하였을 때
+			if(StringUtils.isNotBlank(cr_leadr_mb_nick) && StringUtils.isNotEmpty(cr_leadr_mb_nick)) {
+				if(StringUtils.equals(member.getNick(), cr_leadr_mb_nick)) {
+					crewListSearchhNick.add(crew);
+				}
+			}
 		}
 		
-		model.addAttribute("codeList",codeList);
-		model.addAttribute(crewList);
+		//리더 닉네임 검색 결과
+		if(StringUtils.isNotBlank(cr_leadr_mb_nick) && StringUtils.isNotEmpty(cr_leadr_mb_nick)) {
+			model.addAttribute("cr_leadr_mb_nick", cr_leadr_mb_nick);
+			model.addAttribute("crewList",crewListSearchhNick);
+			model.addAttribute("codeList", codeList);
+			
+		}else {
+			model.addAttribute("codeList", codeList);
+			model.addAttribute("crewList", crewList);			
+		}
+		
 
 		return "crew/crewList";
 	}
@@ -99,7 +141,8 @@ public class CrewController {
 	}
 
 	@RequestMapping("crew/form")
-	public String crewForm(@RequestParam(value = "cr_no", required = false, defaultValue = "0") String cr_no,
+	public String crewForm(@RequestParam(value = "cr_no", required = false, defaultValue = "") String cr_no,
+			@RequestParam(value="groupCode", required = false, defaultValue="01") String groupCode,
 			Model model, HttpSession session) throws Exception {
 
 		Crew crew = null;
@@ -110,12 +153,11 @@ public class CrewController {
 			
 			//크루리더와 로그인 유저가 같을때
 			if(StringUtils.equals(crew.getCr_leadr_mb_no(), member.getMb_no())) {
-				
-
 				model.addAttribute("crew", crew);
 			}
+			
 			//trplc_no뒤에 문자 2개를 짤라서 그룹코드로 넣는다.
-			String groupCode = crew.getTrplc_no();
+			groupCode = crew.getTrplc_no();
 			groupCode = groupCode.substring(0, groupCode.length()-3);
 			model.addAttribute("groupCode", groupCode);
 			
@@ -129,6 +171,32 @@ public class CrewController {
 			
 			model.addAttribute("bigCateList", bigCateList);
 			model.addAttribute("themaList", themaList);
+		}else {
+			//Insert
+			
+			// when value of groupCode is in groupCodeArr
+			ArrayList<String> groupCodeArr = new ArrayList<>();
+			groupCodeArr.add("01"); groupCodeArr.add("02"); groupCodeArr.add("03");
+			groupCodeArr.add("04"); groupCodeArr.add("05"); groupCodeArr.add("06");
+			if(groupCodeArr.contains(groupCode) ) {
+				groupCode = "BIG_CATE_" + groupCode;
+				
+				model.addAttribute("groupCode", groupCode);
+				//나라별 선택
+				List<Code> bigCateList = codeService.selectListByGroupCode("BIG_CATE");
+				
+				//테마 선택
+				List<Code> themaList = codeService.selectListByGroupCode("THEMA");
+				
+				model.addAttribute("bigCateList", bigCateList);
+				model.addAttribute("themaList", themaList);
+				
+			}else {
+				throw new RuntimeException();
+			}
+			
+			
+			
 		}
 		
 
@@ -136,11 +204,50 @@ public class CrewController {
 	}
 
 	@RequestMapping(value = "crew/crewInsert", method = RequestMethod.POST)
-	public String insertCrew(Crew crew, Model model) throws Exception {
-
+	public String insertCrew(Crew crew, Model model,
+			HttpSession session
+			) throws Exception {
+		
+		Member member = (Member) session.getAttribute("LOGIN_USER");
+		
+		//set crew leader
+		crew.setCr_leadr_mb_no(member.getMb_no());
+		
+		//set now female or male nmpr consider leader's gender
+		if(StringUtils.equals(member.getGender(),"여성")) {
+			
+			crew.setNow_female_nmpr(1);
+			crew.setNow_male_nmpr(0);
+			
+		}else if(StringUtils.equals(member.getGender(), "남성")) {
+			
+			crew.setNow_male_nmpr(1);
+			crew.setNow_female_nmpr(0);
+			
+		}
+		
+		System.out.println("depr_de" + crew.getDepr_de());
+		
 		int updCnt = crewService.insertCrew(crew);
+		
+		
+		model.addAttribute("isError", false);
+		model.addAttribute("message", "정상적으로 크루를 만들었습니다.");
+		model.addAttribute("locationURL", "/crew/page/"+crew.getCr_no());
 
-		return "crew/crewForm";
+		return "common/message";
+	}
+	
+	@RequestMapping(value = "crew/crewUpdate", method = RequestMethod.POST)
+	public String updateCrew(Crew crew, Model model) throws Exception {
+		
+		int updCnt = crewService.updateCrew(crew);
+		
+		model.addAttribute("isError", false);
+		model.addAttribute("message", "정상적으로 수정하였습니다.");
+		model.addAttribute("locationURL", "/crew/page/"+crew.getCr_no());
+		
+		return "common/message";
 	}
 
 }
