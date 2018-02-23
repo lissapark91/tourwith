@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="tk.tourwith.project.crew.room.mapper.CrewEventMapper">
+  
+  	<select id="selectCrewEventList"  parameterType="map">
+			select
+				EVENT_NO
+				,EVENT_NM
+				,EVENT_CON
+				,BGNDT
+				,ENDDT
+				,CR_NO
+				,REG_DE
+				,UPD_DE
+				,DEL_YN
+				,WRTER
+				,UPDUSR
+				,UPD_POSBL_YN
+			from crewevent
+			where del_yn = 'n'
+  	</select>
+  
+  </mapper>
