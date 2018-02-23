@@ -38,10 +38,12 @@ html, body {
 
 /* Set gray background color and 100% height */
 .sidenav {
-	background-color: #white;
 	height: 100%;
+	border: solid 1px gray;
 }
 </style>
+
+
 <script>
 	// This example requires the Places library. Include the libraries=places
 	// parameter when you first load the API. For example:
@@ -81,7 +83,7 @@ html, body {
 			for (var i = 0; i < results.length; i++) {
 // 				console.log(results[i].name)
 				$(function(){
-					str += '<ul style="border: 1px solid black;">'
+					str += '<ul style="border: 1px solid gray; padding: 5%;">'
 					str += listAddPhoto(results[i]);
 					str += "<li>" + results[i].name + "</li>"
 					str += "<li>" + results[i].formatted_address + "</li>"
@@ -99,6 +101,8 @@ html, body {
 				
 				// createPhotoMarker(results[i]);
 				str += "</ul>"
+				//alert($('#activities2 option:selected').val());
+				
 				createMarker(results[i]);
 			}
 // 			str += '</ul>'
@@ -159,6 +163,18 @@ html, body {
 		});
 	}
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	$(function() {
 
 		$("#activities1")
@@ -168,47 +184,42 @@ html, body {
 							var codecate = $("#activities1").val();
 							// 		alert(codecate);
 							$
-									.ajax({
-										type : "GET",
-										url : "${pageContext.request.contextPath}/cate/"
-												+ codecate,
-										// 	        data:params,
-										dataType : "json",
-										success : function(data) {
-											// 	            console.log(data); //{codeList: []}   
-											// 	            console.log(data.codeList); // []
-											var codeList = data.codeList;
-											var optionHtml = '<option>==지역을 선택해주세요==</option>';
-											for (var i = 0; i < codeList.length; i++) {
-												var code = codeList[i]; //{code_no: "BIG_CATE_02_01", code_nm: "동티모르", group_code: null, …}
-												// 					console.log(code.code_no,code.code_nm);
-												console
-														.log('<option value="'+code.code_no+'">'
-																+ code.code_nm
-																+ '</option>');
+								.ajax({
+								type : "GET",
+								url : "${pageContext.request.contextPath}/cate/"
+										+ codecate,
+							// 	        data:params,
+								dataType : "json",
+								success : function(data) {
+					// 	            console.log(data); //{codeList: []}   
+					// 	            console.log(data.codeList); // []
+									var codeList = data.codeList;
+									var optionHtml = '<option>==지역을 선택해주세요==</option>';
+									for (var i = 0; i < codeList.length; i++) {
+											var code = codeList[i]; //{code_no: "BIG_CATE_02_01", code_nm: "동티모르", group_code: null, …}
+												// 					 console.log(code.code_no,code.code_nm);
+												console.log('<option value="'+code.code_no+'">'
+													+ code.code_nm + '</option>');
 												// 					optionHtml=optionHtml+'<option value="'+code.code_no+'">'+code.code_nm+'</option>';
 												optionHtml += '<option value="'+code.code_no+'">'
-														+ code.code_nm
-														+ '</option>';
+													+ code.code_nm + '</option>';
 											}
-											console.log(optionHtml);
-											$("#activities2").html(optionHtml);
+												console.log(optionHtml);
+												$("#activities2").html(optionHtml);
 										},
-										error : function(e) {
-											console
-													.log("요청 실패",
-															e.responseText);
+											error : function(e) {
+											console.log("요청 실패",
+											e.responseText);
 										}
 									});
-
-						});
-	});
+								});
+							});
 
 	$(function() {
-		// 		$("xxx") 태그 이름이 xxx 찾아라
-		// 		$("#xxx") id 속성값이 xxx 찾아라
-		// 		$(".xxx") class 속성값이 xxx 찾아라
-		// 		$("[xxx=yyy]") xxx 속성값이 yyy 찾아라
+			// 		$("xxx") 태그 이름이 xxx 찾아라
+			// 		$("#xxx") id 속성값이 xxx 찾아라
+			// 		$(".xxx") class 속성값이 xxx 찾아라
+			// 		$("[xxx=yyy]") xxx 속성값이 yyy 찾아라
 		$("#activities2").on("change", function() {
 			var codecate = $("#activities2").val();
 			// 					$('option'): 태그 이름이 option 찾아라 
@@ -218,26 +229,32 @@ html, body {
 			var codename = $('#activities2 option:selected').html();
 
 
-			console.log(codecate);
-			$.ajax({
-				type : "GET",
-				url : "${pageContext.request.contextPath}/help/loc",
-				data : "trplc_no=" + codecate,
-				dataType : "json",
-				success : function(data) {
-					console.log(data);
-					console.log(data.lati, data.longi);
-					map.setCenter({
-						lat : data.lati,
-						lng : data.longi
-					});
-					service.textSearch({
-						location : map.getCenter(),
-						radius : 10000,
-						query : codename + ' 관광명소 여행' // '${code.codenm} 관광명소 여행'
-					}, callback);
-				
+				console.log(codecate);
+				$.ajax({
+					type : "GET",
+					url : "${pageContext.request.contextPath}/help/loc",
+					data : "trplc_no=" + codecate,
+					dataType : "json",
+					success : function(data) {
+						console.log(data);
+						console.log(data.lati, data.longi);
+						
+						
+						// 마커 지우기 
+						map = new google.maps.Map(document.getElementById('map'), {
+							center : {
+								lat : data.lati,
+								lng : data.longi
+							},
+							zoom : 13
+						});
 
+						
+						service.textSearch({
+							location : map.getCenter(),
+							radius : 10000,
+							query : codename + ' 관광명소 여행' // '${code.codenm} 관광명소 여행'
+						}, callback);
 					
 				},
 				error : function(e) {
@@ -252,21 +269,22 @@ html, body {
 
 <body>
 
+	
 
-	<div class="container">
+	<div class="row container" style="margin: 4%">
 
 	<!-- 나라, 지역 셀렉트 박스  -->
 	<div class="gtco-container">
 		<div class="row ">
 			<div class="col-md-6 col-md-offset-0 sidenav">
 				<div id="list list-group-item">
-					<!-- 					<form action="#"> -->
+					<!-- <form action="#"> -->
 
 					<table>
 						<div class="row form-group">
 							<div class="col-md-6">
 								<label for="activities">나라별선택</label> <select name="BIG_CATE"
-									id="activities1" class="form-control">
+									id="activities1" class="form-control form-control-lg">
 									<option>==국가를 선택해주세요==</option>
 									<c:forEach var="code" items="${codeList}" varStatus="status">
 										<option value="${code.code_no}">${code.code_nm}</option>
@@ -275,36 +293,32 @@ html, body {
 							</div>
 							<div class="col-md-6">
 								<label for="destination">지역별선택</label>
-								<!-- 															<input placeholder="도시, 지역별로 검색" type="text" id="destination" class="form-control"> -->
+								<!-- <input placeholder="도시, 지역별로 검색" type="text" id="destination" class="form-control"> -->
 								<select name="BIG_CATE_2" id="activities2" class="form-control">
 									<option>==지역을 선택해주세요==</option>
 								</select>
 							</div>
 							
 							<div class="col-md-6">
-							<div style="height: 400px; overflow: auto; width: 500px;">
+							<div style="height: 800px; overflow: auto; width: 500px; padding-top: 10%;">
 							
 								<ol id="codeaddrlist">
 									<li>관광지 이름</li>
 								</ol>
+								
 							</div>
-
 						</div>
-</div>
-
-
-
-					</table>
-				</div>
+					</div>
+				</table>
 			</div>
+		</div>
 
 
 
 
-			<div class="col-md-6 col-md-offset-0" style="height: 500px">
+			<div class="col-md-6 col-md-offset-0" style="height: 900px">
 
-				<div id="map" style="width: 100%"></div>
-
+				<div id="map" style="width: 1350px;"></div>
 			</div>
 
 		</div>

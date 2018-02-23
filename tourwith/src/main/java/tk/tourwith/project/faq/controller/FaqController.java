@@ -11,7 +11,6 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -83,7 +82,7 @@ public class FaqController {
 
 		Faq faq = null;
 
-		faq = faqService.viewFaq(faq_no);
+		faq = faqService.selectFaq(faq_no);
 
 		model.addAttribute("faq", faq);
 
@@ -95,13 +94,9 @@ public class FaqController {
 	public String faqForm(HttpSession session, @RequestParam(value = "faq_no", required = false) String faq_no,
 			Model model) throws Exception {
 
-		// Faq faq = null;
-
 		if (StringUtils.isNotBlank(faq_no) && StringUtils.isNotEmpty(faq_no)) {
 
-			// faq = faqService.viewFaq(faq_no);
-
-			Faq faq = faqService.viewFaq(faq_no);
+			Faq faq = faqService.selectFaq(faq_no);
 			model.addAttribute("faq", faq);
 
 		}
