@@ -50,6 +50,9 @@
 	
 	<!-- gyubot style -->
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/sky.css">
+	
+	<!-- calendar -->
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/fullcalendar.min.css" >
 
 	<!-- calandar  -->
 	<link rel='stylesheet' href='${pageContext.request.contextPath}/css/fullcalendar.min.css' />
