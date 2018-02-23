@@ -40,12 +40,7 @@ public class CrewController {
 		Map<String, Object> paramMap = new HashMap<>();
 		// BIG_CATE_{} by.bsp
 		paramMap.put("category", category);
-		if(StringUtils.isNotBlank(city)) {
-			paramMap.put("city",  city );
-		}
-		if(StringUtils.isNotBlank(date)) {
-			paramMap.put("date", date);
-		}
+	
 		List<Crew> crewList = crewService.selectCrewList(paramMap);
 		
 		//trplc, 크루 리더, 테마, 모집상태 이름을 넣어준다.
