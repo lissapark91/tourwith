@@ -9,13 +9,17 @@ import org.springframework.stereotype.Service;
 import tk.tourwith.project.crew.room.mapper.CrewEventMapper;
 import tk.tourwith.project.crew.room.model.CrewEvent;
 import tk.tourwith.project.crew.room.service.CrewEventService;
+import tk.tourwith.project.util.mapper.NumberCreateMapper;
 
 @Service(value="crewEventService")
 public class CrewEventServiceImpl implements CrewEventService{
 	
 	@Autowired
 	CrewEventMapper crewEventMapper;
-
+	
+	@Autowired
+	NumberCreateMapper numberCreateMapper;
+	
 	@Override
 	public List<CrewEvent> selectCrewEventList(Map<String, Object> paramMap) throws Exception {
 
@@ -32,7 +36,12 @@ public class CrewEventServiceImpl implements CrewEventService{
 	public int insertCrewEvent(CrewEvent crewEvent) throws Exception {
 		
 		int updcnt = crewEventMapper.insertCrewEvent(crewEvent);
-
+		
+		if(updcnt >0 )
+		{
+			numberCreateMapper.updateNumber("CR_EVENT");
+		}
+		
 		return updcnt;
 	}
 
