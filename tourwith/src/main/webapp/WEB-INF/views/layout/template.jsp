@@ -50,7 +50,12 @@
 	
 	<!-- gyubot style -->
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/sky.css">
+	
+	<!-- calendar -->
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/fullcalendar.min.css" >
 
+	<!-- calandar  -->
+	<link rel='stylesheet' href='${pageContext.request.contextPath}/css/fullcalendar.min.css' />
 	
 	<!-- Modernizr JS -->
 	<script src="${pageContext.request.contextPath}/js/modernizr-2.6.2.min.js"></script>
@@ -59,6 +64,10 @@
 	<script src="js/respond.min.js"></script>
 	<![endif]-->
 	
+	
+	
+	
+  <script src='${pageContext.request.contextPath}/js/moment.min.js'></script>
 	<!-- jQuery -->
 	<script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 	<!-- jQuery Easing -->
@@ -81,6 +90,9 @@
 	
 	<!-- Datepicker -->
 	<script src="${pageContext.request.contextPath}/js/bootstrap-datepicker.min.js"></script>
+	
+	<!-- calendar -->
+  <script src='${pageContext.request.contextPath}/js/fullcalendar.min.js'></script>
 
 	<!-- Main -->
 	<script src="${pageContext.request.contextPath}/js/main.js"></script>

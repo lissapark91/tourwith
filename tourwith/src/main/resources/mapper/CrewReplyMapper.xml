@@ -4,7 +4,7 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
-<mapper namespace="tk.tourwith.project.crew.mapper.CrewMapper">
+<mapper namespace="tk.tourwith.project.crew.mapper.CrewReplyMapper">
 
 	<!-- 댓글 개수 -->
 <!-- 	<select id="crewReplyCount" resultType="int"> -->
@@ -16,16 +16,32 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- 	</select> -->
 
 	<!-- 댓글 목록 -->
-	<select id="crewReplyList" resultType="tk.tourwith.project.crew.mapper.CrewReplyMapper" >
+	<select id="crewReplyList" resultType="CrewReply" parameterType="map" >
 		
 		SELECT
-		*
-		FROM CR_RPLY
+			a.CR_RPLY_NO,
+			a.CR_NO,
+			a.CON,
+			a.REG_DE,
+			a.DEL_YN,
+			a.WRITNG_MB_NO,
+			a.UPD_DE,
+			a.PARNTS_RPLY_NO,
+			b.NICK as WRITNG_MB_NICK,
+			b.FB_ID as WRITNG_FB_ID
+		FROM CR_RPLY as a, MEMBER as b
+		WHERE a.CR_NO = #{cr_no}
+		AND a.DEL_YN = 'n'
+		AND a.WRITNG_MB_NO = b.MB_NO
+		ORDER BY IF(ISNULL(a.PARNTS_RPLY_NO), a.CR_RPLY_NO, a.PARNTS_RPLY_NO), a.REG_DE
 	
 	</select>
 
 	<!-- 댓글 작성 -->
-	<insert id="insertCrewReply" parameterType="tk.tourwith.project.crew.mapper.CrewReplyMapper">
+	<insert id="insertCrewReply" parameterType="CrewReply">
+	<selectKey keyProperty="cr_rply_no" resultType="string" order="BEFORE">
+  		SELECT NEXT_NO FROM NO_CREAT where TABLENM = 'CR_RPLY'
+ 	</selectKey>
 	
 		INSERT INTO
 		CR_RPLY (	CR_RPLY_NO,
@@ -34,26 +50,46 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					REG_DE,
 					DEL_YN,
 					WRITNG_MB_NO,
-					UPD_DE,
-					PARNTS_RPLY_NO)
-		WHERE(#{cr_rply_no},#{cr_no},now(),#{del_yn},#{writng_mb_no},now(),#{parnts_rply_no})
+					UPD_DE
+		<if test="parnts_rply_no != null and parnts_rply_no != '' ">
+			, PARNTS_RPLY_NO
+		</if>
+			)
+		VALUES (#{cr_rply_no},#{cr_no}, #{con}, now(),'n',#{writng_mb_no},now()
+		
+		<if test="parnts_rply_no != null and parnts_rply_no != '' ">
+			, #{parnts_rply_no}
+		</if>
+		
+		)
 	
 
 	</insert>
 	
+	<select id="selectCrewReplyByPk" resultType="CrewReply" parameterType="string">
+		select CR_RPLY_NO, CR_NO, CON, REG_DE, WRITNG_MB_NO
+		from CR_RPLY
+		where CR_RPLY_NO = #{cr_rply_no}
+	</select>
+	
 	<!-- 댓글 수정 -->
-	<update id="updateCrewReply" parameterType="tk.tourwith.project.crew.mapper.CrewReplyMapper">
+	<update id="updateCrewReply" parameterType="CrewReply">
 	
 		UPDATE CR_RPLY
 			SET
-			WRITNG_MB_NO = #{writng_mb_no}
+			CON = #{con},
+			UPD_DE = now()                     
 		WHERE CR_RPLY_NO = #{cr_rply_no}
 	</update>
 	
 	<!-- 댓글 삭제 -->
-	<delete id="daleteCrewReply" parameterType="int">
+	<delete id="deleteCrewReply" parameterType="string">
 	
-		DELETE FROM CR_RPLY WHERE CR_RPLY_NO = #{cr_rply_no}
+		UPDATE CR_RPLY
+			SET
+			DEL_YN = 'y',
+			UPD_DE = now()                     
+		WHERE CR_RPLY_NO = #{cr_rply_no}
 	
 	</delete>
 

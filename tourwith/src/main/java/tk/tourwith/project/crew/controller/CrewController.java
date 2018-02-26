@@ -23,6 +23,7 @@ import tk.tourwith.project.crew.model.Crew;
 import tk.tourwith.project.crew.service.impl.CrewServiceImpl;
 import tk.tourwith.project.member.model.Member;
 import tk.tourwith.project.member.service.impl.MemberServiceImpl;
+import tk.tourwith.project.util.PagingUtil;
 
 @Controller
 public class CrewController {
@@ -38,6 +39,7 @@ public class CrewController {
 	public String getCrewList(@PathVariable String category, 
 			String big_cate_2, String nmpl, String depr_de, String cr_sj,
 			String cr_leadr_mb_nick,
+			@RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage,
 			Model model) throws Exception {
 		
 		
@@ -53,56 +55,48 @@ public class CrewController {
 		paramMap.put("nmpl", nmpl);
 		paramMap.put("depr_de", depr_de);
 		paramMap.put("cr_sj", cr_sj);
+		//리더 닉네임
+		paramMap.put("cr_leadr_nm_nick", cr_leadr_mb_nick);
 
 		model.addAttribute("big_cate_2", big_cate_2);
 		model.addAttribute("nmpl", nmpl);
 		model.addAttribute("depr_de", depr_de);
 		model.addAttribute("cr_sj", cr_sj);
+		model.addAttribute("cr_leadr_mb_nick", cr_leadr_mb_nick);
 		
-		System.out.println(cr_leadr_mb_nick);
+		model.addAttribute("category", category);
+		
+		
+		
+		
+		// 페이징 처리 180223 종표
+		int totalCount = crewService.getTotalCnt(paramMap);
+		
+		PagingUtil pagingUtil = new PagingUtil(currentPage, totalCount, 10, 5);
+		
+		// 콘솔 확인용
+		System.out.println( "================================");
+		System.out.println( "getCurrentPage : " + pagingUtil.getCurrentPage());
+		System.out.println( "getTotalCount : " + pagingUtil.getTotalCount());	
+		System.out.println( "================================");
+		
+		paramMap.put("startRow", pagingUtil.getStartRow());
+		paramMap.put("endRow", pagingUtil.getEndRow());
+		
+		List<Crew> getCrewList = crewService.selectCrewList(paramMap);
+		
+		model.addAttribute("getCrewList", getCrewList);
+		model.addAttribute("pagingUtil", pagingUtil.getPageHtml().toString());
+		
 		
 		
 		//리더 닉네임
 		paramMap.put("cr_leadr_nm_nick", cr_leadr_mb_nick);
 		
 		List<Crew> crewList = crewService.selectCrewList(paramMap);
-		List<Crew> crewListSearchhNick = new ArrayList<>();
-		model.addAttribute("category", category);
-		//trplc, 크루 리더, 테마, 모집상태 이름을 넣어준다.
-		for(Crew crew : crewList) {
-			
-			Member member = memberService.selectMemberByPK(crew.getCr_leadr_mb_no());
-			crew.setCr_leadr_nick(member.getNick());
-			
-			
-			Code code = codeService.selectCodeByPk(crew.getTrplc_no());
-			crew.setTrplc_no_nm(code.getCode_nm());
-			
-			code = codeService.selectCodeByPk(crew.getThema());
-			crew.setThema_nm(code.getCode_nm());
-			
-			code = codeService.selectCodeByPk(crew.getRcrit_sttus());
-			crew.setRcrit_sttus_nm(code.getCode_nm());
-			
-			//리더 닉네임 검색을 하였을 때
-			if(StringUtils.isNotBlank(cr_leadr_mb_nick) && StringUtils.isNotEmpty(cr_leadr_mb_nick)) {
-				if(StringUtils.equals(member.getNick(), cr_leadr_mb_nick)) {
-					crewListSearchhNick.add(crew);
-				}
-			}
-		}
 		
-		//리더 닉네임 검색 결과
-		if(StringUtils.isNotBlank(cr_leadr_mb_nick) && StringUtils.isNotEmpty(cr_leadr_mb_nick)) {
-			model.addAttribute("cr_leadr_mb_nick", cr_leadr_mb_nick);
-			model.addAttribute("crewList",crewListSearchhNick);
-			model.addAttribute("codeList", codeList);
-			
-		}else {
-			model.addAttribute("codeList", codeList);
-			model.addAttribute("crewList", crewList);			
-		}
-		
+		model.addAttribute("codeList", codeList);
+		model.addAttribute("crewList", crewList);			
 
 		return "crew/crewList";
 	}
