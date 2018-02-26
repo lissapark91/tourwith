@@ -24,7 +24,7 @@
 	where a.DEL_YN = 'n' 
 		AND a.REV_NO = #{rev_no}
 		AND a.WRITNG_MB_NO = b.MB_NO 
-	ORDER BY a.REG_DE
+	ORDER BY IF(ISNULL(a.PARNTS_RPLY_NO), a.REV_RPLY_NO, a.PARNTS_RPLY_NO), a.REG_DE
 	
 	<if test="startRow >= 0 and endRow > startRow">
 		LIMIT #{startRow}, 15
@@ -45,6 +45,9 @@
 		,REG_DE
 		,UPD_DE
 		,DEL_YN
+		<if test="parnts_rply_no != null and parnts_rply_no != '' ">
+			, PARNTS_RPLY_NO
+		</if>
 	)
 	VALUES
 	(
@@ -55,6 +58,9 @@
 		,now()
 		,now()
 		,'n'
+			<if test="parnts_rply_no != null and parnts_rply_no != '' ">
+			, #{parnts_rply_no}
+		</if>
 	)
 	</insert>
 	
@@ -63,8 +69,8 @@
 	UPDATE REV_RPLY
 	SET
 		rev_rply_no = #{rev_rply_no}
-		con = #{con}
-		upd_de = now()
+		, con = #{con}
+		, upd_de = now()
 	WHERE rev_rply_no = #{rev_rply_no}
 	</update>
 	
@@ -76,8 +82,19 @@
 	WHERE rev_rply_no = #{rev_rply_no}
 	</delete>
 	
-	
-	
+	<!-- bsp -->
+	<select id="selectRevReplyByPk" resultType="RevReply" parameterType="string">
+		select 
+		 REV_RPLY_NO
+		,REV_NO
+		,WRITNG_MB_NO
+		,CON
+		,REG_DE
+		,UPD_DE
+		,DEL_YN
+		from REV_RPLY
+		where REV_RPLY_NO = #{rev_rply_no}
+	</select>
 	
 	
 	

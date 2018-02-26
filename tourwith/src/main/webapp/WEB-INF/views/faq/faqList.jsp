@@ -54,7 +54,9 @@
 						<form name="searchForm" class="form-inline">
 
 							<p>
-								<input type="hidden" name="currentPage" value=""> <select
+								<input type="hidden" name="currentPage" value=""> 
+								
+								<select
 									name="searchType" class="form-control">
 
 									<option ${param.searchType=='01' ? 'selected' : ''} value="01">제목</option>
@@ -62,8 +64,11 @@
 									<option ${param.searchType=='02' ? 'selected' : ''} value="02">내용</option>
 
 									<option ${param.searchType=='03' ? 'selected' : ''} value="03">제목 + 내용</option>
-								</select> <input type="text" name="searchWord" size="40"
-									value="${param.searchWord}" class="form-control"> <input
+								</select> 
+								<input type="text" name="searchWord" size="40"
+									value="${param.searchWord}" class="form-control"> 
+									
+								<input
 									type="button" value="검색" onclick="fn_search(1);"
 									class="btn btn-primary">
 
@@ -100,14 +105,14 @@
 
 							<c:if test="${not empty faqList}">
 
-								<c:forEach var="faq" items="${faqList}">
+								<c:forEach var="faq" items="${faqList}" varStatus="status">
 									<tr>
-										<td>${faq.faq_no}</td>
+										<td width="10%">${status.index + pagingUtil.startRow + 1}</td>
 
-										<td><a href="faq/${faq.faq_no}">${faq.sj }</a></td>
+										<td width="50%"><a href="faq/${faq.faq_no}">${faq.sj }</a></td>
 
-										<td class="reg_de" regde="${faq.reg_de }"></td>
-										<td>${faq.hitcnt }</td>
+										<td class="reg_de" regde="${faq.reg_de }" width="20%"></td>
+										<td width="20%">${faq.hitcnt }</td>
 									</tr>
 								</c:forEach>
 							</c:if>
@@ -118,7 +123,7 @@
 					<!-- 페이지 네이게이션 -->
 					<div style="text-align: center;">
 						<ul class="pagination">
-							${pagingUtil}
+							${pagingUtil.pageHtml}
 						</ul>
 					</div>
 

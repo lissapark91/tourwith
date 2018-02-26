@@ -8,9 +8,42 @@
   		
   		<!-- 페이징 조회 180223 종표 -->
   		<select id="getTotalCnt" resultType="int" parameterType="map">
-  				select count(CR_SJ)
-  					from CREW
-  					where DEL_YN = 'n'
+  				select
+  			  count(a.CR_NO)
+		from CREW as a, MEMBER as b, CMMN_CODE as c, CMMN_CODE as d, CMMN_CODE as e	
+		where a.DEL_YN = 'n'
+		
+		and a.THEMA = c.CODE_NO
+		and a.CR_LEADR_MB_NO = b.MB_NO
+		and a.TRPLC_NO = d.CODE_NO
+		and a.RCRIT_STTUS = e.CODE_NO
+		
+		<if test="category != null and category != ''">
+		and a.TRPLC_NO like CONCAT(#{category} , '%')
+		</if>
+
+		<if test="big_cate_2 != null and big_cate_2 != ''">
+		and a.TRPLC_NO = #{big_cate_2}
+		</if>
+
+		<if test="nmpl == 2 or nmpl == 4 or nmpl == 6 or nmpl == 9">
+		and #{nmpl} >= (a.FEMALE_NMPR + a.MALE_NMPR)
+		</if>
+
+		<if test="nmpl == 10">
+		and (a.FEMALE_NMPR + a.MALE_NMPR) >= #{nmpl}
+		</if>
+		
+		<if test="cr_sj != null and cr_sj != '' ">
+		and a.CR_SJ LIKE CONCAT(#{cr_sj}, '%')
+		</if>
+		
+		<if test="cr_leadr_mb_nick != null and cr_leadr_mb_nick != '' ">
+		and b.NICK = #{cr_leadr_mb_nick}
+		</if>
+		<if test="startRow >= 0 and endRow > startRow">
+			LIMIT #{startRow}, 10
+		</if>
   		</select>
   		
   		
@@ -70,7 +103,7 @@
 		<if test="cr_leadr_mb_nick != null and cr_leadr_mb_nick != '' ">
 		and b.NICK = #{cr_leadr_mb_nick}
 		</if>
-		ORDER BY REG_DE DESC
+		ORDER BY a.REG_DE DESC
 		<if test="startRow >= 0 and endRow > startRow">
 			LIMIT #{startRow}, 10
 		</if>
