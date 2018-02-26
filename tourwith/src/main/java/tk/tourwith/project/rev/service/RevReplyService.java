@@ -21,4 +21,7 @@ public interface RevReplyService {
 	
 	// 리뷰 페이징 처리
 	public int getTotalCnt(Map<String, Object> paramMap) throws Exception;
+	
+	//select review reply by pk
+	public RevReply selectRevReplyByPk(String rev_rply_no);
 }

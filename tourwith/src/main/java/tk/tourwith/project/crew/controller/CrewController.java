@@ -67,6 +67,8 @@ public class CrewController {
 		model.addAttribute("category", category);
 		
 		
+		//리더 닉네임
+		paramMap.put("cr_leadr_nm_nick", cr_leadr_mb_nick);
 		
 		
 		// 페이징 처리 180223 종표
@@ -90,8 +92,6 @@ public class CrewController {
 		
 		
 		
-		//리더 닉네임
-		paramMap.put("cr_leadr_nm_nick", cr_leadr_mb_nick);
 		
 		List<Crew> crewList = crewService.selectCrewList(paramMap);
 		

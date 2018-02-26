@@ -9,11 +9,11 @@
 
 <style type="text/css">
 .replyBox {
-	padding: 1%;
+	padding: 0.5%;
 /* 	border-top: 1px solid #b3b3b3; */
 }
 </style>
-
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script> -->
 <script src="http://malsup.github.com/jquery.form.js"></script>
 
@@ -32,98 +32,182 @@
 		
 		
 		
-		function updateReply(rev_rply_no, status) {
-			$(function() {
+		function updateReply(rev_rply_no, status){
+			$(function(){
 				
-				if(status == 'before'){
-					if($('.updateTextarea').length >= 1){
-						return false;
-					}
-					
-					var con1 = $('pre.' + rev_rply_no).text();
-					
-					var str = '<textarea class = "form-control updateTextarea">' +con1+ '</textarea>'
-					
-					$('[rply_no='+ rev_rply_no +']').attr('onclick', 'updateReply(\'' + rev_rply_no + '\', \'after\')')
-					
-					$('div.' + rev_rply_no).html(str);
-					
-				}else if(status == 'after'){
-					
-					// ajax 추가 !
-					
-				}
-				
-			})
-		}
-		
-		
-	
-		
-		$(function() {
-			function getReply(urlRef, dataRef) {
-				
-			$.ajax({
-				type: "POST",
-				url: urlRef,
-				dataType: "json",
-				data: dataRef,
-				success: function (data) {
-					var replyList = data.revReplyList;
-					var str = '';
-					
-					console.log(data);
-					console.log(replyList);
-					 for(var i = 0; i < replyList.length; i++){
-						var reply = replyList[i];
-						var updateUrl = "${pageContext.request.contextPath}/review/reply/update?rev_rply_no=" + reply.rev_rply_no;
-						var deleteUrl = "${pageContext.request.contextPath}/review/reply/delete?rev_rply_no=" + reply.rev_rply_no;
+					if(status == 'before'){
 						
-						str += '<div class = "row">';
-						str += '<div class = "col-md-12 replyBox">';
-						str += '<div class = "row">';
-						
-						var fb_url = "http://www.facebook.com/" + reply.writng_fb_id;
-						var fb_profile = "http://graph.facebook.com/" + reply.writng_fb_id + "/picture?width=32&height=32";
-						
-						str += '<div class = "col-md-9" <a href="'+ fb_url +'" mb_no="'+reply.writng_mb_no+'" target="_blank"><img src="'+fb_profile+'" class="img-circle">&nbsp;&nbsp;' + reply.writng_mb_nick + '</a></div>';
-						
-						var reg_de = reply.reg_de.substring(0, 16);
-						
-						if('${LOGIN_USER.mb_no}' == reply.writng_mb_no){
-							str += '<div class = "col-md-3">' + reg_de + '&nbsp;&nbsp;<a onclick="updateReply(\''+ reply.rev_rply_no +'\', \'before\');" rply_no="'+ reply.rev_rply_no +'">수정</a> / <a onclick="deleteReply('+ reply.rev_rply_no +', \'before\')">삭제</a></div>';
-						}else{
-							str += '<div class ="col-md-3 text-right">'+ reg_de +'</div>'
+						if($('.updateTextarea').length >= 1){
+							return false;
 						}
 						
-						str += '</div>';
+						var con1 = $('pre.' + rev_rply_no).text(); 
+						
+						var str = '<textarea class="form-control updateTextarea" id="updateTextarea">' + con1 + '</textarea>';
+						
+						$('.replyUpdate[rply_no='+ rev_rply_no +']').attr('onclick', 'updateReply(\'' + rev_rply_no + '\', \'after\')')
 						
 						
-						str += '<div class = "row">';
-						str += '<div class = "col-md-12 '+ reply.rev_rply_no +'">';
-	
-						str += '<pre class="'+ reply.rev_rply_no +'">';
-						str += reply.con;
-						str += '</pre>';
+						$('div.replycon.' + rev_rply_no).html(str);
 						
-						str += '</div>';
-						str += '</div>';
-						str += '</div>';
-						str += '</div>';
+					}else if(status == 'after'){
+						
+						var con1 = $('#updateTextarea').val();
+						//ajax 추가!
+						var updateUrl = "${pageContext.request.contextPath}/review/reply/update?rev_rply_no=" + rev_rply_no;
+						getReply(updateUrl, "con1="+con1)
+						
 						
 					}
 					
-					$('#replyDiv').html(str);
-				},
+				
+			})
+				
+				
+		}
+		
+		function deleteReply(rev_rply_no){
+			
+			var ableToDel = confirm('해당 댓글을 삭제 하시겠습니까?');
+			var deleteUrl = "${pageContext.request.contextPath}/review/reply/delete?rev_rply_no=" + rev_rply_no;
+			if(ableToDel){
+				getReply(deleteUrl);
+				
+			}else{
+				return false;
+			}
+			
+		}
+	
+		function getReply(urlRef, dataRef){
+			$(function(){	
+				
+				$.ajax({
+					type: "POST",
+					url: urlRef,
+					dataType: "json",
+					data: dataRef,
+					success: function(data) {
+						var replyList = data.revReplyList;
+						var str = '';
+						console.log(replyList)
+						for(var i = 0; i < replyList.length; i++){
+							var reply = replyList[i];
+							
+							
+							str += '<div class="row ' + reply.rev_rply_no +'">';
+							str += '<div class="col-md-12 replyBox">'
+							
+		
+							var fb_url = "http://www.facebook.com/" + reply.writng_fb_id;
+							var fb_profile = "http://graph.facebook.com/"+ reply.writng_fb_id +"/picture?width=32&height=32";					
+							
+							str += '<div class="row">';								
+							
+							
+							//reply of reply
+							if(reply.parnts_rply_no != null){
+								//대댓글일때
+							str += '<div class="col-md-8 col-md-offset-1"><a href="'+ fb_url +'" mb_no="' + reply.writng_mb_no + '" target="_blank"><img src="' + fb_profile + '" class="img-circle">&nbsp;&nbsp;'+ reply.writng_mb_nick +'</a> </div>';
+								
+							}else{
+							str += '<div class="col-md-9"><a href="'+ fb_url +'" mb_no="' + reply.writng_mb_no + '" target="_blank"><img src="' + fb_profile + '" class="img-circle">&nbsp;&nbsp;'+ reply.writng_mb_nick +'</a> <span class="commentBtn" onclick="commentReply(\''+ reply.rev_rply_no +'\')"><icon class="icon-reply2" data-toggle="tooltip" title="대댓 등록"></icon></span> </div>';
+
+							}
+							
+							var reg_de = reply.reg_de.substring(0, 16);
+							
+							if('${LOGIN_USER.mb_no}' == reply.writng_mb_no){
+								
+								str += '<div class="col-md-3 ">'+ reg_de +'&nbsp;&nbsp;<a onclick="updateReply(\''+ reply.rev_rply_no +'\', \'before\');" class="replyUpdate" rply_no="'+ reply.rev_rply_no +'"><icon class="icon-pencil" data-toggle="tooltip" title="댓글 수정" style="color: grey;"></icon></a>/<a onclick="deleteReply(\''+ reply.rev_rply_no +'\');"><icon class="icon-cross" data-toggle="tooltip" title="댓글 삭제" style="color: red;"></icon></a></div>';
+								
+							}else{
+								
+								str += '<div class="col-md-3 text-right">'+ reg_de +' </div>'
+								
+							}							
+							
+							str += '</div>';
+							str += '<div class="row">';
+							if(reply.parnts_rply_no != null){
+								str += '<div class="col-md-1"><i class="material-icons pull-right">&#xe5da;</i></div>';
+								str += '<div class="col-md-11 '+ reply.rev_rply_no +' replycon" >'						
+							
+							}else{
+								str += '<div class="col-md-12 '+ reply.rev_rply_no +' replycon" >'						
+								
+							}
+							str += '<pre class="'+ reply.rev_rply_no +'">';
+							str += reply.con;
+							str += '</pre>';
+							str += '</div>'
+							str += '</div>';
+							str += '</div>';
+							str += '</div>';
+						}
+						$('#replyDiv').html(str);
+						
+					},
 					error: function(e) {
-					console.log("요청실패", e.responseText);
+						console.log("요청실패", e.responseText);
+					}
+				})
+			})
+			}
+		//대댓글
+		function commentReply(rev_rply_no){
+			
+			$(function(){
+				
+				if($('.commentBtn').hasClass('activeComment')){
+					
+					return false;
+					
+				}else{
+					
+					var $div = $('<div>')
+					$div.addClass('row');
+					$div.addClass('commentNewDiv');
+					$div.css('padding', '1%');
+					
+					var divHtml = '<div class="col-md-1">대댓 입력</div>'
+					divHtml += '<div class="col-md-9"> ';
+					divHtml += '<textarea class="form-control" name="con2"></textarea>';
+					divHtml += '</div>';
+					divHtml += '<div class="col-md-2">';
+			    	divHtml += '<button class="btn btn-info" type="button" id="commentRegBtn" onclick="commentReg();">등록</button>'
+					divHtml += '</div>'
+			    	divHtml += '</div>'
+			   	
+			    	$div.html(divHtml)
+			    	
+					$('.commentBtn').addClass('activeComment');
+					$div.insertAfter($('div.row.'+rev_rply_no));
+					
+					$('[name=parnts_rply_no]').val(rev_rply_no + '');
 				}
+			})
+		}
+		
+		function commentReg(){
+			$(function(){
+				if($('[name=con2]').val() != ''){
+					
+					var con2 = $('[name=con2]').val();
+					var parnts_rply_no = $('[name=parnts_rply_no]').val();
+					getReply("${pageContext.request.contextPath}/review/reply/insert?rev_no=${rev.rev_no}","con2=" + con2 + "&parnts_rply_no="+parnts_rply_no);
+					
+					
+				}
+				$('[name=con2]').val('')
+				$('.commentNewDiv').remove()
 			})
 		}
 			
 			
+		$(function(){
 			
-			
+		
 			$('#replyRegBtn').click(function() {
 
 				if($('[name=con1]').val() != ''){
@@ -136,9 +220,8 @@
 				$('[name=con1]').val('');
 			})
 			
-			
+		})	
 			getReply("${pageContext.request.contextPath}/review/reply/${rev.rev_no}");	
-		})
 		
 		
 	</script>
@@ -180,6 +263,7 @@
 
 
 	<form method="post" id="replyForm" class="form-group">
+	<input type="hidden" name="parnts_rply_no"/>
 		<div class="row" id="replyDiv"></div>
 
 		<div class="row"
