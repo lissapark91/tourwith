@@ -70,7 +70,7 @@
 		<if test="cr_leadr_mb_nick != null and cr_leadr_mb_nick != '' ">
 		and b.NICK = #{cr_leadr_mb_nick}
 		</if>
-		ORDER BY REG_DE DESC
+		ORDER BY a.REG_DE DESC
 		<if test="startRow >= 0 and endRow > startRow">
 			LIMIT #{startRow}, 10
 		</if>

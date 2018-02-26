@@ -64,6 +64,7 @@
 		
 		
 	}
+	
 	function deleteReply(cr_rply_no){
 		
 		var ableToDel = confirm('해당 댓글을 삭제 하시겠습니까?');
