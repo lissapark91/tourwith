@@ -124,11 +124,15 @@
 		})
 		
 	});
+	
+	
+	
+	
 </script>
 </head>
 
 
-	<header id="gtco-header" class="gtco-cover gtco-cover-sm" role="banner" style="background-image: url(${pageContext.request.contextPath}/image/${category}_01)">
+	<header id="gtco-header" class="gtco-cover gtco-cover-sm" role="banner" style="background-image: url(${pageContext.request.contextPath}/images/CATE01.png)" >
 		<div class="row">
 		<div class="container crewListForm col-md-6 col-md-offset-3">
 <!-- 		<div class="row  text-center"> -->
