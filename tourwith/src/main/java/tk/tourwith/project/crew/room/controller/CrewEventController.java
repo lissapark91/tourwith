@@ -72,4 +72,25 @@ public class CrewEventController {
 		
 		return updcnt;
 	}
+	
+	@RequestMapping("/test/calendar/view")
+	public String crewEventView(Model model,String event_no) throws Exception
+	{
+		CrewEvent crewEvent= crewEventService.getCrewEvent(event_no);
+		
+		return "test/calendar";
+	}
+	
+	@RequestMapping("/update")
+	public int updateCrewEvent(Model model)
+	{
+		return 0;
+	}
+	@RequestMapping("/delete")
+	@ResponseBody
+	public int deleteCrewEvent(Model model)
+	{
+		return 0;
+		
+	}
 }

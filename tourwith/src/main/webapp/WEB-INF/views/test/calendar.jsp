@@ -22,68 +22,18 @@ $('#summernote').summernote({
   }); */
 
 $(document).ready(function() {
+	
+	$('#start_date').datepicker({
+		format: 'yyyy-mm-dd'
+	})
+	$('#end_date').datepicker({
+		format: 'yyyy-mm-dd'
+	})
 			
-	 /* function loadData(){
+	 function loadData(){
 	  	
 		 
-		  data = [
-		      {
-		          title: 'All Day Event',
-		          start: '2018-02-01',
-		        },
-		        {
-		          title: 'Long Event',
-		          start: '2018-02-07',
-		          end: '2018-02-10'
-		        },
-		        {
-		          id: 999,
-		          title: 'Repeating Event',
-		          start: '2018-02-09T16:00:00'
-		        },
-		        {
-		          id: 999,
-		          title: 'Repeating Event',
-		          start: '2018-02-16T16:00:00'
-		        },
-		        {
-		          title: 'Conference',
-		          start: '2018-02-11',
-		          end: '2018-02-13'
-		        },
-		        {
-		          title: 'Meeting',
-		          start: '2018-02-12T10:30:00',
-		          end: '2018-02-12T12:30:00'
-		        },
-		        {
-		          title: 'Lunch',
-		          start: '2018-02-12T12:00:00'
-		        },
-		        {
-		          title: 'Meeting',
-		          start: '2018-02-12T14:30:00'
-		        },
-		        {
-		          title: 'Happy Hour',
-		          start: '2018-02-12T17:30:00'
-		        },
-		        {
-		          title: 'Dinner',
-		          start: '2018-02-12T20:00:00'
-		        },
-		        {
-		          title: 'Birthday Party',
-		          start: '2018-02-13T07:00:00'
-		        },
-		        {
-		          title: 'Click for Google',
-		          url: 'http://google.com/',
-		          start: '2018-02-28'
-		        }
-		      ];
-		  return data;
-	 	 } */
+	}
   $('#submit').click(function(){
 	 var ev_nm = $('#event_nm').val()
 	 var st_dt = $('#start_date').val()
@@ -98,11 +48,15 @@ $(document).ready(function() {
 			 "event_con":ev_con,
 			 "cr_no":'0000000002'
 		},	
-		success: function(data) {
-        	console.log(data)
+		success: function(
+				) {
+			window.location.reload(true);
 		}
 	 });
 	 $('#sche-Modal').modal('hide');
+	 
+	 
+	
 	// console.log(data);
   });
 	
@@ -144,16 +98,38 @@ $(document).ready(function() {
             	for(var i=0 ; i< data.length ; i++ ){
             		var crewEvent=data[i];
             		events.push({
+            			id: crewEvent.event_no,
                         title: crewEvent.event_nm,
                         start: crewEvent.bgndt,
-                        end: crewEvent.enddt
-                         
+                        end: crewEvent.enddt,
+                        content : crewEvent.event_con
                     });
             	}
                 
                 callback(events);
             }
         });
+    },
+   //캘린더 뷰 이벤트
+
+    eventClick: function(calEvent, jsEvent, view) {    	
+    	console.log(calEvent)        
+    	// alert('Event: ' + calEvent.content);
+    	//$('#sche-Modal-view') .modal('show')
+		$('#sche_nm','#sche-Modal-view') .text(calEvent.title);
+		$('#sche_start','#sche-Modal-view') .text( moment(calEvent.start).format("YYYY-MM-DD") );
+		console.log("end", $.type(calEvent.end));
+		
+		if($.type(calEvent.end) == "null"){
+			$('#sche_end','#sche-Modal-view') .text(  moment(calEvent.start).format("YYYY-MM-DD"));
+		}else{
+			$('#sche_end','#sche-Modal-view') .text(moment(calEvent.end).format("YYYY-MM-DD"));	
+		}
+		
+		$('#sche_content','#sche-Modal-view') .text(calEvent.content);
+        // change the border color just for fun
+        $('#sche-Modal-view').modal('show')
+
     }
   });
 
@@ -170,7 +146,7 @@ $(document).ready(function() {
 	<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#sche-Modal">스케줄 작성</button>
 </div>
 	
-<!-- Modal -->
+<!-- 스케줄 등록 모달 Modal -->
 <div class="modal fade" id="sche-Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -182,7 +158,7 @@ $(document).ready(function() {
 				<td width="15%"><h5>스케줄이름</h5></td>
 						<input type="text" id="event_nm"  class="form-control " placeholder="제목을 입력하세요.">
 				<td width="15%"><h5>스케줄 시작날짜</h5></td>
-						<input type="text" id="start_date" class="form-control " placeholder="ex)2012-02-12T20:00:00">
+						<input type="text" id="start_date" class="form-control" placeholder="ex)2012-02-12T20:00:00">
 				<td width="15%"><h5>스케줄 종료날짜</h5></td>
 						<input type="text" id="end_date" class="form-control " placeholder="ex)2012-02-12T20:00:00">
 			<td colspan="2">
@@ -192,6 +168,39 @@ $(document).ready(function() {
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
         <button type="button" class="btn btn-primary" id=submit>스케줄 등록</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--  스케쥴 뷰 모달 modal -->
+
+<div class="modal fade" id="sche-Modal-view" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">스케줄</h4>
+      </div>
+      <div class="modal-body">
+				<td width="15%"><h5>스케줄이름</h5></td>
+<!-- 						<input type="text" id="sche_nm" value="" name="" class="form-control "> -->
+						<div class=form-control><span id="sche_nm" value=""></span></div>
+				<td width="15%"><h5>스케줄 시작날짜</h5></td>
+<!-- 							<input type="text" id="sche_start" value="" name=""class="form-control "> -->
+						<div class=form-control><span id="sche_start"></span></div>
+				<td width="15%"><h5>스케줄 종료날짜</h5></td>
+<!-- 						<input type="text" id="sche_end" value="" name  class="form-control "> -->
+						<div class=form-control><span id="sche_end"></span></div>
+			<td colspan="2">
+				<td width="15%"><h5>스케줄 내용</h5></td>
+					<div class=form-control row="15"><span id="sche_content"></span></div>
+			</td>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="edit">수정</button>
+        <button type="button" class="btn btn-primary" id="delete">삭제</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
       </div>
     </div>
   </div>
