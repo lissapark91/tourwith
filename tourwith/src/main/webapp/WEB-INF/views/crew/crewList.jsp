@@ -42,6 +42,19 @@
 		})
 	</script>
 	<script type="text/javascript">
+	
+	function fn_search(currentPage) {
+		var frm = document.crewSearchFrm;
+		
+		frm.currentPage.value = currentPage;
+		
+		var big_cate = '${category}'.substring(9);
+		
+		frm.action = "${pageContext.request.contextPath}/crew/list/"+ big_cate +"?currentPage=" + currentPage;
+		frm.submit();
+	}
+	
+	
 	$(function() {
 
 		$("#activities1")
@@ -135,6 +148,9 @@
 <!-- 			<h3>크루 검색</h3> -->
 <!-- 		</div> -->
 			<form id="crewSearchFrm" name="crewSearchFrm" class="form-group" method="post">
+			
+			<input type="hidden" name="currentPage" value="">
+			
 				<div class="col-md-4">
 					<label for="activities">나라별선택</label> 
 					<select
@@ -255,19 +271,18 @@
 			
 		<!-- end row -->	
 		</div>
-		
-		<div class="paging">
-				<a href="#" class="btn_arr first"><span class="hide">처음페이지</span></a>
-				<a href="#" class="btn_arr prev"><span class="hide">이전페이지</span></a>
-				<a href="#" class="on">1</a>
-				<!-- D : 활성화페이지일 경우 : on 처리 -->
-				<a href="#">2</a>
-				<a href="#">3</a>
-				<a href="#">4</a>
-				<a href="#">5</a>
-				<a href="#" class="btn_arr next"><span class="hide">다음페이지</span></a>
-				<a href="#" class="btn_arr last"><span class="hide">마지막페이지</span></a>
+
+		<div>
+
 		</div>
+
+
+		<!-- 페이지 네이게이션 -->
+					<div style="text-align: center;">
+						<ul class="pagination">
+							${pagingUtil}
+						</ul>
+					</div>
 		
 	<!-- gtco-container end -->
 	</div>

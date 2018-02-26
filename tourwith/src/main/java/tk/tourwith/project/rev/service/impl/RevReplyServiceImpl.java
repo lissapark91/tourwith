@@ -15,22 +15,23 @@ import tk.tourwith.project.util.mapper.NumberCreateMapper;
 public class RevReplyServiceImpl implements RevReplyService{
 	
 	@Autowired
-	RevReplyMapper repMapper;
+	RevReplyMapper revRepMapper;
 	
 	@Autowired
 	NumberCreateMapper numberCreateMapper;
 	
 	// REVIEW 댓글 조회
 	@Override
-	public List<RevReply> selectRepList(String rev_rply_no) throws Exception {
-		return repMapper.selectRepList(rev_rply_no);
+	public List<RevReply> selectRepList(Map<String, Object> paramMap) throws Exception {
+		
+		return revRepMapper.selectRepList(paramMap);
 	}
 	
 	// REVIEW 댓글 입력
 	@Override
 	public int insertRep(RevReply rep) throws Exception {
 		
-		int updCnt = repMapper.insertRep(rep);
+		int updCnt = revRepMapper.insertRep(rep);
 		
 		if(updCnt > 0) {
 			numberCreateMapper.updateNumber("REV_RPLY");
@@ -43,7 +44,7 @@ public class RevReplyServiceImpl implements RevReplyService{
 	@Override
 	public int updateRep(RevReply rep) throws Exception {
 		
-		int updCnt = repMapper.updateRep(rep);
+		int updCnt = revRepMapper.updateRep(rep);
 		
 		return updCnt;
 	}
@@ -52,7 +53,7 @@ public class RevReplyServiceImpl implements RevReplyService{
 	@Override
 	public int deleteRep(RevReply rep) throws Exception {
 		
-		int updCnt = repMapper.deleteRep(rep);
+		int updCnt = revRepMapper.deleteRep(rep);
 		
 		return updCnt;
 	}
@@ -61,7 +62,7 @@ public class RevReplyServiceImpl implements RevReplyService{
 	@Override
 	public int getTotalCnt(Map<String, Object> paramMap) throws Exception {
 		
-		return repMapper.getTotalCnt(paramMap);
+		return revRepMapper.getTotalCnt(paramMap);
 	}
 
 

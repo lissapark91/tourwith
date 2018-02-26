@@ -4,22 +4,27 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="tk.tourwith.project.rev.mapper.ReplyMapper">
+<mapper namespace="tk.tourwith.project.rev.mapper.RevReplyMapper">
 
 	<!-- REVIEW 게시판 댓글 목록 매퍼 -->
-	<select id="selectRepList" resultType="RevReply" parameterType="string">
+	<select id="selectRepList" resultType="RevReply" parameterType="map">
 	select
-		REV_RPLY_NO
-		,REV_NO
-		,PARNTS_RPLY_NO
-		,WRITNG_MB_NO
-		,CON
-		,REG_DE
-		,UPD_DE
-		,DEL_YN
-	from REV_RPLY
-	where DEL_YN = 'n' AND REV_NO = #{rev_no}
-	ORDER BY REG_DE DESC
+		a.REV_RPLY_NO
+		,a.REV_NO
+		,a.PARNTS_RPLY_NO
+		,a.WRITNG_MB_NO
+		,a.CON
+		,a.REG_DE
+		,a.UPD_DE
+		,a.DEL_YN
+		,b.NICK AS WRITNG_MB_NICK
+		,b.FB_ID AS WRITNG_FB_ID
+	from REV_RPLY as a, MEMBER as b
+	
+	where a.DEL_YN = 'n' 
+		AND a.REV_NO = #{rev_no}
+		AND a.WRITNG_MB_NO = b.MB_NO 
+	ORDER BY a.REG_DE
 	
 	<if test="startRow >= 0 and endRow > startRow">
 		LIMIT #{startRow}, 15
@@ -33,25 +38,23 @@
 	</selectKey>
 
 	INSERT INTO REV_RPLY(
-	REV_RPLY_NO
-	,REV_NO
-	,PARNTS_RPLY_NO
-	,WRITNG_MB_NO
-	,CON,
-	,REG_DE,
-	,UPD_DE,
-	,DEL_YN
+		REV_RPLY_NO
+		,REV_NO
+		,WRITNG_MB_NO
+		,CON
+		,REG_DE
+		,UPD_DE
+		,DEL_YN
 	)
 	VALUES
 	(
-	#{rev_rply_no}
-	,#{rev_no}
-	,#{parnts_rply_no}
-	,#{writng_mb_no}
-	,#{con}
-	,now()
-	,now()
-	,'n'
+		#{rev_rply_no}
+		,#{rev_no}
+		,#{writng_mb_no}
+		,#{con}
+		,now()
+		,now()
+		,'n'
 	)
 	</insert>
 	

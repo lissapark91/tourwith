@@ -12,6 +12,9 @@ public class CrewReply {
 	private String upd_de;
 	private String parnts_rply_no;
 	
+	//작성자 이름, 페이스북 아이디
+	private String writng_mb_nick;
+	private String writng_fb_id;
 	
 	
 	public String getCr_rply_no() {
@@ -89,6 +92,28 @@ public class CrewReply {
 	
 	public void setParnts_rply_no(String parnts_rply_no) {
 		this.parnts_rply_no = parnts_rply_no;
+	}
+
+
+	public String getWritng_mb_nick() {
+		return writng_mb_nick;
+	}
+
+
+	public void setWritng_mb_nick(String writng_mb_nick) {
+		this.writng_mb_nick = writng_mb_nick;
+	}
+
+
+
+
+	public String getWritng_fb_id() {
+		return writng_fb_id;
+	}
+
+
+	public void setWritng_fb_id(String writng_fb_id) {
+		this.writng_fb_id = writng_fb_id;
 	}
 	
 	

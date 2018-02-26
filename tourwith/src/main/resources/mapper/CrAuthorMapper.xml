@@ -14,6 +14,33 @@
 	  
 </select>
 
+<select id="selectListByMbNo" parameterType="string" resultType="CrAuthor">
+
+   select CR_AUTHOR_NO, MB_NO, CR_NO, AUTHOR_CODE;
+   from CR_AUTHOR
+   where MB_NO = #{mb_no}  
+	  
+</select>
+
+<select id="selectAuthorByMbNoCrNo" parameterType="map" resultType="CrAuthor">
+
+   select a.CR_AUTHOR_NO, a.MB_NO, a.CR_NO, a.AUTHOR_CODE
+   from CR_AUTHOR as a
+   where a.MB_NO = #{mb_no} and a.CR_NO = #{cr_no}
+  
+</select>
+
+<select id="selectListByDe" parameterType="map" resultType="CrAuthor">
+	select a.CR_AUTHOR_NO, a.MB_NO, a.CR_NO, a.AUTHOR_CODE
+	from CR_AUTHOR as a, CREW as b
+	where a.MB_NO = #{mb_no} and a.CR_NO = b.CR_NO and b.DEL_YN = 'n' and b.RCRIT_STTUS = 'RECR_STAT_01'
+	<if test="depr_de != null and depr_de != '' and arvl_de != null and arvl_de != '' "> 
+	   and b.DEPR_DE between #{depr_de} and #{arvl_de}
+	   and b.ARVL_DE between #{depr_de} and #{arvl_de}
+	</if>
+	and a.AUTHOR_CODE in ( 'CR_ROLE_01', 'CR_ROLE_02', 'CR_ROLE_05') 
+</select>
+
 <insert id="insertCrewLeaderIntoCrAuthor" parameterType="CrAuthor">
 
 	<selectKey keyProperty="cr_author_no" resultType="string" order="BEFORE">
@@ -40,6 +67,18 @@
 	UPDATE CR_AUTHOR
 	SET 
 		AUTHOR_CODE = 'CR_ROLE_02'
+	WHERE
+		MB_NO = #{mb_no}
+	AND
+		CR_NO = #{cr_no}
+		
+</update>
+
+<update id="updateRequest" parameterType="map">
+
+	UPDATE CR_AUTHOR
+	SET 
+		AUTHOR_CODE = 'CR_ROLE_03'
 	WHERE
 		MB_NO = #{mb_no}
 	AND
