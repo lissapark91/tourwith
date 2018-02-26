@@ -23,6 +23,7 @@ import tk.tourwith.project.crew.model.Crew;
 import tk.tourwith.project.crew.service.impl.CrewServiceImpl;
 import tk.tourwith.project.member.model.Member;
 import tk.tourwith.project.member.service.impl.MemberServiceImpl;
+import tk.tourwith.project.util.PagingUtil;
 
 @Controller
 public class CrewController {
@@ -38,6 +39,7 @@ public class CrewController {
 	public String getCrewList(@PathVariable String category, 
 			String big_cate_2, String nmpl, String depr_de, String cr_sj,
 			String cr_leadr_mb_nick,
+			@RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage,
 			Model model) throws Exception {
 		
 		
@@ -63,6 +65,33 @@ public class CrewController {
 		model.addAttribute("cr_leadr_mb_nick", cr_leadr_mb_nick);
 		
 		model.addAttribute("category", category);
+		
+		
+		
+		
+		// 페이징 처리 180223 종표
+		int totalCount = crewService.getTotalCnt(paramMap);
+		
+		PagingUtil pagingUtil = new PagingUtil(currentPage, totalCount, 10, 5);
+		
+		// 콘솔 확인용
+		System.out.println( "================================");
+		System.out.println( "getCurrentPage : " + pagingUtil.getCurrentPage());
+		System.out.println( "getTotalCount : " + pagingUtil.getTotalCount());	
+		System.out.println( "================================");
+		
+		paramMap.put("startRow", pagingUtil.getStartRow());
+		paramMap.put("endRow", pagingUtil.getEndRow());
+		
+		List<Crew> getCrewList = crewService.selectCrewList(paramMap);
+		
+		model.addAttribute("getCrewList", getCrewList);
+		model.addAttribute("pagingUtil", pagingUtil.getPageHtml().toString());
+		
+		
+		
+		//리더 닉네임
+		paramMap.put("cr_leadr_nm_nick", cr_leadr_mb_nick);
 		
 		List<Crew> crewList = crewService.selectCrewList(paramMap);
 		
