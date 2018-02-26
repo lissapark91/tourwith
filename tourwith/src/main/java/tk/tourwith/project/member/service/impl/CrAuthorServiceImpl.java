@@ -25,6 +25,16 @@ public class CrAuthorServiceImpl implements CrAuthorService {
 	}
 
 	@Override
+	public List<CrAuthor> selectListByMbNo(String mb_no) {
+		return crAuthorMapper.selectListByMbNo(mb_no);
+	}
+	
+	@Override
+	public CrAuthor selectAuthorByMbNoCrNo(Map<String, Object> paramMap) {
+		return crAuthorMapper.selectAuthorByMbNoCrNo(paramMap);
+	}
+
+	@Override
 	public int insertCrewLeaderIntoCrAuthor(CrAuthor crAuthor) {
 		
 		int updCnt = crAuthorMapper.insertCrewLeaderIntoCrAuthor(crAuthor);
@@ -55,7 +65,18 @@ public class CrAuthorServiceImpl implements CrAuthorService {
 		
 		return crAuthorMapper.updateRequestApproved(paramMap);
 	}
+	
+	@Override
+	public List<CrAuthor> selectListByDe(Map<String, Object> paramMap) {
+		
+		return crAuthorMapper.selectListByDe(paramMap);
+	}
 
+	@Override
+	public int updateRequest(Map<String, Object> paramMap) {
+		return crAuthorMapper.updateRequest(paramMap);
+	}
+	
 	@Override
 	public int updateRequestRefuse(Map<String, Object> paramMap) {
 		

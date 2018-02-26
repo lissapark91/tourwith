@@ -11,6 +11,13 @@ public class RevReply {
 	private String del_yn;
 
 	
+	// 작성자 이름
+	private String writng_mb_nick;
+	
+	// 작성자 사진
+	private String writng_fb_id;
+	
+	
 	public String getRev_rply_no() {
 		return rev_rply_no;
 	}
@@ -73,6 +80,22 @@ public class RevReply {
 
 	public void setDel_yn(String del_yn) {
 		this.del_yn = del_yn;
+	}
+
+	public String getWritng_mb_nick() {
+		return writng_mb_nick;
+	}
+
+	public void setWritng_mb_nick(String writng_mb_nick) {
+		this.writng_mb_nick = writng_mb_nick;
+	}
+
+	public String getWritng_fb_id() {
+		return writng_fb_id;
+	}
+
+	public void setWritng_fb_id(String writng_fb_id) {
+		this.writng_fb_id = writng_fb_id;
 	}
 
 }

@@ -2,25 +2,103 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
-  <mapper namespace="tk.tourwith.project.crew.room.mapper.CrewEventMapper">
-  
-  	<select id="selectCrewEventList"  parameterType="map">
-			select
-				EVENT_NO
-				,EVENT_NM
-				,EVENT_CON
-				,BGNDT
-				,ENDDT
-				,CR_NO
-				,REG_DE
-				,UPD_DE
-				,DEL_YN
-				,WRTER
-				,UPDUSR
-				,UPD_POSBL_YN
-			from crewevent
-			where del_yn = 'n'
-  	</select>
-  
-  </mapper>
+
+<mapper namespace="tk.tourwith.project.crew.room.mapper.CrewEventMapper">
+
+	<select id="selectCrewEventList" parameterType="map" resultType="CrewEvent">
+		select
+		EVENT_NO
+		,EVENT_NM
+		,EVENT_CON
+		,BGNDT
+		,ENDDT
+		,CR_NO
+		,REG_DE
+		,UPD_DE
+		,DEL_YN
+		,WRTER
+		,UPDUSR
+		,UPD_POSBL_YN
+		from CR_EVENT
+		where del_yn = 'n'
+		and CR_NO=#{cr_no}
+	</select>
+	<select id="getCrewEvent" resultType="CrewEvent">
+		select
+		EVENT_NO
+		,EVENT_NM
+		,EVENT_CON
+		,BGNDT
+		,ENDDT
+		,CR_NO
+		,REG_DE
+		,UPD_DE
+		,DEL_YN
+		,WRTER
+		,UPDUSR
+		,UPD_POSBL_YN
+		from CR_EVENT
+		where del_yn = 'n'
+		and CR_NO=#{cr_no}
+		and EVENT_NO = #{event_no}
+	</select>
+	<insert id="insertCrewEvent" parameterType="CrewEvent">
+	
+		 <selectKey keyProperty="event_no" resultType="String" order="BEFORE" >
+			SELECT NEXT_NO FROM NO_CREAT WHERE TABLENM = 'CR_EVENT'
+		</selectKey> 
+	
+		INSERT INTO CR_EVENT
+		(EVENT_NO,
+		EVENT_NM,
+		EVENT_CON,
+		BGNDT,
+		ENDDT,
+		CR_NO,
+		REG_DE,
+		UPD_DE,
+		DEL_YN,
+		WRTER,
+		UPDUSR,
+		UPD_POSBL_YN)
+		VALUES
+		(
+		#{event_no}, 
+		#{event_nm},
+		#{event_con},
+		#{bgndt},
+		#{enddt},
+		#{cr_no},
+		now(),
+		now(),
+		'n',
+		'MB_0000000001',
+		'MB_0000000001',
+		'n');
+
+	</insert>
+	
+	<update id="updateCrewEvent" parameterType="int">
+		UPDATE CR_EVENT
+		SET
+		EVENT_NM = {event_nm},
+		EVENT_CON = {event_con},
+		BGNDT = {bgndt},
+		ENDDT = {enddt},
+		CR_NO = {cr_no},
+		REG_DE = {reg_de},
+		UPD_DE = {upd_de},
+		DEL_YN = {del_yn},
+		WRTER = {wrter},
+		UPDUSR = {updusr},
+		UPD_POSBL_YN = 'n'
+		WHERE EVENT_NO = {event_no}
+	</update>
+	
+	<update id="deleteCrewEvent" parameterType="int">
+		UPDATE CR_EVENT
+		SET
+		UPD_POSBL_YN = 'y'
+		WHERE EVENT_NO = {event_no}
+	</update>
+</mapper>

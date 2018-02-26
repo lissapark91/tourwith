@@ -26,7 +26,7 @@ public class HelpController {
 	CodeService codeService;
 	
 	
-	@RequestMapping(value = "/help/helps", method = RequestMethod.GET)
+	@RequestMapping(value = "/helper", method = RequestMethod.GET)
 
 		public String helphome(Model model)  {
 			

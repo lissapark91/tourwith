@@ -9,12 +9,15 @@ import org.springframework.stereotype.Service;
 import tk.tourwith.project.crew.mapper.CrewReplyMapper;
 import tk.tourwith.project.crew.model.CrewReply;
 import tk.tourwith.project.crew.service.CrewReplyService;
+import tk.tourwith.project.util.mapper.NumberCreateMapper;
 
 @Service(value="crewReplyService")
 public class CrewReplyServiceImpl implements CrewReplyService {
 
 	@Autowired
 	CrewReplyMapper crewReplyMapper;
+	@Autowired
+	NumberCreateMapper numberCreateMapper;
 	
 	
 	//댓글 목록
@@ -28,7 +31,12 @@ public class CrewReplyServiceImpl implements CrewReplyService {
 	@Override
 	public int insertCrewReply(CrewReply crewReply) throws Exception {
 		
-		return crewReplyMapper.insertCrewReply(crewReply);
+		int updCnt = crewReplyMapper.insertCrewReply(crewReply);
+		if(updCnt > 0) {
+			numberCreateMapper.updateNumber("CR_RPLY");
+		}
+		
+		return updCnt;
 	}
 	
 	//댓글 수정
@@ -40,12 +48,17 @@ public class CrewReplyServiceImpl implements CrewReplyService {
 			
 	//댓글 삭제
 	@Override
-	public int daleteCrewReply(String cr_no) throws Exception {
+	public int deleteCrewReply(String cr_no) throws Exception {
 		
-		return crewReplyMapper.daleteCrewReply(cr_no);
+		return crewReplyMapper.deleteCrewReply(cr_no);
 	}
 		
-
+	
+	//select CrewReply by cr_rply_no
+	public CrewReply selectCrewReplyByPk(String cr_rply_no) {
+		return crewReplyMapper.selectCrewReplyByPk(cr_rply_no);
+		
+	}
 	
 	
 }

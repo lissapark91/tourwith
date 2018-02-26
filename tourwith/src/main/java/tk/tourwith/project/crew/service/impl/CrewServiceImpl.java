@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import tk.tourwith.project.crew.mapper.CrewMapper;
 import tk.tourwith.project.crew.model.Crew;
+import tk.tourwith.project.crew.model.CrewReply;
 import tk.tourwith.project.crew.service.CrewService;
 import tk.tourwith.project.member.mapper.CrAuthorMapper;
 import tk.tourwith.project.member.model.CrAuthor;
@@ -71,6 +72,14 @@ public class CrewServiceImpl implements CrewService{
 	public int deleteCrew(String cr_no) throws Exception {
 		// TODO Auto-generated method stub
 		return crewMapper.deleteCrew(cr_no);
+	}
+	
+	
+	// 페이징 조회 180223 윤종표 추가
+	@Override
+	public int getTotalCnt(Map<String, Object> paramMap) throws Exception {
+		
+		return crewMapper.getTotalCnt(paramMap);
 	}
 
 }

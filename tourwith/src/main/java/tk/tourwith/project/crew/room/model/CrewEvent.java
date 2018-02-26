@@ -1,20 +1,19 @@
 package tk.tourwith.project.crew.room.model;
 
 public class CrewEvent {
-	
-	private String event_no;
+
+	private String event_no;	
 	private String event_nm;
-	private String event_con;
-	private String bgndt;
-	private String enddt;
-	private String cr_no;
-	private String reg_de;
-	private String upd_de;
-	private String del_yn;
+	private String event_con;	
+	private String bgndt;	
+	private String enddt;	
+	private String cr_no;	
+	private String reg_de;	
+	private String upd_de;	
+	private String del_yn;	
 	private String wrter;
-	private String updusr;
+	private String updusr;	
 	private String upd_posbl_yn;
-	
 	public String getEvent_no() {
 		return event_no;
 	}
@@ -88,4 +87,5 @@ public class CrewEvent {
 		this.upd_posbl_yn = upd_posbl_yn;
 	}
 
+	
 }
