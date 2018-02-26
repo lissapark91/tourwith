@@ -32,7 +32,7 @@ public class RevController {
 	private FileServcieImpl fileService;
 
 	// REV 검색
-	@RequestMapping("/review")
+	@RequestMapping("/reviews")
 	public String getRevList(
 			@RequestParam(value="searchType", required=false, defaultValue="") String searchType,
 			@RequestParam(value="searchWord", required=false, defaultValue="") String searchWord,

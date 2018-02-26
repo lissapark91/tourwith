@@ -8,7 +8,7 @@ import tk.tourwith.project.rev.model.RevReply;
 public interface RevReplyService {
 	
 	// 리뷰 댓글 목록
-	public List<RevReply> selectRepList(String rev_rply_no) throws Exception;
+	public List<RevReply> selectRepList(Map<String, Object> paramMap) throws Exception;
 	
 	// 리뷰 댓글 등록 
 	public int insertRep(RevReply rep) throws Exception;

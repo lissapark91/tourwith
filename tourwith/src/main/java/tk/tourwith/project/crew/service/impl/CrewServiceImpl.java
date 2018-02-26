@@ -72,5 +72,13 @@ public class CrewServiceImpl implements CrewService{
 		// TODO Auto-generated method stub
 		return crewMapper.deleteCrew(cr_no);
 	}
+	
+	
+	// 페이징 조회 180223 윤종표 추가
+	@Override
+	public int getTotalCnt(Map<String, Object> paramMap) throws Exception {
+		
+		return crewMapper.getTotalCnt(paramMap);
+	}
 
 }
