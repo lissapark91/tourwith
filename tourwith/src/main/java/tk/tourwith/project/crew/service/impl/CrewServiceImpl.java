@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import tk.tourwith.project.crew.mapper.CrewMapper;
 import tk.tourwith.project.crew.model.Crew;
+import tk.tourwith.project.crew.model.CrewReply;
 import tk.tourwith.project.crew.service.CrewService;
 import tk.tourwith.project.member.mapper.CrAuthorMapper;
 import tk.tourwith.project.member.model.CrAuthor;
@@ -72,5 +73,6 @@ public class CrewServiceImpl implements CrewService{
 		// TODO Auto-generated method stub
 		return crewMapper.deleteCrew(cr_no);
 	}
+	
 
 }

@@ -53,56 +53,21 @@ public class CrewController {
 		paramMap.put("nmpl", nmpl);
 		paramMap.put("depr_de", depr_de);
 		paramMap.put("cr_sj", cr_sj);
+		//리더 닉네임
+		paramMap.put("cr_leadr_nm_nick", cr_leadr_mb_nick);
 
 		model.addAttribute("big_cate_2", big_cate_2);
 		model.addAttribute("nmpl", nmpl);
 		model.addAttribute("depr_de", depr_de);
 		model.addAttribute("cr_sj", cr_sj);
+		model.addAttribute("cr_leadr_mb_nick", cr_leadr_mb_nick);
 		
-		System.out.println(cr_leadr_mb_nick);
-		
-		
-		//리더 닉네임
-		paramMap.put("cr_leadr_nm_nick", cr_leadr_mb_nick);
+		model.addAttribute("category", category);
 		
 		List<Crew> crewList = crewService.selectCrewList(paramMap);
-		List<Crew> crewListSearchhNick = new ArrayList<>();
-		model.addAttribute("category", category);
-		//trplc, 크루 리더, 테마, 모집상태 이름을 넣어준다.
-		for(Crew crew : crewList) {
-			
-			Member member = memberService.selectMemberByPK(crew.getCr_leadr_mb_no());
-			crew.setCr_leadr_nick(member.getNick());
-			
-			
-			Code code = codeService.selectCodeByPk(crew.getTrplc_no());
-			crew.setTrplc_no_nm(code.getCode_nm());
-			
-			code = codeService.selectCodeByPk(crew.getThema());
-			crew.setThema_nm(code.getCode_nm());
-			
-			code = codeService.selectCodeByPk(crew.getRcrit_sttus());
-			crew.setRcrit_sttus_nm(code.getCode_nm());
-			
-			//리더 닉네임 검색을 하였을 때
-			if(StringUtils.isNotBlank(cr_leadr_mb_nick) && StringUtils.isNotEmpty(cr_leadr_mb_nick)) {
-				if(StringUtils.equals(member.getNick(), cr_leadr_mb_nick)) {
-					crewListSearchhNick.add(crew);
-				}
-			}
-		}
 		
-		//리더 닉네임 검색 결과
-		if(StringUtils.isNotBlank(cr_leadr_mb_nick) && StringUtils.isNotEmpty(cr_leadr_mb_nick)) {
-			model.addAttribute("cr_leadr_mb_nick", cr_leadr_mb_nick);
-			model.addAttribute("crewList",crewListSearchhNick);
-			model.addAttribute("codeList", codeList);
-			
-		}else {
-			model.addAttribute("codeList", codeList);
-			model.addAttribute("crewList", crewList);			
-		}
-		
+		model.addAttribute("codeList", codeList);
+		model.addAttribute("crewList", crewList);			
 
 		return "crew/crewList";
 	}

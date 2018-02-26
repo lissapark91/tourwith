@@ -11,6 +11,7 @@
   			  a.CR_NO
 			, a.CR_SJ
 			, a.THEMA
+			, c.CODE_NM as THEMA_NM
 			, a.MAIN_COURS
 			, a.DETAIL_TRPLC
 			, a.DEPR_DE	
@@ -23,10 +24,18 @@
 			, a.REG_DE	
 			, a.UPD_DE	
 			, a.CR_LEADR_MB_NO
+			, b.NICK as CR_LEADR_NM_NICK
 			, a.TRPLC_NO
+			, d.CODE_NM as TRPLC_NO_NM
 			, a.RCRIT_STTUS
-		from CREW as a	
-		where DEL_YN = 'n'
+			, e.CODE_NM as RCRIT_STTUS_NM
+		from CREW as a, MEMBER as b, CMMN_CODE as c, CMMN_CODE as d, CMMN_CODE as e	
+		where a.DEL_YN = 'n'
+		
+		and a.THEMA = c.CODE_NO
+		and a.CR_LEADR_MB_NO = b.MB_NO
+		and a.TRPLC_NO = d.CODE_NO
+		and a.RCRIT_STTUS = e.CODE_NO
 		
 		<if test="category != null and category != ''">
 		and a.TRPLC_NO like CONCAT(#{category} , '%')
@@ -44,10 +53,13 @@
 		and (a.FEMALE_NMPR + a.MALE_NMPR) >= #{nmpl}
 		</if>
 		
-		<if test="cr_sj != null and cr_sj == '' ">
-		and CR_SJ LIKE CONCAT(#{cr_sj}, '%')
+		<if test="cr_sj != null and cr_sj != '' ">
+		and a.CR_SJ LIKE CONCAT(#{cr_sj}, '%')
 		</if>
 		
+		<if test="cr_leadr_mb_nick != null and cr_leadr_mb_nick != '' ">
+		and b.NICK = #{cr_leadr_mb_nick}
+		</if>
 		ORDER BY REG_DE DESC
 
   	</select>

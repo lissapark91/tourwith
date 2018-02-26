@@ -21,9 +21,12 @@ public interface CrewReplyMapper {
 	public int updateCrewReply(CrewReply crewReply) throws Exception;
 	
 	//댓글 삭제
-	public int daleteCrewReply(String cr_no) throws Exception;
+	public int deleteCrewReply(String cr_no) throws Exception;
 	
 	//댓글 페이지
 	public int getTotalReplyCnt(Map<String, Object> paramMap) throws Exception;
+	
+	//select CrewReply by cr_rply_no
+	public CrewReply selectCrewReplyByPk(String cr_rply_no);
 	
 }

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import tk.tourwith.project.crew.model.Crew;
+import tk.tourwith.project.crew.model.CrewReply;
 
 public interface CrewService {
 
@@ -19,4 +20,5 @@ public interface CrewService {
 	public int updateCrew(Crew crew) throws Exception;
 	//크루 삭제
 	public int deleteCrew(String cr_no) throws Exception;
+	
 }
