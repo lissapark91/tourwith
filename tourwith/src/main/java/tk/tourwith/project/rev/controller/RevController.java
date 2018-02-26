@@ -66,7 +66,7 @@ public class RevController {
 		System.out.println( "================================");
 		
 		model.addAttribute("revList", revList);
-		model.addAttribute("pagingUtil", pagingUtil.getPageHtml().toString());
+		model.addAttribute("pagingUtil", pagingUtil);
 
 		return "review/reviewList";
 	}

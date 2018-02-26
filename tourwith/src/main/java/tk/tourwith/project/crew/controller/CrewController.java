@@ -70,7 +70,6 @@ public class CrewController {
 		//리더 닉네임
 		paramMap.put("cr_leadr_nm_nick", cr_leadr_mb_nick);
 		
-		
 		// 페이징 처리 180223 종표
 		int totalCount = crewService.getTotalCnt(paramMap);
 		
@@ -89,6 +88,7 @@ public class CrewController {
 		
 		model.addAttribute("getCrewList", getCrewList);
 		model.addAttribute("pagingUtil", pagingUtil.getPageHtml().toString());
+		
 		
 		
 		

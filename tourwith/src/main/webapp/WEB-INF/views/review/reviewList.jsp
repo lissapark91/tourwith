@@ -14,7 +14,7 @@
 		var frm = document.searchForm;
 
 		frm.currentPage.value = currentPage;
-		frm.action = "${pageContext.request.contextPath}/review";
+		frm.action = "${pageContext.request.contextPath}/reviews";
 		frm.submit();
 	}
 
@@ -78,15 +78,16 @@
 						<tbody>
 						
 							<c:if test="${not empty revList }">
-								<c:forEach var="rev" items="${revList }">
+								<c:forEach var="rev" items="${revList }" varStatus="status">
 									<tr>
-										<td>${rev.rev_no }</td>
-										<td><a href="review/${rev.rev_no }">${rev.sj }</a> </td>
-										<td> # </td>
-										<td> # </td>
-										<td> # </td>
-										<td class="reg_de" regde="${rev.reg_de }"></td>
-										<td>${rev.hitcnt }</td>
+										<%-- <td>${rev.rev_no }</td> --%>
+										<td width="10%">${status.index + pagingUtil.startRow + 1 }</td>
+										<td width="25%"><a href="review/${rev.rev_no }">${rev.sj }</a> </td>
+										<td width="15%"> # </td>
+										<td width="10%"> # </td>
+										<td width="20%"> # </td>
+										<td class="reg_de" regde="${rev.reg_de }" width="10%"></td>
+										<td width="20%">${rev.hitcnt }</td>
 									</tr>
 								</c:forEach>
 							</c:if>
@@ -98,7 +99,7 @@
 					<!-- 페이징 -->
 					<div style="text-align: center;">
 						<ul class="pagination">
-							${pagingUtil }
+							${pagingUtil.pageHtml }
 						</ul>
 					</div>
 					
