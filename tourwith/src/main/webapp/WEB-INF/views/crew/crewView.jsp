@@ -178,7 +178,7 @@
 							str += '</div>';
 							str += '<div class="row">';
 							if(reply.parnts_rply_no != null){
-								str += '<div class="col-md-1"><i class="material-icons pull-right">&#xe5da;</i></div>'
+								str += '<div class="col-md-1"><i class="material-icons pull-right">&#xe5da;</i></div>';
 								str += '<div class="col-md-11 '+ reply.cr_rply_no +' replycon" >'						
 							
 							}else{
