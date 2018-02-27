@@ -62,13 +62,13 @@
 						<thead>
 
 							<tr class="bg-primary">
-
+								<th>수정 삭제</th>
 								<th>코드 번호</th>
 								<th>그룹 코드</th>
 								<th>코드 이름</th>
 								<th>코드 구분</th>
 								<th>삽입 일자</th>
-								<th>매니저</th>
+								<th>매 니 저</th>
 
 							</tr>
 						</thead>
@@ -80,8 +80,8 @@
 								<c:forEach var="code" items="${codeList}">
 
 									<tr>
-
-										<td>${code.code_no}<input type="button" value="수정" class="btn btn-primary" style="margin-left: 2%" onclick="fn_updateForm();"><input type="button" value="삭제" class="btn btn-primary" style="margin-left: 1%"></td>
+										<td><input type="button" value="수정" class="btn btn-primary" style="margin-left: 2%" onclick="fn_updateForm();"><input type="button" value="삭제" class="btn btn-primary" style="margin-left: 1%"></td>
+										<td>${code.code_no}</td>
 														<%-- <td><a href="code/${code.code_no}">${code.group_code}</a></td> 거기로 이동--%>
 
 										<td>${code.group_code}</td>
