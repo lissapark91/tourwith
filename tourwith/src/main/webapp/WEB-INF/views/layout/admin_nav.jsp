@@ -10,13 +10,15 @@
 </head>
 <body>
 
+
   <div id="wrapper" class="toggled">
 
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
                 <li class="sidebar-brand">
-                    <a href="#">
+				<!-- admin home으로 가기 -->
+                    <a href="${pageContext.request.contextPath}/admin/adminHome">
                         TOURWITH.TK
                     </a>
                 </li>
@@ -27,10 +29,9 @@
                     <a href="#">FAQ 관리</a>
                 </li>
                 <li>
-                    <a href="#">여행도우미 관리</a>
-                </li>
-                <li>
-                    <a href="#">공통코드 관리</a>
+				<!-- 공통코드 페이지로 가기 -->
+                    <a href="${pageContext.request.contextPath}/admin/codes">공통코드 관리</a>
+<%--                     <a href="${pageContext.request.contextPath}/admin/codes">공통코드 관리</a></li> --%>
                 </li>
                 <li>
                     <a href="#">여행지 관리</a>
