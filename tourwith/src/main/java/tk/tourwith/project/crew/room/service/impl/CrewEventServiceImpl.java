@@ -34,27 +34,22 @@ public class CrewEventServiceImpl implements CrewEventService{
 
 	@Override
 	public int insertCrewEvent(CrewEvent crewEvent) throws Exception {
-		
 		int updcnt = crewEventMapper.insertCrewEvent(crewEvent);
-		
 		if(updcnt >0 )
 		{
 			numberCreateMapper.updateNumber("CR_EVENT");
 		}
-		
 		return updcnt;
 	}
 
 	@Override
 	public int updateCrewEvent(CrewEvent crewEvent) throws Exception {
-
-		return 0;
+		return crewEventMapper.updateCrewEvent(crewEvent);
 	}
 
 	@Override
 	public int deletCrewEvent(String event_no) throws Exception {
-		
-		return 0;
+		return crewEventMapper.deleteCrewEvent(event_no);
 	}
 
 }
