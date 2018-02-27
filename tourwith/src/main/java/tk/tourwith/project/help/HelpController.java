@@ -19,12 +19,12 @@ import tk.tourwith.project.help.service.HelpService;
 @Controller
 public class HelpController {
 	
+// SG google api 활용 여행도우미 	
 //	인스턴스를 생성
 	@Autowired
 	HelpService helpService;
 	@Autowired
 	CodeService codeService;
-	
 	
 	@RequestMapping(value = "/helper", method = RequestMethod.GET)
 

@@ -5,7 +5,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
  <mapper namespace="tk.tourwith.project.code.mapper.CodeMapper">
- 					
+<!-- 나라검색 					 -->
 <select id="selectListByGroupCode" parameterType="String" resultType="Code">
 
    select CODE_NO, CODE_NM 
@@ -14,6 +14,7 @@
 	  
 </select>
 
+<!-- 지역검색 -->
 <select id="selectCodeByPk" parameterType="String" resultType="Code">
 
    select CODE_NO, CODE_NM 
@@ -21,6 +22,60 @@
    where CODE_NO = #{code_no}  
 	  
 </select>
+
+<!-- 	어드민 코드 리스트 -->
+<select id="selectCodeList" resultType="Code" parameterType="map">
+
+	select
+		CODE_NO
+		,CODE_RGSDE
+		,CODE_SE
+		,CODE_NM
+		,GROUP_CODE
+		,MNGR
+	from CMMN_CODE
+where 1=1
+		<if test="searchType != null and searchWord != '' "  >
+			<if test="searchType == '01'">
+				and CODE_NO LIKE CONCAT('%', #{searchWord}, '%')
+			</if>			
+			<if test="searchType == '02'">
+				and CODE_NM LIKE CONCAT('%', #{searchWord}, '%')
+			</if>			
+		</if>	
+	limit #{startRow},#{pageSize}
+
+</select>
+
+<!-- 어드민 페이징 -->
+
+	<select id="codelistCount" resultType="int" parameterType="map">
+		select count(CODE_NO)
+		from CMMN_CODE
+		where 1=1
+		<if test="searchType != null and searchWord != '' "  >
+			<if test="searchType == '01'">
+				and CODE_NO LIKE CONCAT('%', #{searchWord}, '%')
+			</if>			
+			<if test="searchType == '02'">
+				and CODE_NM LIKE CONCAT('%', #{searchWord}, '%')
+			</if>			
+		</if>	
+		
+	</select>
+	
+	<!-- 코드 수정 -->
+	<update id="updateCode" parameterType="Code">
+		UPDATE CMMN_CODE
+			SET
+			code_no = #{code_no},
+			code_se = #{code_se},
+			code_nm = #{code_nm},
+			group_code = #{group_code},
+			code_rgsde = now()
+		WHERE code_no = #{code_no}		
+	</update>
+	
 
 <!-- <select id="selectByGroupCodeList" parameterType="String" resultType="Code"> -->
 

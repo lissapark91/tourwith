@@ -19,7 +19,7 @@
 			
 		}
 		.crewListForm {
-			margin-top: 15%;
+			margin-top: 200px;
 			padding-top: 1%;
 			background-color: rgba(255,255,255,0.7);
 			border-radius: 25px;
@@ -145,7 +145,7 @@
 </head>
 
 
-	<header id="gtco-header" class="gtco-cover gtco-cover-sm" role="banner" style="background-image: url(${pageContext.request.contextPath}/images/CATE01.png)" >
+	<header id="gtco-header" class="gtco-cover gtco-cover-sm" role="banner" style="background-image: url(${pageContext.request.contextPath}/image/${category})" >
 		<div class="row">
 		<div class="container crewListForm col-md-6 col-md-offset-3">
 <!-- 		<div class="row  text-center"> -->
