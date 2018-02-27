@@ -7,26 +7,34 @@
 <script src="${pageContext.request.contextPath}/summernote/summernote.js"></script>
  <!-- include libraries(jQuery, bootstrap) --> 
 <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet"> 
+<style>
 
+.nor.hide{
+	display:none;
+}
+
+</style>
 
 <script type="text/javascript">
 
-/* $(function(){
-$('#summernote').summernote({
-   height: 300,          // 기본 높이값
- minHeight: null,      // 최소 높이값(null은 제한 없음)
- maxHeight: null,      // 최대 높이값(null은 제한 없음)
-    focus: true,          // 페이지가 열릴때 포커스를 지정함
-    lang: 'ko-KR'         // 한국어 지정(기본값은 en-US)
-    });
-  }); */
+function state_change(){
+	//javascript 이벤트 
+	// .nor class에 .hide클래스가있을경우 .hide클래스를 제거하고 .hide 클래스가없는경우 .hide클래스를 추가한다.
+	$('.nor').toggleClass('hide');
+}
 
 $(document).ready(function() {
 	
-	$('#start_date').datepicker({
+	$('.start_date').datepicker({
 		format: 'yyyy-mm-dd'
 	})
-	$('#end_date').datepicker({
+	$('.sche_start').datepicker({
+		format: 'yyyy-mm-dd'
+	})
+	$('.end_date').datepicker({
+		format: 'yyyy-mm-dd'
+	})
+	$('.sche_end').datepicker({
 		format: 'yyyy-mm-dd'
 	})
 			
@@ -35,10 +43,10 @@ $(document).ready(function() {
 		 
 	}
   $('#submit').click(function(){
-	 var ev_nm = $('#event_nm').val()
-	 var st_dt = $('#start_date').val()
-	 var en_dt = $('#end_date').val()
-	 var ev_con = $('#ev_con').val()
+	 var ev_nm = $('.event_nm').val()
+	 var st_dt = $('.start_date').val()
+	 var en_dt = $('.end_date').val()
+	 var ev_con = $('.ev_con').val()
 	 $.ajax({
 		url:'${pageContext.request.contextPath}/test/calendar/insert',
 		type:"post",
@@ -50,16 +58,61 @@ $(document).ready(function() {
 		},	
 		success: function(
 				) {
-			window.location.reload(true);
+			//다시불러오기 실시간갱신이 아니라 새로고침과 같은 효과
+			//window.location.reload(true);
+					$('#calendar').fullCalendar( 'refetchEvents' );
 		}
 	 });
 	 $('#sche-Modal').modal('hide');
-	 
-	 
-	
-	// console.log(data);
   });
+  //수정 이벤트
+  
+  $('#edit').click(function(){
+	 var ev_nm = $('.sche_nm').val()
+	 var st_dt = $('.sche_start').val()
+	 var en_dt = $('.sche_end').val()
+	 var ev_con = $('.sche_content').val()
+	 var ev_no = $('#event_num').val()
+	 $.ajax({
+		url:'${pageContext.request.contextPath}/test/calendar/update',
+		type:"post",
+		data:{"event_nm":ev_nm,
+			  "event_no":ev_no,
+			 "bgndt":st_dt,
+			 "enddt":en_dt,
+			 "event_con":ev_con,
+			 "cr_no":'0000000002'
+		},	
+		success: function(data) {
+			//window.location.reload(true);
+			//다시불러오기
+			//setTimeout("function(start, end, timezone, callback)",3000);
+			$('#calendar').fullCalendar( 'refetchEvents' );
+		}
+	 });
+	 $('.nor').toggleClass('hide');
+	 $('#sche-Modal-view').modal('hide');
+  });
+  
+  //삭제 이벤트
+   $('#delete').click(function(){
+	 $.ajax({
+		 url:'${pageContext.request.contextPath}/test/calendar/delete',
+		 method:"get",
+// 		 data:"event_no="+$('#event_num').val(),
+		 data:$('#event_num').serialize(),
+		 success:function(data){
+			 console.log(data);
+			 $('#calendar').fullCalendar( 'refetchEvents' );
+		 }			 
+			 
+		 
+	 })
+	 $('#sche-Modal-view').modal('hide');
+	 //console.log(data);
+  }); 
 	
+  //fullcalendar 설정 코드
   $('#calendar').fullCalendar({
 	  header: {
 	        left: 'prev,next today',
@@ -110,26 +163,43 @@ $(document).ready(function() {
             }
         });
     },
+    
    //캘린더 뷰 이벤트
-
     eventClick: function(calEvent, jsEvent, view) {    	
     	console.log(calEvent)        
     	// alert('Event: ' + calEvent.content);
     	//$('#sche-Modal-view') .modal('show')
-		$('#sche_nm','#sche-Modal-view') .text(calEvent.title);
-		$('#sche_start','#sche-Modal-view') .text( moment(calEvent.start).format("YYYY-MM-DD") );
+    	
+    	//모달창 글이 span으로 되있을경우 표시하는 
+		$('span.sche_nm','#sche-Modal-view') .text(calEvent.title);
+		$('span.sche_start','#sche-Modal-view') .text( moment(calEvent.start).format("YYYY-MM-DD") );
 		console.log("end", $.type(calEvent.end));
-		
+// 		$('#event_num','#sche-Modal-view').text(calEvent.id);
 		if($.type(calEvent.end) == "null"){
-			$('#sche_end','#sche-Modal-view') .text(  moment(calEvent.start).format("YYYY-MM-DD"));
+			$('span.sche_end','#sche-Modal-view') .text( moment(calEvent.start).format("YYYY-MM-DD"));
 		}else{
-			$('#sche_end','#sche-Modal-view') .text(moment(calEvent.end).format("YYYY-MM-DD"));	
-		}
+			$('span.sche_end','#sche-Modal-view') .text(moment(calEvent.end).format("YYYY-MM-DD"));	
+		}		
+		$('span.sche_content','#sche-Modal-view') .text(calEvent.content);
+       	//모달창 글이 span으로 되있을경우 표시하는
+       	
+       	//모달창 글이 input text로 되있는경우
+		$('input.sche_nm','#sche-Modal-view') .val(calEvent.title);
+		$('input.sche_start','#sche-Modal-view') .val( moment(calEvent.start).format("YYYY-MM-DD") );
+		console.log("end", $.type(calEvent.end));
+		$('#event_num','#sche-Modal-view').val(calEvent.id);
+		if($.type(calEvent.end) == "null"){
+			$('input.sche_end','#sche-Modal-view') .val( moment(calEvent.start).format("YYYY-MM-DD"));
+		}else{
+			$('input.sche_end','#sche-Modal-view') .val(moment(calEvent.end).format("YYYY-MM-DD"));	
+		}		
+		$('input.sche_content','#sche-Modal-view') .val(calEvent.content);
+		//모달창 글이 input text로 되있는경
 		
-		$('#sche_content','#sche-Modal-view') .text(calEvent.content);
-        // change the border color just for fun
+		//모달창 오픈
         $('#sche-Modal-view').modal('show')
-
+        
+		
     }
   });
 
@@ -156,18 +226,18 @@ $(document).ready(function() {
       </div>
       <div class="modal-body">
 				<td width="15%"><h5>스케줄이름</h5></td>
-						<input type="text" id="event_nm"  class="form-control " placeholder="제목을 입력하세요.">
+						<input type="text"   class="form-control event_nm " placeholder="제목을 입력하세요.">
 				<td width="15%"><h5>스케줄 시작날짜</h5></td>
-						<input type="text" id="start_date" class="form-control" placeholder="ex)2012-02-12T20:00:00">
+						<input type="text"  class="form-control start_date" placeholder="ex)2012-02-12T20:00:00">
 				<td width="15%"><h5>스케줄 종료날짜</h5></td>
-						<input type="text" id="end_date" class="form-control " placeholder="ex)2012-02-12T20:00:00">
+						<input type="text"  class="form-control end_date" placeholder="ex)2012-02-12T20:00:00">
 			<td colspan="2">
-					<textarea id="ev_con" rows="15" class="form-control" name="con"></textarea>
+					<textarea  rows="15" class="form-control ev_con" name="con"></textarea>
 			</td>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-        <button type="button" class="btn btn-primary" id=submit>스케줄 등록</button>
+        <button type="button" class="btn btn-primary" id="submit">스케줄 등록</button>
       </div>
     </div>
   </div>
@@ -183,22 +253,26 @@ $(document).ready(function() {
         <h4 class="modal-title" id="myModalLabel">스케줄</h4>
       </div>
       <div class="modal-body">
+      			<input type="hidden" id="event_num" name="event_no" class="event_num" >
 				<td width="15%"><h5>스케줄이름</h5></td>
-<!-- 						<input type="text" id="sche_nm" value="" name="" class="form-control "> -->
-						<div class=form-control><span id="sche_nm" value=""></span></div>
+						<input type="text"  value="" name="" class="form-control hide nor sche_nm">
+						<span  class="nor sche_nm" ></span>
 				<td width="15%"><h5>스케줄 시작날짜</h5></td>
-<!-- 							<input type="text" id="sche_start" value="" name=""class="form-control "> -->
-						<div class=form-control><span id="sche_start"></span></div>
+						<input type="text" id="" name=""class="form-control hide nor sche_start">
+						<span  class="nor sche_start"></span>
 				<td width="15%"><h5>스케줄 종료날짜</h5></td>
-<!-- 						<input type="text" id="sche_end" value="" name  class="form-control "> -->
-						<div class=form-control><span id="sche_end"></span></div>
+						<input type="text"   class="form-control hide nor sche_end">
+						<span  class="nor sche_end"></span>
 			<td colspan="2">
 				<td width="15%"><h5>스케줄 내용</h5></td>
-					<div class=form-control row="15"><span id="sche_content"></span></div>
+					<input type="text"  class="form-control hide nor sche_content">
+					<span  class="nor sche_content"></span>
+					
 			</td>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" id="edit">수정</button>
+    	<button type="button" class="btn btn-primary nor" onclick="state_change()">수정 </button>
+        <button type="button" class="btn btn-default hide nor" id="edit">수정</button>
         <button type="button" class="btn btn-primary" id="delete">삭제</button>
         <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
       </div>

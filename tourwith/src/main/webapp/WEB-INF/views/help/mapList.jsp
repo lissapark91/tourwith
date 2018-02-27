@@ -62,7 +62,7 @@ html, body {
 
 		map = new google.maps.Map(document.getElementById('map'), {
 			center : pyrmont,
-			zoom : 9
+			zoom : 8
 		});
 
 		infowindow = new google.maps.InfoWindow();
@@ -167,14 +167,6 @@ html, body {
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
 	$(function() {
 
 		$("#activities1")
@@ -246,10 +238,10 @@ html, body {
 								lat : data.lati,
 								lng : data.longi
 							},
-							zoom : 13
+							zoom : 8
 						});
 
-						
+						//코드이름 불러오며 관광명소 여행도 서치하여 출력
 						service.textSearch({
 							location : map.getCenter(),
 							radius : 10000,
@@ -315,7 +307,7 @@ html, body {
 
 
 
-
+			<!-- map 영역 및 사이즈 -->
 			<div class="col-md-6 col-md-offset-0" style="height: 900px">
 
 				<div id="map" style="width: 1350px;"></div>
@@ -324,7 +316,7 @@ html, body {
 		</div>
 	</div>
 
-
+	<!-- google api -->
 	<script
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyApTn1uDzXOtlEB4dd_M8tprfAL_gT1SvY&libraries=places&callback=initMap"
 		async defer></script>

@@ -10,11 +10,22 @@ public class Code {
 	private String code_se;
 	private String code_nm;
 	private String group_code;
-	private String wrter;
+//	private String wrter;
+	private String mngr;
 	
 	
 	
 	
+	
+	
+	public String getMngr() {
+		return mngr;
+	}
+
+	public void setMngr(String mngr) {
+		this.mngr = mngr;
+	}
+
 	public String getCode_no() {
 		return code_no;
 	}
@@ -55,13 +66,13 @@ public class Code {
 		this.group_code = group_code;
 	}
 	
-	public String getWrter() {
-		return wrter;
-	}
-	
-	public void setWrter(String wrter) {
-		this.wrter = wrter;
-	}
+//	public String getWrter() {
+//		return wrter;
+//	}
+//	
+//	public void setWrter(String wrter) {
+//		this.wrter = wrter;
+//	}
 
 	
 	
