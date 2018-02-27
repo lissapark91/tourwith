@@ -82,11 +82,11 @@
 									<tr>
 										<%-- <td>${rev.rev_no }</td> --%>
 										<td width="10%">${status.index + pagingUtil.startRow + 1 }</td>
-										<td width="25%"><a href="review/${rev.rev_no }">${rev.sj }</a> </td>
-										<td width="15%"> # </td>
-										<td width="10%"> # </td>
-										<td width="20%"> # </td>
-										<td class="reg_de" regde="${rev.reg_de }" width="10%"></td>
+										<td width="25%"><a href="review/${rev.rev_no }">${rev.sj } [${rev.replyCnt }]</a> </td>
+										<td width="15%">${rev.trplc_no}</td>
+										<td width="10%">${rev.nmpr }</td>
+										<td width="20%">${rev.depr_de} - ${rev.arvl_de}</td>
+										<td class="reg_de" regde="${rev.reg_de}" width="10%"></td>
 										<td width="20%">${rev.hitcnt }</td>
 									</tr>
 								</c:forEach>

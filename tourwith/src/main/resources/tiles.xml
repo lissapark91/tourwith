@@ -9,7 +9,6 @@
 <!-- 관리 페이지 -->
 	<definition name="admin" template="/WEB-INF/views/layout/admin_template.jsp">
 		<put-attribute name="nav" value="/WEB-INF/views/layout/admin_nav.jsp" />
-	
 	</definition>
 
 	<definition name="admin/*" extends="admin">
@@ -28,9 +27,6 @@
 		<put-attribute name="footer" value="/WEB-INF/views/layout/footer.jsp" />
 	</definition>
 	
-
-
-
 
 
 

@@ -14,12 +14,12 @@ public class Rev {
 	
 	//table에 없지만 추가
 	private String trplc_no;
-	private String nmpl;
+	private String nmpr;
 	private String depr_de;
 	private String arvl_de;
 	private String rev_writng_mb_nm;
 	
-	
+	private int replyCnt;
 	
 	public String getRev_no() {
 		return rev_no;
@@ -81,11 +81,11 @@ public class Rev {
 	public void setTrplc_no(String trplc_no) {
 		this.trplc_no = trplc_no;
 	}
-	public String getNmpl() {
-		return nmpl;
+	public String getNmpr() {
+		return nmpr;
 	}
-	public void setNmpl(String nmpl) {
-		this.nmpl = nmpl;
+	public void setNmpr(String nmpr) {
+		this.nmpr = nmpr;
 	}
 	public String getDepr_de() {
 		return depr_de;
@@ -104,5 +104,11 @@ public class Rev {
 	}
 	public void setRev_writng_mb_nm(String rev_writng_mb_nm) {
 		this.rev_writng_mb_nm = rev_writng_mb_nm;
+	}
+	public int getReplyCnt() {
+		return replyCnt;
+	}
+	public void setReplyCnt(int replyCnt) {
+		this.replyCnt = replyCnt;
 	}
 }
