@@ -81,16 +81,38 @@ public class CrewEventController {
 		return "test/calendar";
 	}
 	
-	@RequestMapping("/update")
-	public int updateCrewEvent(Model model)
-	{
-		return 0;
-	}
-	@RequestMapping("/delete")
+	@RequestMapping("/test/calendar/update")
 	@ResponseBody
-	public int deleteCrewEvent(Model model)
+	public int updateCrewEvent(Model model,String event_no,CrewEvent crewEvent)
 	{
-		return 0;
+		
+		
+		int updcnt = 0;
+		try {
+			updcnt = crewEventService.updateCrewEvent(crewEvent);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
+		return updcnt;
+	}
+	
+	@RequestMapping("/test/calendar/delete")
+	@ResponseBody
+	public int deleteCrewEvent(Model model,String event_no)
+	{	
+		int updcnt = 0;
+		System.out.println(event_no);
+		try {
+			updcnt = crewEventService.deletCrewEvent(event_no);
+		} catch (Exception e) {
+			
+		}
+		
+		return updcnt;
 		
 	}
 }

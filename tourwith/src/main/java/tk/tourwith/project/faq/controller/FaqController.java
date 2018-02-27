@@ -69,8 +69,9 @@ public class FaqController {
 		
 		List<Faq> faqList = faqService.selectFaqList(paramMap);
 
-		model.addAttribute("faqList", faqList);  
-		model.addAttribute("pagingUtil", pagingUtil.getPageHtml().toString());
+		model.addAttribute("faqList", faqList);
+		// model.addAttribute("pagingUtil", pagingUtil.getPageHtml().toString());
+		model.addAttribute("pagingUtil", pagingUtil);
 
 		return "faq/faqList";
 	}
