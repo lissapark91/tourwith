@@ -134,7 +134,7 @@ $(document).ready(function() {
    // events: loadData() 
      events: function(start, end, timezone, callback) {
         $.ajax({
-            url: '${pageContext.request.contextPath}/calendar/event/0000000002',
+            url: '${pageContext.request.contextPath}/part/calendar/event/0000000002',
             dataType: 'json',
            /*  data: {
                 // our hypothetical feed requires UNIX timestamps

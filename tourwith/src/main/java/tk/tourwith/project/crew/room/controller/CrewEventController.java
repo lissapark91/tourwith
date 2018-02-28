@@ -32,15 +32,15 @@ public class CrewEventController {
 	@Autowired
 	CrewServiceImpl crewService;
 	
-	@RequestMapping("/calendar")
+	@RequestMapping("/part/calendar")
 	public String getCrewEventList(Model model
 								   ) throws Exception{
 		
 		
-		return "test/calendar";
+		return "part/calendar";
 	}
 	
-	@RequestMapping("/calendar/event/{CR_NO}")
+	@RequestMapping("/part/calendar/event/{CR_NO}")
 	@ResponseBody
 	public List<CrewEvent> getCrewEventListtest(Model model/*,
 								   String EVENT_NM,
@@ -78,7 +78,7 @@ public class CrewEventController {
 	{
 		CrewEvent crewEvent= crewEventService.getCrewEvent(event_no);
 		
-		return "test/calendar";
+		return "part/calendar";
 	}
 	
 	@RequestMapping("/calendar/update")

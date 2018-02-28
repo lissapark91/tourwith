@@ -19,13 +19,16 @@
 	</definition>
 
 <!-- 빈 설정 템플릿 -->	
-	<definition name="test" template="/WEB-INF/views/layout/emptyTemplate.jsp">
+	<definition name="part" template="/WEB-INF/views/layout/emptyTemplate.jsp">
+	
+	</definition>
+	<definition name="part/*" extends="part">
+	<put-attribute name="body" value="/WEB-INF/views/part/{1}.jsp"></put-attribute>
 	
 	</definition>
 	
-	<definition name="/calendar/*" extends="test">
-<!-- 		<put-attribute name="body" value="/WEB-INF/views/test/calendar.jsp"></put-attribute>  -->
-	<put-attribute name="body" value="/WEB-INF/views/test/{1}.jsp"></put-attribute>
+	<definition name="part/*/*" extends="part">
+	<put-attribute name="body" value="/WEB-INF/views/part/{1}/{2}.jsp"></put-attribute>
 	</definition>
 
 
