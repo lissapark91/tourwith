@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,9 +14,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import tk.tourwith.project.code.service.impl.CodeServiceImpl;
+import tk.tourwith.project.crew.model.Crew;
 import tk.tourwith.project.crew.room.model.CrewEvent;
 import tk.tourwith.project.crew.room.service.impl.CrewEventServiceImpl;
 import tk.tourwith.project.crew.service.impl.CrewServiceImpl;
+import tk.tourwith.project.member.model.CrAuthor;
+import tk.tourwith.project.member.model.Member;
+import tk.tourwith.project.member.service.impl.CrAuthorServiceImpl;
 import tk.tourwith.project.member.service.impl.MemberServiceImpl;
 
 @Controller
@@ -32,10 +38,26 @@ public class CrewEventController {
 	@Autowired
 	CrewServiceImpl crewService;
 	
-	@RequestMapping("/part/calendar")
-	public String getCrewEventList(Model model
-								   ) throws Exception{
+	@Autowired
+	CrAuthorServiceImpl crAuthorService;
+	
+	@RequestMapping("/part/calendar/{cr_no}")
+	public String getCrewEventList( @PathVariable("cr_no") String cr_no, Model model
+								   , HttpSession session) throws Exception{
 		
+		Member member = (Member) session.getAttribute("LOGIN_USER");
+		
+		Map<String, Object> paramMap = new HashMap<>();
+		
+		paramMap.put("mb_no", member.getMb_no());
+		paramMap.put("cr_no", cr_no);
+		
+		CrAuthor crAuthor = crAuthorService.selectAuthorByMbNoCrNo(paramMap);
+		
+		
+		Crew crew = crewService.getCrew(cr_no);
+		
+		model.addAttribute("crew", crew);
 		
 		return "part/calendar";
 	}
