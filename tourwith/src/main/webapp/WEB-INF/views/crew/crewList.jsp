@@ -137,7 +137,21 @@
 		})
 		
 	});
-	
+	$(function(){
+		$('a[cr_no]').on('click', function(){
+			console.log('click')
+			var $this = $(this);
+			if(${empty LOGIN_USER}){
+				$this.attr({
+					'data-toggle': "modal", 'data-target': "#myModal"
+				})
+				fbLogin();
+			}else{
+				$this.attr('href', "${pageContext.request.contextPath}/crew/page/" + $this.attr('cr_no'));			
+			}
+			
+		})
+	})
 	
 	
 	
@@ -234,7 +248,9 @@
 
 		<c:forEach var="crew" items="${crewList }">
 			<div class="col-lg-6 col-md-6 col-sm-6" >
-					<a href="${pageContext.request.contextPath}/crew/page/${crew.cr_no}" class="fh5co-card-item">
+					<a class="fh5co-card-item" cr_no="${crew.cr_no }">
+<%-- 					<a onclick="goCrew('${crew.cr_no}')"  data-toggle="modal" data-target="#myModal" class="fh5co-card-item" cr_no="${crew.cr_no }"> --%>
+<%-- 					<a onclick="goCrew('${crew.cr_no}')" href="${pageContext.request.contextPath}/crew/page/${crew.cr_no}" class="fh5co-card-item"> --%>
 					
 						<div class="row">
 						
