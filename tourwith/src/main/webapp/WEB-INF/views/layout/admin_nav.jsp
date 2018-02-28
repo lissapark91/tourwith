@@ -34,7 +34,7 @@
 <%--                     <a href="${pageContext.request.contextPath}/admin/codes">공통코드 관리</a></li> --%>
                 </li>
                 <li>
-                    <a href="#">여행지 관리</a>
+                    <a href="${pageContext.request.contextPath}/admin/codes/help">여행지 관리</a>
                 </li>
                 <li>
                     <a href="#">통계</a>
