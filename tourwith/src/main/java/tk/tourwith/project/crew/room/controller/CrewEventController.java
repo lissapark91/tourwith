@@ -32,15 +32,15 @@ public class CrewEventController {
 	@Autowired
 	CrewServiceImpl crewService;
 	
-	@RequestMapping("/test/calendar")
+	@RequestMapping("/part/calendar")
 	public String getCrewEventList(Model model
 								   ) throws Exception{
 		
 		
-		return "test/calendar";
+		return "part/calendar";
 	}
 	
-	@RequestMapping("/test/calendar/event/{CR_NO}")
+	@RequestMapping("/part/calendar/event/{CR_NO}")
 	@ResponseBody
 	public List<CrewEvent> getCrewEventListtest(Model model/*,
 								   String EVENT_NM,
@@ -62,7 +62,7 @@ public class CrewEventController {
 		return crewEventList;
 	}
 	
-	@RequestMapping("/test/calendar/insert")
+	@RequestMapping("/calendar/insert")
 	@ResponseBody
 	public int insertCrewEvent(Model model,
 			 					CrewEvent crewEvent
@@ -73,15 +73,15 @@ public class CrewEventController {
 		return updcnt;
 	}
 	
-	@RequestMapping("/test/calendar/view")
+	@RequestMapping("/calendar/view")
 	public String crewEventView(Model model,String event_no) throws Exception
 	{
 		CrewEvent crewEvent= crewEventService.getCrewEvent(event_no);
 		
-		return "test/calendar";
+		return "part/calendar";
 	}
 	
-	@RequestMapping("/test/calendar/update")
+	@RequestMapping("/calendar/update")
 	@ResponseBody
 	public int updateCrewEvent(Model model,String event_no,CrewEvent crewEvent)
 	{
@@ -100,7 +100,7 @@ public class CrewEventController {
 		return updcnt;
 	}
 	
-	@RequestMapping("/test/calendar/delete")
+	@RequestMapping("/calendar/delete")
 	@ResponseBody
 	public int deleteCrewEvent(Model model,String event_no)
 	{	
