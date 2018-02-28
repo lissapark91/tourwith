@@ -128,7 +128,7 @@
 //  					        	 var result = JSON.parse(result)
  					        	 var isMember = result.isMember;
  					        	 console.log(isMember);
- 					        	 $('#modal-contents').hide();
+//  					        	 $('#modal-contents').hide();
  					        	 if(!isMember){
  					        		 var htmlStr = '<div align="center">';
  					        		 htmlStr += "<h4>"+ response.name +"님으로 tourwith에 가입합니다.</h4>";
@@ -136,14 +136,15 @@
  					        		 htmlStr += '<br/><button type="button" class="btn btn-default" onclick="document.getElementById('+"'member'"+').submit();">회원가입</button>'
  					        		 $('.modal-body').html(htmlStr)
  					        		 console.log(htmlStr)
- 					        	 }else{
- 					        		 var htmlStr = '<div align="center">';
-					        		 htmlStr += "<h4>"+ response.name +"님으로 tourwith에 로그인합니다.</h4>";
-					        		 htmlStr += '<div><img src="' + response.picture.data.url + '"></div>'
-					        		 htmlStr += '<br/><button type="button" class="btn btn-default" onclick="signin(' + "'" + response.id + "'" + ')">로그인</button>';
-					        		 $('.modal-body').html(htmlStr);
- 					        		 
  					        	 }
+//  					        	 else{
+//  					        		 var htmlStr = '<div align="center">';
+// 					        		 htmlStr += "<h4>"+ response.name +"님으로 tourwith에 로그인합니다.</h4>";
+// 					        		 htmlStr += '<div><img src="' + response.picture.data.url + '"></div>'
+// 					        		 htmlStr += '<br/><button type="button" class="btn btn-default" onclick="signin(' + "'" + response.id + "'" + ')">로그인</button>';
+// 					        		 $('.modal-body').html(htmlStr);
+ 					        		 
+//  					        	 }
  					         }
  					       });
  					})
@@ -179,7 +180,7 @@
 //					        	 var result = JSON.parse(result)
 					        	 var isMember = result.isMember;
 					        	 console.log(isMember);
-					        	 $('#modal-contents').hide();
+// 					        	 $('#modal-contents').hide();
 					        	 if(!isMember){
 					        		 //회원가입으로
 					        		 document.getElementById("member").action = "${pageContext.request.contextPath}/member/form/" + response.id;
@@ -261,7 +262,8 @@
 	        <br/>
 	        <br/>
 	         <div id="fb-login-button" class="fb-login-button" data-max-rows="1" data-size="large" 
-				data-button-type="login_with" data-show-faces="false" data-auto-logout-link="true" 
+				data-button-type="login_with" data-show-faces="false" 
+				data-auto-logout-link="false" 
 				data-use-continue-as="true" 
 				scope="public_profile,user_birthday"
 				onlogin="fbLoginButton()"></div>
