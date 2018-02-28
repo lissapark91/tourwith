@@ -29,7 +29,7 @@
 							</li>
 							<li class="has-dropdown"><a href="#">어디갈래?</a>
 								<ul class="dropdown">
-									<li><a href="${pageContext.request.contextPath}/helper/map">여행도우미</a></li>
+									<li><a href="${pageContext.request.contextPath}/helper">여행도우미</a></li>
 									<li><a href="${pageContext.request.contextPath}/reviews">여행 리뷰</a></li>
 								</ul>
 							</li>

@@ -23,9 +23,6 @@
 				/* subject + content */
 			</if>
 		</if>
-
-		
-		
 	</select>
 	
 	<!-- FAQ 게시판 리스트 매퍼 -->

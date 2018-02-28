@@ -64,6 +64,7 @@
 		
 		
 	}
+	
 	function deleteReply(cr_rply_no){
 		
 		var ableToDel = confirm('해당 댓글을 삭제 하시겠습니까?');
@@ -128,6 +129,8 @@
 			
 		})
 			function getReply(urlRef, dataRef){
+			console.log('isLeader ${isLeader}')
+			console.log('justMember ${justMember}')
 			$(function(){	
 				
 				$.ajax({
@@ -141,7 +144,14 @@
 						console.log(replyList)
 						for(var i = 0; i < replyList.length; i++){
 							var reply = replyList[i];
-							
+// 							var nickName = reply.writng_mb_nick;
+// 							if('${isLeader}' == 'true'){
+// 								nickName += '<span style="color: orange">리더</span>'
+								
+// 							}else if('${justMember}' == 'true'){
+// 								nickName += '<span style="color: lightblue">크루원</span>'
+								
+// 							}
 							
 							str += '<div class="row ' + reply.cr_rply_no +'">';
 							str += '<div class="col-md-12 replyBox">'
@@ -266,7 +276,14 @@
 					}
 					$('[name=con1]').val('')
 				})
-
+				
+				$('#goCrewRoomBtn').click(function(){
+				
+					location.href = "${pageContext.request.contextPath}/crew/room/${crew.cr_no}";
+					
+					
+				})
+				
 				
 				
 			})
@@ -354,9 +371,16 @@
 					<!-- 가운데 정렬용.. div.. -->
 					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
 					</div>
+				<c:if test="${not isCrewMember}">
 					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
 						<button type="button" class="btn btn-warning btn-block" id="requestRegBtn"><b>참 여 하 기</b></button>
 					</div>
+				</c:if>
+				<c:if test="${isCrewMember}">
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+						<button type="button" class="btn btn-warning btn-block" id="goCrewRoomBtn"><b>크루룸 입장</b></button>
+					</div>
+				</c:if>
 					<!-- 가운데 정렬용.. div.. -->
 					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
 					</div>

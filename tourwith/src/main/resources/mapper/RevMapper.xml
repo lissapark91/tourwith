@@ -28,29 +28,38 @@
   	<!-- REV 게시판 리스트 매퍼 -->
   	<select id="selectRevList" resultType="Rev" parameterType="map">
   		select
-  			REV_NO
-				,SJ
-				,REV_WRITNG_MB_NO
-				,DEL_YN
-				,HITCNT
-				,CR_NO
-				,CON
-				,REG_DE
-				,UPD_DE
-			from REV
-			where DEL_YN = 'n'
+  			a.REV_NO
+				,a.SJ
+				,a.REV_WRITNG_MB_NO
+				,c.NICK as rev_writng_mb_nm
+				,a.DEL_YN
+				,a.HITCNT
+				,a.CR_NO
+				,d.CODE_NM as trplc_no 
+				,(b.MALE_NMPR + b.FEMALE_NMPR) as nmpr
+				,b.DEPR_DE
+				,b.ARVL_DE
+				,a.CON
+				,a.REG_DE
+				,a.UPD_DE
+				,(select count(e.REV_RPLY_NO) from REV_RPLY as e where e.REV_NO = a.REV_NO ) as replyCnt
+			from REV as a, CREW as b, MEMBER as c, CMMN_CODE as d
+			where a.DEL_YN = 'n'
+			and a.CR_NO = b.CR_NO
+			and a.REV_WRITNG_MB_NO = c.MB_NO
+			and b.TRPLC_NO = d.CODE_NO
 			<if test="searchWord != null and searchWord != '' ">
 				<if test="searchType == '01'">
-					and SJ LIKE CONCAT('%', #{searchWord}, '%')
+					and a.SJ LIKE CONCAT('%', #{searchWord}, '%')
 				</if>
 				<if test="searchType == '02'">
-					and CON LIKE CONCAT('%', #{searchWord}, '%')
+					and a.CON LIKE CONCAT('%', #{searchWord}, '%')
 				</if>
 				<if test="searchType == '03'">
-					and CONCAT(SJ, ' ', CON) LIKE CONCAT('%', #{searchWord}, '%')
+					and CONCAT(a.SJ, ' ', a.CON) LIKE CONCAT('%', #{searchWord}, '%')
 			</if>
 		</if>
-		ORDER BY REG_DE DESC
+		ORDER BY a.REG_DE DESC
 		<if test="startRow >= 0 and endRow > startRow">
 			LIMIT #{startRow}, 15
 		</if>

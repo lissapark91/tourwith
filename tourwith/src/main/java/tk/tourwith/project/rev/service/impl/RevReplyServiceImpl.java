@@ -64,6 +64,11 @@ public class RevReplyServiceImpl implements RevReplyService{
 		
 		return revRepMapper.getTotalCnt(paramMap);
 	}
+	
+	@Override
+	public RevReply selectRevReplyByPk(String rev_rply_no) {
+		return revRepMapper.selectRevReplyByPk(rev_rply_no);
+	}
 
 
 

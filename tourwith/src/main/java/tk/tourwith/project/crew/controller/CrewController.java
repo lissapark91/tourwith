@@ -21,7 +21,9 @@ import tk.tourwith.project.code.model.Code;
 import tk.tourwith.project.code.service.impl.CodeServiceImpl;
 import tk.tourwith.project.crew.model.Crew;
 import tk.tourwith.project.crew.service.impl.CrewServiceImpl;
+import tk.tourwith.project.member.model.CrAuthor;
 import tk.tourwith.project.member.model.Member;
+import tk.tourwith.project.member.service.impl.CrAuthorServiceImpl;
 import tk.tourwith.project.member.service.impl.MemberServiceImpl;
 import tk.tourwith.project.util.PagingUtil;
 
@@ -34,6 +36,8 @@ public class CrewController {
 	CodeServiceImpl codeService;
 	@Autowired
 	MemberServiceImpl memberService;
+	@Autowired
+	CrAuthorServiceImpl crAuthorService;
 
 	@RequestMapping("/crew/list/{category}")
 	public String getCrewList(@PathVariable String category, 
@@ -67,7 +71,8 @@ public class CrewController {
 		model.addAttribute("category", category);
 		
 		
-		
+		//리더 닉네임
+		paramMap.put("cr_leadr_nm_nick", cr_leadr_mb_nick);
 		
 		// 페이징 처리 180223 종표
 		int totalCount = crewService.getTotalCnt(paramMap);
@@ -90,8 +95,7 @@ public class CrewController {
 		
 		
 		
-		//리더 닉네임
-		paramMap.put("cr_leadr_nm_nick", cr_leadr_mb_nick);
+		
 		
 		List<Crew> crewList = crewService.selectCrewList(paramMap);
 		
@@ -115,6 +119,12 @@ public class CrewController {
 			
 		}
 		
+	//현재 로그인 유저가 크루원인지 아닌지(참가하기버튼, 크루룸으로 이동 버튼)
+		
+		Map<String, Object> paramMap = new HashMap<>();
+		paramMap.put("mb_no", member.getMb_no());
+		paramMap.put("cr_no", cr_no);
+		
 		//trplc, 크루 리더, 테마, 모집상태 이름을 넣어준다.
 		member = memberService.selectMemberByPK(crew.getCr_leadr_mb_no());
 		crew.setCr_leadr_nick(member.getNick());
@@ -128,7 +138,28 @@ public class CrewController {
 		
 		code = codeService.selectCodeByPk(crew.getRcrit_sttus());
 		crew.setRcrit_sttus_nm(code.getCode_nm());
-
+		
+	
+		
+		CrAuthor crAuthor = crAuthorService.selectAuthorByMbNoCrNo(paramMap);
+		
+		//강퇴
+		if(crAuthor != null) {
+			if(StringUtils.contains(crAuthor.getCr_author_no(), "CR_ROLE_07")) {
+				if(StringUtils.contains(crAuthor.getCr_author_no(), "CR_ROLE_04")) {
+					if(StringUtils.contains(crAuthor.getCr_author_no(), "CR_ROLE_03")) {
+						model.addAttribute("isCrewMember", true);
+							
+						if(StringUtils.contains(crAuthor.getCr_author_no(), "CR_ROLE_01")) {
+							model.addAttribute("justMember", true);
+						}
+						
+					}
+				}
+			}
+			
+		}
+		
 		model.addAttribute("crew", crew);
 
 		return "crew/crewView";

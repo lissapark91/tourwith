@@ -104,6 +104,8 @@
 		<input type="hidden" name="rev_no" value="${rev.rev_no }">
 		<input type="hidden" name="rev_writng_mb_no" value="${rev.rev_writng_mb_no }">
 		
+		
+		
 		<table class="table">
 			<tr class="info">
 				<td width="15%">제목</td>

@@ -19,7 +19,7 @@
 			
 		}
 		.crewListForm {
-			margin-top: 15%;
+			margin-top: 200px;
 			padding-top: 1%;
 			background-color: rgba(255,255,255,0.7);
 			border-radius: 25px;
@@ -137,11 +137,29 @@
 		})
 		
 	});
+	$(function(){
+		$('a[cr_no]').on('click', function(){
+			console.log('click')
+			var $this = $(this);
+			if(${empty LOGIN_USER}){
+				$this.attr({
+					'data-toggle': "modal", 'data-target': "#myModal"
+				})
+				fbLogin();
+			}else{
+				$this.attr('href', "${pageContext.request.contextPath}/crew/page/" + $this.attr('cr_no'));			
+			}
+			
+		})
+	})
+	
+	
+	
 </script>
 </head>
 
 
-	<header id="gtco-header" class="gtco-cover gtco-cover-sm" role="banner" style="background-image: url(${pageContext.request.contextPath}/image/${category}_01)">
+	<header id="gtco-header" class="gtco-cover gtco-cover-sm" role="banner" style="background-image: url(${pageContext.request.contextPath}/image/${category})" >
 		<div class="row">
 		<div class="container crewListForm col-md-6 col-md-offset-3">
 <!-- 		<div class="row  text-center"> -->
@@ -230,7 +248,9 @@
 
 		<c:forEach var="crew" items="${crewList }">
 			<div class="col-lg-6 col-md-6 col-sm-6" >
-					<a href="${pageContext.request.contextPath}/crew/page/${crew.cr_no}" class="fh5co-card-item">
+					<a class="fh5co-card-item" cr_no="${crew.cr_no }">
+<%-- 					<a onclick="goCrew('${crew.cr_no}')"  data-toggle="modal" data-target="#myModal" class="fh5co-card-item" cr_no="${crew.cr_no }"> --%>
+<%-- 					<a onclick="goCrew('${crew.cr_no}')" href="${pageContext.request.contextPath}/crew/page/${crew.cr_no}" class="fh5co-card-item"> --%>
 					
 						<div class="row">
 						

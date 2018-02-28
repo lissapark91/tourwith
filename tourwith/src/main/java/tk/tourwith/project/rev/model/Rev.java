@@ -12,6 +12,14 @@ public class Rev {
 	private String reg_de;
 	private String upd_de;
 	
+	//table에 없지만 추가
+	private String trplc_no;
+	private String nmpr;
+	private String depr_de;
+	private String arvl_de;
+	private String rev_writng_mb_nm;
+	
+	private int replyCnt;
 	
 	public String getRev_no() {
 		return rev_no;
@@ -66,5 +74,41 @@ public class Rev {
 	}
 	public void setUpd_de(String upd_de) {
 		this.upd_de = upd_de;
+	}
+	public String getTrplc_no() {
+		return trplc_no;
+	}
+	public void setTrplc_no(String trplc_no) {
+		this.trplc_no = trplc_no;
+	}
+	public String getNmpr() {
+		return nmpr;
+	}
+	public void setNmpr(String nmpr) {
+		this.nmpr = nmpr;
+	}
+	public String getDepr_de() {
+		return depr_de;
+	}
+	public void setDepr_de(String depr_de) {
+		this.depr_de = depr_de;
+	}
+	public String getArvl_de() {
+		return arvl_de;
+	}
+	public void setArvl_de(String arvl_de) {
+		this.arvl_de = arvl_de;
+	}
+	public String getRev_writng_mb_nm() {
+		return rev_writng_mb_nm;
+	}
+	public void setRev_writng_mb_nm(String rev_writng_mb_nm) {
+		this.rev_writng_mb_nm = rev_writng_mb_nm;
+	}
+	public int getReplyCnt() {
+		return replyCnt;
+	}
+	public void setReplyCnt(int replyCnt) {
+		this.replyCnt = replyCnt;
 	}
 }

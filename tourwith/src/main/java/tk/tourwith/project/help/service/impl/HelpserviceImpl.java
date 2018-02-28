@@ -1,6 +1,7 @@
 package tk.tourwith.project.help.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,17 @@ public class HelpserviceImpl implements HelpService {
 	public Help selectLoc(String group_help) {
 		
 		return helpMapper.selectLoc(group_help);
+	}
+	
+	public List<Help> selectHelpList(Map<String, Object> paramMap) throws Exception {
+		 
+		return helpMapper.selectHelpList(paramMap);
+	}
+	@Override
+	public int codehelpCount(Map<String, Object> paramMap) throws Exception {
+		
+		return helpMapper.codehelpCount(paramMap);
+		
 	}
 
 }
