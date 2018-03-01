@@ -129,8 +129,6 @@
 			
 		})
 			function getReply(urlRef, dataRef){
-			console.log('isLeader ${isLeader}')
-			console.log('justMember ${justMember}')
 			$(function(){	
 				
 				$.ajax({

@@ -125,7 +125,17 @@ public class CrewController {
 		paramMap.put("mb_no", member.getMb_no());
 		paramMap.put("cr_no", cr_no);
 		
-		//trplc, 크루 리더, 테마, 모집상태 이름을 넣어준다.
+		CrAuthor memberCrAuthor = crAuthorService.selectAuthorByMbNoCrNo(paramMap);
+		System.out.println(memberCrAuthor.getAuthor_group_code());
+		if(StringUtils.equals(memberCrAuthor.getAuthor_group_code(), "CR_ROLE_REG")) {
+			model.addAttribute("isCrewMember", true);
+		}else {
+			model.addAttribute("isCrewMember", false);
+		}
+		
+		
+//		trplc, 크루 리더, 테마, 모집상태 이름을 넣어준다.
+		
 		member = memberService.selectMemberByPK(crew.getCr_leadr_mb_no());
 		crew.setCr_leadr_nick(member.getNick());
 		crew.setCr_leadr_fb_id(member.getFb_id());
@@ -138,27 +148,8 @@ public class CrewController {
 		
 		code = codeService.selectCodeByPk(crew.getRcrit_sttus());
 		crew.setRcrit_sttus_nm(code.getCode_nm());
-		
-	
-		
-		CrAuthor crAuthor = crAuthorService.selectAuthorByMbNoCrNo(paramMap);
-		
-		//강퇴
-		if(crAuthor != null) {
-			if(StringUtils.contains(crAuthor.getCr_author_no(), "CR_ROLE_07")) {
-				if(StringUtils.contains(crAuthor.getCr_author_no(), "CR_ROLE_04")) {
-					if(StringUtils.contains(crAuthor.getCr_author_no(), "CR_ROLE_03")) {
-						model.addAttribute("isCrewMember", true);
-							
-						if(StringUtils.contains(crAuthor.getCr_author_no(), "CR_ROLE_01")) {
-							model.addAttribute("justMember", true);
-						}
-						
-					}
-				}
-			}
-			
-		}
+//		
+
 		
 		model.addAttribute("crew", crew);
 
@@ -234,6 +225,25 @@ public class CrewController {
 			) throws Exception {
 		
 		Member member = (Member) session.getAttribute("LOGIN_USER");
+		
+		// if login user is registered a crew in this period, cannot make crew
+		
+		Map<String, Object> paramMap = new HashMap<>();
+		paramMap.put("mb_no", member.getMb_no());
+		paramMap.put("depr_de", crew.getDepr_de());
+		paramMap.put("arvl_de", crew.getArvl_de());
+		
+		List<CrAuthor> checkDeList = crAuthorService.selectListByDe(paramMap);
+		
+		if(checkDeList.size() > 0) {
+			model.addAttribute("isError", true);
+			model.addAttribute("message", "해당 기간에 가입한 크루가 존재합니다..");
+			model.addAttribute("locationURL", "/crew/form");
+			
+			return "common/message";
+		}
+		
+		///////////////////
 		
 		//set crew leader
 		crew.setCr_leadr_mb_no(member.getMb_no());

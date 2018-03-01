@@ -54,6 +54,8 @@ public class CrewEventController {
 		
 		CrAuthor crAuthor = crAuthorService.selectAuthorByMbNoCrNo(paramMap);
 		
+//		crAuthor.getCr_author_no()
+		
 		
 		Crew crew = crewService.getCrew(cr_no);
 		
