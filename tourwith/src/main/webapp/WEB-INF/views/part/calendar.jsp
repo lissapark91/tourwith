@@ -79,7 +79,7 @@ $(document).ready(function() {
 			 "bgndt":st_dt,
 			 "enddt":en_dt,
 			 "event_con":ev_con,
-			 "cr_no":'0000000002'
+			 "cr_no":'${crew.cr_no}'
 		},	
 		success: function(data) {
 			//window.location.reload(true);

@@ -1,21 +1,26 @@
 package tk.tourwith.project.crew.room.controller;
 
-import javax.servlet.http.HttpSession;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import tk.tourwith.project.member.model.Member;
+import tk.tourwith.project.crew.model.Crew;
+import tk.tourwith.project.crew.service.impl.CrewServiceImpl;
 
 @Controller
 public class CrewRoomController {
 	
+	@Autowired
+	CrewServiceImpl crewService;
+	
 	@RequestMapping("/crew/room/{cr_no}")
-	public String goCrewRoom(@PathVariable String cr_no
-										  ,HttpSession session) {
+	public String goCrewRoom(@PathVariable String cr_no, Model model) throws Exception {
 		
-		Member member = (Member)session.getAttribute("LOGIN_USER");
+		Crew crew = crewService.getCrew(cr_no);
+		
+		model.addAttribute("crew", crew);
 		
 		return "crew/crewRoom";
 	}
