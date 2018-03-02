@@ -72,8 +72,8 @@
 		now(),
 		now(),
 		'n',
-		'MB_0000000001',
-		'MB_0000000001',
+		#{wrter},
+		#{updusr},
 		'n');
 
 	</insert>
@@ -86,7 +86,7 @@
 		BGNDT = #{bgndt},
 		ENDDT = #{enddt},
 		UPD_DE = now(),
-		UPDUSR = 'MB_0000000001',
+		UPDUSR = #{updusr},
 		UPD_POSBL_YN = 'n'
 		WHERE EVENT_NO = #{event_no}
 	</update>
