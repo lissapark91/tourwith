@@ -209,6 +209,7 @@ $(document).ready(function() {
 <div style="width: 500px; height: 700px;">
 	<div id="calendar"></div>
 	<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#sche-Modal">스케줄 작성</button>
+	<input type="hidden" class="cr_no" value="${cr_no}">
 </div>
 	
 <!-- 스케줄 등록 모달 Modal -->
