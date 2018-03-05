@@ -30,7 +30,18 @@
 	<definition name="part/*/*" extends="part">
 	<put-attribute name="body" value="/WEB-INF/views/part/{1}/{2}.jsp"></put-attribute>
 	</definition>
-
+	
+	<!-- 에러페이지 템플릿 -->
+	<definition name="common" template="/WEB-INF/views/layout/errorTemplate.jsp" >
+	</definition>
+	
+	<definition name="common/error" extends="common" >
+		<put-attribute name="body" value="/WEB-INF/views/common/error.jsp"></put-attribute>
+	</definition>
+	
+<!-- 	<definition name="common/error/*"> -->
+<!-- 		<put-attribute name="body" value="/WEB-INF/views/common/error.jsp"></put-attribute> -->
+<!-- 	</definition> -->
 
 <!-- 기본설정 템플릿 -->
 	<definition name="default" template="/WEB-INF/views/layout/template.jsp">

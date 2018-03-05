@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -42,9 +43,11 @@ public class CrewEventController {
 	CrAuthorServiceImpl crAuthorService;
 	
 	@RequestMapping("/part/calendar/{cr_no}")
-	public String getCrewEventList( @PathVariable("cr_no") String cr_no, Model model
-								   , HttpSession session) throws Exception{
+	public String getCrewEventList(@PathVariable("cr_no") String cr_no, Model model
+			   						, HttpSession session
+									) throws Exception{
 		
+				
 		Member member = (Member) session.getAttribute("LOGIN_USER");
 		
 		Map<String, Object> paramMap = new HashMap<>();
@@ -52,14 +55,22 @@ public class CrewEventController {
 		paramMap.put("mb_no", member.getMb_no());
 		paramMap.put("cr_no", cr_no);
 		
-		CrAuthor crAuthor = crAuthorService.selectAuthorByMbNoCrNo(paramMap);
+		CrAuthor memberCrAuthor = crAuthorService.selectAuthorByMbNoCrNo(paramMap);
+		System.out.println(memberCrAuthor);
+		System.out.println(memberCrAuthor.getAuthor_group_code());
 		
-//		crAuthor.getCr_author_no()
+		if(StringUtils.equals(memberCrAuthor.getAuthor_group_code(), "CR_ROLE_REG")) {
+			model.addAttribute("isCrewMember", true);
+			Crew crew = crewService.getCrew(cr_no);
+			
+			model.addAttribute("crew", crew);
+			model.addAttribute("member",member);
+		}else {
+			model.addAttribute("isCrewMember", false);
+			System.out.println("throw new urlnotfound");
+		}
 		
 		
-		Crew crew = crewService.getCrew(cr_no);
-		
-		model.addAttribute("crew", crew);
 		
 		return "part/calendar";
 	}
