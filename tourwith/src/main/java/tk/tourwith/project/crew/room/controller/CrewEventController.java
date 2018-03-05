@@ -56,8 +56,9 @@ public class CrewEventController {
 		paramMap.put("cr_no", cr_no);
 		
 		CrAuthor memberCrAuthor = crAuthorService.selectAuthorByMbNoCrNo(paramMap);
+		System.out.println(memberCrAuthor);
+		System.out.println(memberCrAuthor.getAuthor_group_code());
 		
-//		crAuthor.getCr_author_no()
 		if(StringUtils.equals(memberCrAuthor.getAuthor_group_code(), "CR_ROLE_REG")) {
 			model.addAttribute("isCrewMember", true);
 			Crew crew = crewService.getCrew(cr_no);
@@ -66,8 +67,7 @@ public class CrewEventController {
 			model.addAttribute("member",member);
 		}else {
 			model.addAttribute("isCrewMember", false);
-			//throw new urlnotfound;
-			System.out.println("");
+			System.out.println("throw new urlnotfound");
 		}
 		
 		
