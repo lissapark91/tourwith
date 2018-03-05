@@ -32,14 +32,23 @@ html, body {
 	padding: 0;
 }
 
-.row.content {
-	height: 1500px
+/* .row.content { */
+/* 	height: 1500px */
+/* } */
+
+#codeaddrlist {
+	height: 600px;
+	overflow: auto;
 }
 
 /* Set gray background color and 100% height */
 .sidenav {
 	height: 100%;
 	border: solid 1px gray;
+}
+
+.active {
+	background-color: gray;
 }
 </style>
 
@@ -81,10 +90,13 @@ html, body {
 			console.log(results)
 			var str = "";
 			for (var i = 0; i < results.length; i++) {
-// 				console.log(results[i].name)
 				$(function(){
-					str += '<ul style="border: 1px solid gray; padding: 5%;">'
-					str += listAddPhoto(results[i]);
+					str += '<li class="list-group-item" map_id="'+ results[i].id +'"><ul>'
+					
+					
+					if(listAddPhoto(results[i]) != null){
+						str += listAddPhoto(results[i]);
+					}					
 					str += "<li>" + results[i].name + "</li>"
 					str += "<li>" + results[i].formatted_address + "</li>"
 // 					var photo = results[i].photos
@@ -100,7 +112,7 @@ html, body {
 				
 				
 				// createPhotoMarker(results[i]);
-				str += "</ul>"
+				str += "</ul></li>"
 				//alert($('#activities2 option:selected').val());
 				
 				createMarker(results[i]);
@@ -120,9 +132,9 @@ html, body {
 
 		for (var i = 0; i < photos.length; i++) {
 		  var str = '<img src="' + photos[i].getUrl({
-				'maxWidth' : 50,
-				'maxHeight' : 50
-			}) + '"/>'
+				'maxWidth' : 100,
+				'maxHeight' : 100
+			}) + '" alter=""/>'
 			
 		}
 		return str;
@@ -160,6 +172,13 @@ html, body {
 		google.maps.event.addListener(marker, 'click', function() {
 			infowindow.setContent(place.name);
 			infowindow.open(map, this);
+			$(function(){
+				$('#codeaddrlist').scrollTop(0);
+				$('[map_id]').removeClass('active')
+				$('[map_id='+ place.id +']').addClass('active');
+				var position = $('[map_id='+ place.id +']').position();
+				$('#codeaddrlist').scrollTop(position.top);
+			})
 		});
 	}
 
@@ -186,7 +205,7 @@ html, body {
 					// 	            console.log(data); //{codeList: []}   
 					// 	            console.log(data.codeList); // []
 									var codeList = data.codeList;
-									var optionHtml = '<option>==지역을 선택해주세요==</option>';
+									var optionHtml = '<option>지역을 선택해주세요</option>';
 									for (var i = 0; i < codeList.length; i++) {
 											var code = codeList[i]; //{code_no: "BIG_CATE_02_01", code_nm: "동티모르", group_code: null, …}
 												// 					 console.log(code.code_no,code.code_nm);
@@ -261,67 +280,58 @@ html, body {
 
 <body>
 
-	
 
-	<div class="row container" style="margin: 4%">
+<!-- 보성 추가	 -->
+	<div class="container">
+	<div class="gtco-section">
+<!-- 	<div class="row container" style="margin: 4%"> -->
 
 	<!-- 나라, 지역 셀렉트 박스  -->
 	<div class="gtco-container">
 		<div class="row ">
-			<div class="col-md-6 col-md-offset-0 sidenav">
-				<div id="list list-group-item">
-					<!-- <form action="#"> -->
-
-					<table>
-						<div class="row form-group">
-							<div class="col-md-6">
-								<label for="activities">나라별선택</label> <select name="BIG_CATE"
+			<div class="col-md-5">
+			<div class="row">
+				<div class="col-md-6">
+				<label for="activities">나라별선택</label> <select name="BIG_CATE"
 									id="activities1" class="form-control form-control-lg">
-									<option>==국가를 선택해주세요==</option>
-									<c:forEach var="code" items="${codeList}" varStatus="status">
-										<option value="${code.code_no}">${code.code_nm}</option>
-									</c:forEach>
-								</select>
-							</div>
-							<div class="col-md-6">
-								<label for="destination">지역별선택</label>
-								<!-- <input placeholder="도시, 지역별로 검색" type="text" id="destination" class="form-control"> -->
-								<select name="BIG_CATE_2" id="activities2" class="form-control">
-									<option>==지역을 선택해주세요==</option>
-								</select>
-							</div>
-							
-							<div class="col-md-6">
-							<div style="height: 800px; overflow: auto; width: 500px; padding-top: 10%;">
-							
-								<ol id="codeaddrlist">
-									<li>관광지 이름</li>
-								</ol>
-								
-							</div>
-						</div>
-					</div>
-				</table>
+					<option>국가를 선택해주세요</option>
+					<c:forEach var="code" items="${codeList}" varStatus="status">
+						<option value="${code.code_no}">${code.code_nm}</option>
+					</c:forEach>
+				</select>
+				</div>
+				<div class="col-md-6">
+				<label for="destination">지역별선택</label>
+				<!-- <input placeholder="도시, 지역별로 검색" type="text" id="destination" class="form-control"> -->
+				<select name="BIG_CATE_2" id="activities2" class="form-control">
+					<option>지역을 선택해주세요</option>
+				</select>
+				</div>
 			</div>
-		</div>
-
-
-
-			<!-- map 영역 및 사이즈 -->
-			<div class="col-md-6 col-md-offset-0" style="height: 900px">
-
-				<div id="map" style="width: 1350px;"></div>
+			<div class="row" style="margin-top: 10px;">
+				<div class="col-md-12">
+					<ul class="list-group" id="codeaddrlist">
+						<li class="list-group-item">관광지 이름</li>
+					</ul>
+				</div>
 			</div>
-
+			</div>
+			<div class="col-md-7">
+			
+				<div id="map" style="height: 700px;" ></div>
+				<script
+					src="https://maps.googleapis.com/maps/api/js?key=AIzaSyApTn1uDzXOtlEB4dd_M8tprfAL_gT1SvY&libraries=places&callback=initMap"
+					async defer></script>
+			
+			</div>
 		</div>
 	</div>
-
-	<!-- google api -->
-	<script
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyApTn1uDzXOtlEB4dd_M8tprfAL_gT1SvY&libraries=places&callback=initMap"
-		async defer></script>
-		
-</div>			
+	</div>
+	</div>
+	
+		<!-- google api -->
+	
+			
 		
 </body>
 </html>
