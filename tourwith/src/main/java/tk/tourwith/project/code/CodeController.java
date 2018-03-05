@@ -37,7 +37,7 @@ public class CodeController {
 	}
 
 	// COMN_CODE LIST 불러오기 및 페이징, 서치 처리
-	@RequestMapping(value = "/admin/codes", method = RequestMethod.GET)
+	@RequestMapping(value = "admin/codes", method = RequestMethod.GET)
 	public String selectCodeList(
 			@RequestParam(value="searchType", required=false, defaultValue="") String searchType,
 			@RequestParam(value="searchWord", required=false, defaultValue="") String searchWord,
@@ -89,6 +89,7 @@ public class CodeController {
 		return "admin/codeForm";
 		
 	}
+
 
 	
 	}

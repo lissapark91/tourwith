@@ -76,6 +76,7 @@ where 1=1
 		WHERE code_no = #{code_no}		
 	</update>
 	
+	<!-- help 코드 불러오기 -->
 
 <!-- <select id="selectByGroupCodeList" parameterType="String" resultType="Code"> -->
 

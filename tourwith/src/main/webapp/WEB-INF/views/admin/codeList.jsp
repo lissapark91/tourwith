@@ -7,8 +7,48 @@
 <script type="text/javascript">
 
 
-	function fn_updateForm() {
-		location.href = "${pageContext.request.contextPath}/admin/codeForm";
+// 	function fn_updateForm() {
+// 		location.href = "${pageContext.request.contextPath}/admin/codeForm";
+// 	}
+
+	function fn_updateForm(code_no, status) {
+		$(function(){
+			if(status == 0){
+				
+				$tr = $('tr[code_no='+ code_no +']')			
+				$tdList = $('tr[code_no='+ code_no +'] [data_type]')
+				$this = $('tr[code_no='+ code_no +'] .updateBtn')
+	// 			$tdList = $('tr[code_no='+ code_no +'] td')
+				$tdList.each(function(idx, ele){
+					$newInput = $('<input>');
+					$newInput.addClass('form-control')
+					var $ele = $(ele)
+	 				$newInput.val($ele.text())
+	 				$newInput.attr('name', $ele.attr('data_type'))
+					$ele.html($newInput)
+					if(idx == 0){
+						$newInput.focus();
+					}
+				})
+	
+				$this.text('확인')
+				$this.attr('onclick', 'fn_updateForm(\''+ code_no +'\', 1);')
+				
+			}else if(status == 1){
+				
+				var $form = $('form[name=code]')
+				$form.attr('action', "${pageContext.request.contextPath}/admin/code/update?code_no="+code_no);
+				$form.submit();
+				
+				
+			}
+			
+		})
+				
+	}
+	
+	function fn_delete(code_no){
+		var a = confirm()
 	}
 
 
@@ -19,6 +59,7 @@
 
 		frm.action = "${pageContext.request.contextPath}/admin/codes";
 		frm.submit();
+		
 	}
 </script>
 
@@ -62,13 +103,13 @@
 						<thead>
 
 							<tr class="bg-primary">
-
+								<th>수정 삭제</th>
 								<th>코드 번호</th>
 								<th>그룹 코드</th>
 								<th>코드 이름</th>
 								<th>코드 구분</th>
 								<th>삽입 일자</th>
-								<th>매니저</th>
+								<th>매 니 저</th>
 
 							</tr>
 						</thead>
@@ -76,29 +117,30 @@
 						<tbody>
 
 							<c:if test="${not empty codeList}">
-
+							<form name="code" method="post">
 								<c:forEach var="code" items="${codeList}">
-
-									<tr>
-
-										<td>${code.code_no}<input type="button" value="수정" class="btn btn-primary" style="margin-left: 2%" onclick="fn_updateForm();"><input type="button" value="삭제" class="btn btn-primary" style="margin-left: 1%"></td>
+		
+									<tr code_no="${code.code_no}">
+										<td><button type="button" class="btn btn-primary updateBtn" style="margin-left: 2%" onclick="fn_updateForm('${code.code_no}', 0);">수정</button><button type="button" class="btn btn-primary deleteBtn" style="margin-left: 1%">삭제</button></td>
+										<td data_type="code_no">${code.code_no}</td>
 														<%-- <td><a href="code/${code.code_no}">${code.group_code}</a></td> 거기로 이동--%>
 
-										<td>${code.group_code}</td>
+										<td data_type="group_code">${code.group_code}</td>
 
-										<td>${code.code_nm}</td>
+										<td data_type="code_nm">${code.code_nm}</td>
 
-										<td>${code.code_se}</td>
+										<td data_type="code_se">${code.code_se}</td>
 
-										<td>${code.code_rgsde}</td>
+										<td data_type="code_rgsde">${code.code_rgsde}</td>
 
-										<td>${code.mngr}</td>
+										<td data_type="mngr">${code.mngr}</td>
 
 
 
 									</tr>
 								</c:forEach>
 							</c:if>
+							</form>
 						</tbody>
 					</table>
 					<!-- 페이징 -->
@@ -117,39 +159,6 @@
 			</div>
 		</div>
 	</div>
-
-
-
-
-
-
-	<!-- jQuery -->
-	<script src="js/jquery.min.js"></script>
-	<!-- jQuery Easing -->
-	<script src="js/jquery.easing.1.3.js"></script>
-	<!-- Bootstrap -->
-	<script src="js/bootstrap.min.js"></script>
-	<!-- Waypoints -->
-	<script src="js/jquery.waypoints.min.js"></script>
-	<!-- Carousel -->
-	<script src="js/owl.carousel.min.js"></script>
-	<!-- countTo -->
-	<script src="js/jquery.countTo.js"></script>
-
-	<!-- Stellar Parallax -->
-	<script src="js/jquery.stellar.min.js"></script>
-
-	<!-- Magnific Popup -->
-	<script src="js/jquery.magnific-popup.min.js"></script>
-	<script src="js/magnific-popup-options.js"></script>
-
-	<!-- Datepicker -->
-	<script src="js/bootstrap-datepicker.min.js"></script>
-
-
-	<!-- Main -->
-	<script src="js/main.js"></script>
-
 
 </body>
 </html>

@@ -3,8 +3,6 @@
  
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<link href="${pageContext.request.contextPath}/summernote/summernote.css" rel="stylesheet">
-<script src="${pageContext.request.contextPath}/summernote/summernote.js"></script>
  <!-- include libraries(jQuery, bootstrap) --> 
 <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet"> 
 <style>
@@ -26,16 +24,16 @@ function state_change(){
 $(document).ready(function() {
 	
 	$('.start_date').datepicker({
-		format: 'yyyy-mm-dd'
+		format: 'yyyy-mm-dd'+'T'+'12:00:00'
 	})
 	$('.sche_start').datepicker({
-		format: 'yyyy-mm-dd'
+		format: 'yyyy-mm-dd'+'T'+'12:00:00'
 	})
 	$('.end_date').datepicker({
-		format: 'yyyy-mm-dd'
+		format: 'yyyy-mm-dd'+'T'+'12:00:00'
 	})
 	$('.sche_end').datepicker({
-		format: 'yyyy-mm-dd'
+		format: 'yyyy-mm-dd'+'T'+'12:00:00'
 	})
 			
 	 function loadData(){
@@ -48,7 +46,7 @@ $(document).ready(function() {
 	 var en_dt = $('.end_date').val()
 	 var ev_con = $('.ev_con').val()
 	 $.ajax({
-		url:'${pageContext.request.contextPath}/test/calendar/insert',
+		url:'${pageContext.request.contextPath}/calendar/insert',
 		type:"post",
 		data:{"event_nm":ev_nm,
 			 "bgndt":st_dt,
@@ -74,14 +72,14 @@ $(document).ready(function() {
 	 var ev_con = $('.sche_content').val()
 	 var ev_no = $('#event_num').val()
 	 $.ajax({
-		url:'${pageContext.request.contextPath}/test/calendar/update',
+		url:'${pageContext.request.contextPath}/calendar/update',
 		type:"post",
 		data:{"event_nm":ev_nm,
 			  "event_no":ev_no,
 			 "bgndt":st_dt,
 			 "enddt":en_dt,
 			 "event_con":ev_con,
-			 "cr_no":'0000000002'
+			 "cr_no":'${crew.cr_no}'
 		},	
 		success: function(data) {
 			//window.location.reload(true);
@@ -97,7 +95,7 @@ $(document).ready(function() {
   //삭제 이벤트
    $('#delete').click(function(){
 	 $.ajax({
-		 url:'${pageContext.request.contextPath}/test/calendar/delete',
+		 url:'${pageContext.request.contextPath}/calendar/delete',
 		 method:"get",
 // 		 data:"event_no="+$('#event_num').val(),
 		 data:$('#event_num').serialize(),
@@ -136,7 +134,7 @@ $(document).ready(function() {
    // events: loadData() 
      events: function(start, end, timezone, callback) {
         $.ajax({
-            url: '${pageContext.request.contextPath}/test/calendar/event/0000000002',
+            url: '${pageContext.request.contextPath}/part/calendar/event/0000000002',
             dataType: 'json',
            /*  data: {
                 // our hypothetical feed requires UNIX timestamps
@@ -206,10 +204,7 @@ $(document).ready(function() {
 });
 
 </script>
-
-<header id="gtco-header" class="gtco-cover gtco-cover-sm" role="banner"
-	style="height: 80px;"> </header>
-
+ 
 
 <div style="width: 500px; height: 700px;">
 	<div id="calendar"></div>

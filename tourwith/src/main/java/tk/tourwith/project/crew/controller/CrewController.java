@@ -21,7 +21,9 @@ import tk.tourwith.project.code.model.Code;
 import tk.tourwith.project.code.service.impl.CodeServiceImpl;
 import tk.tourwith.project.crew.model.Crew;
 import tk.tourwith.project.crew.service.impl.CrewServiceImpl;
+import tk.tourwith.project.member.model.CrAuthor;
 import tk.tourwith.project.member.model.Member;
+import tk.tourwith.project.member.service.impl.CrAuthorServiceImpl;
 import tk.tourwith.project.member.service.impl.MemberServiceImpl;
 import tk.tourwith.project.util.PagingUtil;
 
@@ -34,6 +36,8 @@ public class CrewController {
 	CodeServiceImpl codeService;
 	@Autowired
 	MemberServiceImpl memberService;
+	@Autowired
+	CrAuthorServiceImpl crAuthorService;
 
 	@RequestMapping("/crew/list/{category}")
 	public String getCrewList(@PathVariable String category, 
@@ -115,7 +119,23 @@ public class CrewController {
 			
 		}
 		
-		//trplc, 크루 리더, 테마, 모집상태 이름을 넣어준다.
+	//현재 로그인 유저가 크루원인지 아닌지(참가하기버튼, 크루룸으로 이동 버튼)
+		
+		Map<String, Object> paramMap = new HashMap<>();
+		paramMap.put("mb_no", member.getMb_no());
+		paramMap.put("cr_no", cr_no);
+		
+		CrAuthor memberCrAuthor = crAuthorService.selectAuthorByMbNoCrNo(paramMap);
+		System.out.println(memberCrAuthor.getAuthor_group_code());
+		if(StringUtils.equals(memberCrAuthor.getAuthor_group_code(), "CR_ROLE_REG")) {
+			model.addAttribute("isCrewMember", true);
+		}else {
+			model.addAttribute("isCrewMember", false);
+		}
+		
+		
+//		trplc, 크루 리더, 테마, 모집상태 이름을 넣어준다.
+		
 		member = memberService.selectMemberByPK(crew.getCr_leadr_mb_no());
 		crew.setCr_leadr_nick(member.getNick());
 		crew.setCr_leadr_fb_id(member.getFb_id());
@@ -128,7 +148,9 @@ public class CrewController {
 		
 		code = codeService.selectCodeByPk(crew.getRcrit_sttus());
 		crew.setRcrit_sttus_nm(code.getCode_nm());
+//		
 
+		
 		model.addAttribute("crew", crew);
 
 		return "crew/crewView";
@@ -203,6 +225,25 @@ public class CrewController {
 			) throws Exception {
 		
 		Member member = (Member) session.getAttribute("LOGIN_USER");
+		
+		// if login user is registered a crew in this period, cannot make crew
+		
+		Map<String, Object> paramMap = new HashMap<>();
+		paramMap.put("mb_no", member.getMb_no());
+		paramMap.put("depr_de", crew.getDepr_de());
+		paramMap.put("arvl_de", crew.getArvl_de());
+		
+		List<CrAuthor> checkDeList = crAuthorService.selectListByDe(paramMap);
+		
+		if(checkDeList.size() > 0) {
+			model.addAttribute("isError", true);
+			model.addAttribute("message", "해당 기간에 가입한 크루가 존재합니다..");
+			model.addAttribute("locationURL", "/crew/form");
+			
+			return "common/message";
+		}
+		
+		///////////////////
 		
 		//set crew leader
 		crew.setCr_leadr_mb_no(member.getMb_no());

@@ -7,16 +7,80 @@
 
 	<select id="selectLoc" parameterType="string" resultType="Help">
 
-		select a.TRPLC_NO, a.TRPLC_CTGRY, a.REG_DE, a.UPD_DE, a.TRPLC_DETAIL_CTGRY, a.LATI, a.LONGI, a.MNGR 
+		select a.TRPLC_NO, a.TRPLC_CTGRY, a.REG_DE, a.UPD_DE,
+		a.TRPLC_DETAIL_CTGRY, a.LATI, a.LONGI, a.MNGR
 		from TRPLC_INFO as a
 		where a.TRPLC_NO = #{trplc_no}
 
-<!-- 		select a.TRPLC_NO, a.TRPLC_CTGRY, a.REG_DE, a.UPD_DE, a.TRPLC_DETAIL_CTGRY, -->
-<!-- 		a.LATI, a.LONGI, a.MNGR, b.CODE_NM as TRPLC_NM  -->
-<!-- 		from TRPLC_INFO as a,CMMN_CODE as b  -->
-<!-- 		where a.TRPLC_NO = #{trplc_no} and b.CODE_NO =#{trplc_nm} -->
+
+		<!-- select a.TRPLC_NO, a.TRPLC_CTGRY, a.REG_DE, a.UPD_DE, a.TRPLC_DETAIL_CTGRY, -->
+		<!-- a.LATI, a.LONGI, a.MNGR, b.CODE_NM as TRPLC_NM -->
+		<!-- from TRPLC_INFO as a,CMMN_CODE as b -->
+		<!-- where a.TRPLC_NO = #{trplc_no} and b.CODE_NO =#{trplc_nm} -->
+
+
 
 	</select>
+
+
+	<!-- 어드민 코드 리스트 -->
+	<select id="selectHelpList" resultType="Help" parameterType="map">
+	select * from (
+	select a.TRPLC_NO
+	 ,(select CODE_NM from CMMN_CODE where  CODE_NO = a.TRPLC_NO ) as TRPLC_NM
+     , a.TRPLC_CTGRY		
+     , a.REG_DE
+     , a.UPD_DE
+     ,	a.TRPLC_DETAIL_CTGRY
+	, a.LATI
+    , a.LONGI
+    , a.MNGR
+from TRPLC_INFO a) as b
+
+		where  1=1
+		<if test="searchType != null and searchWord != '' ">
+			<if test="searchType == '01'">
+				and b.TRPLC_NO LIKE CONCAT('%', #{searchWord}, '%')
+			</if>
+			<if test="searchType == '02'">
+				and b.TRPLC_NM LIKE CONCAT('%', #{searchWord}, '%')
+			</if>
+		</if>
+		limit #{startRow},#{pageSize}
+
+	</select>
+<!-- /* limit #{startRow},#{pageSize} */ -->
+
+<!-- 헬 페이징 -->
+
+	<select id="codehelpCount" resultType="int" parameterType="map">
+		<if test="searchType == null or searchType == ''  ">
+			select count(TRPLC_NO)
+			from TRPLC_INFO 
+			where 1=1
+		</if>
+		<if test="searchType != null and searchWord != '' "  >
+			<if test="searchType == '01'">
+				select count(TRPLC_NO)
+				from TRPLC_INFO 
+				where 1=1
+				and TRPLC_NO LIKE CONCAT('%', #{searchWord}, '%')
+			</if>			
+			<if test="searchType == '02'">
+				select count(b.TRPLC_NM)
+				from (select (select CODE_NM from CMMN_CODE where CODE_NO = a.TRPLC_NO) as TRPLC_NM
+				    from TRPLC_INFO as a) as b where b.TRPLC_NM like CONCAT('%', #{searchWord},'%');
+			</if>			
+		</if>	
+		
+	</select>
+
+
+
+
+
+
+
 	<!-- select 가져오겠다 -->
 	<!-- CODE_NO, CODE_NM 컬럼들의 내용을 -->
 	<!-- from CMMN_CODE 어디에서? CMMN 코드 테이블에서 -->
