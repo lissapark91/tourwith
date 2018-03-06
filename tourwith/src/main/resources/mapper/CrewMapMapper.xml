@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="tk.tourwith.project.crew.room.mapper.CrewMapMapper">
+
+	<select id="selectMapLoc" parameterType="string" resultType="crewMap">
+		select a.TRPLC_NO, a.TRPLC_CTGRY, a.REG_DE, a.UPD_DE, a.TRPLC_DETAIL_CTGRY, a.LATI, a.LONGI, a.MNGR 
+		from TRPLC_INFO as a
+		where a.TRPLC_NO = #{trplc_no}
+	</select>
+   <select id="selectMapLoc4CrewNo" parameterType="string" resultType="crewMap" >
+   		select a.LATI, a.LONGI   		
+		from TRPLC_INFO a, CREW b
+		where a.TRPLC_NO = b.TRPLC_NO
+		and b.CR_NO = #{cr_no}
+   </select>
+
+
+
+</mapper>
