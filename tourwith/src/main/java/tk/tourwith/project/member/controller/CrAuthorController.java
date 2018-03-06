@@ -44,8 +44,10 @@ public class CrAuthorController {
 		paramMap.put("cr_no", cr_no);
 		paramMap.put("mb_no", member.getMb_no());
 
+		//member(mb_no)'s authority is checked by selecting author list by cr_no  
 		CrAuthor crAuthorCheck = crAuthorService.selectAuthorByMbNoCrNo(paramMap);
 		
+		//get this crew by cr_no
 		Crew crew = crewService.getCrew(cr_no);
 		
 		//모집이 종료 되었을 때
@@ -57,7 +59,7 @@ public class CrAuthorController {
 		paramMap.put("depr_de", crew.getDepr_de());
 		paramMap.put("arvl_de", crew.getArvl_de());
 		
-		//해당 크루의 여행 기간에 겹치는 가입 크루가 있을 때...
+		//해당 크루의 여행 기간에 겹치는 가입 크루가 있을 때...(group_code = CR_ROLE_REG)
 		List<CrAuthor> checkDeList = crAuthorService.selectListByDe(paramMap);
 		if(checkDeList.size() > 0) {
 			model.put("message", "이미 해당 기간에 가입한 크루가 있습니다.");
@@ -67,10 +69,8 @@ public class CrAuthorController {
 		
 		int updCnt = 0;
 		
+		//doesnt registered
 		if(crAuthorCheck == null) {
-			//해당 크루에 가입 신청이나, 가입 상태나, 강퇴 기록이 없을 때
-			
-
 			updCnt = crAuthorService.insertCrewRequestIntoCrAuthor(crAuthor);
 			
 		}else {
@@ -99,9 +99,6 @@ public class CrAuthorController {
 			}
 			
 		}
-		
-		
-		
 		
 		if(updCnt > 0) {
 			

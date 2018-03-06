@@ -18,7 +18,12 @@ public class CrAuthorServiceImpl implements CrAuthorService {
 	CrAuthorMapper crAuthorMapper;
 	@Autowired
 	NumberCreateMapper numberCreateMapper;
-
+	
+	@Override
+	public List<Map<String, Object>> selectListByMap(Map<String, Object> paramMap) {
+		return crAuthorMapper.selectListByMap(paramMap);
+	}
+	
 	@Override
 	public List<CrAuthor> selectListByCrNo(String cr_no) {
 		return crAuthorMapper.selectListByCrNo(cr_no);

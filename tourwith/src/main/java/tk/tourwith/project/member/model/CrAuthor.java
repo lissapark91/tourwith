@@ -7,6 +7,10 @@ public class CrAuthor {
 	private String cr_no;
 	private String author_code;
 	
+	//doesnt exist in table added by bsp
+	private String author_group_code;
+	
+	private String cr_sj;
 	
 	public String getCr_author_no() {
 		return cr_author_no;
@@ -31,6 +35,18 @@ public class CrAuthor {
 	}
 	public void setAuthor_code(String author_code) {
 		this.author_code = author_code;
+	}
+	public String getAuthor_group_code() {
+		return author_group_code;
+	}
+	public void setAuthor_group_code(String author_group_code) {
+		this.author_group_code = author_group_code;
+	}
+	public String getCr_sj() {
+		return cr_sj;
+	}
+	public void setCr_sj(String cr_sj) {
+		this.cr_sj = cr_sj;
 	}
 
 }

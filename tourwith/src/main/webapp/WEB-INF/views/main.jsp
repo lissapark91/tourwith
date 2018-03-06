@@ -7,6 +7,41 @@
 
 <%-- <script src="${pageContext.request.contextPath}/js/jquery-3.2.1.js"></script> --%>
 
+<head>
+	<style>
+		.revList, .faqList { 
+			display: none;
+			color: darkslategray;
+		}
+		[rev_page], [faq_page] {
+			cursor: pointer;
+		}
+		.rev-pagination li,.faq-pagination li {
+			background-color: lavender;
+			border-radius: 10px; 
+		}
+		.rev-pagination,.faq-pagination {
+			position: absolute;
+			bottom: 20px;
+		}
+		.rev-pagination {
+			left: 120px;
+		}
+		.faq-pagination {
+			left: 135px;
+
+		}
+		
+		.rev-active, .faq-active {
+			color: black;
+			font-weight: bold;
+		}
+		.revListDiv, .faqListDiv, .refListDiv {
+			background-color: aliceblue;
+		}
+	</style>
+</head>
+
 <script type="text/javascript">
 	$(function() {
 
@@ -27,7 +62,7 @@
 											// 	            console.log(data); //{codeList: []}   
 											// 	            console.log(data.codeList); // []
 											var codeList = data.codeList;
-											var optionHtml = '<option>==지역을 선택해주세요==</option>';
+											var optionHtml = '<option value="">==지역을 선택해주세요==</option>';
 											for (var i = 0; i < codeList.length; i++) {
 												var code = codeList[i]; //{code_no: "BIG_CATE_02_01", code_nm: "동티모르", group_code: null, …}
 												// 					console.log(code.code_no,code.code_nm);
@@ -51,6 +86,10 @@
 									});
 
 						});
+		
+		$('#depr_de').datepicker({
+			format: 'yyyy-mm-dd'
+		})
 	});
 </script>
 
@@ -78,13 +117,13 @@
 
 			</div>
 		</div>
-		<a class="left carousel-control" href="#myCarousel" role="button"
-			data-slide="prev"> <span class="icomoon icon-align-left"
-			aria-hidden="true"></span> <span class="sr-only">Previous</span>
-		</a> <a class="right carousel-control" href="#myCarousel" role="button"
-			data-slide="next"> <span class="icomoon icon-align-right"
-			aria-hidden="true"></span> <span class="sr-only">Next</span>
-		</a>
+<!-- 		<a class="left carousel-control" href="#myCarousel" role="button" -->
+<!-- 			data-slide="prev"> <span class="icomoon icon-align-left" -->
+<!-- 			aria-hidden="true"></span> <span class="sr-only">Previous</span> -->
+<!-- 		</a> <a class="right carousel-control" href="#myCarousel" role="button" -->
+<!-- 			data-slide="next"> <span class="icomoon icon-align-right" -->
+<!-- 			aria-hidden="true"></span> <span class="sr-only">Next</span> -->
+<!-- 		</a> -->
 
 		<!-- SG 서치 네비게이터 -->
 		<div class="gtco-container container"
@@ -103,13 +142,12 @@
 
 									<div class="tab-content">
 										<div class="tab-content-inner active" data-content="signup">
-											<form action="#">
 
 												<div class="row form-group">
 													<div class="col-md-12">
 														<label for="activities">나라별선택</label> <select
 															name="BIG_CATE" id="activities1" class="form-control">
-															<option>==국가를 선택해주세요==</option>
+															<option value="">==국가를 선택해주세요==</option>
 															<c:forEach var="code" items="${codeList}"
 																varStatus="status">
 																<option value="${code.code_no}">${code.code_nm}</option>
@@ -117,35 +155,74 @@
 														</select>
 													</div>
 												</div>
-												<div class="row form-group">
+												<div class="row ">
 													<div class="col-md-12">
 														<label for="destination">지역별선택</label>
 														<!-- 															<input placeholder="도시, 지역별로 검색" type="text" id="destination" class="form-control"> -->
 														<select name="BIG_CATE_2" id="activities2"
 															class="form-control">
-															<option>==지역을 선택해주세요==</option>
+															<option value="">==지역을 선택해주세요==</option>
 														</select>
 													</div>
 												</div>
-												<div class="row form-group">
+												<div class="row " style="margin-top: 20px;">
 													<div class="col-md-12">
-														<label for="date-start">출발일 선택</label> <input type="text"
-															id="date-start" class="form-control">
+														<label for="depr_de">출발일 선택</label> <input type="text"
+															id="depr_de" class="form-control">
 													</div>
 												</div>
+												<div class="row " style="margin-top: 20px;">
+													<div class="col-md-12">
+														<button type="button" class="btn btn-primary btn-block" id="searchBtn">검색</button>
+													</div>
+												</div>
+<!-- 												<p> -->
+<!-- 													<a class="btn btn-default" id="detailSearch" role="button">세부검색</a> -->
+<!-- 												</p> -->
 
-												<div class="row form-group">
-													<div class="col-md-12">
-														<input type="submit" class="btn btn-primary btn-block"
-															value="검색">
-													</div>
-												</div>
-												<p>
-													<a class="btn btn-default" href="#" role="button">세부검색</a>
-												</p>
-											</form>
 										</div>
 									</div>
+									
+									<script>
+										$(function(){
+											
+											function validateSearch(){
+												var validate = false;
+												var big_cate_value = $('[name=BIG_CATE]').val()
+												if(big_cate_value != ''){
+													validate = true;
+												}
+												return validate
+											}
+											
+											$('#searchBtn').click(function(){
+												if(!validateSearch()){
+													alert('국가를 선택해 주세요.');
+													return false;
+												}
+												
+												var big_cate_value = $('[name=BIG_CATE]').val();
+												var cate2_value = $('[name=BIG_CATE_2]').val();
+												var depr_de = $('#depr_de').val();
+												
+												var lochrf = "${pageContext.request.contextPath}/crew/list/" + big_cate_value.substring(9, big_cate_value.length) + "?mainsearch=true"
+												if(cate2_value != ''){
+													
+													//분류 2개 선택
+													lochrf += "&big_cate_2=" + cate2_value;
+												}
+												if(depr_de != ''){
+													lochrf += "&depr_de=" + depr_de;	
+												}
+												
+												location.href = lochrf;
+											})
+											
+										})
+									
+									</script>
+									
+									
 								</div>
 							</div>
 						</div>
@@ -275,9 +352,9 @@
 		<div class="row">
 			<div class="col-md-8 col-md-offset-2 text-center gtco-heading">
 				<!-- SG 3페이지 문구-->
-				<h2>아직도 못 정했니?</h2>
+				<h2>크루를 구했다구?</h2>
 				<p>
-					괜찮아! 우리가 도와줄게~<br>
+					함께 여행 계획을 짜보자!  <br/>먼저 다녀온 사람들의 생생한 "리뷰"도 참고하고~<br>
 				</p>
 			</div>
 		</div>
@@ -288,8 +365,8 @@
 
 			<div class="col-lg-4 col-md-4 col-sm-6">
 
-				<div class="list-group-item fh5co-text-SG">
-					<h2>이달의 추천여행지</h2>
+				<div class="list-group-item fh5co-text-SG refListDiv" style="height: 470px;">
+					<h2>여행 준비 참고 사이트</h2>
 
 					<a class="fh5co-card-item image-popup">
 						<table class="table table-bordered">
@@ -319,87 +396,114 @@
 
 
 			</div>
-			<div class="col-lg-4 col-md-4 col-sm-6">
+			
+			
+			<div class="col-lg-4 col-md-4 col-sm-6" >
 
-				<div class="list-group-item fh5co-text-SG">
+				<div class="list-group-item fh5co-text-SG revListDiv" style="height: 470px;">
 					<h2>리뷰</h2>
-
-					<a class="fh5co-card-item image-popup">
-						<table class="table table-bordered">
+					
+					<c:forEach items="${revList }" var="rev" varStatus="status">
+					
+					
+					<a class="fh5co-card-item revList" rev_no="${status.index }" href="${pageContext.request.contextPath}/review/${rev.rev_no}">
+						<table class="table table-bordered" style="margin-bottom: 0px;" >
 							<tr>
-								<td class="col-md-4">이미지가 나오는 곳입니다.</td>
-								<td class="col-md-8">리뷰리뷰리뷰</td>
+								<td class="col-md-4"><img src="${pageContext.request.contextPath}/image/${rev.trplc}" style="width: 120px;"/></td>
+								<td class="col-md-8">${rev.sj }</td>
 
-							</tr>
-						</table>
-					</a> <a class="fh5co-card-item image-popup">
-						<table class="table table-bordered">
-							<tr>
-								<td class="col-md-4">이미지가 나오는 곳입니다.</td>
-								<td class="col-md-8">리뷰리뷰리뷰리뷰</td>
-
-							</tr>
-						</table>
-					</a> <a class="fh5co-card-item image-popup">
-						<table class="table table-bordered">
-							<tr>
-								<td class="col-md-4">이미지가 나오는 곳입니다.</td>
-								<td class="col-md-8">리뷰리뷰리뷰리뷰</td>
 							</tr>
 						</table>
 					</a>
+										
+					</c:forEach>
+					
+					<ul class="list-inline text-center rev-pagination">
+						<li rev_page="1" class="rev-active">1</li>
+						<li rev_page="2">2</li>
+						<li rev_page="3">3</li>
+						<li rev_page="4">4</li>
+						<li rev_page="5">5</li>
+					</ul>
 				</div>
 
 
 			</div>
 
-
+			<script>
+				$(function(){
+					$('[rev_page]').on('click', function(){
+						$('[rev_page]').removeClass('rev-active');
+						$(this).addClass('rev-active');
+						revPrint();
+					})
+					
+					function revPrint(){
+						var now_rev = $('[rev_page].rev-active').attr('rev_page')
+						$('.revList').css('display', 'none');
+						//한 페이지당 3개씩
+						for(var i = 0; i < 3; i++){
+							var revidx = (now_rev - 1) * 3 + i;
+							$('[rev_no=' + revidx + ']').css('display', 'block')
+						}
+					}
+					revPrint();
+				})
+			
+			</script>
 
 
 
 
 			<div class="col-lg-4 col-md-4 col-sm-6">
 
-				<div class="list-group-item fh5co-text-SG">
+				<div class="list-group-item fh5co-text-SG faqListDiv"  style="height: 470px;">
 					<h2>FAQ</h2>
-
-					<a class="fh5co-card-item image-popup">
-						<table class="table table-bordered">
+					<c:forEach items="${faqList }" var="faq" varStatus="status">
+					
+					<a class="fh5co-card-item faqList" faq_no="${status.index}" href="${pageContext.request.contextPath}/faq/${faq.faq_no}">
+						<table class="table table-bordered" style="margin-bottom: 0px;">
 							<tr>
-								<td class="col-md-4">공지가 나오는 곳입니다.</td>
-
+								<td class="col-md-4">${faq.sj}</td>
 							</tr>
 						</table>
-					</a> <a class="fh5co-card-item image-popup">
-						<table class="table table-bordered">
-							<tr>
-								<td class="col-md-4">공지가 나오는 곳입니다.</td>
-
-							</tr>
-						</table>
-					</a> <a class="fh5co-card-item image-popup">
-						<table class="table table-bordered">
-							<tr>
-								<td class="col-md-4">공지가 나오는 곳입니다.</td>
-
-							</tr>
-						</table>
-					</a> <a class="fh5co-card-item image-popup">
-						<table class="table table-bordered">
-							<tr>
-								<td class="col-md-4">공지가 나오는 곳입니다.</td>
-
-							</tr>
-						</table>
-					</a> <a class="fh5co-card-item image-popup">
-						<table class="table table-bordered">
-							<tr>
-								<td class="col-md-4">공지가 나오는 곳입니다.</td>
-
-							</tr>
-						</table>
-					</a>
+					</a> 
+					
+					</c:forEach>
+					
+					<ul class="list-inline text-center faq-pagination">
+						<li faq_page="1" class="faq-active">1</li>
+						<li faq_page="2">2</li>
+						<li faq_page="3">3</li>
+					
+					</ul>
+					
 				</div>
 
 
 			</div>
+			
+			<script>
+				$(function(){
+					$('[faq_page]').on('click', function(){
+						$('[faq_page]').removeClass('faq-active');
+						$(this).addClass('faq-active');
+						faqPrint();
+					})
+					
+					
+					function faqPrint(){
+						var now_faq = $('[faq_page].faq-active').attr('faq_page')
+						$('.faqList').css('display', 'none');
+						//한 페이지당 3개씩
+						for(var i = 0; i < 4; i++){
+							var faqidx = (now_faq - 1) * 3 + i;
+							$('[faq_no=' + faqidx + ']').css('display', 'block')
+						}
+					}
+					faqPrint();
+				})
+			
+			</script>
+			
+			

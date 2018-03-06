@@ -10,6 +10,8 @@ import tk.tourwith.project.member.model.CrAuthor;
 @Mapper
 public interface CrAuthorMapper {
 	
+	public List<Map<String, Object>> selectListByMap(Map<String, Object> paramMap);
+
 	public List<CrAuthor> selectListByCrNo(String cr_no);
 
 	public List<CrAuthor> selectListByMbNo(String mb_no);

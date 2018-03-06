@@ -6,39 +6,74 @@
   
  <mapper namespace="tk.tourwith.project.member.mapper.CrAuthorMapper">
  					
+<select id="selectListByMap" parameterType="map" resultType="map">
+
+   select a.CR_AUTHOR_NO as cr_author_no, a.MB_NO as mb_no, a.CR_NO as cr_no, a.AUTHOR_CODE as author_code, b.GROUP_CODE as author_group_code 
+  	, c.CR_SJ as cr_sj
+  	, d.NICK as nick
+  	, b.CODE_NM as code_nm
+  	, d.FB_ID as fb_id
+  	, c.DEPR_DE as depr_de
+  	, c.ARVL_DE as arvl_de
+   from CR_AUTHOR as a, CMMN_CODE as b, CREW as c, MEMBER as d
+   where a.author_code = b.code_no
+   and c.CR_NO = a.CR_NO
+   and d.MB_NO = a.MB_NO
+   <if test="mb_no != '' and mb_no != null ">
+   and a.MB_NO = #{mb_no} 
+   </if> 
+   <if test="cr_no != '' and cr_no != null ">
+   and a.CR_NO = #{cr_no} 
+   </if>
+   <if test="author_code != '' and author_code != null ">
+   and a.AUTHOR_CODE = #{author_code} 
+   </if>
+   ORDER BY a.CR_AUTHOR_NO DESC
+     
+	  
+</select>
+
 <select id="selectListByCrNo" parameterType="string" resultType="CrAuthor">
 
-   select CR_AUTHOR_NO, MB_NO, CR_NO, AUTHOR_CODE;
-   from CR_AUTHOR
-   where CR_NO = #{cr_no}  
+   select a.CR_AUTHOR_NO, a.MB_NO, a.CR_NO, a.AUTHOR_CODE, b.GROUP_CODE as author_group_code 
+  	, c.CR_SJ as cr_sj
+   from CR_AUTHOR as a, CMMN_CODE as b, CREW as c
+   where MB_NO = #{mb_no}  and a.author_code = b.code_no
+   and c.CR_NO = a.CR_NO 
 	  
 </select>
 
 <select id="selectListByMbNo" parameterType="string" resultType="CrAuthor">
 
-   select CR_AUTHOR_NO, MB_NO, CR_NO, AUTHOR_CODE;
-   from CR_AUTHOR
-   where MB_NO = #{mb_no}  
+   select a.CR_AUTHOR_NO, a.MB_NO, a.CR_NO, a.AUTHOR_CODE, b.GROUP_CODE as author_group_code 
+   	, c.CR_SJ as cr_sj
+   from CR_AUTHOR as a, CMMN_CODE as b, CREW as c
+   where MB_NO = #{mb_no}  and a.author_code = b.code_no
+   and c.CR_NO = a.CR_NO 
+	  
 	  
 </select>
 
 <select id="selectAuthorByMbNoCrNo" parameterType="map" resultType="CrAuthor">
 
-   select a.CR_AUTHOR_NO, a.MB_NO, a.CR_NO, a.AUTHOR_CODE
-   from CR_AUTHOR as a
-   where a.MB_NO = #{mb_no} and a.CR_NO = #{cr_no}
+   select a.CR_AUTHOR_NO, a.MB_NO, a.CR_NO, a.AUTHOR_CODE, b.GROUP_CODE as author_group_code
+   from CR_AUTHOR as a, CMMN_CODE as b
+   where a.MB_NO = #{mb_no} and a.CR_NO = #{cr_no} and a.author_code = b.code_no
   
 </select>
 
 <select id="selectListByDe" parameterType="map" resultType="CrAuthor">
-	select a.CR_AUTHOR_NO, a.MB_NO, a.CR_NO, a.AUTHOR_CODE
-	from CR_AUTHOR as a, CREW as b
-	where a.MB_NO = #{mb_no} and a.CR_NO = b.CR_NO and b.DEL_YN = 'n' and b.RCRIT_STTUS = 'RECR_STAT_01'
+	select a.CR_AUTHOR_NO, a.MB_NO, a.CR_NO, a.AUTHOR_CODE, c.GROUP_CODE as author_group_code
+	from CR_AUTHOR as a, CREW as b, CMMN_CODE as c
+	where a.MB_NO = #{mb_no} and a.CR_NO = b.CR_NO 
+	and b.DEL_YN = 'n'
+	and c.CODE_NO = a.AUTHOR_CODE
 	<if test="depr_de != null and depr_de != '' and arvl_de != null and arvl_de != '' "> 
 	   and b.DEPR_DE between #{depr_de} and #{arvl_de}
 	   and b.ARVL_DE between #{depr_de} and #{arvl_de}
 	</if>
-	and a.AUTHOR_CODE in ( 'CR_ROLE_01', 'CR_ROLE_02', 'CR_ROLE_05') 
+	and c.GROUP_CODE = 'CR_ROLE_REG'
+	
 </select>
 
 <insert id="insertCrewLeaderIntoCrAuthor" parameterType="CrAuthor">
