@@ -118,7 +118,7 @@
 				</div>
 			</td>			
 		</tr>
-			
+		
 			<tr>
 				<td colspan="2">
 					<textarea id="summernote" rows="15" class="form-control" name="con">${crewNotice.con}</textarea>

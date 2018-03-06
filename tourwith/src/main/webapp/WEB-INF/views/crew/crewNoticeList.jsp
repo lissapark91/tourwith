@@ -41,7 +41,6 @@
 										<c:forEach var="crewNotice" items="${crewNoticeList}">
 											<tr>
 												<td width="50%"><a href="${pageContext.request.contextPath}/crewNotice/${crewNotice.notice_no}">${crewNotice.sj}</a></td>
-<%-- 												<td width="50%">${crewNotice.con}</td> --%>
 											</tr>
 										</c:forEach>
 										

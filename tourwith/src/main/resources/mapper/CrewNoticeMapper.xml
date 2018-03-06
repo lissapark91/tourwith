@@ -9,6 +9,7 @@
   	select count(SJ)
   	from CR_NOTICE
   	where DEL_YN = 'n'
+  	and CR_NO = ${cr_no}
   	<if test="searchWord != null and searchWord != '' ">
   		<if test="searchType == '01' ">
   			and SJ LIKE CONCAT('%', #{searchWord}, '%')
@@ -35,6 +36,7 @@
 			,NOTICE_NO
   	from CR_NOTICE
   	where DEL_YN = 'n'
+  	and CR_NO = #{cr_no}
   	<if test="searchWord != null and searchWord != '' ">
   		<if test="searchType == '01' ">
   			and SJ LIKE CONCAT('%', #{searchWord}, '%')

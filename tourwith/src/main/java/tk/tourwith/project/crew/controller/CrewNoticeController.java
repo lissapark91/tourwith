@@ -3,6 +3,8 @@ package tk.tourwith.project.crew.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -18,9 +20,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import tk.tourwith.project.crew.model.CrewNotice;
 import tk.tourwith.project.crew.service.CrewNoticeService;
-import tk.tourwith.project.faq.model.Faq;
 import tk.tourwith.project.member.model.Member;
 import tk.tourwith.project.util.PagingUtil;
+import tk.tourwith.project.util.file.service.impl.FileServcieImpl;
 
 @Controller
 public class CrewNoticeController {
