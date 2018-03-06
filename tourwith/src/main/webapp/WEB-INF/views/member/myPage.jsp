@@ -3,6 +3,16 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <head>
 
+<script>
+	$(function(){
+		$('#approveBtn').click(function(){
+			var cr_no = $('[name="mb_no"]:checked').attr('cr_no')
+			var mb_no = $('[name="mb_no"]:checked').val()
+			location.href = "${pageContext.request.contextPath}/crew/approve/" + mb_no + "/" +cr_no
+		})
+		
+	})
+</script>
 </head>
 
 
@@ -31,7 +41,8 @@
 			<div class="col-md-12">
 			<div class="col-md-6" style="border-right: 2px solid gray;">
 				<h3>가입 신청 현황</h3>
-				<div  style="height: 400px; overflow: auto;">			
+				<div  style="height: 400px; overflow: auto;">
+				<form method="post" id="requestForm">	
 				<table class="table table-hover" >
 				<thead>
 					<tr>
@@ -40,19 +51,20 @@
 				</thead>
 				
 				<c:forEach items="${crLeadrList}" var="cr">
-					
+				
 					<tr>
-						<td><input type="checkbox" class="checkbox"></td>
+						<td><input name="mb_no" value="${cr.mb_no}" cr_no="${cr.cr_no }" type="radio" class="radio"></td>
 						<td><a href="${pageContext.request.contextPath }/crew/page/${cr.cr_no}">${cr.cr_sj }</a></td>
 						<td><a href="http://www.facebook.com/${cr.fb_id}"><img src="http://graph.facebook.com/${cr.fb_id}/picture?width=32&height=32" class="img-circle"/>&nbsp;&nbsp;${cr.nick }</a></td>
-						<td>${cr.code_nm }</td>
+						<td style="color: blue; cursor: pointer;" class="rec_status" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?">${cr.code_nm }</td>
 					</tr>
 					
 				</c:forEach>
 				
 				</table>
+				</form>
 				</div>
-				<button type="button" class="btn btn-info">가입 신청 수락</button>
+				<button type="button" class="btn btn-info" id="approveBtn">가입 신청 수락</button>
 				<button type="button" class="btn btn-danger">가입 신청 거절</button>
 			</div>
 			<div class="col-md-6" >
