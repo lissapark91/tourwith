@@ -238,7 +238,7 @@
 	<table class="table">
 		<tr class="info">
 			<td width="15%">제목</td>
-			<td>${rev.sj }</td>
+			<td><div>${rev.sj }</div></td>
 		</tr>
 
 		<tr>

@@ -35,7 +35,8 @@
 				,a.DEL_YN
 				,a.HITCNT
 				,a.CR_NO
-				,d.CODE_NM as trplc_no 
+				,d.CODE_NM as trplc_no
+				,d.CODE_NO as trplc 
 				,(b.MALE_NMPR + b.FEMALE_NMPR) as nmpr
 				,b.DEPR_DE
 				,b.ARVL_DE

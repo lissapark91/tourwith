@@ -269,8 +269,8 @@
 							<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
 								<div class="text" style="color: black;">
 									<table>
-										<tr>
-											<td colspan="2" width="100%" >${crew.cr_sj }</td>
+										<tr >
+											<td colspan="2" width="100%" ><div style="overflow: hidden; height: 27px; width: 300px;">${crew.cr_sj }</div></td>
 										</tr>
 										<tr>
 											<td width="60%" style="color: #6E6E6E;"><b>${crew.trplc_no_nm }</b></td>

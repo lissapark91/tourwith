@@ -41,9 +41,9 @@
 		</div>
 
 		
-<!-- 		<div class="col-md-12"> -->
-<%-- 		<iframe  height="500" width="500" src="${pageContext.request.contextPath}/part/member/${crew.cr_no}"></iframe> --%>
-<!-- 		</div> -->
+		<div class="col-md-12">
+		<iframe  height="500" width="800" frameborder="0" scrolling="no" src="${pageContext.request.contextPath}/part/map"></iframe>
+		</div>
 		
 </div>
 </div>
