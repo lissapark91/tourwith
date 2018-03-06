@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import tk.tourwith.project.code.model.Code;
 import tk.tourwith.project.code.service.CodeService;
+import tk.tourwith.project.faq.service.impl.FaqServiceImpl;
+import tk.tourwith.project.rev.service.impl.RevServiceImpl;
 //화면 연결
 @Controller
 public class MainController {
@@ -24,14 +26,31 @@ public class MainController {
 //	인스턴스를 생성
 	CodeService codeService;
 	
+	//bsp 추가부분
+	@Autowired
+	RevServiceImpl revService;
+	@Autowired
+	FaqServiceImpl faqService;
+	
+	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 //	컨트롤러랑 jsp랑 연결해주는 애가 @RequestMapping
 //	보안 post 필요없음 get 
-	public String home(Locale locale, ModelMap model)  {
+	public String home(Locale locale, ModelMap model) throws Exception  {
 		
 		List<Code> codeList = codeService.selectListByGroupCode("BIG_CATE");
 		
 		model.addAttribute("codeList",codeList);
+		
+		
+		//메인 하단 부분 리뷰, faq
+		
+		Map<String, Object> paramMap = new HashMap<>();
+		paramMap.put("startRow", 0);
+		model.addAttribute("revList", revService.selectRevList(paramMap));
+		model.addAttribute("faqList", faqService.selectFaqList(paramMap));
+		
+		
 		
 		
 		return "main";

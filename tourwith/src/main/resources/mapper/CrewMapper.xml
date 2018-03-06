@@ -80,6 +80,12 @@
 		and a.TRPLC_NO = d.CODE_NO
 		and a.RCRIT_STTUS = e.CODE_NO
 		
+		
+		<if test="depr_de != null and depr_de != ''">
+		and a.DEPR_DE > #{depr_de}
+		</if>
+
+		
 		<if test="category != null and category != ''">
 		and a.TRPLC_NO like CONCAT(#{category} , '%')
 		</if>

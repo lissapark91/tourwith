@@ -16,8 +16,10 @@ public interface CrewService {
 	
 	//크루 등록
 	public int insertCrew(Crew crew) throws Exception;
+	
 	//크루 수정
 	public int updateCrew(Crew crew) throws Exception;
+	
 	//크루 삭제
 	public int deleteCrew(String cr_no) throws Exception;
 	

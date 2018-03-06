@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -107,6 +108,35 @@ public class CrAuthorController {
 		
 		return model;
 		
+	}
+	
+	@RequestMapping("/crew/approve/{mb_no}/{cr_no}")
+	public String updateApprove(HttpSession session, Model model, @PathVariable("mb_no") String mb_no,
+			@PathVariable("cr_no") String cr_no) throws Exception {
+		
+		Member member = (Member) session.getAttribute("LOGIN_USER");
+		
+		Map<String, Object> paramMap = new HashMap<>();
+		
+		paramMap.put("mb_no", member.getMb_no());
+		paramMap.put("cr_no", cr_no);
+		
+		CrAuthor leader = crAuthorService.selectAuthorByMbNoCrNo(paramMap);
+		
+		//현재 로그인 유저가 크루리더인지 확인
+		if(StringUtils.equals(leader.getAuthor_code(), "CR_ROLE_01")) {
+			
+			paramMap.remove("mb_no");
+			paramMap.put("mb_no", mb_no);
+			crAuthorService.updateRequestApproved(paramMap);
+			
+		}else {
+			throw new Exception();
+		}
+		
+		model.addAttribute("locationURL", "/member/mypage");
+		
+		return "common/redirect";
 	}
 	
 	

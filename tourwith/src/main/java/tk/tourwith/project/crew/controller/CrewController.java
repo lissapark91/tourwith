@@ -113,6 +113,7 @@ public class CrewController {
 		crew = crewService.getCrew(cr_no);
 		
 		//로그인유저가 크루 리더이면 수정 삭제를 노출 (로그인이 되어있다는 가정하)
+		
 		Member member =  (Member) session.getAttribute("LOGIN_USER");
 		if(StringUtils.equals(crew.getCr_leadr_mb_no(), member.getMb_no())) {
 			model.addAttribute("isLeader", true);
@@ -126,11 +127,15 @@ public class CrewController {
 		paramMap.put("cr_no", cr_no);
 		
 		CrAuthor memberCrAuthor = crAuthorService.selectAuthorByMbNoCrNo(paramMap);
-		System.out.println(memberCrAuthor.getAuthor_group_code());
-		if(StringUtils.equals(memberCrAuthor.getAuthor_group_code(), "CR_ROLE_REG")) {
-			model.addAttribute("isCrewMember", true);
+		if(memberCrAuthor != null) {
+			if(StringUtils.equals(memberCrAuthor.getAuthor_group_code(), "CR_ROLE_REG")) {
+				model.addAttribute("isCrewMember", true);
+			}else {
+				model.addAttribute("isCrewMember", false);
+			}			
 		}else {
 			model.addAttribute("isCrewMember", false);
+			
 		}
 		
 		

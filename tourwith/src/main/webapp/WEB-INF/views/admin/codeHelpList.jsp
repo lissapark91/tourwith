@@ -43,9 +43,20 @@
 								</select> <input type="text" name="searchWord" size="40"
 									value="${param.searchWord}" class="form-control input-sm">
 								<input type="button" value="검색" onclick="fn_search(1);"
-									class="btn btn-primary btn-lg">
+									class="btn btn-primary btn-lg btn-warning">
+								
+								<div class="container">	
+									<div class="row">
+										<div class="col-md-12 col-md-offset-12">	
+											
+											<input type="button" value="추가" onclick="fn_search(1);"
+												class="btn btn-primary btn-lg btn-warning">
+										</div>
+									</div>
+								</div>
 							</p>
 						</form>
+						
 					</div>
 
 
@@ -53,7 +64,7 @@
 
 						<thead>
 
-							<tr class="bg-primary">
+							<tr class="bg-primary bg-warning">
 								<th>수정 삭제</th>
 								<th>여행지 이름</th>
 								<th>여행지 그룹</th>
@@ -75,9 +86,9 @@
 
 									<tr>
 										<td><input type="button" value="수정"
-											class="btn btn-primary" style="margin-left: 2%"
+											class="btn btn-primary btn-warning" style="margin-left: 2%"
 											onclick="fn_updateForm();"><input type="button"
-											value="삭제" class="btn btn-primary" style="margin-left: 1%"></td>
+											value="삭제" class="btn btn-primary btn-warning" style="margin-left: 1%"></td>
 										<td>${help.trplc_nm}</td>
 
 										<td>${help.trplc_ctgry}</td>
@@ -106,7 +117,8 @@
 						<div class="row">
 							<div class="col-md-5 col-md-offset-5">
 								<div style="text-align: center;">
-									<ul class="pagination">${pageInfo}
+									<ul class="pagination">
+									${pageInfo}
 									</ul>
 								</div>
 							</div>

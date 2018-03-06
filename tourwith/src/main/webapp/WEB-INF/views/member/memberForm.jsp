@@ -55,7 +55,7 @@
 			<input type="hidden" name="gender" value="${member.gender}"/>
 			<input type="hidden" name="fb_tkn" value="${member.fb_tkn}"/>
 			<br/>
-			<h2>닉네임만 추가로 입력하면 가입이 완료됩니다!</h2>
+			<h2>닉네임만 추가로 입력하면 가입이 완료됩니다! (가입 후 닉네임 변경 불가)</h2>
 			<br/>
 			<br/>
 			<div class="col-xs-6 col-xs-offset-3">

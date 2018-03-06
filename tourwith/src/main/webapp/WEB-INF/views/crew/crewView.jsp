@@ -23,6 +23,9 @@
 /* 			border-top: 1px solid #b3b3b3; */
 			
 		}
+		.commentBtn,icon,i {
+			cursor: pointer;
+		}
 		
 	</style>
 	 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> 

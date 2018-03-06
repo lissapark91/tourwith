@@ -71,7 +71,7 @@
 	
 							<li class="has-dropdown"><a href="#"><img src="http://graph.facebook.com/${LOGIN_USER.fb_id}/picture?width=32&height=32" style="border-radius:16px; border: 1px solid grey;"/></a>
 								<ul class="dropdown">
-									<li><a href="#">마이페이지</a></li>
+									<li><a href="${pageContext.request.contextPath}/member/mypage">마이페이지</a></li>
 									<li><a href="${pageContext.request.contextPath}/signout">로그아웃</a></li>
 								</ul>
 							</li>

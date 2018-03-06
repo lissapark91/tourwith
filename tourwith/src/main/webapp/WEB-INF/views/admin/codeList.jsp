@@ -93,6 +93,17 @@
 											value="${param.searchWord}" class="form-control input-sm"> 
 											<input type="button" value="검색" onclick="fn_search(1);"
 											class="btn btn-primary btn-lg">
+											
+											<div class="container">	
+									<div class="row">
+										<div class="col-md-12 col-md-offset-12">	
+											
+											<input type="button" value="추가" onclick="fn_search(1);"
+												class="btn btn-primary btn-lg">
+										</div>
+									</div>
+								</div>
+								
 							</p>
 						</form>
 					</div>

@@ -52,7 +52,9 @@ $(document).ready(function() {
 			 "bgndt":st_dt,
 			 "enddt":en_dt,
 			 "event_con":ev_con,
-			 "cr_no":'0000000002'
+			 "cr_no":'${crew.cr_no}',
+			 "wrter":'${member.mb_no}',
+			 "updusr":'${member.mb_no}'
 		},	
 		success: function(
 				) {
@@ -79,7 +81,8 @@ $(document).ready(function() {
 			 "bgndt":st_dt,
 			 "enddt":en_dt,
 			 "event_con":ev_con,
-			 "cr_no":'${crew.cr_no}'
+			 "cr_no":'${crew.cr_no}',
+			 "updusr":'${member.mb_no}'
 		},	
 		success: function(data) {
 			//window.location.reload(true);
@@ -144,7 +147,7 @@ $(document).ready(function() {
             }, */
             success: function(data) {
             	console.log(data)
-            
+            	
                 var events = [];
             	for(var i=0 ; i< data.length ; i++ ){
             		var crewEvent=data[i];
@@ -209,6 +212,7 @@ $(document).ready(function() {
 <div style="width: 500px; height: 700px;">
 	<div id="calendar"></div>
 	<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#sche-Modal">스케줄 작성</button>
+	<input type="hidden" class="cr_no" value="${cr_no}">
 </div>
 	
 <!-- 스케줄 등록 모달 Modal -->
