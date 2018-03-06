@@ -123,7 +123,7 @@ public class RevController {
 		
 		boolean isError = false;
 		String message = "정상 등록되었습니다.";
-		String locationURL = "/review";
+		String locationURL = "/reviews";
 		
 		model.addAttribute("isError", isError);
 		model.addAttribute("message", message);
@@ -170,7 +170,7 @@ public class RevController {
 		
 		boolean isError = false;
 		String message = "정상 삭제되었습니다.";
-		String locationURL = "/review";
+		String locationURL = "/reviews";
 		
 		
 		model.addAttribute("isError", isError);

@@ -33,6 +33,10 @@
 		.RECR_STAT_02{
 			color: red;
 		}
+		.cr_card {
+			cursor: pointer;
+			background-color: #FAFAFA;
+		}
 	</style>
 	<script>
 		$(function(){
@@ -151,6 +155,8 @@
 			}
 			
 		})
+		
+// 		$('.nohover')
 	})
 	
 	
@@ -159,7 +165,7 @@
 </head>
 
 
-	<header id="gtco-header" class="gtco-cover gtco-cover-sm" role="banner" style="background-image: url(${pageContext.request.contextPath}/image/${category})" >
+	<header id="gtco-header" class="gtco-cover gtco-cover-sm" role="banner" style="background-image: url(${pageContext.request.contextPath}/images/${category}.png)" >
 		<div class="row">
 		<div class="container crewListForm col-md-6 col-md-offset-3">
 <!-- 		<div class="row  text-center"> -->
@@ -247,8 +253,8 @@
 		<div class="row">
 
 		<c:forEach var="crew" items="${crewList }">
-			<div class="col-lg-6 col-md-6 col-sm-6" >
-					<a class="fh5co-card-item" cr_no="${crew.cr_no }">
+			<div class="col-lg-6 col-md-6 col-sm-6 " >
+					<a class="fh5co-card-item cr_card"  cr_no="${crew.cr_no }" >
 <%-- 					<a onclick="goCrew('${crew.cr_no}')"  data-toggle="modal" data-target="#myModal" class="fh5co-card-item" cr_no="${crew.cr_no }"> --%>
 <%-- 					<a onclick="goCrew('${crew.cr_no}')" href="${pageContext.request.contextPath}/crew/page/${crew.cr_no}" class="fh5co-card-item"> --%>
 					
@@ -264,19 +270,19 @@
 								<div class="text" style="color: black;">
 									<table>
 										<tr>
-											<td colspan="2" width="100%">${crew.cr_sj }</td>
+											<td colspan="2" width="100%" >${crew.cr_sj }</td>
 										</tr>
 										<tr>
-											<td width="60%">${crew.trplc_no_nm }</td>
-											<td width="40%">#${crew.thema_nm }</td>
+											<td width="60%" style="color: #6E6E6E;"><b>${crew.trplc_no_nm }</b></td>
+											<td width="40%" style="color: gray;"><b>#${crew.thema_nm }</b></td>
 										</tr>
 										<tr>
-											<td width="60%">남 ${crew.now_male_nmpr} / ${crew.male_nmpr},  
-											여 ${crew.now_female_nmpr} / ${crew.female_nmpr}</td>
-											<td width="40%" class="${crew.rcrit_sttus}">#${crew.rcrit_sttus_nm }</td>
+											<td width="60%"><img src="${pageContext.request.contextPath}/images/masculine.png"/> ${crew.now_male_nmpr} / ${crew.male_nmpr},  
+											<img class="nohover" src="${pageContext.request.contextPath}/images/femenine.png"/> ${crew.now_female_nmpr} / ${crew.female_nmpr}</td>
+											<td width="40%" class="${crew.rcrit_sttus}"><b>#${crew.rcrit_sttus_nm }</b></td>
 										</tr>
 										<tr>
-											<td colspan="2" width="100%">${crew.depr_de} - ${crew.arvl_de}</td>
+											<td colspan="2" width="100%" class="text-center">${crew.depr_de} - ${crew.arvl_de}</td>
 										</tr>
 									</table>
 								</div>

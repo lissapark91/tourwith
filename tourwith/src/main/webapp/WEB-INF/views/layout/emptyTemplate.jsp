@@ -102,13 +102,13 @@
 
 
  
-<div id="page">
+<!-- <div id="page"> -->
  
 	  
 	<tiles:insertAttribute name="body"/>
 
 
-</div>
+<!-- </div> -->
  
 
 
