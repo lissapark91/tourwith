@@ -11,6 +11,16 @@
 			location.href = "${pageContext.request.contextPath}/crew/approve/" + mb_no + "/" +cr_no
 		})
 		
+		$('.requestCancel').click(function(){
+			var a  = confirm('가입 요청을 취소 하시겠습니까?')
+			if(a){
+				var cr = $(this).attr('cr_no');
+				location.href = "${pageContext.request.contextPath}/crew/cancel/" + cr;
+			}else{
+				return false;
+			}
+		})
+		
 	})
 </script>
 </head>
@@ -82,7 +92,7 @@
 					<tr>
 						<td><a href="${pageContext.request.contextPath }/crew/page/${cr.cr_no}">${cr.cr_sj }</a></td>
 						<c:if test="${cr.author_code == 'CR_ROLE_03' }">
-						<td><a style="color: blue; cursor: pointer;">${cr.code_nm }</a></td>
+						<td><a style="color: blue; cursor: pointer;" class="requestCancel" cr_no="${cr.cr_no }">${cr.code_nm }</a></td>
 						</c:if>
 						<c:if test="${cr.author_code != 'CR_ROLE_03' }">
 						<td>${cr.code_nm }</td>

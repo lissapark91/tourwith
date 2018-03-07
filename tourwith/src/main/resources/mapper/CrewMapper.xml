@@ -213,6 +213,24 @@
   			WHERE CR_NO=#{cr_no}
   	</update>
   	
+  	<update id="updateRcritSttusByDe">
+  	
+  		UPDATE CREW
+  		SET
+  		RCRIT_STTUS = 'RECR_STAT_02'
+  		WHERE now() > DEPR_DE  
+  		
+  	</update>
+  	
+  	<update id="updateRcritSttusByNmpr">
+  	
+  		UPDATE CREW
+  		SET
+  		RCRIT_STTUS = 'RECR_STAT_02'
+  		WHERE (MALE_NMPR + FEMALE_NMPR) = (NOW_MALE_NMPR + NOW_FEMALE_NMPR)
+  		
+  	</update>
+  	
   	
   	</mapper>
  
