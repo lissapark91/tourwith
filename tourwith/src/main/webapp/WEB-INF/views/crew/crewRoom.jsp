@@ -40,7 +40,9 @@
 		<div class="col-md-10 col-md-offset-2" >
 		<iframe  height="500" width="800" frameborder="0" scrolling="no" src="${pageContext.request.contextPath}/part/calendar/${crew.cr_no}"></iframe>
 		</div>
-
+<!-- 		<div> -->
+<%-- 		<iframe height="500" width="800" frameborder="0" src="${pageContext.request.contextPath}/chat"></iframe> --%>
+<!-- 		</div> -->
 		
 		<div class="col-md-12">
 		<iframe  height="500" width="800" frameborder="0" scrolling="no" src="${pageContext.request.contextPath}/part/map"></iframe>
