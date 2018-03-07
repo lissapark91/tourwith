@@ -45,8 +45,6 @@ public class CrewRoomController {
 				memberList.add(member);
 			}
 		}
-		
-		
 		model.addAttribute("memberList", memberList);
 		
 		return "crew/crewRoom";

@@ -12,9 +12,9 @@
 	border:5px solid black;
 	width:500px;
 	height:500px;
-	max-height:500px;
+/* 	max-height:500px; */
 /* 	margin-top:100px; */
-	margin-left:200px;
+/* 	margin-left:200px; */
 	border-radius:10px;
 }
 
@@ -81,12 +81,14 @@
 </script>
 </head>
 <body>
-	<div style="margin-left:200px;margin-top:200px;margin-bottom:auto;">
-    <input type="button" id="sendMessage" value="엔터" />
-    <input type="text" id="message" placeholder="메시지 내용"/>
-    <input type="text" id="to" placeholder="귓속말대상"/>
-    </div>
+<!-- 	<div style="margin-left:200px;margin-top:200px;margin-bottom:auto;"> -->
+
     <div id="chatMessage" class="mgbox" style=""></div>
+    <div >
+<!--     <input type="button" id="sendMessage" value="엔터" /> -->
+    <input type="text" id="message" placeholder="메시지 내용"/>
+<!--     <input type="text" id="to" placeholder="귓속말대상"/> -->
+    </div>
 </body>
 </html>
 

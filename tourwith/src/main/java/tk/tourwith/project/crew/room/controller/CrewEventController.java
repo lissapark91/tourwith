@@ -75,17 +75,17 @@ public class CrewEventController {
 		return "part/calendar";
 	}
 	
-	@RequestMapping("/part/calendar/event/{CR_NO}")
+	@RequestMapping("/part/calendar/event/{cr_no}")
 	@ResponseBody
 	public List<CrewEvent> getCrewEventListtest(Model model/*,
 								   String EVENT_NM,
 								   String EVENT_CON,
 								   String BGNDT,
 								   String ENDDT*/,
-								   @PathVariable String CR_NO) throws Exception{
+								   @PathVariable String cr_no) throws Exception{
 		
 		Map<String, Object> param = new HashMap<>();
-		param.put("cr_no", CR_NO);
+		param.put("cr_no", cr_no);
 		List<CrewEvent> crewEventList = crewEventService.selectCrewEventList(param);
 		
 //		param.put("EVENT_CON", EVENT_CON);

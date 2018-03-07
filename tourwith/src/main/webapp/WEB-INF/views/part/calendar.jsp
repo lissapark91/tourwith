@@ -114,13 +114,17 @@ $(document).ready(function() {
   }); 
 	
   //fullcalendar 설정 코드
+  var today = new Date();
+  var date = today.getDate();
+  var month = today.getMonth();
+  var year = today.getFullYear();
   $('#calendar').fullCalendar({
 	  header: {
 	        left: 'prev,next today',
 	        center: 'title',
 	        right: 'month,agendaWeek,agendaDay,listWeek'
 	      },
-	      defaultDate: '2018-02-12',
+	      defaultDate: year + '-' + month + '-' + date,
 	      navLinks: true, // can click day/week names to navigate views
 	      editable: false,
 	      eventLimit: true, // allow "more" link when too many events
@@ -137,7 +141,7 @@ $(document).ready(function() {
    // events: loadData() 
      events: function(start, end, timezone, callback) {
         $.ajax({
-            url: '${pageContext.request.contextPath}/part/calendar/event/0000000002',
+            url: '${pageContext.request.contextPath}/part/calendar/event/${crew.cr_no}',
             dataType: 'json',
            /*  data: {
                 // our hypothetical feed requires UNIX timestamps
