@@ -22,6 +22,9 @@
 <typeAlias type="tk.tourwith.project.help.model.Help" alias="Help"/>
 <typeAlias type="tk.tourwith.project.crew.model.CrewReply" alias="CrewReply"/>
 <typeAlias type="tk.tourwith.project.crew.room.model.CrewEvent" alias="CrewEvent"/>
+<typeAlias type="tk.tourwith.project.crew.room.model.CrewMap" alias="CrewMap"/>
+<typeAlias type="tk.tourwith.project.crew.model.CrewNotice" alias="CrewNotice"/>
+
 
 <!-- <typeAlias type="tk.tourwith.project.reply.crew.model.CrewReply" alias="CrewReply"/> -->
 <!-- <typeAlias type="tk.tourwith.project.reply.review.model.ReviewReply" alias="ReviewReply"/> -->

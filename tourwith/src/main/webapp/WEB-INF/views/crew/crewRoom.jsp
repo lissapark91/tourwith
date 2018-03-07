@@ -12,6 +12,7 @@
 
         <div class="row">
            
+<<<<<<< Updated upstream
 		<h3>크루룸</h3>
 		
 		<div class="col-md-6" id="chat">
@@ -41,11 +42,29 @@
 		</div>
 
 		
-<!-- 		<div class="col-md-12"> -->
-<%-- 		<iframe  height="500" width="500" src="${pageContext.request.contextPath}/part/member/${crew.cr_no}"></iframe> --%>
-<!-- 		</div> -->
+		<div class="col-md-12">
+		<iframe  height="500" width="800" frameborder="0" scrolling="no" src="${pageContext.request.contextPath}/part/map"></iframe>
+		</div>
 		
-</div>
-</div>
-</div>
+=======
+		<div class="gtco-section list-group-item">
+<!-- 		<div class="list-group-item"> -->
+	
+		<h1>크루룸</h1>
+	
+		<div class="col-md-8 col-md-offset-8">
 
+		<iframe  height="500" width="500" src="${pageContext.request.contextPath}/part/calendar/${crew.cr_no}"></iframe>
+		</div>
+		
+		<div class="row">
+		<div class="col-md-8 col-md-offset-8">
+			<iframe  height="500" width="500" src="${pageContext.request.contextPath}/part/crewMap/${crew.cr_no}"></iframe>
+		</div>
+		</div>
+		
+>>>>>>> Stashed changes
+</div>
+</div>
+</div>
+<!-- </div> -->

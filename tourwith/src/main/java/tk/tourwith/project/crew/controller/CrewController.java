@@ -127,11 +127,15 @@ public class CrewController {
 		paramMap.put("cr_no", cr_no);
 		
 		CrAuthor memberCrAuthor = crAuthorService.selectAuthorByMbNoCrNo(paramMap);
-		System.out.println(memberCrAuthor.getAuthor_group_code());
-		if(StringUtils.equals(memberCrAuthor.getAuthor_group_code(), "CR_ROLE_REG")) {
-			model.addAttribute("isCrewMember", true);
+		if(memberCrAuthor != null) {
+			if(StringUtils.equals(memberCrAuthor.getAuthor_group_code(), "CR_ROLE_REG")) {
+				model.addAttribute("isCrewMember", true);
+			}else {
+				model.addAttribute("isCrewMember", false);
+			}			
 		}else {
 			model.addAttribute("isCrewMember", false);
+			
 		}
 		
 		

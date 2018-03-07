@@ -68,6 +68,7 @@
 	
 	
   <script src='${pageContext.request.contextPath}/js/moment.min.js'></script>
+  
 	<!-- jQuery -->
 	<script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 	<!-- jQuery Easing -->

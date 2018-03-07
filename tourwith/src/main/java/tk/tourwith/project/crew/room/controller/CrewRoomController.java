@@ -78,5 +78,11 @@ public class CrewRoomController {
 		return "part/crewMember";
 	}
 	
+	@RequestMapping("/part/map")
+	public String getMap() {
+		
+		return "part/map";
+	}
+	
 	
 }

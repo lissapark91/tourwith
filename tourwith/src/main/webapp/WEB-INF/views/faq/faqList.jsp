@@ -38,11 +38,11 @@
 	<div class="gtco-container">
 		<div class="row">
 			<div class="col-md-12">
-				<h3>FAQ</h3>
+				<h2>FAQ</h2>
 
 				<div class="container">
 					<div align="right">
-						<input type="button" value="글쓰기" class="btn btn-primary"
+						<input type="button" value="글쓰기" class="btn btn-primary "
 							onclick="fn_writeForm();">
 					</div>
 
@@ -82,24 +82,11 @@
 
 
 
-					<table class="table table-striped">
+					<table class="table table-hover ">
 
-						<thead>
+						
 
-							<tr>
-
-								<th>번호</th>
-
-								<th>제목</th>
-
-
-								<th>작성일자</th>
-
-								<th>조회수</th>
-
-							</tr>
-
-						</thead>
+							
 
 						<tbody>
 
@@ -107,12 +94,14 @@
 
 								<c:forEach var="faq" items="${faqList}" varStatus="status">
 									<tr>
-										<td width="10%">${status.index + pagingUtil.startRow + 1}</td>
-
+									
+										<td width="10%"><img src="https://png.icons8.com/color/36/000000/question.png"></td>
+<%-- 										<td width="10%">${status.index + pagingUtil.startRow + 1}</td> --%>
+									
 										<td width="50%"><a href="faq/${faq.faq_no}">${faq.sj }</a></td>
 
-										<td class="reg_de" regde="${faq.reg_de }" width="20%"></td>
-										<td width="20%">${faq.hitcnt }</td>
+<%-- 										<td class="reg_de" regde="${faq.reg_de }" width="20%"></td> --%>
+<%-- 										<td width="20%">${faq.hitcnt }</td> --%>
 									</tr>
 								</c:forEach>
 							</c:if>

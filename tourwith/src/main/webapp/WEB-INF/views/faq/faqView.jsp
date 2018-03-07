@@ -36,7 +36,7 @@ function fn_writeForm(seqNo){
 
 
 			<tr>
-				<td colspan="2" style="white-space: pre-wrap;" height="300px">${faq.con}</td>
+				<td colspan="2" style="white-space: pre-wrap;" height="300px"><div>${faq.con}</div></td>
 			</tr>
 
 

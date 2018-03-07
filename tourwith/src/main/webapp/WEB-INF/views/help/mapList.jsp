@@ -81,6 +81,9 @@ html, body {
 			radius : 10000,
 			query : '관광명소 여행' // '${code.codenm} 관광명소 여행'
 		}, callback);
+// 		google.maps.event.addListener(map, 'rightclick', function(){
+// 			console.log(this)
+// 		})
 	}
 
 	

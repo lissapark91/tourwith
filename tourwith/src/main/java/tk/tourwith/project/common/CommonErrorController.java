@@ -85,12 +85,12 @@ public class CommonErrorController {
 	
 	private void pageErrorLog(HttpServletRequest request)
 	{
-		logger.info("status_code"+request.getAttribute("javax.servlet.error.status_code"));
-		logger.info("exception_type"+request.getAttribute("javax.servlet.error.exception_type"));
-		logger.info("message"+request.getAttribute("javax.servlet.error.message"));
-		logger.info("request_uri"+request.getAttribute("javax.servlet.error.request_uri"));
-		logger.info("exception"+request.getAttribute("javax.servlet.error.exception"));
-		logger.info("servlet_name"+request.getAttribute("javax.servlet.error.servlet_name"));
+//		logger.info("status_code"+request.getAttribute("javax.servlet.error.status_code"));
+//		logger.info("exception_type"+request.getAttribute("javax.servlet.error.exception_type"));
+//		logger.info("message"+request.getAttribute("javax.servlet.error.message"));
+//		logger.info("request_uri"+request.getAttribute("javax.servlet.error.request_uri"));
+//		logger.info("exception"+request.getAttribute("javax.servlet.error.exception"));
+//		logger.info("servlet_name"+request.getAttribute("javax.servlet.error.servlet_name"));
 		
 	}
 }

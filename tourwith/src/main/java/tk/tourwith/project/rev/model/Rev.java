@@ -13,11 +13,13 @@ public class Rev {
 	private String upd_de;
 	
 	//table에 없지만 추가
-	private String trplc_no;
+	private String trplc_no; //trplc_no -> 여행지 이름
 	private String nmpr;
 	private String depr_de;
 	private String arvl_de;
 	private String rev_writng_mb_nm;
+	
+	private String trplc;
 	
 	private int replyCnt;
 	
@@ -110,5 +112,11 @@ public class Rev {
 	}
 	public void setReplyCnt(int replyCnt) {
 		this.replyCnt = replyCnt;
+	}
+	public String getTrplc() {
+		return trplc;
+	}
+	public void setTrplc(String trplc) {
+		this.trplc = trplc;
 	}
 }
