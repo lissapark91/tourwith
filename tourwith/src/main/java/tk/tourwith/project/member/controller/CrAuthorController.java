@@ -19,6 +19,7 @@ import tk.tourwith.project.crew.service.impl.CrewServiceImpl;
 import tk.tourwith.project.member.model.CrAuthor;
 import tk.tourwith.project.member.model.Member;
 import tk.tourwith.project.member.service.impl.CrAuthorServiceImpl;
+import tk.tourwith.project.member.service.impl.MemberServiceImpl;
 
 @Controller
 public class CrAuthorController {
@@ -27,6 +28,8 @@ public class CrAuthorController {
 	CrAuthorServiceImpl crAuthorService;
 	@Autowired
 	CrewServiceImpl crewService;
+	@Autowired
+	MemberServiceImpl memberService;
 	
 	@ResponseBody
 	@RequestMapping("/crew/register/{cr_no}")
@@ -128,7 +131,19 @@ public class CrAuthorController {
 			
 			paramMap.remove("mb_no");
 			paramMap.put("mb_no", mb_no);
+			member = memberService.selectMemberByPK(mb_no);
 			crAuthorService.updateRequestApproved(paramMap);
+			Crew crew = crewService.getCrew(cr_no);
+			
+			if(StringUtils.equals("여성", member.getGender())) {
+				crew.setNow_female_nmpr(crew.getNow_female_nmpr() + 1);
+			
+			}else{
+				crew.setNow_male_nmpr(crew.getNow_male_nmpr() + 1);				
+			
+			}
+			
+			crewService.updateCrew(crew);
 			
 		}else {
 			throw new Exception();
@@ -139,5 +154,27 @@ public class CrAuthorController {
 		return "common/redirect";
 	}
 	
+	@RequestMapping("/crew/cancel/{cr_no}")
+	public String cancelRequest(HttpSession session, Model model, @PathVariable("cr_no") String cr_no) throws Exception {
+		
+		Member member = (Member) session.getAttribute("LOGIN_USER");
+		
+		Map<String, Object> paramMap = new HashMap<>();
+		
+		paramMap.put("mb_no", member.getMb_no());
+		paramMap.put("cr_no", cr_no);
+		
+		CrAuthor crAuthor = crAuthorService.selectAuthorByMbNoCrNo(paramMap);
+		
+		if(crAuthor != null) {
+			crAuthorService.updateRequestRefuse(paramMap);
+		}else {
+			throw new Exception();
+		}
+		
+		model.addAttribute("locationURL", "/member/mypage");
+		
+		return "common/redirect";
+	}
 	
 }

@@ -6,6 +6,9 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import tk.tourwith.project.crew.mapper.CrewMapper;
+import tk.tourwith.project.crew.model.Crew;
+import tk.tourwith.project.crew.service.impl.CrewServiceImpl;
 import tk.tourwith.project.member.mapper.CrAuthorMapper;
 import tk.tourwith.project.member.model.CrAuthor;
 import tk.tourwith.project.member.service.CrAuthorService;
@@ -18,6 +21,8 @@ public class CrAuthorServiceImpl implements CrAuthorService {
 	CrAuthorMapper crAuthorMapper;
 	@Autowired
 	NumberCreateMapper numberCreateMapper;
+	@Autowired
+	CrewMapper crewMapper;
 	
 	@Override
 	public List<Map<String, Object>> selectListByMap(Map<String, Object> paramMap) {
@@ -67,8 +72,9 @@ public class CrAuthorServiceImpl implements CrAuthorService {
 	@Override
 	public int updateRequestApproved(Map<String, Object> paramMap) {
 		
+		int updCnt = crAuthorMapper.updateRequestApproved(paramMap);
 		
-		return crAuthorMapper.updateRequestApproved(paramMap);
+		return updCnt;
 	}
 	
 	@Override

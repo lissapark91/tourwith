@@ -14,7 +14,7 @@ import tk.tourwith.project.member.mapper.CrAuthorMapper;
 import tk.tourwith.project.member.model.CrAuthor;
 import tk.tourwith.project.util.mapper.NumberCreateMapper;
 
-@Service(value="crewService")
+@Service("crewService")
 public class CrewServiceImpl implements CrewService{
 	
 	@Autowired
@@ -82,4 +82,13 @@ public class CrewServiceImpl implements CrewService{
 		return crewMapper.getTotalCnt(paramMap);
 	}
 
+	@Override
+	public int updateRcritSttusByDe() {
+		return crewMapper.updateRcritSttusByDe();
+	}
+	@Override
+	public int updateRcritSttusByNmpr() {
+		return crewMapper.updateRcritSttusByNmpr();
+		
+	}
 }
