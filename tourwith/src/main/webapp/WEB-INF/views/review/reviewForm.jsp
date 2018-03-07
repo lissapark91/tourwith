@@ -100,6 +100,8 @@
 	<br><br><br><br><br>
 	<h3>${rev.rev_no == null ? '리뷰작성' : '리뷰수정' }</h3>
 	
+	
+	
 	<form name="revForm" id="revForm" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="rev_no" value="${rev.rev_no }">
 		<input type="hidden" name="rev_writng_mb_no" value="${rev.rev_writng_mb_no }">
@@ -108,6 +110,18 @@
 		
 		<table class="table">
 			<tr class="info">
+			<tr class="crew">
+				<td>리뷰를 작성할 크루</td>
+				
+				<td>
+				<select name="cr_no" class="form-control">
+				<c:forEach items="${crewList }" var="crew">
+					<option value="${crew.cr_no }" ${rev.cr_no == crew.cr_no ? 'selected' : '' }>${crew.cr_sj} [${crew.trplc_no_nm }]</option>					
+				</c:forEach>
+				</select>
+				</td>
+				
+			</tr>
 				<td width="15%">제목</td>
 				<td>
 					<div class="col-xs-12">

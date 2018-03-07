@@ -6,6 +6,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import tk.tourwith.project.member.mapper.MemberMapper;
+import tk.tourwith.project.member.model.Member;
 import tk.tourwith.project.rev.mapper.RevMapper;
 import tk.tourwith.project.rev.model.Rev;
 import tk.tourwith.project.rev.service.RevService;
@@ -19,6 +21,9 @@ public class RevServiceImpl implements RevService{
 	
 	@Autowired
 	NumberCreateMapper numberCreateMapper;
+	
+	@Autowired
+	MemberMapper memberMapper;
 	
 	// REVIEW 게시글 조회
 	@Override
@@ -47,6 +52,8 @@ public class RevServiceImpl implements RevService{
 		
 		if(updCnt > 0){
 			numberCreateMapper.updateNumber("REV");
+			
+			memberMapper.updateTourCnt(rev.getRev_writng_mb_no());
 		}
 		
 		return updCnt;

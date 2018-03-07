@@ -124,8 +124,16 @@
   			, BIRTHDAY = #{birthday}
   			, FB_TKN = #{fb_tkn}
   			, UPD_DE = now()
+  			
   		where FB_ID = #{fb_id}
   		
+  	</update>
+  	
+  	<update id="updateTourCnt" parameterType="string">
+  		update MEMBER
+  		set 
+  			TOUR_CNT = TOUR_CNT + 1
+  		where MB_NO = #{mb_no}
   	</update>
   	
   	

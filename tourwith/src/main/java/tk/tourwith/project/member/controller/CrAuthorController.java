@@ -177,4 +177,44 @@ public class CrAuthorController {
 		return "common/redirect";
 	}
 	
+	@RequestMapping("/crew/kick/{mb_no}/{cr_no}")
+	public String kickoutRequest(HttpSession session, Model model,
+			@PathVariable("mb_no") String mb_no, @PathVariable("mb_no") String cr_no ) throws Exception {
+		
+		//check Leader
+		Member member = (Member) session.getAttribute("LOGIN_USER");
+		
+		Map<String, Object> paramMap = new HashMap<>();
+		paramMap.put("mb_no", member.getMb_no());
+		paramMap.put("cr_no", cr_no);
+		
+		CrAuthor loginUserAthor = crAuthorService.selectAuthorByMbNoCrNo(paramMap);
+		
+		if(loginUserAthor != null) {
+			
+			// login user = leader
+			if(StringUtils.equals(loginUserAthor.getAuthor_code(), "CR_ROLE_01")) {
+				
+				paramMap.remove("mb_no");
+				paramMap.put("mb_no", mb_no);
+				
+				int updCnt = crAuthorService.updateKickOut1(paramMap);
+				
+				if(updCnt <= 0) {
+					throw new Exception();
+				}
+				
+			}else {
+				throw new Exception();
+				
+			}
+			
+		}
+		
+		
+		//goto crew room
+		model.addAttribute("locationURL", "/crew/room/"+cr_no);
+		return "common/redirect";
+	}
+	
 }

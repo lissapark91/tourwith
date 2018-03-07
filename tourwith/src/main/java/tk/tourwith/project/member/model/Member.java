@@ -13,8 +13,7 @@ public class Member {
 	private String del_yn	;
 	private String gender	;
 	private String birthday	;
-	private String tour_cnt ;
-	
+	private int tour_cnt ;
 	
 	public String getMb_no() {
 		return mb_no;
@@ -73,15 +72,17 @@ public class Member {
 	public String getBirthday() {
 		return birthday;
 	}
-	public void setBirthday(String age) {
+	public void setBirthday(String birthday) {
 		this.birthday = birthday;
 	}
-	public String getTour_cnt() {
+	public int getTour_cnt() {
 		return tour_cnt;
 	}
-	public void setTour_cnt(String tour_cnt) {
+	public void setTour_cnt(int tour_cnt) {
 		this.tour_cnt = tour_cnt;
 	}
-
+	
+	
+	
 }
 

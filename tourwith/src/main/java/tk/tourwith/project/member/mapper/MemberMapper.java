@@ -15,6 +15,8 @@ public interface MemberMapper {
 	public int insertMember(Member member) throws Exception;
 
 	public int updateMember(Member member) throws Exception;
+
+	public int updateTourCnt(String mb_no) throws Exception;
 	
 	public Member selectMemberByPK(String mb_no) throws Exception;
 

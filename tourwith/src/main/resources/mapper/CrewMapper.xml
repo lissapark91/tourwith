@@ -117,27 +117,38 @@
   	</select>
 
   	<select id="getCrew" resultType="Crew" parameterType="String" >
+  	
   		select
-  			  CR_NO				<!-- 크루 번호 -->
-			, CR_SJ				<!--크루 명 -->
-			, THEMA				<!--크루 테마 -->
-			, MAIN_COURS		<!-- 주요 코스 -->
-			, DETAIL_TRPLC		<!-- 세부 코스 -->
-			, DEPR_DE	 		<!-- 출발 날짜 -->
-			, ARVL_DE			<!-- 도착 날짜 -->
-			, NOW_MALE_NMPR		<!-- 현재 남자 인원 -->
-			, MALE_NMPR			<!-- 남자인원 -->
-			, FEMALE_NMPR		<!--여자 인원 -->
-			, NOW_FEMALE_NMPR	<!-- 현재 여자 인원 -->
-			, PRTXT				<!-- 홍보 글 -->
-			, REG_DE			<!-- 등록 날짜 -->
-			, UPD_DE			<!-- 수정 날짜 -->
-			, DEL_YN			<!-- 삭제 여부 -->
-			, CR_LEADR_MB_NO	<!-- 크루리더 번호 -->	
-			, TRPLC_NO			<!-- 여행지 번호  -->
-			, RCRIT_STTUS		<!-- 모집 상태 -->
-		from CREW 
-		where CR_NO = #{cr_no}
+  			  a.CR_NO
+			, a.CR_SJ
+			, a.THEMA
+			, c.CODE_NM as THEMA_NM
+			, a.MAIN_COURS
+			, a.DETAIL_TRPLC
+			, a.DEPR_DE	
+			, a.ARVL_DE	
+			, a.NOW_MALE_NMPR
+			, a.MALE_NMPR	
+			, a.FEMALE_NMPR	
+			, a.NOW_FEMALE_NMPR	
+			, a.PRTXT	
+			, a.REG_DE	
+			, a.UPD_DE	
+			, a.CR_LEADR_MB_NO
+			, b.NICK as CR_LEADR_NM_NICK
+			, a.TRPLC_NO
+			, d.CODE_NM as TRPLC_NO_NM
+			, a.RCRIT_STTUS
+			, e.CODE_NM as RCRIT_STTUS_NM
+		from CREW as a, MEMBER as b, CMMN_CODE as c, CMMN_CODE as d, CMMN_CODE as e	
+		where a.DEL_YN = 'n'
+		
+		and a.THEMA = c.CODE_NO
+		and a.CR_LEADR_MB_NO = b.MB_NO
+		and a.TRPLC_NO = d.CODE_NO
+		and a.RCRIT_STTUS = e.CODE_NO
+		and CR_NO = #{cr_no}
+		
   	</select>
   	
   	<insert id="insertCrew" parameterType="Crew">
@@ -199,6 +210,8 @@
 			ARVL_DE = #{arvl_de},
 			MALE_NMPR = #{male_nmpr},
 			FEMALE_NMPR = #{female_nmpr},
+			NOW_MALE_NMPR = #{male_nmpr},
+			NOW_FEMALE_NMPR = #{female_nmpr},
 			PRTXT = #{prtxt},
 			UPD_DE = now(),
 			TRPLC_NO = #{trplc_no},
@@ -230,6 +243,8 @@
   		WHERE (MALE_NMPR + FEMALE_NMPR) = (NOW_MALE_NMPR + NOW_FEMALE_NMPR)
   		
   	</update>
+  	
+  
   	
   	
   	</mapper>
