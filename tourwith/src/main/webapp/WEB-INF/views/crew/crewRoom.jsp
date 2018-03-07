@@ -14,9 +14,13 @@
            
 		<h3>크루룸</h3>
 		
-		<div class="col-md-6" id="chat">
+<!-- 		<div class="col-md-6" id="chat"> -->
 <!-- 		<a href="https://www.messenger.com/t/" target="_blank">메신저</a> -->
-		<a href="https://www.messenger.com/t/" onClick="window.open(this.href, '', 'width=900, height=650, top=100, left=100'); return false;"><button type="button" class="btn btn-info"><i class="icon-facebook"></i>메신저</button></a>
+<!-- 		<a href="https://www.messenger.com/t/" onClick="window.open(this.href, '', 'width=900, height=650, top=100, left=100'); return false;"><button type="button" class="btn btn-info"><i class="icon-facebook"></i>메신저</button></a> -->
+<!-- 		</div> -->
+<div class="row">
+		 <div class="col-md-6 "> 
+ 		<iframe height="500" width="500" frameborder="0" scrolling="no" src="${pageContext.request.contextPath}/crewNotices/${crew.cr_no}"></iframe> 
 		</div>
 		
 		<div class="col-md-6">
@@ -39,6 +43,7 @@
 		</div>
 
 
+</div>
 		
 <!-- 		<div class="gtco-section list-group-item"> -->
 <!-- 		<div class="list-group-item"> -->
@@ -53,9 +58,14 @@
 		<div class="col-md-6 ">
 			<iframe  height="700" width="500" frameborder="0" scrolling="no" src="${pageContext.request.contextPath}/part/crewMap/${crew.cr_no}"></iframe>
 		</div>
-		 <div> 
+		
+		 <div class="col-md-6 "> 
  		<iframe height="800" width="800" frameborder="0" scrolling="no" src="${pageContext.request.contextPath}/chat"></iframe> 
  		</div> 
+
+<!-- 		 <div class="col-md-6 ">  -->
+<%--  		<iframe height="800" width="800" frameborder="0" scrolling="no" src="${pageContext.request.contextPath}/crewNotices/${crew.cr_no}"></iframe>  --%>
+<!--  		</div>  -->
 		
 		</div>
 </div>

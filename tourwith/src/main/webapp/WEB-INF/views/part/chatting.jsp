@@ -52,7 +52,26 @@
          
          $("#message").keydown(function (key) {
              if (key.keyCode == 13) {
-                $("#sendMessage").click();
+            	 if( $("#message").val() != "") {
+                     
+                     message={};
+                     message.message = $("#message").val();
+                     message.type = "all";
+                     message.to = "all";
+                      
+                     var to = $("#to").val();
+                     if ( to != "") {
+                         message.type = "one";
+                         message.to = to;
+                     }
+                      
+                     chatSock.send(JSON.stringify(message));
+                     $("#chatMessage").append("나 ->  " + $("#message").val() + "<br/>");
+                     $("#chatMessage").scrollTop(99999999);
+                      
+                     $("#message").val("");	
+                 }
+//                 $("#sendMessage").click();
              }
           });
          
@@ -85,8 +104,9 @@
 
     <div id="chatMessage" class="mgbox" style=""></div>
     <div >
-<!--     <input type="button" id="sendMessage" value="엔터" /> -->
-    <input type="text" id="message" placeholder="메시지 내용"/>
+     
+    <input type="text" id="message" placeholder="메시지 내용" class="form-control col-xs-2"/>
+<!--     <input type="button" id="sendMessage" value="엔터" />  -->
 <!--     <input type="text" id="to" placeholder="귓속말대상"/> -->
     </div>
 </body>
