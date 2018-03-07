@@ -71,6 +71,12 @@
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg ref="sqlSessionFactory"></constructor-arg>
 	</bean>
+	
+	<mybatis-spring:scan base-package="tk.tourwith.project" annotation="org.apache.ibatis.annotations.Mapper"/>
+	
+	<!-- 소켓컨트롤러 설정 -->
+	<bean id="socketController" class="tk.tourwith.project.crew.room.SocketController"/>
+	
 
 	<mybatis-spring:scan base-package="tk.tourwith.project"
 		annotation="org.apache.ibatis.annotations.Mapper" />
