@@ -37,16 +37,7 @@
 			<button type="button" class="btn btn-warning">강퇴하기</button>
 		</div>
 
-		<div class="col-md-10 col-md-offset-2" >
-		<iframe  height="500" width="800" frameborder="0" scrolling="no" src="${pageContext.request.contextPath}/part/calendar/${crew.cr_no}"></iframe>
-		</div>
-<!-- 		<div> -->
-<%-- 		<iframe height="500" width="800" frameborder="0" src="${pageContext.request.contextPath}/chat"></iframe> --%>
-<!-- 		</div> -->
-		
-		<div class="col-md-12">
-		<iframe  height="500" width="800" frameborder="0" scrolling="no" src="${pageContext.request.contextPath}/part/map"></iframe>
-		</div>
+
 		
 =======
 		<div class="gtco-section list-group-item">
@@ -63,6 +54,10 @@
 		<div class="col-md-8 col-md-offset-8">
 			<iframe  height="500" width="500" src="${pageContext.request.contextPath}/part/crewMap/${crew.cr_no}"></iframe>
 		</div>
+		 <div> 
+ 		<iframe height="500" width="800" frameborder="0" src="${pageContext.request.contextPath}/chat"></iframe> 
+ 		</div> 
+		
 		</div>
 		
 >>>>>>> Stashed changes
