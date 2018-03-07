@@ -33,32 +33,31 @@
 				
 				</c:forEach>
 			</ul>
-			<c:if test="${crew.cr_leadr_mb_no == LOGIN_USER.mb_no }">
 			<button type="button" class="btn btn-warning">강퇴하기</button>
-			</c:if>
 		</div>
 
 
 		
-<!-- 		<div class="gtco-section list-group-item"> -->
+		<div class="gtco-section list-group-item">
 <!-- 		<div class="list-group-item"> -->
 	
+		<h1>크루룸</h1>
 	
-		<div class="col-md-6 ">
+		<div class="col-md-8 ">
 
-		<iframe  height="700" width="500" frameborder="0" scrolling="no" src="${pageContext.request.contextPath}/part/calendar/${crew.cr_no}"></iframe>
+		<iframe  height="500" width="500" src="${pageContext.request.contextPath}/part/calendar/${crew.cr_no}"></iframe>
 		</div>
 		
-<!-- 		<div class="row"> -->
-		<div class="col-md-6 ">
-			<iframe  height="700" width="500" frameborder="0" scrolling="no" src="${pageContext.request.contextPath}/part/crewMap/${crew.cr_no}"></iframe>
+		<div class="row">
+		<div class="col-md-8 ">
+			<iframe  height="500" width="500" src="${pageContext.request.contextPath}/part/crewMap/${crew.cr_no}"></iframe>
 		</div>
 		 <div> 
- 		<iframe height="800" width="800" frameborder="0" scrolling="no" src="${pageContext.request.contextPath}/chat"></iframe> 
+ 		<iframe height="500" width="800" frameborder="0" src="${pageContext.request.contextPath}/chat"></iframe> 
  		</div> 
 		
 		</div>
 </div>
 </div>
-<!-- </div> -->
+</div>
 <!-- </div> -->

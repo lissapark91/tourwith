@@ -105,17 +105,20 @@ public class EchoHandler extends TextWebSocketHandler {
     public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
  
         connectedUsers.remove(session);
- 
+        
+        Map<String,Object> map = session.getAttributes();
+        Member member = (Member)map.get("LOGIN_USER");
+        
         for (WebSocketSession webSocketSession : connectedUsers) {
             /*
              * 자신이 보낸 메시지를 받지 않는다.
              */
             if (!session.getId().equals(webSocketSession.getId())) {
-                webSocketSession.sendMessage(new TextMessage(session.getRemoteAddress().getHostName() + "퇴장했습니다."));
+                webSocketSession.sendMessage(new TextMessage(member.getNick() + "퇴장했습니다."));
             }
         }
  
-        logger.info(session.getId() + "님이 퇴장했습니다.");
+        logger.info(member.getNick() + "님이 퇴장했습니다.");
     }
 }
 

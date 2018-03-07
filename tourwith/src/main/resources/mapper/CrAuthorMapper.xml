@@ -38,9 +38,9 @@
    select a.CR_AUTHOR_NO, a.MB_NO, a.CR_NO, a.AUTHOR_CODE, b.GROUP_CODE as author_group_code 
   	, c.CR_SJ as cr_sj
    from CR_AUTHOR as a, CMMN_CODE as b, CREW as c
-   where MB_NO = #{mb_no}  and a.author_code = b.code_no
+   where a.CR_NO = #{cr_no}  and a.author_code = b.code_no
    and c.CR_NO = a.CR_NO 
-	  
+	   
 </select>
 
 <select id="selectListByMbNo" parameterType="string" resultType="CrAuthor">
