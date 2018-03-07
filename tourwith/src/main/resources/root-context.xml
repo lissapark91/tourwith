@@ -69,6 +69,8 @@
 	</bean>
 	
 	<mybatis-spring:scan base-package="tk.tourwith.project" annotation="org.apache.ibatis.annotations.Mapper"/>
-		
+	
+	<!-- 소켓컨트롤러 설정 -->
+	<bean id="socketController" class="tk.tourwith.project.crew.room.SocketController"/>
 	
 </beans>
