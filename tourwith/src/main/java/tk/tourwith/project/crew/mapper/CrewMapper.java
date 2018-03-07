@@ -23,4 +23,10 @@ public interface CrewMapper {
 		
 		// 페이징 처리 180223 윤종표 추가
 		public int getTotalCnt(Map<String, Object> paramMap) throws Exception;
+		
+		public int updateRcritSttusByDe();
+
+		public int updateRcritSttusByNmpr();
+		
+
 }

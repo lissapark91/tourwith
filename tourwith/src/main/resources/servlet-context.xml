@@ -44,38 +44,44 @@
         <beans:constructor-arg value="/uploadTemp"/>
 	</beans:bean>
 	
-<!-- 	<interceptors> -->
-<!-- 	<interceptor> -->
-<!-- 		<mapping path="/member/**"/> -->
-<!-- 		<mapping path="/member/*"/> -->
-<!-- 		<mapping path="/board/**"/> -->
-<!-- 		<mapping path="/board/*"/>	 -->
-			
-<!-- 		<exclude-mapping path="/member/members"/> -->
+	<interceptors>
+	<interceptor>
+		<mapping path="/member/mypage"/>
+		<mapping path="/crew/*"/>
+		<mapping path="/crew/**"/>
+		<mapping path="/signout"/>
+		<mapping path="/review/form"/>
+		<mapping path="/revInsert"/>
+		<mapping path="/revUpdate"/>
+		<mapping path="/review/revDelete"/>
+		<mapping path="/review/reply/*"/>
+		<mapping path="/crew/form"/>
 		
-<!-- 		<exclude-mapping path="/login/*"/> -->
-<!-- 		<exclude-mapping path="/login"/> -->
-<!-- 		<exclude-mapping path="/member/form"/> -->
-<!-- 		<exclude-mapping path="/member/add"/> -->
-<!-- 		<exclude-mapping path="/member/exists"/> -->
-<!-- 		<exclude-mapping path="/board/all/**"/> -->
-<!-- 		<exclude-mapping path="/board/best/**"/> -->
-<!-- 		<beans:bean class="com.bimils.myapp.web.interceptor.LoginCheckInterceptor"></beans:bean> -->
-<!-- 	</interceptor> -->
-	<!-- admin -->
+		
+		
+		<exclude-mapping path="/common/error/*"/>
+		<exclude-mapping path="/crew/list/*"/>
+		<exclude-mapping path="/helper"/>
+		<exclude-mapping path="/help/*"/>
+		<exclude-mapping path="/check/*"/>
+		<exclude-mapping path="/signin/*"/>
+		<exclude-mapping path="/image/*"/>
+		
+		<beans:bean class="tk.tourwith.project.common.LoginCheckInterceptor"></beans:bean>
+	</interceptor>
 	
-<!-- 	<interceptor> -->
-<!-- 		<mapping path="/member/members"/> -->
-<!-- 		<mapping path="/member/del/*"/> -->
-<!-- 		<mapping path="/member/view/*"/> -->
+	
+	<interceptor>
+		<mapping path="/admin/**"/>
+		<mapping path="/admin/*"/>
+		<mapping path="/faq/form"/>
+		<mapping path="/faqInsert"/>
+		<mapping path="/faqUpdate"/>
+		<mapping path="/faqDelete"/>
 		
-		<!-- test -->
-<!-- 		<mapping path="/board/report/*"/> -->
-<!-- 		<mapping path="/board/report/*"/> -->
-		
-<!-- 		<beans:bean class="com.bimils.myapp.web.interceptor.AdminCheckInterceptor"></beans:bean> -->
-<!-- 	</interceptor> -->
-<!-- 	</interceptors> -->
+		<beans:bean class="tk.tourwith.project.common.AdminCheckInterceptor"></beans:bean>
+	</interceptor>
+	</interceptors>
 	
 	<!-- controller bean 자동 등록 -->
 	<context:component-scan base-package="tk.tourwith.project" >

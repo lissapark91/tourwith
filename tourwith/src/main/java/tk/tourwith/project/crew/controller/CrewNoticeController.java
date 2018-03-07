@@ -67,10 +67,10 @@ public class CrewNoticeController {
 		model.addAttribute("pagingUtil",pagingUtil);
 		
 		model.addAttribute("cr_no",cr_no);
-		return "crew/crewNoticeList";
+		return "part/crewNoticeList";
 	}
 	
-	@RequestMapping("/crewNotice/{notice_no}")
+	@RequestMapping("/crew/notice/{notice_no}")
 	public String crewNoticeView(@PathVariable(value = "notice_no", required = true)String notice_no, Model model,@RequestParam(value="cr_no", required = false) String cr_no)
 			throws Exception{
 		
@@ -89,7 +89,7 @@ public class CrewNoticeController {
 		return "crew/crewNoticeView";
 	}
 	
-	@RequestMapping("/crewNotice/form")
+	@RequestMapping("/crew/notice/form")
 	public String crewNoticeForm(HttpSession session, 
 			@RequestParam(value="notice_no", required = false) String notice_no,HttpServletRequest request, CrewNotice crewNotice,
 			Model model )throws Exception{

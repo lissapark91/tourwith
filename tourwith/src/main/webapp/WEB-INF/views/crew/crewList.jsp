@@ -137,7 +137,18 @@
 		
 		$('#createCrewBtn').click(function(){
 			var groupCode = '${category}'.substring(9)
- 			location.href = '${pageContext.request.contextPath}/crew/form?groupCode='+groupCode;
+//  			location.href = '${pageContext.request.contextPath}/crew/form?groupCode='+groupCode;
+ 			
+			var $this = $(this);
+			if(${empty LOGIN_USER}){
+				$this.attr({
+					'data-toggle': "modal", 'data-target': "#myModal"
+				})
+				fbLogin();
+			}else{
+				location.href = '${pageContext.request.contextPath}/crew/form?groupCode='+groupCode;
+			}
+			
 		})
 		
 	});
@@ -155,6 +166,21 @@
 			}
 			
 		})
+		
+		
+// 		$('a[cr_no]').on('click', function(){
+// 			console.log('click')
+// 			var $this = $(this);
+// 			if(${empty LOGIN_USER}){
+// 				$this.attr({
+// 					'data-toggle': "modal", 'data-target': "#myModal"
+// 				})
+// 				fbLogin();
+// 			}else{
+// 				$this.attr('href', "${pageContext.request.contextPath}/crew/page/" + $this.attr('cr_no'));			
+// 			}
+			
+// 		})
 		
 // 		$('.nohover')
 	})

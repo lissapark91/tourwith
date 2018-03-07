@@ -17,10 +17,12 @@ xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/
 	<filter>
 		<filter-name>encodingFilter</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+	<async-supported>true</async-supported>
 		<init-param>
 			<param-name>encoding</param-name>
 			<param-value>UTF-8</param-value>
 		</init-param>
+
 	</filter>
 	
 	<filter-mapping>
@@ -73,10 +75,11 @@ xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/
 			<param-name>contextConfigLocation</param-name>
 			<param-value>
 				classpath:servlet-context.xml
+				classpath:ws-config.xml
 			</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
-
+		<async-supported>true</async-supported>
 
 	</servlet>
 		
@@ -85,7 +88,7 @@ xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 	
-
+	
 
 
 </web-app>
