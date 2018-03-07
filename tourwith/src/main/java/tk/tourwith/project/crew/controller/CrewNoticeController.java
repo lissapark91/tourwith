@@ -86,7 +86,7 @@ public class CrewNoticeController {
 		
 		model.addAttribute("cr_no",cr_no);
 		
-		return "crew/crewNoticeView";
+		return "part/crewNoticeView";
 	}
 	
 	@RequestMapping("/crew/notice/form")
@@ -102,7 +102,7 @@ public class CrewNoticeController {
 		}
 		
 		
-		return "crew/crewNoticeForm";
+		return "part/crewNoticeForm";
 	}
 	
 	@RequestMapping(value = "/crewNoticeInsert", method = RequestMethod.POST)
