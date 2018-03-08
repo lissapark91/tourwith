@@ -60,6 +60,9 @@
 					and CONCAT(a.SJ, ' ', a.CON) LIKE CONCAT('%', #{searchWord}, '%')
 			</if>
 		</if>
+		<if test="mb_no != nul and mb_no != '' ">
+			and a.REV_WRITNG_MB_NO = #{mb_no}
+		</if>
 		ORDER BY a.REG_DE DESC
 		<if test="startRow >= 0 and endRow > startRow">
 			LIMIT #{startRow}, 15
@@ -107,7 +110,7 @@
 				,#{rev_writng_mb_no}
 				,'n'
 				,0
-				,1
+				,#{cr_no}
 				,#{con}
 				,now()
 				,now()

@@ -174,5 +174,7 @@
 	WHERE CR_NO = #{cr_no} and MB_NO = #{MB_NO}
 </delete>
  
+ 
+ 
  </mapper> 
 

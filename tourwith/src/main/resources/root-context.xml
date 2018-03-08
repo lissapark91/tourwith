@@ -105,7 +105,7 @@
 	<!-- cron 표현식 : 초(0~59) 분(0~59) 시(0~23) 일(1~31) 월(1~12) 요일(0~7) -->
 	<bean id="cronTrigger"
 		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean"
-		p:jobDetail-ref="sampleJob" p:startDelay="1000" p:cronExpression="0/5 0 0 * * ?" />
+		p:jobDetail-ref="sampleJob" p:startDelay="1000" p:cronExpression="* * 0 * * ?" />
 <!-- 	p:cronExpression="0 0 0 * * ?" -->
 
 	<bean id="schedulerFactoryBean"

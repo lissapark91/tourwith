@@ -13,12 +13,10 @@ public class CrewTask {
 	private CrewService crewService;
 
 	protected void execute() throws Exception {
-		
-		System.out.println(crewService);
 
 		crewService.updateRcritSttusByDe();
 		crewService.updateRcritSttusByNmpr();
-		System.out.println("=====================================");
+		
 	}
 
 }

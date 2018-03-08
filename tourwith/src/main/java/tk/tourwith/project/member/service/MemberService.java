@@ -22,6 +22,6 @@ public List<Member> selectMemberList(Map<String, Object> paramMap) throws Except
 	public int deleteMember(String mb_no) throws Exception;
 	
 	
-	
+	public int updateTourCnt(String mb_no) throws Exception;
 	
 }

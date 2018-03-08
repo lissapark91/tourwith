@@ -21,7 +21,8 @@ public class MemberServiceImpl implements MemberService{
 
 	@Override
 	public List<Member> selectMemberList(Map<String, Object> paramMap) throws Exception {
-		return null;
+		
+		return memberMapper.selectMemberList(paramMap);
 	}
 
 	@Override
@@ -47,7 +48,7 @@ public class MemberServiceImpl implements MemberService{
 
 	@Override
 	public int deleteMember(String mb_no) throws Exception {
-		return 0;
+		return memberMapper.deleteMember(mb_no);
 	}
 
 	@Override
@@ -59,6 +60,12 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public int updateMember(Member member) throws Exception {
 		return memberMapper.updateMember(member);
+	}
+	
+	@Override
+	public int updateTourCnt(String mb_no) throws Exception {
+		// TODO Auto-generated method stub
+		return memberMapper.updateTourCnt(mb_no);
 	}
 
 }

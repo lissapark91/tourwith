@@ -1,5 +1,8 @@
 package tk.tourwith.project.rev.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,7 +21,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import tk.tourwith.project.crew.model.Crew;
+import tk.tourwith.project.crew.service.impl.CrewServiceImpl;
+import tk.tourwith.project.member.model.CrAuthor;
 import tk.tourwith.project.member.model.Member;
+import tk.tourwith.project.member.service.impl.CrAuthorServiceImpl;
+import tk.tourwith.project.member.service.impl.MemberServiceImpl;
 import tk.tourwith.project.rev.model.Rev;
 import tk.tourwith.project.rev.service.impl.RevServiceImpl;
 import tk.tourwith.project.util.PagingUtil;
@@ -29,7 +37,14 @@ public class RevController {
 
 	@Autowired
 	private RevServiceImpl revService;
+	@Autowired
 	private FileServcieImpl fileService;
+	@Autowired
+	private CrAuthorServiceImpl crAuthorService;
+	@Autowired
+	private CrewServiceImpl crewService;
+	@Autowired
+	private MemberServiceImpl memberService;
 
 	// REV 검색
 	@RequestMapping("/reviews")
@@ -81,7 +96,8 @@ public class RevController {
 		rev = revService.selectRev(rev_no);
 		
 		model.addAttribute("rev", rev);
-
+		model.addAttribute("crew", crewService.getCrew(rev.getCr_no()));
+		model.addAttribute("writer", memberService.selectMemberByPK(rev.getRev_writng_mb_no()));
 		return "review/reviewView";
 	}
 	
@@ -97,7 +113,52 @@ public class RevController {
 			model.addAttribute("rev", rev);
 			
 		}
-		
+			
+			Member member = (Member) session.getAttribute("LOGIN_USER");
+			
+			Map<String, Object> paramMap = new HashMap<>();
+			paramMap.put("mb_no", member.getMb_no());
+			// login user's review list
+			List<Rev> revList = revService.selectRevList(paramMap);
+			// check the cr_no
+			Map<String, String> crewSjMap = new HashMap<>();
+			for(Rev rev : revList) {
+				crewSjMap.put(rev.getCr_no(), rev.getRev_no());
+			}
+			
+			
+			List<CrAuthor> authorList = crAuthorService.selectListByMbNo(member.getMb_no());
+			
+			List<Crew> crewList = new ArrayList<>();
+			
+			for(CrAuthor auth : authorList ) {
+				
+				if(StringUtils.equals(auth.getAuthor_group_code(), "CR_ROLE_REG")) {
+					Crew crew = crewService.getCrew(auth.getCr_no());
+					SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+					
+					Date day1 = null;
+					Date day2 = new Date();
+					
+					day1 = format.parse(crew.getArvl_de());
+					int compare = day2.compareTo(day1);
+					
+					if(compare >= 0 ){
+						//arvl_de > now
+						if(crewSjMap.containsKey(crew.getCr_no())) {
+							
+						}else {
+							crewList.add(crew);								
+						}
+						
+					}
+							
+				}
+				
+				
+			}
+			
+			model.addAttribute("crewList", crewList);
 			return "review/reviewForm";
 		}
 	

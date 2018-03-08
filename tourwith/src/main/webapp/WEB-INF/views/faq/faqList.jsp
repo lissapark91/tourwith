@@ -21,9 +21,9 @@
 		frm.submit();
 	}
 	
-	$(function() {
-		$('.reg_de').text($('.reg_de').attr('regde').split(' ')[0]);
-	})
+// 	$(function() {
+// 		$('.reg_de').text($('.reg_de').attr('regde').split(' ')[0]);
+// 	})
 	
 	
 	

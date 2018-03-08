@@ -12,6 +12,17 @@
 	padding: 0.5%;
 /* 	border-top: 1px solid #b3b3b3; */
 }
+
+.cr_card {
+			cursor: pointer;
+			background-color: #FAFAFA;
+		}
+.RECR_STAT_01{
+	color: orange;
+}
+.RECR_STAT_02{
+	color: red;
+}
 </style>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script> -->
@@ -220,6 +231,20 @@
 				$('[name=con1]').val('');
 			})
 			
+			$('a[cr_no]').on('click', function(){
+			console.log('click')
+			var $this = $(this);
+			if(${empty LOGIN_USER}){
+				$this.attr({
+					'data-toggle': "modal", 'data-target': "#myModal"
+				})
+				fbLogin();
+			}else{
+				$this.attr('href', "${pageContext.request.contextPath}/crew/page/" + $this.attr('cr_no'));			
+			}
+			
+			})
+			
 		})	
 			getReply("${pageContext.request.contextPath}/review/reply/${rev.rev_no}");	
 		
@@ -234,8 +259,70 @@
 <div class="container">
 	<br> <br> <br> <br> <br>
 	<h3>리뷰상세보기</h3>
-
-	<table class="table">
+	<!--  crew card  -->
+	<div class="row">
+	
+		<div class="col-lg-6 col-md-6 col-sm-6 " >
+					<a class="fh5co-card-item cr_card"  cr_no="${crew.cr_no }" >
+<%-- 					<a onclick="goCrew('${crew.cr_no}')"  data-toggle="modal" data-target="#myModal" class="fh5co-card-item" cr_no="${crew.cr_no }"> --%>
+<%-- 					<a onclick="goCrew('${crew.cr_no}')" href="${pageContext.request.contextPath}/crew/page/${crew.cr_no}" class="fh5co-card-item"> --%>
+					
+						<div class="row">
+						
+							<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+								<div>
+								<img class="crewImg" src="${pageContext.request.contextPath}/image/${crew.trplc_no}" style="width:100%;"/>
+								</div>
+							</div>
+							
+							<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+								<div class="text" style="color: black;">
+									<table>
+										<tr >
+											<td colspan="2" width="100%" ><div style="overflow: hidden; height: 27px; width: 300px;">${crew.cr_sj }</div></td>
+										</tr>
+										<tr>
+											<td width="60%" style="color: #6E6E6E;"><b>${crew.trplc_no_nm }</b></td>
+											<td width="40%" style="color: gray;"><b>#${crew.thema_nm }</b></td>
+										</tr>
+										<tr>
+											<td width="60%"><img src="${pageContext.request.contextPath}/images/masculine.png"/> ${crew.now_male_nmpr} / ${crew.male_nmpr},  
+											<img class="nohover" src="${pageContext.request.contextPath}/images/femenine.png"/> ${crew.now_female_nmpr} / ${crew.female_nmpr}</td>
+											<td width="40%" class="${crew.rcrit_sttus}"><b>#${crew.rcrit_sttus_nm }</b></td>
+										</tr>
+										<tr>
+											<td colspan="2" width="100%" class="text-center">${crew.depr_de} - ${crew.arvl_de}</td>
+										</tr>
+									</table>
+								</div>
+							</div>
+							
+						<!-- inner row end -->
+					</div>
+				</a>
+			</div>
+			
+			<!--  writer  -->
+			<div class="namecard col-lg-6 col-md-6 col-sm-6" >
+			<div class="col-md-12" style="border: 1px solid gray; padding: 10px; border-radius:16px;">
+			<div class="col-md-5">
+			<img src="http://graph.facebook.com/${writer.fb_id}/picture?width=120&height=120" style="border-radius:16px;"/>
+			</div>
+			<div class="col-md-7">
+			<span><b>작성자</b></span><br/>
+			<span><b>회원 등급 : </b>${writer.mb_grad}</span><br/>
+			<span><b>닉네임 : </b><a href="http://www.facebook.com/${writer.fb_id}" target="_blank" >${writer.nick }</a></span><br/>
+		
+			<span><b>여행 성사 횟수 : </b>${writer.tour_cnt }</span>
+			</div>
+			</div>
+			</div>
+	
+	</div>
+	
+	
+	
+	<table class="table" style="margin-top: 20px;">
 		<tr class="info">
 			<td width="15%">제목</td>
 			<td><div>${rev.sj }</div></td>
