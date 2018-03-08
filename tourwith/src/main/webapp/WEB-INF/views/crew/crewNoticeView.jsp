@@ -18,7 +18,7 @@ function fn_delete(seqNo){
 }
 
 function fn_writeForm(seqNo){
-	location.href="${pageContext.request.contextPath}/crewNotice/form?notice_no=" + seqNo;
+	location.href="${pageContext.request.contextPath}/crew/notice/form?notice_no=" + seqNo;
 }
 
 </script>
@@ -37,7 +37,7 @@ function fn_writeForm(seqNo){
 	</tr>
 	
 	<tr>
-		<td colspan="2" style="white-space: pre-wrap;" height="300px">${crewNotice.con}</td>
+		<td colspan="2" style="white-space: pre-wrap;" height="300px"><div>${crewNotice.con}</div></td>
 	</tr>
 </table>
 

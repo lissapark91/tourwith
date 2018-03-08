@@ -7,23 +7,21 @@
 
 <script type="text/javascript">
 	function fn_writeForm(){
-		location.href = "${pageContext.request.contextPath}/crewNotice/form?cr_no=${cr_no}";
+		location.href = "${pageContext.request.contextPath}/crew/notice/form?cr_no=${cr_no}";
 	}
 	
 	function fn_search(currentPage) {
 		var frm = document.searchForm;
 
 		frm.currentPage.value = currentPage;
-		frm.action = "${pageContext.request.contextPath}/crewNotices/${cr_no}";
+		frm.action = "${pageContext.request.contextPath}/crew/notices/${cr_no}";
 		frm.submit();
 	}
 </script>
 
-<header id="gtco-header" class="gtco-cover gtco-cover-sm" role="banner" style="height: 80px;">
-</header>
 
 <body>
-		<div class="gtco-section border-bottom">
+		<div class="gtco-section">
 			<div class="gtco-container">
 				<div class="row">
 					<div class="col-md-12">
@@ -40,7 +38,7 @@
 								<tbody>
 										<c:forEach var="crewNotice" items="${crewNoticeList}">
 											<tr>
-												<td width="50%"><a href="${pageContext.request.contextPath}/crewNotice/${crewNotice.notice_no}">${crewNotice.sj}</a></td>
+												<td width="50%"><a href="${pageContext.request.contextPath}/crew/notice/${crewNotice.notice_no}">${crewNotice.sj}</a></td>
 											</tr>
 										</c:forEach>
 										
