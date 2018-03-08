@@ -21,6 +21,15 @@
 			}
 		})
 		
+		$('#refuseBtn').click(function(){
+			
+			var cr_no = $('[name="mb_no"]:checked').attr('cr_no')
+			var mb_no = $('[name="mb_no"]:checked').val()
+			location.href = "${pageContext.request.contextPath}/crew/refuse/" + mb_no + "/" +cr_no
+			
+			
+		})
+		
 	})
 </script>
 </head>
@@ -75,7 +84,7 @@
 				</form>
 				</div>
 				<button type="button" class="btn btn-info" id="approveBtn">가입 신청 수락</button>
-				<button type="button" class="btn btn-danger">가입 신청 거절</button>
+				<button type="button" class="btn btn-danger" id="refuseBtn">가입 신청 거절</button>
 			</div>
 			<div class="col-md-6" >
 				<h3>나의 크루 목록</h3>

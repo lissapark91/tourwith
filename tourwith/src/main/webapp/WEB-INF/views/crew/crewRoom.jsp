@@ -82,15 +82,9 @@
 						<!-- inner row end -->
 					</div>
 				</a>
-			</div>
-<!-- 		<a href="https://www.messenger.com/t/" onClick="window.open(this.href, '', 'width=900, height=650, top=100, left=100'); return false;"><button type="button" class="btn btn-info"><i class="icon-facebook"></i>메신저</button></a> -->
-<!-- 		</div> -->
-		 <div class="col-md-6 "> 
- 		<iframe height="500" width="500" frameborder="0" scrolling="no" src="${pageContext.request.contextPath}/crewNotices/${crew.cr_no}"></iframe> 
-		</div>
-		
-		<div class="col-md-6">
-		<h5>크루원</h5>
+				
+				<div>
+				<h5>크루원</h5>
 			<ul class="list-group">
 				<c:forEach items="${memberList }" var="member">
 					<li class="list-group-item"> 
@@ -107,7 +101,15 @@
 			<button type="button" class="btn btn-warning" id="kickoutBtn">강퇴하기</button>
 			</c:if>
 		</div>
-
+			</div>
+<!-- 		<a href="https://www.messenger.com/t/" onClick="window.open(this.href, '', 'width=900, height=650, top=100, left=100'); return false;"><button type="button" class="btn btn-info"><i class="icon-facebook"></i>메신저</button></a> -->
+<!-- 		</div> -->
+		
+		
+		
+	 <div class="col-md-6 "> 
+ 		<iframe height="500" width="500" frameborder="0" scrolling="no" src="${pageContext.request.contextPath}/crewNotices/${crew.cr_no}"></iframe> 
+		</div>
 
 </div>
 		

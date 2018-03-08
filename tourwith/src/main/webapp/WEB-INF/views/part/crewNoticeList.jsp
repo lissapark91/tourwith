@@ -14,7 +14,7 @@
 		var frm = document.searchForm;
 
 		frm.currentPage.value = currentPage;
-		frm.action = "${pageContext.request.contextPath}/crew/notices/${cr_no}";
+		frm.action = "${pageContext.request.contextPath}/crewNotices/${cr_no}";
 		frm.submit();
 	}
 </script>
