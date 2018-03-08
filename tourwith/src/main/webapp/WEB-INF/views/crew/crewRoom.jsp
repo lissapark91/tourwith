@@ -83,6 +83,12 @@
 					</div>
 				</a>
 			</div>
+<!-- 		<a href="https://www.messenger.com/t/" onClick="window.open(this.href, '', 'width=900, height=650, top=100, left=100'); return false;"><button type="button" class="btn btn-info"><i class="icon-facebook"></i>메신저</button></a> -->
+<!-- 		</div> -->
+		 <div class="col-md-6 "> 
+ 		<iframe height="500" width="500" frameborder="0" scrolling="no" src="${pageContext.request.contextPath}/crewNotices/${crew.cr_no}"></iframe> 
+		</div>
+		
 		<div class="col-md-6">
 		<h5>크루원</h5>
 			<ul class="list-group">
@@ -103,6 +109,7 @@
 		</div>
 
 
+</div>
 		
 <!-- 		<div class="gtco-section list-group-item"> -->
 <!-- 		<div class="list-group-item"> -->
@@ -117,9 +124,14 @@
 		<div class="col-md-6 ">
 			<iframe  height="700" width="500" frameborder="0" scrolling="no" src="${pageContext.request.contextPath}/part/crewMap/${crew.cr_no}"></iframe>
 		</div>
-		 <div> 
+		
+		 <div class="col-md-6 "> 
  		<iframe height="800" width="800" frameborder="0" scrolling="no" src="${pageContext.request.contextPath}/chat"></iframe> 
  		</div> 
+
+<!-- 		 <div class="col-md-6 ">  -->
+<%--  		<iframe height="800" width="800" frameborder="0" scrolling="no" src="${pageContext.request.contextPath}/crewNotices/${crew.cr_no}"></iframe>  --%>
+<!--  		</div>  -->
 		
 		</div>
 </div>
