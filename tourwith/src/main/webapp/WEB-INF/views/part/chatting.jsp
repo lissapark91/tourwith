@@ -4,18 +4,23 @@
 <!DOCTYPE html>
 <html>
 <head>
+ <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Tangerine">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>chat</title>
 <style>
+
 .mgbox{
 	overFlow: auto;
 	border:5px solid black;
 	width:500px;
 	height:500px;
-/* 	max-height:500px; */
-/* 	margin-top:100px; */
-/* 	margin-left:200px; */
 	border-radius:10px;
+	background-color: rgb(245,222,179);
+}
+#chatMessage{
+	color: black;
+	border:1px solid black;
+	font-famaily: 'Abril Fatface';
 }
 
 </style>
@@ -66,7 +71,8 @@
                      }
                       
                      chatSock.send(JSON.stringify(message));
-                     $("#chatMessage").append("나 ->  " + $("#message").val() + "<br/>");
+//                      $("#chatMessage").append("나 ->  " + $("#message").val() + "<br/>");
+                     $("#chatMessage").append("나 : " + $("#message").val()+"<br/>")
                      $("#chatMessage").scrollTop(99999999);
                       
                      $("#message").val("");	
@@ -105,7 +111,7 @@
     <div id="chatMessage" class="mgbox" style=""></div>
     <div >
      
-    <input type="text" id="message" placeholder="메시지 내용" class="form-control col-xs-2"/>
+    <input type="text" id="message" placeholder="메시지 내용" style="width:500px;"/>
 <!--     <input type="button" id="sendMessage" value="엔터" />  -->
 <!--     <input type="text" id="to" placeholder="귓속말대상"/> -->
     </div>
