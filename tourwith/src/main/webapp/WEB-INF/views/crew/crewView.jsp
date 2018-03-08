@@ -336,7 +336,7 @@
 							<img src="http://graph.facebook.com/${crew.cr_leadr_fb_id }/picture?width=32&height=32" class="img-circle"/>&nbsp;&nbsp;${crew.cr_leadr_nick }</a></td>
 							<td>크루 등록 일자</td>
 							<td id="crew_reg_de"></td>
-							
+							 
 						</tr>
 						
 						<tr>
