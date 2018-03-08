@@ -11,14 +11,11 @@
  <!-- include libraries(jQuery, bootstrap) --> 
 <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
 
-<header id="gtco-header" class="gtco-cover gtco-cover-sm" role="banner" style="height: 80px;">
-</header>
-
 <script type="text/javascript"></script>
 <script>
 
 	function fn_list(){
-		location.href = "${pageContext.request.contextPath}/crewNotice";
+		location.href = "${pageContext.request.contextPath}/crewNotices/${crewNotice.cr_no}";
 	}
 	
 	function fn_save(type){
@@ -64,7 +61,7 @@
 	$(function(){
 		
 		$('#summernote').summernote({
-			height: 300,
+			height: 200,
 			minHeight: null,
 			maxHeight: null,
 			lang: 'ko-KR',
@@ -100,8 +97,6 @@
 
 
 <div class="container">
-<br>
-<h3>${crewNotice.notice_no == null ? '글쓰기' : '글수정'}</h3>
 
 <form name="crewNoticeForm" id="crewNoticeForm" method="post" enctype="multipart/form-data">
 
@@ -121,7 +116,7 @@
 		
 			<tr>
 				<td colspan="2">
-					<textarea id="summernote" rows="15" class="form-control" name="con">${crewNotice.con}</textarea>
+					<textarea id="summernote" rows="10" class="form-control" name="con">${crewNotice.con}</textarea>
 				</td>
 			</tr>
 			

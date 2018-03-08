@@ -56,6 +56,9 @@
 		<mapping path="/review/revDelete"/>
 		<mapping path="/review/reply/*"/>
 		<mapping path="/crew/form"/>
+		<mapping path="/part/*"/>
+		<mapping path="/part/**"/>
+		<mapping path="/crewNotices/*"/>
 		
 		
 		
