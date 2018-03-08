@@ -117,13 +117,12 @@
 <!-- 		<div class="list-group-item"> -->
 	
 	
-		<div class="col-md-6 ">
+		<div class="col-md-7 ">
 
 		<iframe  height="700" width="500" frameborder="0" scrolling="no" src="${pageContext.request.contextPath}/part/calendar/${crew.cr_no}"></iframe>
 		</div>
 		
-<!-- 		<div class="row"> -->
-		<div class="col-md-6 ">
+		<div class="col-md-5 ">
 			<iframe  height="700" width="500" frameborder="0" scrolling="no" src="${pageContext.request.contextPath}/part/crewMap/${crew.cr_no}"></iframe>
 		</div>
 		
