@@ -136,15 +136,27 @@ public class CrAuthorController {
 			Crew crew = crewService.getCrew(cr_no);
 			
 			if(StringUtils.equals("여성", member.getGender())) {
-				crew.setNow_female_nmpr(crew.getNow_female_nmpr() + 1);
+				if(crew.getNow_female_nmpr() < crew.getFemale_nmpr()) {
+
+					crew.setNow_female_nmpr(crew.getNow_female_nmpr() + 1);
+					
+				}else {
+					throw new Exception();
+				}
 			
 			}else{
-				crew.setNow_male_nmpr(crew.getNow_male_nmpr() + 1);				
+				if(crew.getNow_male_nmpr() < crew.getMale_nmpr()) {
+					
+					crew.setNow_male_nmpr(crew.getNow_male_nmpr() + 1);				
+					
+				}else {
+					throw new Exception();
+				}
 			
 			}
 			
 			crewService.updateCrew(crew);
-			
+			crewService.updateRcritSttusByNmpr();
 		}else {
 			throw new Exception();
 		}
@@ -168,6 +180,7 @@ public class CrAuthorController {
 		
 		if(crAuthor != null) {
 			crAuthorService.updateRequestRefuse(paramMap);
+			
 		}else {
 			throw new Exception();
 		}
@@ -200,8 +213,27 @@ public class CrAuthorController {
 				
 				int updCnt = crAuthorService.updateKickOut1(paramMap);
 				
+				
 				if(updCnt <= 0) {
 					throw new Exception();
+				}else {
+					
+					//신청한 멤버
+					member = memberService.selectMemberByPK(mb_no);
+					
+					if(StringUtils.equals(member.getGender(), "여성")) {
+						
+						Crew crew = crewService.getCrew(cr_no);
+						crew.setNow_female_nmpr(crew.getNow_female_nmpr() - 1);
+						
+					}else {
+						
+						Crew crew = crewService.getCrew(cr_no);
+						crew.setNow_male_nmpr(crew.getNow_male_nmpr() - 1);
+						
+						
+					}
+
 				}
 				
 			}else {
@@ -216,5 +248,39 @@ public class CrAuthorController {
 		model.addAttribute("locationURL", "/crew/room/"+cr_no);
 		return "common/redirect";
 	}
+	
+	@RequestMapping("/crew/refuse/{mb_no}/{cr_no}")
+	public String refuseRequest(@PathVariable("mb_no") String mb_no,
+			@PathVariable("cr_no") String cr_no, HttpSession session, Model model) {
+		
+		//login 유저
+		Member member  = (Member)  session.getAttribute("LOGIN_USER");
+		
+		
+		Map<String, Object> paramMap = new HashMap<>();
+		paramMap.put("mb_no", member.getMb_no());
+		paramMap.put("cr_no", cr_no);
+		
+		CrAuthor loginUserAthor = crAuthorService.selectAuthorByMbNoCrNo(paramMap);
+		
+		if(loginUserAthor != null) {
+			
+			// login user = leader
+			if(StringUtils.equals(loginUserAthor.getAuthor_code(), "CR_ROLE_01")) {
+				
+				paramMap.remove("mb_no");
+				paramMap.put("mb_no", mb_no);
+				
+				crAuthorService.updateRequestRefuse(paramMap);
+			
+			}
+		}
+		
+		model.addAttribute("locationURL", "/member/mypage");
+		
+		return "common/redirect";
+	
+	}
+	
 	
 }

@@ -88,7 +88,7 @@
 			//수정 버튼
 			$('#modiBtn').click(function(){
 				
-				location.href = "${pageContext.request.contextPath}/crew/form?cr_no=" + ${crew.cr_no}
+				location.href = "${pageContext.request.contextPath}/crew/form?cr_no=${crew.cr_no}"
 
 			})			
 			
@@ -98,7 +98,7 @@
 				var delCrew = confirm('해당 크루를 삭제하시겠습니까?');
 				if(delCrew){
 					
-					location.href = "${pageContext.request.contextPath}/crew/del?cr_no=" + ${crew.cr_no}
+					location.href = "${pageContext.request.contextPath}/crew/del?cr_no=${crew.cr_no}"
 				}else{
 					return false;
 				}

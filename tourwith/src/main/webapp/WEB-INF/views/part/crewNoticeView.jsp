@@ -23,8 +23,6 @@ function fn_writeForm(seqNo){
 
 </script>
 
-<header id="gtco-header" class="gtco-cover gtco-cover-sm" role="banner" style="height: 80px;">
-	</header>
 
 <div class="container">
 <br>
@@ -37,7 +35,7 @@ function fn_writeForm(seqNo){
 	</tr>
 	
 	<tr>
-		<td colspan="2" style="white-space: pre-wrap;" height="300px"><div>${crewNotice.con}</div></td>
+		<td colspan="2" ><div style="white-space: pre-wrap; height: 250px; overflow: auto;" >${crewNotice.con}</div></td>
 	</tr>
 </table>
 

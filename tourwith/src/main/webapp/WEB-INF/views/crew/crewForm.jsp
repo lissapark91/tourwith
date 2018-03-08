@@ -215,7 +215,8 @@ $(function() {
 				<h3>${empty crew.cr_no ? '크루 만들기' : '크루 수정'}</h3>
 				
 				<br/>
-				
+				<input type="hidden" name="now_female_nmpr" value="${crew.now_female_nmpr }"/>
+				<input type="hidden" name="now_male_nmpr" value="${crew.now_male_nmpr }"/>
 				<div class="row">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<table >
